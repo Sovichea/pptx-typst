@@ -148,26 +148,68 @@ def effective_run_style(sh,pa,run):
         italic=next((el.get('i') in ('1','true') for el in ([rp]+defaults) if el is not None and el.get('i') is not None),False)
     return font,sz,c,('bold' if bold else 'regular'),bool(italic)
 
+def paragraph_style_sources(sh,pa):
+    """Paragraph properties from direct formatting through master defaults."""
+    lvl=min(9,max(1,pa.level+1))
+    result=[]
+    def add(nodes):
+        if nodes and nodes[0] not in result:result.append(nodes[0])
+    add(pa._p.xpath('./a:pPr'))
+    add(sh._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
+    if sh.is_placeholder and CURRENT_SLIDE is not None:
+        try:
+            ph=CURRENT_SLIDE.slide_layout.placeholders[sh.placeholder_format.idx]
+            add(ph._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
+        except Exception:pass
+    if sh.is_placeholder and CURRENT_SLIDE is not None:
+        master=CURRENT_SLIDE.slide_layout.slide_master
+        is_title=(sh.is_placeholder and 'TITLE' in str(sh.placeholder_format.type).upper())
+        contexts=['titleStyle'] if is_title else ['bodyStyle','otherStyle']
+        for context in contexts:
+            add(master._element.xpath(f'./p:txStyles/p:{context}/a:lvl{lvl}pPr'))
+    return result
+
+def paragraph_indent(sh,pa):
+    """Resolve DrawingML margin and hanging indent, expressed in points."""
+    sources=paragraph_style_sources(sh,pa)
+    def value(name):
+        for ppr in sources:
+            raw=ppr.get(name)
+            if raw is not None:
+                try:return int(raw)/EMU
+                except ValueError:pass
+        return 0.0
+    return value('marL'),value('indent')
+
 def bullet_spec(sh,pa,fontsize):
-    # Paragraph bullet may be defined locally or inherited from lstStyle.
-    levels=[]
-    local=pa._p.xpath('./a:pPr')
-    if local:levels.append(local[0])
-    ls=sh._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{min(9,pa.level+1)}pPr')
-    if ls:levels.append(ls[0])
-    if not levels:return None
-    node=None
-    for ppr in levels:
+    sources=paragraph_style_sources(sh,pa)
+    node=None;owner=None
+    for ppr in sources:
         found=ppr.xpath('./*[local-name()="buNone" or local-name()="buChar" or local-name()="buAutoNum" or local-name()="buBlip"]')
         if found:
-            node=found[0];break
+            node=found[0];owner=ppr;break
     if node is None:return None
     tag=etree.QName(node).localname
     if tag=='buNone':return None
-    if tag=='buBlip':return {'kind':'unsupported','glyph':'â€¢','fontsize':fontsize}
-    if tag=='buChar':return {'kind':'char','glyph':node.get('char','â€¢'),'fontsize':fontsize}
-    if tag=='buAutoNum':return {'kind':'number','type':node.get('type','arabicPeriod'),'start':int(node.get('startAt','1')),'fontsize':fontsize}
-    return None
+    if tag=='buBlip':spec={'kind':'unsupported','glyph':'•'}
+    elif tag=='buChar':spec={'kind':'char','glyph':node.get('char','•')}
+    elif tag=='buAutoNum':spec={'kind':'number','type':node.get('type','arabicPeriod'),'start':int(node.get('startAt','1'))}
+    else:return None
+    spec['fontsize']=fontsize
+    for ppr in sources:
+        fonts=ppr.xpath('./*[local-name()="buFont"]')
+        if fonts and fonts[0].get('typeface'):
+            spec['font']=expand_theme_font(fonts[0].get('typeface'));break
+    if owner is not None:
+        pct=owner.xpath('./*[local-name()="buSzPct"]')
+        pts=owner.xpath('./*[local-name()="buSzPts"]')
+        if pts and pts[0].get('sz'):
+            spec['fontsize']=int(pts[0].get('sz'))/100;spec['absolute_size']=True
+        elif pct and pct[0].get('val'):
+            spec['fontsize']=fontsize*int(pct[0].get('val'))/100000
+        colors=owner.xpath('./*[local-name()="buClr"]/*[local-name()="solidFill"]/*[local-name()="srgbClr" or local-name()="schemeClr" or local-name()="sysClr" or local-name()="prstClr"]')
+        spec['color']=resolve_color_node(colors[0]) if colors else None
+    return spec
 
 def number_glyph(n,kind):
     def letters(i):
@@ -374,6 +416,7 @@ def content_for_text(sh, ew, eh, sx, sy):
  bullet_counters={}
  for pa in tf.paragraphs:
   rr=[];max_size=0;cell_runs=[];has_tabs=False
+  bullet_text_font=None;bullet_text_color=None;bullet_text_weight='regular'
   inherit=inherited_run_style(sh,pa)
   feature_on=args.text_features in ('inherit','all')
   for run in pa.runs:
@@ -389,6 +432,8 @@ def content_for_text(sh, ew, eh, sx, sy):
     it=False
    fontsize*=shrink
    max_size=max(max_size,fontsize)
+   if bullet_text_font is None:
+    bullet_text_font=font;bullet_text_color=c;bullet_text_weight=wt
    fragments=run.text.replace('\v','\n').split('\n')
    for j,frag in enumerate(fragments):
     pieces=frag.split('\t') if args.text_features in ('structure','all') else [frag]
@@ -435,15 +480,21 @@ def content_for_text(sh, ew, eh, sx, sy):
    rrtext='#grid(columns:('+cols+'),column-gutter:0pt,row-gutter:0pt,'+','.join('['+c+']' for c in cells)+')'
   else:rrtext=''.join(' ' if t=='@@TAB@@' else t for t in rr)
   if glyph and rrtext:
-   bullet_font=max(6,(spec['fontsize'] if spec else max_size)*.98)
-   glyphtext=f'#text(font:"Arial",size:{bullet_font:.2f}pt,fill:rgb("#737373"),{stylize(glyph)})'
+   bullet_font=max(1,(spec['fontsize'] if spec else max_size)*(shrink if spec and spec.get('absolute_size') else 1))
+   bullet_family=spec.get('font') or bullet_text_font or CURRENT_FONTS.get('minor','Arial')
+   bullet_color=spec.get('color') or bullet_text_color or shape_text_color(sh)
+   glyphtext=f'#text(font:{typst_font_fallback(bullet_family)},size:{bullet_font:.2f}pt,weight:"{bullet_text_weight}",fill:rgb("{bullet_color}"),{stylize(glyph)})'
    if args.text_features in ('structure','all'):
-    ppr=pa._p.xpath('./a:pPr')
-    left=int(ppr[0].get('marL','0'))/EMU if ppr else 0
-    hanging=int(ppr[0].get('indent','0'))/EMU if ppr else 0
-    # The bullet glyph is in its own cell, so wrapped text remains aligned.
-    gap=max(10,min(70,(left+hanging if left+hanging>0 else bullet_font*1.4)))
-    rrtext='#grid(columns:('+f'{gap:.2f}pt,1fr'+'),column-gutter:0pt,['+glyphtext+'],['+rrtext+'])'
+    left,indent=paragraph_indent(sh,pa)
+    if abs(indent)<.001:
+     gap=max(10,bullet_font*1.4)
+     bullet_x=left-gap;text_x=left
+    elif indent<0:
+     bullet_x=left+indent;text_x=left;gap=-indent
+    else:
+     bullet_x=left;text_x=left+indent;gap=indent
+    # Typst's native list item keeps wrapped lines aligned with the text start.
+    rrtext='#list(marker:['+glyphtext+'],indent:'+f'{bullet_x:.2f}pt,body-indent:{gap:.2f}pt,tight:true,spacing:0pt'+',['+rrtext+'])'
    else:rrtext=glyphtext+stylize(' ')[1:-1]+rrtext
   line_size=round(float(pa.line_spacing)/EMU,2) if pa.line_spacing and not isinstance(pa.line_spacing,float) else None
   if line_size is not None and max_size>0:

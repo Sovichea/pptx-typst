@@ -41,7 +41,7 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 4.48pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "NORTHWIND TRADERS")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:28.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:18.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "NORTHWIND TRADERS")])
   ]
 ]
 ]
@@ -234,7 +234,7 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 4.48pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Unlocking new horizons")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:28.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:18.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Unlocking new horizons")])
   ]
 ]
 ])
@@ -262,17 +262,17 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Currently gearing up for a ground-breaking launch ")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Currently gearing up for a ground-breaking launch ")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our new offerings will captivate the market")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our new offerings will captivate the market")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our marketing campaign will generate anticipation")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our marketing campaign will generate anticipation")])
   ]
 ]
 ])
@@ -305,17 +305,17 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Implement personalized engagement strategies")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Implement personalized engagement strategies")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Tailor campaigns to resonate with specific demographics, fostering a sense of relevance ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "and connection")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Tailor campaigns to resonate with specific demographics, fostering a sense of relevance ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "and connection")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborate with influencers and thought leaders ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "to amplify our brand message")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborate with influencers and thought leaders ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "to amplify our brand message")])
   ]
 ]
 ])
@@ -369,12 +369,12 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "This underscores our commitment to financial stability, positioning us for sustained growth. ")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "This underscores our commitment to financial stability, positioning us for sustained growth. ")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Key indicators show consistent revenue growth over the past quarter, attributed to strategic cost management and successful marketing.")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Key indicators show consistent revenue growth over the past quarter, attributed to strategic cost management and successful marketing.")])
   ]
   #v(14.40pt)
   #v(22.00pt)
@@ -411,22 +411,22 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Market expansion")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Market expansion")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product innovation")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product innovation")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Customer retention")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Customer retention")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Operational efficiency")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Operational efficiency")])
   ]
 ]
 ])
@@ -520,17 +520,17 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "our operations.")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "our operations.")])
   ]
   #v(14.40pt)
   #align(left)[
     #set par(leading: 3.84pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")])
   ]
 ]
 ])
