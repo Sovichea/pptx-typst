@@ -533,9 +533,15 @@ def image_blip(sh):
     bl=sh._element.xpath('./p:spPr/a:blipFill/a:blip') or sh._element.xpath('./p:blipFill/a:blip')
     if not bl:return None
     from pptx.oxml.ns import qn
-    rid=bl[0].get(qn('r:embed'))
-    if not rid:return None
-    return sh.part.related_part(rid)
+    # PowerPoint can store SVG artwork in an Office extension relationship and
+    # a raster fallback in a:blip. Prefer the SVG for crisp master/layout art.
+    svg_blips=bl[0].xpath('.//*[local-name()="svgBlip"]')
+    rids=([svg_blips[0].get(qn('r:embed'))] if svg_blips else [])+[bl[0].get(qn('r:embed'))]
+    for rid in rids:
+        if not rid:continue
+        try:return sh.part.related_part(rid)
+        except KeyError:continue
+    return None
 
 def geometry_kind(sh):
     # p:pic can carry nonrectangular prstGeom/custGeom as well as p:sp.
@@ -960,4 +966,4 @@ for slide_no,slide in enumerate(prs.slides,1):
 
 (OUT/'main.typ').write_text('\n'.join(lines),encoding='utf8')
 (OUT/'asset_manifest.json').write_text(json.dumps({'source_file':SRC.name,'source_slide_count':len(prs.slides),'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,'counts':dict(counts),'media':media_contents,'slides':manifest},ensure_ascii=False,indent=2))
-print('Saved',OUT,'assets',len(media_contents),'stats',dict(counts),'sizesMB',sum(v['bytes'] for v in media_contents.values())/1024**2)\n
+print('Saved',OUT,'assets',len(media_contents),'stats',dict(counts),'sizesMB',sum(v['bytes'] for v in media_contents.values())/1024**2)

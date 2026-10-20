@@ -9,3 +9,5 @@ typst compile main.typ preview.pdf
 ```
 
 The manifest records unsupported objects for review. Conversion support remains limited to the constructs documented in the project README.
+
+Decorative SVG pictures inherited from PowerPoint masters and layouts are included in the Typst output and kept as vector assets.

@@ -8,10 +8,18 @@
 
 // â”€â”€ Slide 01 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
+  // Source media: assets/media/image1_1a23b57b91.svg | shape: Graphic 31 | rect
+  #Place(x:356.364pt,y:262.788pt,orientation:-14.989deg,child:image("assets/media/image1_1a23b57b91.svg",width:209.424pt,height:209.424pt,fit:"stretch"))
+  // Source media: assets/media/image2_9c3eeb6c7e.svg | shape: Graphic 32 | rect
+  #Place(x:0.000pt,y:129.784pt,orientation:0.000deg,child:box(width:187.470pt,height:144.375pt,clip:true)[#place(top+left,dx:-57.298pt,dy:0.000pt)[#image("assets/media/image2_9c3eeb6c7e.svg",width:244.768pt,height:144.375pt,fit:"stretch")]])
+  // Source media: assets/media/image3_7c0e818f4a.svg | shape: Graphic 34 | rect
+  #Place(x:321.073pt,y:0.000pt,orientation:0.000deg,child:box(width:120.339pt,height:145.735pt,clip:true)[#place(top+left,dx:0.000pt,dy:-17.263pt)[#image("assets/media/image3_7c0e818f4a.svg",width:120.339pt,height:162.998pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 30
   #Place(x:510.615pt,y:-0.417pt,orientation:0.000deg,child:image("assets/media/shape_c436dd8ce805.svg",width:208.917pt,height:540.833pt,fit:"stretch"))
   // Original editable PowerPoint shape: Rectangle 36
   #Place(x:682.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_560596a583ee.svg",width:278.000pt,height:541.000pt,fit:"stretch"))
+  // Source media: assets/media/image4_dc27eb1a84.svg | shape: Graphic 23 | rect
+  #Place(x:43.875pt,y:55.310pt,orientation:0.000deg,child:image("assets/media/image4_dc27eb1a84.svg",width:84.226pt,height:84.226pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 16
   #Place(x:104.908pt,y:427.613pt,orientation:0.000deg,child:image("assets/media/shape_68a654cbf756.svg",width:113.698pt,height:112.387pt,fit:"stretch"))
   // Editable text: Title 2 | Quarterly marketing meeting
@@ -46,10 +54,14 @@
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 16
   #Place(x:603.700pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_ebc344196741.svg",width:356.800pt,height:541.000pt,fit:"stretch"))
+  // Source media: assets/media/image5_c40c069a6d.svg | shape: Graphic 12 | rect
+  #Place(x:648.295pt,y:224.775pt,orientation:14.624deg,child:image("assets/media/image5_c40c069a6d.svg",width:144.066pt,height:175.623pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 14
   #Place(x:511.828pt,y:-0.417pt,orientation:180.000deg,child:image("assets/media/shape_0d5e939dfda0.svg",width:208.917pt,height:540.833pt,fit:"stretch"))
   // Original editable PowerPoint shape: Rectangle 15
   #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_19a13ae8718e.svg",width:532.000pt,height:541.000pt,fit:"stretch"))
+  // Source media: assets/media/image6_37fd9fbd3c.svg | shape: Graphic 18 | rect
+  #Place(x:687.900pt,y:433.331pt,orientation:0.000deg,child:box(width:165.682pt,height:106.669pt,clip:true)[#place(top+left,dx:0.000pt,dy:0.000pt)[#image("assets/media/image6_37fd9fbd3c.svg",width:165.682pt,height:143.030pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 10
   #Place(x:707.368pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_8e2b1822d27f.svg",width:252.632pt,height:323.160pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 19
@@ -107,6 +119,14 @@
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Freeform: Shape 15
   #Place(x:468.552pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_f3ec7d23b26d.svg",width:491.948pt,height:541.000pt,fit:"stretch"))
+  // Source media: assets/media/image7_42fb22fd6a.svg | shape: Graphic 49 | rect
+  #Place(x:0.000pt,y:277.941pt,orientation:0.000deg,child:box(width:173.482pt,height:165.750pt,clip:true)[#place(top+left,dx:-18.518pt,dy:0.000pt)[#image("assets/media/image7_42fb22fd6a.svg",width:192.000pt,height:165.750pt,fit:"stretch")]])
+  // Source media: assets/media/image8_583511fef8.svg | shape: Graphic 50 | rect
+  #Place(x:233.075pt,y:116.436pt,orientation:12.045deg,child:image("assets/media/image8_583511fef8.svg",width:147.750pt,height:192.000pt,fit:"stretch"))
+  // Source media: assets/media/image9_ee34313f19.svg | shape: Graphic 51 | rect
+  #Place(x:310.212pt,y:364.174pt,orientation:0.000deg,child:box(width:192.000pt,height:175.826pt,clip:true)[#place(top+left,dx:0.000pt,dy:0.000pt)[#image("assets/media/image9_ee34313f19.svg",width:192.000pt,height:192.000pt,fit:"stretch")]])
+  // Source media: assets/media/image4_dc27eb1a84.svg | shape: Graphic 23 | rect
+  #Place(x:43.875pt,y:55.310pt,orientation:0.000deg,child:image("assets/media/image4_dc27eb1a84.svg",width:84.226pt,height:84.226pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 11
   #Place(x:30.963pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_88853b38b7ec.svg",width:193.999pt,height:118.050pt,fit:"stretch"))
   // Editable text: Title 1 | Strategies for growth
@@ -127,10 +147,14 @@
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 16
   #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_bc6763013f09.svg",width:257.800pt,height:541.000pt,fit:"stretch"))
+  // Source media: assets/media/image1_1a23b57b91.svg | shape: Graphic 8 | rect
+  #Place(x:62.124pt,y:191.856pt,orientation:-14.989deg,child:image("assets/media/image1_1a23b57b91.svg",width:209.424pt,height:209.424pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 14
   #Place(x:166.420pt,y:-0.417pt,orientation:-0.000deg,child:image("assets/media/shape_0d5e939dfda0.svg",width:208.917pt,height:540.833pt,fit:"stretch"))
   // Original editable PowerPoint shape: Rectangle 7
   #Place(x:296.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_64a04a9b67af.svg",width:664.000pt,height:541.000pt,fit:"stretch"))
+  // Source media: assets/media/image2_9c3eeb6c7e.svg | shape: Graphic 9 | rect
+  #Place(x:0.000pt,y:23.625pt,orientation:0.000deg,child:box(width:187.470pt,height:144.375pt,clip:true)[#place(top+left,dx:-57.298pt,dy:0.000pt)[#image("assets/media/image2_9c3eeb6c7e.svg",width:244.768pt,height:144.375pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 26
   #Place(x:0.000pt,y:410.456pt,orientation:0.000deg,child:image("assets/media/shape_c7e867190f70.svg",width:105.486pt,height:129.544pt,fit:"stretch"))
   // Editable text: Title 1 | Current market analysis
@@ -174,6 +198,20 @@
 #pagebreak()
 // â”€â”€ Slide 05 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
+  // Source media: assets/media/image10_d61936ec21.svg | shape: Graphic 49 | rect
+  #Place(x:0.114pt,y:311.681pt,orientation:0.000deg,child:box(width:173.482pt,height:165.750pt,clip:true)[#place(top+left,dx:-18.518pt,dy:0.000pt)[#image("assets/media/image10_d61936ec21.svg",width:192.000pt,height:165.750pt,fit:"stretch")]])
+  // Source media: assets/media/image11_cada0dced8.svg | shape: Graphic 50 | rect
+  #Place(x:53.065pt,y:51.640pt,orientation:12.045deg,child:image("assets/media/image11_cada0dced8.svg",width:147.750pt,height:192.000pt,fit:"stretch"))
+  // Source media: assets/media/image12_4b742b9d55.svg | shape: Graphic 51 | rect
+  #Place(x:189.926pt,y:421.462pt,orientation:0.000deg,child:box(width:192.000pt,height:118.538pt,clip:true)[#place(top+left,dx:0.000pt,dy:-0.002pt)[#image("assets/media/image12_4b742b9d55.svg",width:192.000pt,height:192.001pt,fit:"stretch")]])
+  // Source media: assets/media/image2_9c3eeb6c7e.svg | shape: Graphic 4 | rect
+  #Place(x:693.806pt,y:199.720pt,orientation:0.000deg,child:box(width:246.576pt,height:144.375pt,clip:true)[#place(top+left,dx:1.809pt,dy:0.000pt)[#image("assets/media/image2_9c3eeb6c7e.svg",width:244.770pt,height:144.375pt,fit:"stretch")]])
+  // Source media: assets/media/image3_7c0e818f4a.svg | shape: Graphic 6 | rect
+  #Place(x:642.068pt,y:-1.537pt,orientation:0.000deg,child:box(width:120.339pt,height:145.735pt,clip:true)[#place(top+left,dx:0.000pt,dy:-17.263pt)[#image("assets/media/image3_7c0e818f4a.svg",width:120.339pt,height:162.998pt,fit:"stretch")]])
+  // Source media: assets/media/image13_2d48d3985b.svg | shape: Graphic 7 | rect
+  #Place(x:210.628pt,y:0.000pt,orientation:0.000deg,child:box(width:538.744pt,height:540.000pt,clip:true)[#place(top+left,dx:0.000pt,dy:0.000pt)[#image("assets/media/image13_2d48d3985b.svg",width:539.997pt,height:540.000pt,fit:"stretch")]])
+  // Source media: assets/media/image14_adc5562936.svg | shape: Graphic 8 | rect
+  #Place(x:846.515pt,y:0.000pt,orientation:0.000deg,child:box(width:113.485pt,height:161.195pt,clip:true)[#place(top+left,dx:0.000pt,dy:-61.999pt)[#image("assets/media/image14_adc5562936.svg",width:208.371pt,height:223.193pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 17
   #Place(x:208.596pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_5a96b05790f4.svg",width:190.035pt,height:78.109pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 27
@@ -428,6 +466,20 @@
 #pagebreak()
 // â”€â”€ Slide 11 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
+  // Source media: assets/media/image10_d61936ec21.svg | shape: Graphic 8 | rect
+  #Place(x:0.114pt,y:311.681pt,orientation:0.000deg,child:box(width:173.482pt,height:165.750pt,clip:true)[#place(top+left,dx:-18.518pt,dy:0.000pt)[#image("assets/media/image10_d61936ec21.svg",width:192.000pt,height:165.750pt,fit:"stretch")]])
+  // Source media: assets/media/image11_cada0dced8.svg | shape: Graphic 9 | rect
+  #Place(x:53.065pt,y:51.640pt,orientation:12.045deg,child:image("assets/media/image11_cada0dced8.svg",width:147.750pt,height:192.000pt,fit:"stretch"))
+  // Source media: assets/media/image12_4b742b9d55.svg | shape: Graphic 10 | rect
+  #Place(x:189.926pt,y:421.462pt,orientation:0.000deg,child:box(width:192.000pt,height:118.538pt,clip:true)[#place(top+left,dx:0.000pt,dy:-0.002pt)[#image("assets/media/image12_4b742b9d55.svg",width:192.000pt,height:192.001pt,fit:"stretch")]])
+  // Source media: assets/media/image2_9c3eeb6c7e.svg | shape: Graphic 13 | rect
+  #Place(x:693.806pt,y:199.720pt,orientation:0.000deg,child:box(width:246.576pt,height:144.375pt,clip:true)[#place(top+left,dx:1.809pt,dy:0.000pt)[#image("assets/media/image2_9c3eeb6c7e.svg",width:244.770pt,height:144.375pt,fit:"stretch")]])
+  // Source media: assets/media/image3_7c0e818f4a.svg | shape: Graphic 15 | rect
+  #Place(x:642.068pt,y:-1.537pt,orientation:0.000deg,child:box(width:120.339pt,height:145.735pt,clip:true)[#place(top+left,dx:0.000pt,dy:-17.263pt)[#image("assets/media/image3_7c0e818f4a.svg",width:120.339pt,height:162.998pt,fit:"stretch")]])
+  // Source media: assets/media/image14_adc5562936.svg | shape: Graphic 16 | rect
+  #Place(x:846.515pt,y:0.000pt,orientation:0.000deg,child:box(width:113.485pt,height:161.195pt,clip:true)[#place(top+left,dx:0.000pt,dy:-61.999pt)[#image("assets/media/image14_adc5562936.svg",width:208.371pt,height:223.193pt,fit:"stretch")]])
+  // Source media: assets/media/image13_2d48d3985b.svg | shape: Graphic 7 | rect
+  #Place(x:210.628pt,y:0.000pt,orientation:0.000deg,child:box(width:538.744pt,height:540.000pt,clip:true)[#place(top+left,dx:0.000pt,dy:0.000pt)[#image("assets/media/image13_2d48d3985b.svg",width:539.997pt,height:540.000pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 21
   #Place(x:208.596pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_1e627c7166bb.svg",width:189.756pt,height:78.109pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 32
@@ -528,6 +580,12 @@
   #Place(x:0.000pt,y:225.746pt,orientation:0.000deg,child:image("assets/media/shape_ce3564b20371.svg",width:189.270pt,height:126.161pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 19
   #Place(x:777.492pt,y:393.084pt,orientation:0.000deg,child:image("assets/media/shape_679eaa2277ef.svg",width:140.659pt,height:146.916pt,fit:"stretch"))
+  // Source media: assets/media/image15_7a592df3d2.svg | shape: Graphic 11 | rect
+  #Place(x:831.088pt,y:36.449pt,orientation:14.624deg,child:image("assets/media/image15_7a592df3d2.svg",width:144.066pt,height:175.623pt,fit:"stretch"))
+  // Source media: assets/media/image10_d61936ec21.svg | shape: Graphic 18 | rect
+  #Place(x:0.000pt,y:49.147pt,orientation:0.000deg,child:box(width:148.748pt,height:141.353pt,clip:true)[#place(top+left,dx:-16.934pt,dy:0.000pt)[#image("assets/media/image10_d61936ec21.svg",width:165.683pt,height:143.029pt,fit:"stretch")]])
+  // Source media: assets/media/image16_a7107c6dad.svg | shape: Graphic 12 | rect
+  #Place(x:648.295pt,y:224.775pt,orientation:14.624deg,child:image("assets/media/image16_a7107c6dad.svg",width:144.066pt,height:175.623pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 10
   #Place(x:80.687pt,y:-0.417pt,orientation:180.000deg,child:image("assets/media/shape_c4cd1f33172c.svg",width:798.626pt,height:540.833pt,fit:"stretch"))
   // Editable text: Title 4 | Thank you
@@ -560,4 +618,4 @@
   ]
 ]
 ])
-])\n
+])
