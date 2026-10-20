@@ -4,7 +4,7 @@
 #let ppt-format=(width:960.000pt,height:540.000pt)
 #set page(width:960.000pt,height:540.000pt,margin:0pt,fill:white)
 #set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)
-#set par(leading:3pt,spacing:0pt)
+#set par(leading:4pt,spacing:0pt)
 
 // â”€â”€ Slide 01 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
@@ -25,27 +25,23 @@
   // Editable text: Title 2 | Quarterly marketing meeting
   #Place(x:43.875pt,y:159.633pt,orientation:0.000deg,child:box(width: 474.71pt, height: 320.02pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
-  #align(bottom)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 8.64pt, spacing: 0pt)
+    #set par(leading: 28.08pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 54.00pt, weight: "regular", fill: rgb("#EAE8E8"), "Quarterly marketing meeting")
   ]
 ]
-]
 ])
   // Editable text: Text Placeholder 4 | NORTHWIND TRADERS
-  #Place(x:135.375pt,y:62.435pt,orientation:0.000deg,child:box(width: 383.21pt, height: 72.00pt, clip: false)[
+  #Place(x:135.375pt,y:62.435pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 383.21pt, height: 72.00pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
-  #align(center + horizon)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 4.48pt, spacing: 0pt)
+    #set par(leading: 14.56pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:28.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:18.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "NORTHWIND TRADERS")])
   ]
 ]
-]
-])
+]))
   // Source media: assets/media/image17_aceb3da99c.jpg | shape: Picture Placeholder 10 | complex
   #Place(x:564.250pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/clip_ce73af6474f6d8dc.png",width:395.750pt,height:540.000pt,fit:"stretch"))
 ])
@@ -71,41 +67,41 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Agenda")
   ]
 ]
 ])
   // Editable text: Content Placeholder 2 | Growth strategy Market analysis Financial overview Innovative solutions Future i
-  #Place(x:66.046pt,y:229.631pt,orientation:0.000deg,child:box(width: 538.20pt, height: 223.97pt, clip: false)[
+  #Place(x:66.046pt,y:229.631pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 538.20pt, height: 223.97pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.72pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Growth strategy")
   ]
-  #v(14.40pt)
+  #v(28.80pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.72pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Market analysis")
   ]
-  #v(14.40pt)
+  #v(28.80pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.72pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Financial overview")
   ]
-  #v(14.40pt)
+  #v(28.80pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.72pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Innovative solutions")
   ]
-  #v(14.40pt)
+  #v(28.80pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.72pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Future initiatives")
   ]
 ]
-])
+]))
   // Editable text: Slide Number Placeholder 3 | 2
   #Place(x:313.515pt,y:485.822pt,orientation:0.000deg,child:box(width: 43.26pt, height: 28.75pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -134,7 +130,7 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 7.04pt, spacing: 0pt)
+    #set par(leading: 22.88pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Strategies ")#text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "for growth")
   ]
 ]
@@ -162,31 +158,31 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Current market ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "analysis")
   ]
 ]
 ])
   // Editable text: Content Placeholder 2 | Data reveals a steady increase in consumer demand for sustainable products, pres
-  #Place(x:320.400pt,y:223.800pt,orientation:0.000deg,child:box(width: 581.40pt, height: 229.80pt, clip: false)[
+  #Place(x:320.400pt,y:223.800pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 581.40pt, height: 229.80pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Data reveals a steady increase in consumer demand for sustainable products, presenting an opportunity for our co-friendly offerings.")
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our competitors are now focusing on digital marketing strategies, suggesting a shift in consumer behavior.")
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Understanding these nuanced dynamics positions us to adapt and capitalize on emerging market preferences.")
   ]
 ]
-])
+]))
   // Editable text: Slide Number Placeholder 3 | 4
   #Place(x:606.588pt,y:485.822pt,orientation:0.000deg,child:box(width: 43.26pt, height: 28.75pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -223,21 +219,21 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 7.04pt, spacing: 0pt)
+    #set par(leading: 22.88pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Market expansion")
   ]
 ]
 ])
   // Editable text: Subtitle 2 | Unlocking new horizons
-  #Place(x:179.938pt,y:152.684pt,orientation:0.000deg,child:box(width: 600.12pt, height: 72.00pt, clip: false)[
+  #Place(x:179.938pt,y:152.684pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 600.12pt, height: 72.00pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 4.48pt, spacing: 0pt)
+    #set par(leading: 14.56pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:28.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:18.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Unlocking new horizons")])
   ]
 ]
-])
+]))
 ])
 #pagebreak()
 // â”€â”€ Slide 06 â”€â”€
@@ -251,31 +247,31 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Product launch ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "timeline")
   ]
 ]
 ])
   // Editable text: Content Placeholder 2 | Currently gearing up for a ground-breaking launch  Our new offerings will captiv
-  #Place(x:66.000pt,y:203.550pt,orientation:0.000deg,child:box(width: 332.40pt, height: 250.30pt, clip: false)[
+  #Place(x:66.000pt,y:203.550pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 332.40pt, height: 250.30pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Currently gearing up for a ground-breaking launch ")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our new offerings will captivate the market")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our marketing campaign will generate anticipation")])
   ]
 ]
-])
+]))
   // SmartArt layout drawing: Content Placeholder 16
   #Place(x:448.500pt,y:164.875pt,orientation:0.000deg,child:image("assets/media/smartart_0a46e8230802.svg",width:445.750pt,height:308.125pt,fit:"stretch"))
   // Editable text: Slide Number Placeholder 3 | 6
@@ -296,31 +292,31 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Marketing ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "strategies")
   ]
 ]
 ])
   // Editable text: Content Placeholder 2 | Implement personalized engagement strategies Tailor campaigns to resonate with s
-  #Place(x:66.000pt,y:229.631pt,orientation:0.000deg,child:box(width: 538.20pt, height: 223.97pt, clip: false)[
+  #Place(x:66.000pt,y:229.631pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 538.20pt, height: 223.97pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Implement personalized engagement strategies")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Tailor campaigns to resonate with specific demographics, fostering a sense of relevance ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "and connection")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborate with influencers and thought leaders ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "to amplify our brand message")])
   ]
 ]
-])
+]))
   // Editable text: Slide Number Placeholder 3 | 7
   #Place(x:313.468pt,y:485.822pt,orientation:0.000deg,child:box(width: 43.26pt, height: 28.75pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -343,7 +339,7 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Financial ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "overview")
   ]
 ]
@@ -353,15 +349,15 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.55pt, spacing: 0pt)
+    #set par(leading: 11.54pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 22.20pt, weight: "regular", fill: rgb("#EBDDC3"), "Our financial overview reflects a robust and resilient fiscal performance.")
   ]
-  #v(13.32pt)
+  #v(22.20pt)
   #align(left)[
-    #set par(leading: 3.55pt, spacing: 0pt)
+    #set par(leading: 11.54pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 22.20pt, weight: "regular", fill: rgb("#EBDDC3"), "Operating margins have improved, signaling operational efficiency, while strengthening our reserves.")
   ]
-  #v(13.32pt)
+  #v(22.20pt)
   #v(22.00pt)
 ]
 ])
@@ -370,15 +366,15 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "This underscores our commitment to financial stability, positioning us for sustained growth. ")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Key indicators show consistent revenue growth over the past quarter, attributed to strategic cost management and successful marketing.")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #v(22.00pt)
 ]
 ])
@@ -402,36 +398,36 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Quarterly ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "targets")
   ]
 ]
 ])
   // Editable text: Content Placeholder 7 | Market expansion Product innovation Customer retention Operational efficiency
-  #Place(x:66.019pt,y:208.800pt,orientation:0.000deg,child:box(width: 322.78pt, height: 250.30pt, clip: false)[
+  #Place(x:66.019pt,y:208.800pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 322.78pt, height: 250.30pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Market expansion")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product innovation")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Customer retention")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Operational efficiency")])
   ]
 ]
-])
+]))
   // Editable PowerPoint table: Table Placeholder 2
   #Place(x:418.250pt,y:208.750pt,orientation:0.000deg,child:table(columns:(118.937pt, 118.937pt, 118.937pt, 118.937pt),rows:(72.050pt, 45.450pt, 45.450pt, 45.450pt, 45.450pt),gutter:0pt,stroke:none,table.cell(fill:none,stroke:(left: 0.5pt + rgb("#FFFFFF"), right: 0.5pt + rgb("#FFFFFF"), top: 0.5pt + rgb("#FFFFFF"), bottom: 2.000pt + rgb("#FFFFFF")),inset:(x:7.200pt,y:3.600pt),align:center + horizon)[#text(font: ("Arial", "Libertinus Serif"), size: 14.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Quarter")],
   table.cell(fill:none,stroke:(left: 0.5pt + rgb("#FFFFFF"), right: 0.5pt + rgb("#FFFFFF"), top: 0.5pt + rgb("#FFFFFF"), bottom: 2.000pt + rgb("#FFFFFF")),inset:(x:7.200pt,y:3.600pt),align:center + horizon)[#text(font: ("Arial", "Libertinus Serif"), size: 14.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Revenue ")#text(font: ("Arial", "Libertinus Serif"), size: 14.00pt, weight: "regular", fill: rgb("#EBDDC3"), "growth (%)")],
@@ -473,7 +469,7 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Financial ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "snapshot")
   ]
 ]
@@ -539,7 +535,7 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 7.04pt, spacing: 0pt)
+    #set par(leading: 22.88pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Innovative solutions")
   ]
 ]
@@ -557,56 +553,56 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Future ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "initiatives")
   ]
 ]
 ])
   // Editable text: Content Placeholder 3 | Product enhancement. Introduce regular updates and features to enhance product o
-  #Place(x:66.000pt,y:203.550pt,orientation:0.000deg,child:box(width: 523.20pt, height: 274.14pt, clip: false)[
+  #Place(x:66.000pt,y:203.550pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 523.20pt, height: 274.14pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "our operations.")])
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")])
   ]
 ]
-])
+]))
   // Editable text: Content Placeholder 2 | Green supply chain Reduced carbon footprint Waste reduction Water conservation
-  #Place(x:618.600pt,y:203.550pt,orientation:0.000deg,child:box(width: 275.40pt, height: 274.14pt, clip: false)[
+  #Place(x:618.600pt,y:203.550pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 275.40pt, height: 274.14pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Green supply chain")
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Reduced carbon footprint")
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Waste reduction")
   ]
-  #v(14.40pt)
+  #v(24.00pt)
   #align(left)[
-    #set par(leading: 3.84pt, spacing: 0pt)
+    #set par(leading: 12.48pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Water conservation")
   ]
 ]
-])
+]))
   // Editable text: Slide Number Placeholder 4 | 12
   #Place(x:458.368pt,y:485.822pt,orientation:0.000deg,child:box(width: 43.26pt, height: 28.75pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -641,7 +637,7 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 5.76pt, spacing: 0pt)
+    #set par(leading: 18.72pt, spacing: 0pt)
     #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Thank you")
   ]
 ]
@@ -651,17 +647,17 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 2.88pt, spacing: 0pt)
+    #set par(leading: 9.54pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Peyton Davis | 424-555-0124")
   ]
-  #v(10.80pt)
+  #v(21.60pt)
   #align(left)[
-    #set par(leading: 2.88pt, spacing: 0pt)
+    #set par(leading: 9.54pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "peyton@northwindtraders.com")
   ]
-  #v(10.80pt)
+  #v(21.60pt)
   #align(left)[
-    #set par(leading: 2.88pt, spacing: 0pt)
+    #set par(leading: 9.54pt, spacing: 0pt)
     #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "www.northwindtraders.com")
   ]
 ]

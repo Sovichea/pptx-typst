@@ -502,10 +502,30 @@ def content_for_text(sh, ew, eh, sx, sy):
     # Typst's native list item keeps wrapped lines aligned with the text start.
     rrtext='#list(marker:['+glyphtext+'],indent:'+f'{bullet_x:.2f}pt,body-indent:{gap:.2f}pt,tight:true,spacing:0pt'+',['+rrtext+'])'
    else:rrtext=glyphtext+stylize(' ')[1:-1]+rrtext
-  line_size=round(float(pa.line_spacing)/EMU,2) if pa.line_spacing and not isinstance(pa.line_spacing,float) else None
+  line_value=pa.line_spacing
+  if isinstance(line_value,float):
+   # python-pptx represents proportional DrawingML line spacing as a multiplier.
+   line_size=round(max_size*line_value,2) if max_size>0 else None
+  elif line_value:
+   line_size=round(float(line_value)/EMU,2)
+  else:
+   # PowerPoint also inherits line spacing from paragraph and master styles.
+   line_size=None
+   for source in paragraph_style_sources(sh,pa):
+    line_nodes=source.xpath('./*[local-name()="lnSpc"]')
+    if not line_nodes:continue
+    pct=line_nodes[0].xpath('./*[local-name()="spcPct"]/@val')
+    pts=line_nodes[0].xpath('./*[local-name()="spcPts"]/@val')
+    if pct and max_size>0:line_size=round(max_size*int(pct[0])/100000,2)
+    elif pts:line_size=round(int(pts[0])/100,2)
+    if line_size is not None:break
   if line_size is not None and max_size>0:
-   leading=max(0.,line_size-max_size*1.08)
-  else:leading=max(1.,max_size*.16)
+   # PowerPoint's single spacing is a baseline pitch, while Typst leading is
+   # the gap between font line boxes. The latter depends on the chosen font;
+   # use a measured floor for single spacing and subtract the fallback font's
+   # natural line pitch when preserving larger authored spacing values.
+   leading=max(max_size*.52,line_size-max_size*.67)
+  else:leading=max(1.,max_size*.52)
   leading=max(0.,leading*(1-spacing_reduction))
   before=round(float(pa.space_before)/EMU,2) if pa.space_before else 0
   after=round(float(pa.space_after)/EMU,2) if pa.space_after else 0
@@ -527,11 +547,15 @@ def content_for_text(sh, ew, eh, sx, sy):
   result.append(f'  #align({align})[\n    #set par(leading: {leading:.2f}pt, spacing: 0pt)\n    {frags}\n  ]')
   if i<len(paragraphs)-1:
    if args.text_layout in ('spacing','anchors-spacing'):pass
-   else:result.append(f'  #v({max(0.0,(line_size or size*1.3)-size*0.70):.2f}pt)')
+   else:result.append(f'  #v({max(0.0,(line_size or size*1.3)):.2f}pt)')
   if after>0:result.append(f'  #v({after:.2f}pt)')
  if valign != 'top':result.append(']')
  result.append(']');result.append(']')
- return '\n'.join(result)
+ rendered='\n'.join(result)
+ # For common body sizes, PowerPoint's default font ascent places visible ink
+ # lower than Typst's fallback font. Match that measured top offset.
+ if 20<=max_size<=28:rendered='move(dy:7.20pt, '+rendered+')'
+ return rendered
 
 def table_style_color(scheme,transform=None):
     transform=transform or ''
@@ -1130,7 +1154,7 @@ lines=['// Source-faithful PPTX conversion with original shared media and editab
        f'#let ppt-format=(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt)',
        f'#set page(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,margin:0pt,fill:white)',
        '#set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)',
-       '#set par(leading:3pt,spacing:0pt)', '']
+       '#set par(leading:4pt,spacing:0pt)', '']
 
 for slide_no,slide in enumerate(prs.slides,1):
     CURRENT_THEME,CURRENT_MAP=theme_context(slide)
