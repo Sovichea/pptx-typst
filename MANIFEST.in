@@ -1,0 +1,3 @@
+recursive-include src/pptx_typst *.py *.typ
+include README.md
+include SOURCE_VERSIONS.json

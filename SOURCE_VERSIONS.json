@@ -1,0 +1,16 @@
+{
+  "forward": {
+    "archive": "PPTX_Typst_Converter_v8_POC.zip",
+    "entrypoint": "pptx_to_typst.py",
+    "version": "v8"
+  },
+  "reverse": {
+    "archive": "Typst_to_PowerPoint_PoC_Baseline.zip",
+    "entrypoint": "typst_to_pptx.py",
+    "version": "baseline PoC"
+  },
+  "sample": {
+    "source": "examples/quarterly_marketing_meeting",
+    "same_as_reverse_sample": false
+  }
+}

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pptx-typst"
+version = "0.1.0"
+description = "Convert supported PowerPoint presentations to Typst and back"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "python-pptx>=0.6.23",
+  "Pillow>=10",
+  "lxml>=4.9",
+  "numpy>=1.24",
+  "cairosvg>=2.7",
+]
+keywords = ["powerpoint", "pptx", "typst", "presentation", "converter"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+]
+
+[project.urls]
+Homepage = "https://github.com/Sovichea/pptx-typst"
+Repository = "https://github.com/Sovichea/pptx-typst"
+Issues = "https://github.com/Sovichea/pptx-typst/issues"
+
+[project.scripts]
+pptx-typst = "pptx_typst.cli:main"
+pptx-to-typst = "pptx_typst.cli:pptx_to_typst"
+typst-to-pptx = "pptx_typst.cli:typst_to_pptx"
+pptx-typst-validate = "pptx_typst.cli:validate_layout"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pptx_typst = ["template.typ", "templates/*.typ"]
