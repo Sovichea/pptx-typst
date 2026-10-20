@@ -2,7 +2,7 @@
 
 `pptx-typst` converts PowerPoint presentations (`.pptx`) to editable Typst source and converts a bounded Typst presentation subset back to PowerPoint.
 
-Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, layout, and transparency cases. The reverse converter reads the explicit `#Root` / `#Place` subset emitted by the forward converter; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
+Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, layout, and transparency cases. SmartArt with a stored PowerPoint drawing cache is included as vector artwork; its text is rendered in the SVG rather than emitted as independently editable Typst text. The reverse converter reads the explicit `#Root` / `#Place` subset emitted by the forward converter; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
 
 ## Install
 

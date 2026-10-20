@@ -6,7 +6,7 @@
     540.0
   ],
   "unique_images": 19,
-  "unique_vectors": 27,
+  "unique_vectors": 28,
   "alpha_variants": 0,
   "group_mode": "safe",
   "clip_mode": "legacy",
@@ -16,7 +16,7 @@
     "inherited_master_layers": 13,
     "media_placements": 32,
     "geometry_rect": 29,
-    "other_placements": 40,
+    "other_placements": 39,
     "vector_shapes": 37,
     "inherited_layout_layers": 13,
     "text_placements": 33,
@@ -26,9 +26,9 @@
     "masked_complex": 3,
     "geometry_complex": 3,
     "autofit_shrink": 10,
-    "unsupported_shape": 1,
-    "unsupported_placements": 3,
-    "unsupported_table": 2
+    "smartart_placements": 1,
+    "unsupported_table": 2,
+    "unsupported_placements": 2
   },
   "media": {
     "1a23b57b9161752385891b0e631c642154ecbfccbb498cb72907887bc5b4e436": {
@@ -1741,9 +1741,9 @@
           "rot": 0.0,
           "flip_y": false,
           "group_skew": 0.0,
-          "type": "unsupported",
-          "unsupported_kind": "shape",
-          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+          "type": "smartart",
+          "source": "assets/media/smartart_0a46e8230802.svg",
+          "rendering": "materialized vector drawing"
         },
         {
           "z_index": 3,

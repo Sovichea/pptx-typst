@@ -13,3 +13,5 @@ The manifest records unsupported objects for review. Conversion support remains 
 Decorative SVG pictures inherited from PowerPoint masters and layouts are included in the Typst output and kept as vector assets.
 
 Slide picture placeholders also inherit custom clipping geometry from their matching layout placeholders, preserving torn and shaped image edges.
+
+The product timeline SmartArt on slide 6 is included as a vector SVG generated from PowerPoint's stored drawing cache. Its text is part of the SVG artwork rather than separately editable Typst text.

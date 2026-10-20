@@ -276,6 +276,8 @@
   ]
 ]
 ])
+  // SmartArt layout drawing: Content Placeholder 16
+  #Place(x:448.500pt,y:164.875pt,orientation:0.000deg,child:image("assets/media/smartart_0a46e8230802.svg",width:445.750pt,height:308.125pt,fit:"stretch"))
   // Editable text: Slide Number Placeholder 3 | 6
   #Place(x:458.368pt,y:485.822pt,orientation:0.000deg,child:box(width: 43.26pt, height: 28.75pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[

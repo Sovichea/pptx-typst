@@ -8,13 +8,14 @@ from pptx.enum.text import PP_ALIGN
 from zipfile import ZipFile
 import numpy as np
 import json,math,hashlib,os,shutil,re
+from html import escape as xml_escape
 from lxml import etree
 from pptx.oxml.ns import qn
 from pptx.dml.color import RGBColor
 from collections import Counter,defaultdict
 
 import argparse
-from .pptx_geometry import shape_paths
+from .pptx_geometry import shape_paths, preset_path
 from .pptx_mask import mask_image
 
 cli=argparse.ArgumentParser(description="Convert PPTX to Typst with original shared picture assets and Place placements")
@@ -552,7 +553,9 @@ def rot(a):
 
 def shape_matrix(sh):
     e=sh._element
-    if sh.shape_type==MSO_SHAPE_TYPE.PICTURE:
+    if etree.QName(e).localname=='graphicFrame':
+        xfrm=e.xpath('./p:xfrm')
+    elif sh.shape_type==MSO_SHAPE_TYPE.PICTURE:
         xfrm=e.xpath('./p:spPr/a:xfrm')
     else:xfrm=e.xpath('./p:spPr/a:xfrm')
     if xfrm:
@@ -824,6 +827,148 @@ def vector_svg(sh):
         vector_assets[sha]='assets/media/'+out_name
     return vector_assets[sha],pad,w0,h0
 
+def smartart_drawing(sh):
+    """Return the materialized DrawingML drawing for a SmartArt graphic frame."""
+    graphic=sh._element.xpath('./a:graphic/a:graphicData')
+    if not graphic or not any(etree.QName(child).localname=='relIds' for child in graphic[0]):
+        return None
+    if not any(etree.QName(child).namespace.endswith('/diagram') for child in graphic[0]):
+        return None
+    for rel in sh.part.rels.values():
+        if rel.reltype.endswith('/diagramDrawing') and not rel.is_external:
+            return etree.fromstring(rel.target_part.blob)
+    return None
+
+def smartart_svg(sh, drawing):
+    """Serialize SmartArt's positioned drawing cache to a reusable vector SVG.
+
+    PowerPoint stores the calculated layout (including its z-order) in drawing*.xml.
+    Reusing that drawing cache is substantially more faithful than rebuilding its
+    data model and layout algorithm. Text remains vector text in the SVG.
+    """
+    width=max(1,float(sh.width));height=max(1,float(sh.height))
+    ns={'dsp':'http://schemas.microsoft.com/office/drawing/2008/diagram',
+        'a':'http://schemas.openxmlformats.org/drawingml/2006/main'}
+    root=drawing.xpath('.//dsp:spTree',namespaces=ns)
+    if not root:return None
+    out=[]
+    def shape_color(parent,default='none'):
+        fill=parent.xpath('./*[local-name()="solidFill"]/*')
+        return resolve_color_node(fill[0],default) if fill else default
+    def color_opacity_path(parent):
+        fill=parent.xpath('./*[local-name()="solidFill"]/*')
+        return color_opacity(fill[0]) if fill else 1.0
+    def run_text(run):
+        return ''.join(run.xpath('.//*[local-name()="t"]/text()'))
+    for shape_index,sp in enumerate(root[0]):
+        if etree.QName(sp).localname!='sp':continue
+        xfs=sp.xpath('./dsp:spPr/a:xfrm',namespaces=ns)
+        if not xfs:continue
+        xf=xfs[0];offs=xf.xpath('./a:off',namespaces=ns);exts=xf.xpath('./a:ext',namespaces=ns)
+        if not offs or not exts:continue
+        x=float(offs[0].get('x','0'));y=float(offs[0].get('y','0'))
+        w=float(exts[0].get('cx','0'));h=float(exts[0].get('cy','0'))
+        if w<0 or h<0 or (w==0 and h==0):continue
+        rot=int(xf.get('rot','0'))/60000
+        flipx=-1 if xf.get('flipH') in ('1','true') else 1
+        flipy=-1 if xf.get('flipV') in ('1','true') else 1
+        transform=f'transform="translate({x+w/2:.3f} {y+h/2:.3f}) rotate({rot:.4f}) scale({flipx} {flipy}) translate({-w/2:.3f} {-h/2:.3f})"'
+        geom=sp.xpath('./dsp:spPr/a:prstGeom',namespaces=ns)
+        preset=geom[0].get('prst','rect') if geom else 'rect'
+        solid=sp.xpath('./dsp:spPr/a:solidFill/*',namespaces=ns)
+        fill=resolve_color_node(solid[0],'none') if solid else 'none'
+        fill_op=color_opacity(solid[0]) if solid else 1
+        ln=sp.xpath('./dsp:spPr/a:ln',namespaces=ns)
+        stroke='none';sw=0.;stroke_op=1.
+        if ln:
+            stroke=shape_color(ln[0])
+            stroke_op=color_opacity_path(ln[0])
+            if ln[0].xpath('./a:noFill',namespaces=ns):stroke='none'
+            sw=float(ln[0].get('w','0'))
+        dash=''
+        dash_nodes=ln[0].xpath('./a:prstDash/@val',namespaces=ns) if ln else []
+        if dash_nodes and dash_nodes[0] not in ('solid','sys','solidFill'):
+            ratios={'dash':(4,2),'lgDash':(8,3),'dashDot':(4,2,1,2),
+                    'lgDashDot':(8,3,1,3),'lgDashDotDot':(8,3,1,3,1,3),
+                    'sysDash':(3,2),'sysDot':(1,2),'sysDashDot':(3,2,1,2),
+                    'sysDashDotDot':(3,2,1,2,1,2),'dot':(1,2)}
+            ratio=ratios.get(dash_nodes[0])
+            if ratio:dash=f' stroke-dasharray="{" ".join(f"{sw*v:.3f}" for v in ratio)}"'
+        if preset=='ellipse':
+            artwork=f'<ellipse cx="{w/2:.3f}" cy="{h/2:.3f}" rx="{w/2:.3f}" ry="{h/2:.3f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}"/>'
+        elif preset in ('line','straightConnector1'):
+            marker_defs=[];marker_attrs=[]
+            for tag,side,ident in (('headEnd','start',f'smartart-start-{shape_index}'),('tailEnd','end',f'smartart-end-{shape_index}')):
+                end=ln[0].xpath('./a:'+tag,namespaces=ns) if ln else []
+                typ=end[0].get('type','none') if end else 'none'
+                if typ not in ('triangle','stealth','diamond','oval','arrowhead'):continue
+                if typ=='diamond':mark='<path d="M0,3 L4,0 L8,3 L4,6 Z"/>'
+                elif typ=='oval':mark='<ellipse cx="4" cy="3" rx="3" ry="3"/>'
+                else:mark='<path d="M0,0 L9,3 L0,6 Z"/>'
+                marker_defs.append(f'<defs><marker id="{ident}" markerWidth="9" markerHeight="6" refX="{0 if side=="start" else 9}" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth" fill="{stroke}">{mark}</marker></defs>')
+                marker_attrs.append(f'marker-{side}="url(#{ident})"')
+            arrow=''.join(marker_defs)
+            marks=' '.join(marker_attrs)
+            artwork=f'{arrow}<path d="M0,0 L{w:.3f},{h:.3f}" fill="none" stroke="{stroke}" stroke-width="{max(sw,1):.3f}"{dash} {marks}/>'
+        elif preset in ('rect','roundRect'):
+            r=min(w,h)*.08 if preset=='roundRect' else 0
+            artwork=f'<rect x="0" y="0" width="{w:.3f}" height="{h:.3f}" rx="{r:.3f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}"/>'
+        else:
+            path=preset_path(preset)
+            if path:artwork=f'<path d="{path}" transform="scale({w:.6f} {h:.6f})" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}"/>'
+            else:artwork=f'<rect x="0" y="0" width="{w:.3f}" height="{h:.3f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw:.3f}"/>'
+        op=[]
+        if fill_op<.99999:op.append(f'fill-opacity="{fill_op:.5f}"')
+        if stroke_op<.99999:op.append(f'stroke-opacity="{stroke_op:.5f}"')
+        out.append(f'<g {transform} {" ".join(op)}>{artwork}')
+        bodies=sp.xpath('./dsp:txBody',namespaces=ns)
+        if bodies:
+            body=bodies[0];bodypr=body.xpath('./a:bodyPr',namespaces=ns)
+            bp=bodypr[0] if bodypr else None
+            left=float(bp.get('lIns','91440')) if bp is not None else 91440
+            right=float(bp.get('rIns','91440')) if bp is not None else 91440
+            top=float(bp.get('tIns','45720')) if bp is not None else 45720
+            anchor=bp.get('anchor','ctr') if bp is not None else 'ctr'
+            paras=body.xpath('./a:p',namespaces=ns)
+            font_default=1800
+            total=0
+            parsed=[]
+            for para in paras:
+                runs=para.xpath('./a:r | ./a:fld | ./a:endParaRPr',namespaces=ns)
+                pieces=[];psize=None
+                for run in runs:
+                    if etree.QName(run).localname=='endParaRPr':continue
+                    txt=run_text(run)
+                    if not txt:continue
+                    rpr=run.xpath('./a:rPr',namespaces=ns)
+                    rp=rpr[0] if rpr else None
+                    sz=int(rp.get('sz'))*127 if rp is not None and rp.get('sz') else font_default
+                    psize=psize or sz
+                    typeface=rp.xpath('./a:latin/@typeface',namespaces=ns) if rp is not None else []
+                    fam=typeface[0] if typeface and not typeface[0].startswith('+') else 'Arial'
+                    color_nodes=rp.xpath('./a:solidFill/*',namespaces=ns) if rp is not None else []
+                    tc=resolve_color_node(color_nodes[0],'#111111') if color_nodes else '#111111'
+                    pieces.append(f'<tspan font-family="{xml_escape(fam)}" font-size="{sz:.1f}" fill="{tc}">{xml_escape(txt)}</tspan>')
+                if pieces:
+                    sz=psize or font_default;total+=sz*1.2;parsed.append((para,pieces,sz))
+            ytext=top if anchor=='t' else max(top,(h-total)/2) if anchor=='ctr' else max(top,h-total)
+            for para,pieces,sz in parsed:
+                ppr=para.xpath('./a:pPr',namespaces=ns)
+                align=ppr[0].get('algn','l') if ppr else 'l'
+                anch={'ctr':'middle','r':'end','just':'start','l':'start'}.get(align,'start')
+                tx=left if anch=='start' else w-right if anch=='end' else w/2
+                ytext+=sz
+                out.append(f'<text x="{tx:.3f}" y="{ytext:.3f}" text-anchor="{anch}">{"".join(pieces)}</text>')
+                ytext+=sz*.2
+        out.append('</g>')
+    if not out:return None
+    svg=f'<svg xmlns="http://www.w3.org/2000/svg" width="{width/EMU:.3f}pt" height="{height/EMU:.3f}pt" viewBox="0 0 {width:.3f} {height:.3f}">{"".join(out)}</svg>'
+    sha=hashlib.sha256(svg.encode()).hexdigest()
+    if sha not in vector_assets:
+        out_name=f'smartart_{sha[:12]}.svg';(ASSETS/out_name).write_text(svg,encoding='utf8')
+        vector_assets[sha]='assets/media/'+out_name
+    return vector_assets[sha]
+
 def slide_background(slide):
     bg=slide._element.xpath('./p:cSld/p:bg/p:bgPr')
     if not bg:return 'white'
@@ -937,10 +1082,20 @@ for slide_no,slide in enumerate(prs.slides,1):
                     recur(sh.shapes,group_parent,group_path+(gid,),origin)
                 continue
             pl=placement_info(sh,parent)
+            obj={'z_index':zindex,'group_path':list(group_path),'source_shape_id':sh.shape_id,'name':sh.name,'x':round(pl['x'],2),'y':round(pl['y'],2),'w':round(pl['w'],2),'h':round(pl['h'],2),'rot':round(pl['rotation'],2),'flip_y':pl['flip_y'],'group_skew':round(pl['skew'],5)}
             # Preserve established fixes from first converter for text boxes known to differ in rendered metrics
+            smartart=smartart_drawing(sh)
+            if smartart is not None:
+                asset=smartart_svg(sh,smartart)
+                if asset:
+                    lines.append(f'  // SmartArt layout drawing: {sh.name}')
+                    lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{asset}",width:{pl["w"]:.3f}pt,height:{pl["h"]:.3f}pt,fit:"stretch"))')
+                    obj.update(type='smartart',source=asset,rendering='materialized vector drawing')
+                    counts['smartart_placements']+=1
+                    sm['placements'].append(obj)
+                    continue
             istext=sh.has_text_frame and bool(sh.text.strip())
             imgpart=image_blip(sh)
-            obj={'z_index':zindex,'group_path':list(group_path),'source_shape_id':sh.shape_id,'name':sh.name,'x':round(pl['x'],2),'y':round(pl['y'],2),'w':round(pl['w'],2),'h':round(pl['h'],2),'rot':round(pl['rotation'],2),'flip_y':pl['flip_y'],'group_skew':round(pl['skew'],5)}
             if abs(pl['skew'])>0.001:
                 counts['nonorthogonal_group_objects']+=1
                 obj['transform_warning']='Nonorthogonal group transform: Place orientation approximates shear.'

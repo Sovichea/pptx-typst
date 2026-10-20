@@ -75,6 +75,10 @@ def _preset_path(preset):
         return ' '.join(('M' if i==0 else 'L')+f'{a:.8f},{b:.8f}' for i,(a,b) in enumerate(pts[preset]))+' Z'
     return None
 
+def preset_path(preset):
+    """Normalized SVG path for a preset geometry with fixed guide values."""
+    return _preset_path(preset)
+
 def shape_paths(element):
     kind,xml_paths=kind_and_paths(element)
     if xml_paths:
