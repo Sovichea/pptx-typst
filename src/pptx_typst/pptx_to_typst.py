@@ -22,7 +22,7 @@ cli.add_argument("input_pptx",type=Path,help="source PowerPoint document")
 cli.add_argument("--output",type=Path,default=Path("./typst-output"),help="Typst project output directory")
 cli.add_argument("--template",type=Path,default=Path(__file__).with_name("template.typ"),help="Typst template defining Root, Place, and related layout helpers")
 cli.add_argument("--text-layout",choices=["v3","anchors","spacing","anchors-spacing"],default="anchors",help="vertical text anchor fidelity. Alternate spacing strategies are experimental; v3 preserves the old baseline")
-cli.add_argument("--text-features", choices=["legacy","inherit","structure","all"], default="structure", help="Text inheritance/bullets/tabs features for regression A/B tests")
+cli.add_argument("--text-features", choices=["legacy","inherit","structure","all"], default="all", help="Text inheritance/bullets/tabs features (default: all)")
 cli.add_argument("--group-mode",choices=["safe","nested","flatten"],default="safe",help="Emit editable nested GroupContent containers or v5 flattened placements")
 cli.add_argument("--clip-mode",choices=["component","legacy"],default="legacy",help="Rectangular picture crop representation")
 cli.add_argument("--mask-mode",choices=["legacy","validated","experimental"],default="legacy",help="Conservative legacy default; opt in to preset or experimental curved masks after visual validation")
@@ -293,9 +293,16 @@ prs=Presentation(SRC)
 def stylize(s):
  return '\\"'.join([]) if False else '"'+s.replace('\\','\\\\').replace('"','\\"').replace('\n','\\n').replace('\t',' ' ).replace('\v','\\n')+'"'
 
+def typst_font_fallback(f):
+    """Prefer the requested family, then Typst's bundled fallback family."""
+    families=[]
+    for family in (font_mapping(f), 'Libertinus Serif'):
+        if family and family not in families:families.append(family)
+    return '('+', '.join(stylize(family) for family in families)+')'
+
 def font_mapping(f):
     if not f:return 'Arial'
-    # Preserve original font request. Typst performs fallback where unavailable.
+    # Preserve the original family name; typst_font_fallback adds local choices.
     return f.strip() or 'Arial'
 
 def weight_mapping(run):
@@ -387,7 +394,7 @@ def content_for_text(sh, ew, eh, sx, sy):
     pieces=frag.split('\t') if args.text_features in ('structure','all') else [frag]
     for k,piece in enumerate(pieces):
      if piece:
-      style=f'#text(font: {stylize(font)}, size: {fontsize:.2f}pt, weight: "{wt}", fill: rgb("{c}"), '+('style: "italic", ' if it else '')+f'{stylize(piece)})'
+      style=f'#text(font: {typst_font_fallback(font)}, size: {fontsize:.2f}pt, weight: "{wt}", fill: rgb("{c}"), '+('style: "italic", ' if it else '')+f'{stylize(piece)})'
       rr.append(style)
      if k<len(pieces)-1:
       rr.append('@@TAB@@');has_tabs=True
@@ -814,7 +821,7 @@ lines=['// Source-faithful PPTX conversion with original shared media and editab
        '#import "template.typ": Root, Place, GroupContent, ClipContent',
        f'#let ppt-format=(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt)',
        f'#set page(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,margin:0pt,fill:white)',
-       '#set text(font:"Arial",size:20pt,fill:black)',
+       '#set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)',
        '#set par(leading:3pt,spacing:0pt)', '']
 
 for slide_no,slide in enumerate(prs.slides,1):
@@ -960,12 +967,11 @@ for slide_no,slide in enumerate(prs.slides,1):
                     obj['background_shape']=rel
                     counts['text_backing_shapes']+=1
                 counts['text_placements']+=1
-                size=max([r.font.size.pt for pa in sh.text_frame.paragraphs for r in pa.runs if r.font.size] or [20])
-                has_insets=any((sh.text_frame.margin_left or 0,sh.text_frame.margin_right or 0,sh.text_frame.margin_top or 0,sh.text_frame.margin_bottom or 0))
-                yshift=0 if has_insets or abs(pl['rotation'])>0.001 else min(17.,size*.42)
                 core=content_for_text(sh,pl['w'],pl['h'],1,1)
                 lines.append(f'  // Editable text: {sh.name} | {sh.text[:80].replace(chr(10)," ")}')
-                lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]+yshift-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{core})')
+                # Keep the text frame at the source shape origin. Text insets,
+                # paragraph anchors, and point sizes are handled inside its box.
+                lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{core})')
                 obj.update(type='text',text=sh.text[:200],anchor=(sh._element.xpath('./p:txBody/a:bodyPr')[0].get('anchor','t') if sh._element.xpath('./p:txBody/a:bodyPr') else 't'),autofit_mode=text_autofit(sh)[0],font_scale=text_autofit(sh)[1],line_spacing_reduction=text_autofit(sh)[2])
                 counts['autofit_'+text_autofit(sh)[0]]+=1
             else:

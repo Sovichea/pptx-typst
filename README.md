@@ -12,7 +12,7 @@ Python 3.10 or newer is required.
 python -m pip install pptx-typst
 ```
 
-The forward converter can produce Typst source without the Typst compiler. To render the output as PDF, install the [Typst CLI](https://typst.app/) separately.
+The forward converter can produce Typst source without the Typst compiler. To render the output as PDF, install the [Typst CLI](https://typst.app/) separately. It keeps the PowerPoint text point sizes and text-frame coordinates, resolves inherited text styles by default, and tries the requested font followed by Typst's bundled Libertinus Serif. If the requested font is unavailable, fallback glyph metrics can still change wrapping and line appearance.
 
 ## Convert PowerPoint to Typst
 

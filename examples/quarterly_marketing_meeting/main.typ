@@ -3,7 +3,7 @@
 #import "template.typ": Root, Place, GroupContent, ClipContent
 #let ppt-format=(width:960.000pt,height:540.000pt)
 #set page(width:960.000pt,height:540.000pt,margin:0pt,fill:white)
-#set text(font:"Arial",size:20pt,fill:black)
+#set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)
 #set par(leading:3pt,spacing:0pt)
 
 // â”€â”€ Slide 01 â”€â”€
@@ -28,8 +28,8 @@
   #align(bottom)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Quarterly marketing meeting")
+    #set par(leading: 8.64pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 54.00pt, weight: "regular", fill: rgb("#EAE8E8"), "Quarterly marketing meeting")
   ]
 ]
 ]
@@ -40,8 +40,8 @@
   #align(center + horizon)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "NORTHWIND TRADERS")
+    #set par(leading: 4.48pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "NORTHWIND TRADERS")
   ]
 ]
 ]
@@ -71,8 +71,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Agenda")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Agenda")
   ]
 ]
 ])
@@ -81,28 +81,28 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Growth strategy")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Growth strategy")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Market analysis")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Market analysis")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Financial overview")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Financial overview")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Innovative solutions")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Innovative solutions")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Future initiatives")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Future initiatives")
   ]
 ]
 ])
@@ -134,8 +134,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Strategies ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "for growth")
+    #set par(leading: 7.04pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Strategies ")#text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "for growth")
   ]
 ]
 ])
@@ -162,8 +162,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Current market ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "analysis")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Current market ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "analysis")
   ]
 ]
 ])
@@ -172,18 +172,18 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Data reveals a steady increase in consumer demand for sustainable products, presenting an opportunity for our co-friendly offerings.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Data reveals a steady increase in consumer demand for sustainable products, presenting an opportunity for our co-friendly offerings.")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Our competitors are now focusing on digital marketing strategies, suggesting a shift in consumer behavior.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our competitors are now focusing on digital marketing strategies, suggesting a shift in consumer behavior.")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Understanding these nuanced dynamics positions us to adapt and capitalize on emerging market preferences.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Understanding these nuanced dynamics positions us to adapt and capitalize on emerging market preferences.")
   ]
 ]
 ])
@@ -223,8 +223,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Market expansion")
+    #set par(leading: 7.04pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Market expansion")
   ]
 ]
 ])
@@ -233,8 +233,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Unlocking new horizons")
+    #set par(leading: 4.48pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Unlocking new horizons")
   ]
 ]
 ])
@@ -251,8 +251,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Product launch ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "timeline")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Product launch ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "timeline")
   ]
 ]
 ])
@@ -261,18 +261,18 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Currently gearing up for a ground-breaking launch ")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Currently gearing up for a ground-breaking launch ")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Our new offerings will captivate the market")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our new offerings will captivate the market")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Our marketing campaign will generate anticipation")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Our marketing campaign will generate anticipation")
   ]
 ]
 ])
@@ -294,8 +294,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Marketing ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "strategies")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Marketing ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "strategies")
   ]
 ]
 ])
@@ -304,18 +304,18 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Implement personalized engagement strategies")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Implement personalized engagement strategies")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Tailor campaigns to resonate with specific demographics, fostering a sense of relevance ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "and connection")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Tailor campaigns to resonate with specific demographics, fostering a sense of relevance ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "and connection")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Collaborate with influencers and thought leaders ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "to amplify our brand message")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborate with influencers and thought leaders ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "to amplify our brand message")
   ]
 ]
 ])
@@ -341,8 +341,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Financial ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "overview")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Financial ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "overview")
   ]
 ]
 ])
@@ -351,15 +351,15 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 2.96pt, spacing: 0pt)
-    #text(font: "Arial", size: 18.50pt, weight: "regular", fill: rgb("#FFFFFF"), "Our financial overview reflects a robust and resilient fiscal performance.")
+    #set par(leading: 3.55pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 22.20pt, weight: "regular", fill: rgb("#EBDDC3"), "Our financial overview reflects a robust and resilient fiscal performance.")
   ]
-  #v(11.10pt)
+  #v(13.32pt)
   #align(left)[
-    #set par(leading: 2.96pt, spacing: 0pt)
-    #text(font: "Arial", size: 18.50pt, weight: "regular", fill: rgb("#FFFFFF"), "Operating margins have improved, signaling operational efficiency, while strengthening our reserves.")
+    #set par(leading: 3.55pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 22.20pt, weight: "regular", fill: rgb("#EBDDC3"), "Operating margins have improved, signaling operational efficiency, while strengthening our reserves.")
   ]
-  #v(11.10pt)
+  #v(13.32pt)
   #v(22.00pt)
 ]
 ])
@@ -368,15 +368,15 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "This underscores our commitment to financial stability, positioning us for sustained growth. ")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "This underscores our commitment to financial stability, positioning us for sustained growth. ")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Key indicators show consistent revenue growth over the past quarter, attributed to strategic cost management and successful marketing.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Key indicators show consistent revenue growth over the past quarter, attributed to strategic cost management and successful marketing.")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #v(22.00pt)
 ]
 ])
@@ -400,8 +400,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Quarterly ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "targets")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Quarterly ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "targets")
   ]
 ]
 ])
@@ -410,23 +410,23 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Market expansion")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Market expansion")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Product innovation")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product innovation")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Customer retention")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Customer retention")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Operational efficiency")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Operational efficiency")
   ]
 ]
 ])
@@ -450,8 +450,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Financial ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "snapshot")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Financial ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "snapshot")
   ]
 ]
 ])
@@ -491,8 +491,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Innovative solutions")
+    #set par(leading: 7.04pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 44.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Innovative solutions")
   ]
 ]
 ])
@@ -509,8 +509,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Future ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "initiatives")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "Future ")#text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#F2F2F2"), "initiatives")
   ]
 ]
 ])
@@ -519,18 +519,18 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "our operations.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "our operations.")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")
   ]
 ]
 ])
@@ -539,23 +539,23 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Green supply chain")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Green supply chain")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Reduced carbon footprint")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Reduced carbon footprint")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Waste reduction")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Waste reduction")
   ]
-  #v(12.00pt)
+  #v(14.40pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Water conservation")
+    #set par(leading: 3.84pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Water conservation")
   ]
 ]
 ])
@@ -593,8 +593,8 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Thank you")
+    #set par(leading: 5.76pt, spacing: 0pt)
+    #text(font: ("Jumble", "Libertinus Serif"), size: 36.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Thank you")
   ]
 ]
 ])
@@ -603,18 +603,18 @@
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "Peyton Davis | 424-555-0124")
+    #set par(leading: 2.88pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Peyton Davis | 424-555-0124")
   ]
-  #v(12.00pt)
+  #v(10.80pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "peyton@northwindtraders.com")
+    #set par(leading: 2.88pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "peyton@northwindtraders.com")
   ]
-  #v(12.00pt)
+  #v(10.80pt)
   #align(left)[
-    #set par(leading: 3.20pt, spacing: 0pt)
-    #text(font: "Arial", size: 20.00pt, weight: "regular", fill: rgb("#FFFFFF"), "www.northwindtraders.com")
+    #set par(leading: 2.88pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "www.northwindtraders.com")
   ]
 ]
 ])
