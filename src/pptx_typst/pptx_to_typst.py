@@ -230,6 +230,22 @@ def color_in(parent, prefix, default=None):
     el=parent.xpath(prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
     return resolve_color_node(el[0],default) if el else default
 
+def color_opacity(node):
+    """Resolve DrawingML alpha transforms on one color node."""
+    opacity=1.0
+    if node is None:return opacity
+    for transform in node:
+        kind=etree.QName(transform).localname
+        value=float(transform.get('val','100000'))/100000
+        if kind=='alpha':opacity=value
+        elif kind=='alphaMod':opacity*=value
+        elif kind=='alphaOff':opacity+=value
+    return max(0.0,min(1.0,opacity))
+
+def color_opacity_in(parent, prefix):
+    nodes=parent.xpath(prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
+    return color_opacity(nodes[0]) if nodes else 1.0
+
 def gradient_expr(gf):
     stops=[]
     for gs in gf.xpath('./a:gsLst/a:gs'):
@@ -632,6 +648,7 @@ def vector_svg(sh):
     width=float(w0);height=float(h0)
     rgb='none'
     if solid:rgb=resolve_color_node(solid[0],'none')
+    fill_opacity=color_opacity(solid[0]) if solid else 1.0
     native_grad=e.xpath('./p:spPr/a:gradFill')
     defs=''
     if native_grad:
@@ -653,10 +670,11 @@ def vector_svg(sh):
         else:
             defs=f'<defs><radialGradient id="pptgrad">{"".join(stops)}</radialGradient></defs>'
         if stops:rgb='url(#pptgrad)'
-    stroke='none';stroke_w=0.;linecap='butt';dash=''
+    stroke='none';stroke_w=0.;linecap='butt';dash='';stroke_opacity=1.0
     if ln:
         lin=ln[0]
         stroke=color_in(lin,'./a:solidFill','none')
+        stroke_opacity=color_opacity_in(lin,'./a:solidFill')
         if lin.xpath('./a:noFill'):stroke='none'
         stroke_w=float(lin.get('w','0'))/EMU
         linecap='round' if lin.get('cap')=='rnd' else 'square' if lin.get('cap')=='sq' else 'butt'
@@ -717,11 +735,16 @@ def vector_svg(sh):
             if typ=='oval':mark=f'<ellipse cx="5" cy="3" rx="3" ry="3" fill="{stroke}"/>'
             elif typ=='diamond':mark=f'<path d="M0,3 L4,0 L8,3 L4,6 Z" fill="{stroke}"/>'
             else:mark=f'<path d="M0,0 L9,3 L0,6 Z" fill="{stroke}"/>'
-            heads.append(f'<marker id="{id}" markerWidth="9" markerHeight="6" refX="{0 if attach=="start" else 9}" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth">{mark}</marker>')
+            marker_opacity=f' opacity="{stroke_opacity:.5f}"' if stroke_opacity<.99999 else ''
+            heads.append(f'<marker id="{id}" markerWidth="9" markerHeight="6" refX="{0 if attach=="start" else 9}" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth"{marker_opacity}>{mark}</marker>')
             art=art.replace('<path ', f'<path marker-{attach}="url(#{id})" ', 1)
         if heads:defs=defs.replace('</defs>',''.join(heads)+'</defs>') if defs else '<defs>'+''.join(heads)+'</defs>'
     # permit stroke beyond boundaries, as in PPTX ring decorations
     pad=max(0,stroke_w/2)
+    opacity_attrs=[]
+    if fill_opacity<.99999:opacity_attrs.append(f'fill-opacity="{fill_opacity:.5f}"')
+    if stroke_opacity<.99999:opacity_attrs.append(f'stroke-opacity="{stroke_opacity:.5f}"')
+    if opacity_attrs:art=f'<g {" ".join(opacity_attrs)}>{art}</g>'
     svg=f'<svg xmlns="http://www.w3.org/2000/svg" width="{w0+2*pad:.3f}" height="{h0+2*pad:.3f}" viewBox="{-pad:.3f} {-pad:.3f} {w0+2*pad:.3f} {h0+2*pad:.3f}">{defs}{art}</svg>'
     sha=hashlib.sha256(svg.encode()).hexdigest()
     if sha not in vector_assets:
@@ -965,5 +988,5 @@ for slide_no,slide in enumerate(prs.slides,1):
     manifest.append(sm)
 
 (OUT/'main.typ').write_text('\n'.join(lines),encoding='utf8')
-(OUT/'asset_manifest.json').write_text(json.dumps({'source_file':SRC.name,'source_slide_count':len(prs.slides),'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,'counts':dict(counts),'media':media_contents,'slides':manifest},ensure_ascii=False,indent=2))
+(OUT/'asset_manifest.json').write_text(json.dumps({'source_file':SRC.name,'source_slide_count':len(prs.slides),'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,'counts':dict(counts),'media':media_contents,'slides':manifest},ensure_ascii=False,indent=2),encoding='utf8')
 print('Saved',OUT,'assets',len(media_contents),'stats',dict(counts),'sizesMB',sum(v['bytes'] for v in media_contents.values())/1024**2)

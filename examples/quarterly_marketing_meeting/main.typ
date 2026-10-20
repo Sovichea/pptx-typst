@@ -21,7 +21,7 @@
   // Source media: assets/media/image4_dc27eb1a84.svg | shape: Graphic 23 | rect
   #Place(x:43.875pt,y:55.310pt,orientation:0.000deg,child:image("assets/media/image4_dc27eb1a84.svg",width:84.226pt,height:84.226pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 16
-  #Place(x:104.908pt,y:427.613pt,orientation:0.000deg,child:image("assets/media/shape_68a654cbf756.svg",width:113.698pt,height:112.387pt,fit:"stretch"))
+  #Place(x:104.908pt,y:427.613pt,orientation:0.000deg,child:image("assets/media/shape_036db51bf8ed.svg",width:113.698pt,height:112.387pt,fit:"stretch"))
   // Editable text: Title 2 | Quarterly marketing meeting
   #Place(x:43.875pt,y:159.633pt,orientation:0.000deg,child:box(width: 474.71pt, height: 320.02pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -53,7 +53,7 @@
 // â”€â”€ Slide 02 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 16
-  #Place(x:603.700pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_ebc344196741.svg",width:356.800pt,height:541.000pt,fit:"stretch"))
+  #Place(x:603.700pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_10265b29576a.svg",width:356.800pt,height:541.000pt,fit:"stretch"))
   // Source media: assets/media/image5_c40c069a6d.svg | shape: Graphic 12 | rect
   #Place(x:648.295pt,y:224.775pt,orientation:14.624deg,child:image("assets/media/image5_c40c069a6d.svg",width:144.066pt,height:175.623pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 14
@@ -63,7 +63,7 @@
   // Source media: assets/media/image6_37fd9fbd3c.svg | shape: Graphic 18 | rect
   #Place(x:687.900pt,y:433.331pt,orientation:0.000deg,child:box(width:165.682pt,height:106.669pt,clip:true)[#place(top+left,dx:0.000pt,dy:0.000pt)[#image("assets/media/image6_37fd9fbd3c.svg",width:165.682pt,height:143.030pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 10
-  #Place(x:707.368pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_8e2b1822d27f.svg",width:252.632pt,height:323.160pt,fit:"stretch"))
+  #Place(x:707.368pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_5f521b8ee6b8.svg",width:252.632pt,height:323.160pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 19
   #Place(x:866.349pt,y:337.661pt,orientation:0.000deg,child:image("assets/media/shape_d5e2f1bcad9c.svg",width:93.651pt,height:126.795pt,fit:"stretch"))
   // Editable text: Title 1 | Agenda
@@ -128,7 +128,7 @@
   // Source media: assets/media/image4_dc27eb1a84.svg | shape: Graphic 23 | rect
   #Place(x:43.875pt,y:55.310pt,orientation:0.000deg,child:image("assets/media/image4_dc27eb1a84.svg",width:84.226pt,height:84.226pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 11
-  #Place(x:30.963pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_88853b38b7ec.svg",width:193.999pt,height:118.050pt,fit:"stretch"))
+  #Place(x:30.963pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_584ec81e9869.svg",width:193.999pt,height:118.050pt,fit:"stretch"))
   // Editable text: Title 1 | Strategies for growth
   #Place(x:43.875pt,y:159.633pt,orientation:0.000deg,child:box(width: 474.71pt, height: 320.02pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -146,7 +146,7 @@
 // â”€â”€ Slide 04 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 16
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_bc6763013f09.svg",width:257.800pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_2a61986cc85c.svg",width:257.800pt,height:541.000pt,fit:"stretch"))
   // Source media: assets/media/image1_1a23b57b91.svg | shape: Graphic 8 | rect
   #Place(x:62.124pt,y:191.856pt,orientation:-14.989deg,child:image("assets/media/image1_1a23b57b91.svg",width:209.424pt,height:209.424pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 14
@@ -156,7 +156,7 @@
   // Source media: assets/media/image2_9c3eeb6c7e.svg | shape: Graphic 9 | rect
   #Place(x:0.000pt,y:23.625pt,orientation:0.000deg,child:box(width:187.470pt,height:144.375pt,clip:true)[#place(top+left,dx:-57.298pt,dy:0.000pt)[#image("assets/media/image2_9c3eeb6c7e.svg",width:244.768pt,height:144.375pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 26
-  #Place(x:0.000pt,y:410.456pt,orientation:0.000deg,child:image("assets/media/shape_c7e867190f70.svg",width:105.486pt,height:129.544pt,fit:"stretch"))
+  #Place(x:0.000pt,y:410.456pt,orientation:0.000deg,child:image("assets/media/shape_445df2c6bfef.svg",width:105.486pt,height:129.544pt,fit:"stretch"))
   // Editable text: Title 1 | Current market analysis
   #Place(x:320.400pt,y:67.192pt,orientation:0.000deg,child:box(width: 581.40pt, height: 142.17pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -213,11 +213,11 @@
   // Source media: assets/media/image14_adc5562936.svg | shape: Graphic 8 | rect
   #Place(x:846.515pt,y:0.000pt,orientation:0.000deg,child:box(width:113.485pt,height:161.195pt,clip:true)[#place(top+left,dx:0.000pt,dy:-61.999pt)[#image("assets/media/image14_adc5562936.svg",width:208.371pt,height:223.193pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 17
-  #Place(x:208.596pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_5a96b05790f4.svg",width:190.035pt,height:78.109pt,fit:"stretch"))
+  #Place(x:208.596pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_9bb623cf3145.svg",width:190.035pt,height:78.109pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 27
-  #Place(x:877.679pt,y:444.037pt,orientation:0.000deg,child:image("assets/media/shape_52f21e78f2eb.svg",width:82.321pt,height:95.963pt,fit:"stretch"))
+  #Place(x:877.679pt,y:444.037pt,orientation:0.000deg,child:image("assets/media/shape_5cbb463b6c27.svg",width:82.321pt,height:95.963pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 43
-  #Place(x:644.882pt,y:419.351pt,orientation:0.000deg,child:image("assets/media/shape_97a1bd9b15c9.svg",width:113.698pt,height:120.649pt,fit:"stretch"))
+  #Place(x:644.882pt,y:419.351pt,orientation:0.000deg,child:image("assets/media/shape_d45950bec055.svg",width:113.698pt,height:120.649pt,fit:"stretch"))
   // Editable text: Title 1 | Market expansion
   #Place(x:134.187pt,y:267.724pt,orientation:0.000deg,child:box(width: 691.63pt, height: 198.61pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -243,7 +243,7 @@
 // â”€â”€ Slide 06 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 15
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_785925b7c424.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_002d149bece2.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
   // Original editable PowerPoint shape: Graphic 32
   #Place(x:18.180pt,y:16.511pt,orientation:0.000deg,child:image("assets/media/shape_e118c916581b.svg",width:923.640pt,height:506.977pt,fit:"stretch"))
   // Editable text: Title 1 | Product launch timeline
@@ -333,7 +333,7 @@
 // â”€â”€ Slide 08 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 12
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_785925b7c424.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_002d149bece2.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
   // Original editable PowerPoint shape: Graphic 32
   #Place(x:18.180pt,y:16.511pt,orientation:0.000deg,child:image("assets/media/shape_e118c916581b.svg",width:923.640pt,height:506.977pt,fit:"stretch"))
   // Editable text: Title 1 | Financial overview
@@ -392,7 +392,7 @@
 // â”€â”€ Slide 09 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 8
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_785925b7c424.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_002d149bece2.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
   // Original editable PowerPoint shape: Graphic 32
   #Place(x:18.180pt,y:16.511pt,orientation:0.000deg,child:image("assets/media/shape_e118c916581b.svg",width:923.640pt,height:506.977pt,fit:"stretch"))
   // Editable text: Title 1 | Quarterly targets
@@ -442,7 +442,7 @@
 // â”€â”€ Slide 10 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 8
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_785925b7c424.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_002d149bece2.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
   // Original editable PowerPoint shape: Graphic 32
   #Place(x:18.180pt,y:16.511pt,orientation:0.000deg,child:image("assets/media/shape_e118c916581b.svg",width:923.640pt,height:506.977pt,fit:"stretch"))
   // Editable text: Title 1 | Financial snapshot
@@ -481,11 +481,11 @@
   // Source media: assets/media/image13_2d48d3985b.svg | shape: Graphic 7 | rect
   #Place(x:210.628pt,y:0.000pt,orientation:0.000deg,child:box(width:538.744pt,height:540.000pt,clip:true)[#place(top+left,dx:0.000pt,dy:0.000pt)[#image("assets/media/image13_2d48d3985b.svg",width:539.997pt,height:540.000pt,fit:"stretch")]])
   // Original editable PowerPoint shape: Freeform: Shape 21
-  #Place(x:208.596pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_1e627c7166bb.svg",width:189.756pt,height:78.109pt,fit:"stretch"))
+  #Place(x:208.596pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/shape_808dd51a96d4.svg",width:189.756pt,height:78.109pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 32
-  #Place(x:877.679pt,y:444.037pt,orientation:0.000deg,child:image("assets/media/shape_52f21e78f2eb.svg",width:82.321pt,height:95.963pt,fit:"stretch"))
+  #Place(x:877.679pt,y:444.037pt,orientation:0.000deg,child:image("assets/media/shape_5cbb463b6c27.svg",width:82.321pt,height:95.963pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 47
-  #Place(x:644.882pt,y:419.351pt,orientation:0.000deg,child:image("assets/media/shape_865ef61852c2.svg",width:113.698pt,height:120.649pt,fit:"stretch"))
+  #Place(x:644.882pt,y:419.351pt,orientation:0.000deg,child:image("assets/media/shape_3144ce6ddb1a.svg",width:113.698pt,height:120.649pt,fit:"stretch"))
   // Editable text: Title 2 | Innovative solutions
   #Place(x:134.187pt,y:170.695pt,orientation:0.000deg,child:box(width: 691.63pt, height: 198.61pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
@@ -501,7 +501,7 @@
 // â”€â”€ Slide 12 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 12
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_785925b7c424.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_002d149bece2.svg",width:961.000pt,height:541.000pt,fit:"stretch"))
   // Original editable PowerPoint shape: Graphic 32
   #Place(x:18.180pt,y:16.511pt,orientation:0.000deg,child:image("assets/media/shape_e118c916581b.svg",width:923.640pt,height:506.977pt,fit:"stretch"))
   // Editable text: Title 1 | Future initiatives
@@ -571,15 +571,15 @@
 // â”€â”€ Slide 13 â”€â”€
 #Root(width:960.000pt,height:540.000pt,fill:rgb("#334031"),format:ppt-format,children:[
   // Original editable PowerPoint shape: Rectangle 16
-  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_63d1679f528d.svg",width:958.764pt,height:541.000pt,fit:"stretch"))
+  #Place(x:-0.500pt,y:-0.500pt,orientation:0.000deg,child:image("assets/media/shape_0a87422a1b3e.svg",width:958.764pt,height:541.000pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 31
-  #Place(x:0.000pt,y:425.809pt,orientation:0.000deg,child:image("assets/media/shape_2d37c39b8197.svg",width:136.069pt,height:114.191pt,fit:"stretch"))
+  #Place(x:0.000pt,y:425.809pt,orientation:0.000deg,child:image("assets/media/shape_34c397a5621b.svg",width:136.069pt,height:114.191pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 40
-  #Place(x:872.435pt,y:241.161pt,orientation:0.000deg,child:image("assets/media/shape_3217c6fce381.svg",width:87.565pt,height:126.795pt,fit:"stretch"))
+  #Place(x:872.435pt,y:241.161pt,orientation:0.000deg,child:image("assets/media/shape_b60f083cfce3.svg",width:87.565pt,height:126.795pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 37
-  #Place(x:0.000pt,y:225.746pt,orientation:0.000deg,child:image("assets/media/shape_ce3564b20371.svg",width:189.270pt,height:126.161pt,fit:"stretch"))
+  #Place(x:0.000pt,y:225.746pt,orientation:0.000deg,child:image("assets/media/shape_d35b14c6015d.svg",width:189.270pt,height:126.161pt,fit:"stretch"))
   // Original editable PowerPoint shape: Freeform: Shape 19
-  #Place(x:777.492pt,y:393.084pt,orientation:0.000deg,child:image("assets/media/shape_679eaa2277ef.svg",width:140.659pt,height:146.916pt,fit:"stretch"))
+  #Place(x:777.492pt,y:393.084pt,orientation:0.000deg,child:image("assets/media/shape_710d93559f07.svg",width:140.659pt,height:146.916pt,fit:"stretch"))
   // Source media: assets/media/image15_7a592df3d2.svg | shape: Graphic 11 | rect
   #Place(x:831.088pt,y:36.449pt,orientation:14.624deg,child:image("assets/media/image15_7a592df3d2.svg",width:144.066pt,height:175.623pt,fit:"stretch"))
   // Source media: assets/media/image10_d61936ec21.svg | shape: Graphic 18 | rect
