@@ -33,15 +33,15 @@
 ]
 ])
   // Editable text: Text Placeholder 4 | NORTHWIND TRADERS
-  #Place(x:135.375pt,y:62.435pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 383.21pt, height: 72.00pt, clip: false)[
+  #Place(x:135.375pt,y:62.435pt,orientation:0.000deg,child:box(width: 383.21pt, height: 72.00pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 14.56pt, spacing: 0pt)
-    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:28.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:18.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "NORTHWIND TRADERS")])
+    #set par(leading: 9.36pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "NORTHWIND TRADERS")
   ]
 ]
-]))
+])
   // Source media: assets/media/image17_aceb3da99c.jpg | shape: Picture Placeholder 10 | complex
   #Place(x:564.250pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/clip_ce73af6474f6d8dc.png",width:395.750pt,height:540.000pt,fit:"stretch"))
 ])
@@ -225,15 +225,15 @@
 ]
 ])
   // Editable text: Subtitle 2 | Unlocking new horizons
-  #Place(x:179.938pt,y:152.684pt,orientation:0.000deg,child:move(dy:7.20pt, box(width: 600.12pt, height: 72.00pt, clip: false)[
+  #Place(x:179.938pt,y:152.684pt,orientation:0.000deg,child:box(width: 600.12pt, height: 72.00pt, clip: false)[
   #pad(left:7.200pt,right:7.200pt,top:3.600pt,bottom:3.600pt)[
   #set par(spacing: 0pt)
   #align(left)[
-    #set par(leading: 14.56pt, spacing: 0pt)
-    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:28.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:18.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 28.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Unlocking new horizons")])
+    #set par(leading: 9.36pt, spacing: 0pt)
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 18.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Unlocking new horizons")
   ]
 ]
-]))
+])
 ])
 #pagebreak()
 // â”€â”€ Slide 06 â”€â”€
@@ -564,17 +564,17 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")])
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Product enhancement. Introduce regular updates and features to enhance product offerings.")
   ]
   #v(24.00pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "our operations.")])
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Technology integration. Explore emerging technologies for potential integration into ")#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "our operations.")
   ]
   #v(24.00pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")])
+    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Collaborative partnerships. Foster collaborations with tech innovators and industry leaders to drive innovation.")
   ]
 ]
 ]))
@@ -584,22 +584,22 @@
   #set par(spacing: 0pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Green supply chain")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Green supply chain")])
   ]
   #v(24.00pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Reduced carbon footprint")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Reduced carbon footprint")])
   ]
   #v(24.00pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Waste reduction")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Waste reduction")])
   ]
   #v(24.00pt)
   #align(left)[
     #set par(leading: 12.48pt, spacing: 0pt)
-    #text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Water conservation")
+    #list(marker:[#text(font:("Arial", "Libertinus Serif"),size:24.00pt,weight:"regular",fill:rgb("#EBDDC3"),"•")],indent:0.00pt,body-indent:27.00pt,tight:true,spacing:0pt,[#text(font: ("Source Sans Pro", "Libertinus Serif"), size: 24.00pt, weight: "regular", fill: rgb("#EBDDC3"), "Water conservation")])
   ]
 ]
 ]))

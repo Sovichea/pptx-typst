@@ -101,6 +101,13 @@ def expand_theme_font(name):
     if name.startswith('+mn'):return CURRENT_FONTS['minor']
     return name
 
+def layout_placeholder(sh):
+    """Find the layout peer by placeholder ID, not collection position."""
+    if not sh.is_placeholder or CURRENT_SLIDE is None:return None
+    idx=sh.placeholder_format.idx
+    return next((ph for ph in CURRENT_SLIDE.slide_layout.placeholders
+                 if ph.placeholder_format.idx==idx),None)
+
 def text_style_defaults(sh,pa):
     # Run formatting cascades through pPr/defRPr, then lstStyle, then
     # placeholder defaults and finally major/minor theme fonts.
@@ -114,10 +121,10 @@ def text_style_defaults(sh,pa):
     if ls:add(ls[0])
     if sh.is_placeholder and CURRENT_SLIDE is not None:
         try:
-            idx=sh.placeholder_format.idx
-            ph=CURRENT_SLIDE.slide_layout.placeholders[idx]
-            x=ph._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr/a:defRPr')
-            if x:add(x[0])
+            ph=layout_placeholder(sh)
+            if ph:
+                x=ph._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr/a:defRPr')
+                if x:add(x[0])
         except Exception:pass
     # Master text styles vary for title, body, and ordinary text boxes.
     if CURRENT_SLIDE is not None:
@@ -159,8 +166,8 @@ def paragraph_style_sources(sh,pa):
     add(sh._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
     if sh.is_placeholder and CURRENT_SLIDE is not None:
         try:
-            ph=CURRENT_SLIDE.slide_layout.placeholders[sh.placeholder_format.idx]
-            add(ph._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
+            ph=layout_placeholder(sh)
+            if ph:add(ph._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
         except Exception:pass
     if sh.is_placeholder and CURRENT_SLIDE is not None:
         master=CURRENT_SLIDE.slide_layout.slide_master
