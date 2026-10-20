@@ -15,13 +15,16 @@
     "background_colors": 13,
     "inherited_master_layers": 13,
     "media_placements": 32,
-    "geometry_rect": 32,
+    "geometry_rect": 29,
     "other_placements": 40,
     "vector_shapes": 37,
     "inherited_layout_layers": 13,
     "text_placements": 33,
     "autofit_none": 9,
     "autofit_no_autofit": 14,
+    "clipped_images": 3,
+    "masked_complex": 3,
+    "geometry_complex": 3,
     "autofit_shrink": 10,
     "unsupported_shape": 1,
     "unsupported_placements": 3,
@@ -200,7 +203,7 @@
           },
           "fillrect": null,
           "alpha": 1.0,
-          "geometry": "rect"
+          "geometry": "complex"
         }
       ]
     },
@@ -316,7 +319,7 @@
           },
           "fillrect": null,
           "alpha": 1.0,
-          "geometry": "rect"
+          "geometry": "complex"
         }
       ]
     },
@@ -510,7 +513,7 @@
           },
           "fillrect": null,
           "alpha": 1.0,
-          "geometry": "rect"
+          "geometry": "complex"
         }
       ]
     },
@@ -760,8 +763,8 @@
           "group_skew": 0.0,
           "type": "image",
           "source": "assets/media/image17_aceb3da99c.jpg",
-          "render_source": "assets/media/image17_aceb3da99c.jpg",
-          "geometry": "rect",
+          "render_source": "assets/media/clip_ce73af6474f6d8dc.png",
+          "geometry": "complex",
           "crop": {
             "l": 0.04196,
             "t": 0.0,
@@ -769,15 +772,10 @@
             "b": 0.0
           },
           "fillrect": null,
-          "render_crop": {
-            "l": 0.04196,
-            "t": 0.0,
-            "r": 0.04196,
-            "b": 0.0
-          },
+          "render_crop": null,
           "render_fillrect": null,
           "alpha": 1.0,
-          "mask_applied": false
+          "mask_applied": true
         }
       ],
       "groups": []
@@ -1154,8 +1152,8 @@
           "group_skew": 0.0,
           "type": "image",
           "source": "assets/media/image18_b33e26a03b.jpg",
-          "render_source": "assets/media/image18_b33e26a03b.jpg",
-          "geometry": "rect",
+          "render_source": "assets/media/clip_8d48d4fb6eae9d0f.png",
+          "geometry": "complex",
           "crop": {
             "l": 0.51731,
             "t": 0.0,
@@ -1163,15 +1161,10 @@
             "b": 0.0
           },
           "fillrect": null,
-          "render_crop": {
-            "l": 0.51731,
-            "t": 0.0,
-            "r": 1e-05,
-            "b": 0.0
-          },
+          "render_crop": null,
           "render_fillrect": null,
           "alpha": 1.0,
-          "mask_applied": false
+          "mask_applied": true
         }
       ],
       "groups": []
@@ -1863,8 +1856,8 @@
           "group_skew": 0.0,
           "type": "image",
           "source": "assets/media/image19_366ddc801f.png",
-          "render_source": "assets/media/image19_366ddc801f.png",
-          "geometry": "rect",
+          "render_source": "assets/media/clip_c8facf7e1b0d0704.png",
+          "geometry": "complex",
           "crop": {
             "l": 0.0,
             "t": 0.00206,
@@ -1872,15 +1865,10 @@
             "b": 0.00206
           },
           "fillrect": null,
-          "render_crop": {
-            "l": 0.0,
-            "t": 0.00206,
-            "r": 0.0,
-            "b": 0.00206
-          },
+          "render_crop": null,
           "render_fillrect": null,
           "alpha": 1.0,
-          "mask_applied": false
+          "mask_applied": true
         }
       ],
       "groups": []

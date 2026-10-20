@@ -46,8 +46,8 @@
 ]
 ]
 ])
-  // Source media: assets/media/image17_aceb3da99c.jpg | shape: Picture Placeholder 10 | rect
-  #Place(x:564.250pt,y:0.000pt,orientation:0.000deg,child:box(width:395.750pt,height:540.000pt,clip:true)[#place(top+left,dx:-18.127pt,dy:0.000pt)[#image("assets/media/image17_aceb3da99c.jpg",width:432.004pt,height:540.000pt,fit:"stretch")]])
+  // Source media: assets/media/image17_aceb3da99c.jpg | shape: Picture Placeholder 10 | complex
+  #Place(x:564.250pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/clip_ce73af6474f6d8dc.png",width:395.750pt,height:540.000pt,fit:"stretch"))
 ])
 #pagebreak()
 // â”€â”€ Slide 02 â”€â”€
@@ -139,8 +139,8 @@
   ]
 ]
 ])
-  // Source media: assets/media/image18_b33e26a03b.jpg | shape: Picture Placeholder 14 | rect
-  #Place(x:496.625pt,y:0.000pt,orientation:0.000deg,child:box(width:463.375pt,height:540.000pt,clip:true)[#place(top+left,dx:-496.620pt,dy:0.000pt)[#image("assets/media/image18_b33e26a03b.jpg",width:960.004pt,height:540.000pt,fit:"stretch")]])
+  // Source media: assets/media/image18_b33e26a03b.jpg | shape: Picture Placeholder 14 | complex
+  #Place(x:496.625pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/clip_8d48d4fb6eae9d0f.png",width:463.375pt,height:540.000pt,fit:"stretch"))
 ])
 #pagebreak()
 // â”€â”€ Slide 04 â”€â”€
@@ -326,8 +326,8 @@
   #v(22.00pt)
 ]
 ])
-  // Source media: assets/media/image19_366ddc801f.png | shape: Picture Placeholder 19 | rect
-  #Place(x:713.750pt,y:0.000pt,orientation:0.000deg,child:box(width:246.250pt,height:540.000pt,clip:true)[#place(top+left,dx:0.000pt,dy:-1.117pt)[#image("assets/media/image19_366ddc801f.png",width:246.250pt,height:542.234pt,fit:"stretch")]])
+  // Source media: assets/media/image19_366ddc801f.png | shape: Picture Placeholder 19 | complex
+  #Place(x:713.750pt,y:0.000pt,orientation:0.000deg,child:image("assets/media/clip_c8facf7e1b0d0704.png",width:246.250pt,height:540.000pt,fit:"stretch"))
 ])
 #pagebreak()
 // â”€â”€ Slide 08 â”€â”€

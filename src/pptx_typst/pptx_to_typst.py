@@ -559,12 +559,26 @@ def image_blip(sh):
         except KeyError:continue
     return None
 
-def geometry_kind(sh):
+def effective_shape_geometry(sh):
+    """Resolve geometry inherited by a slide placeholder from its layout peer."""
+    own=sh._element.xpath('./p:spPr/a:prstGeom | ./p:spPr/a:custGeom')
+    if own or not sh.is_placeholder or not hasattr(sh.part,'slide_layout'):
+        return sh._element
+    ph=sh.placeholder_format
+    for candidate in sh.part.slide_layout.placeholders:
+        other=candidate.placeholder_format
+        if other.idx==ph.idx and other.type==ph.type:
+            inherited=candidate._element.xpath('./p:spPr/a:prstGeom | ./p:spPr/a:custGeom')
+            if inherited:return candidate._element
+    return sh._element
+
+def geometry_kind(sh, element=None):
     # p:pic can carry nonrectangular prstGeom/custGeom as well as p:sp.
     # Never infer 'rect' solely because its OOXML element is a picture.
-    if sh._element.xpath('./p:spPr/a:prstGeom'):
-        return sh._element.xpath('./p:spPr/a:prstGeom')[0].get('prst')
-    path=sh._element.xpath('./p:spPr/a:custGeom/a:pathLst/a:path')
+    if element is None:element=sh._element
+    if element.xpath('./p:spPr/a:prstGeom'):
+        return element.xpath('./p:spPr/a:prstGeom')[0].get('prst')
+    path=element.xpath('./p:spPr/a:custGeom/a:pathLst/a:path')
     if not path:return 'rect'
     pts=[]
     for tag in path[0]:
@@ -880,12 +894,13 @@ for slide_no,slide in enumerate(prs.slides,1):
                 authored_crop=({**crop} if crop else None)
                 authored_fillrect=({**fillrect} if fillrect else None)
                 rendered_rel=alpha_variant(imgpart,rel,alpha)
-                shape_kind=geometry_kind(sh)
+                geometry_element=effective_shape_geometry(sh)
+                shape_kind=geometry_kind(sh,geometry_element)
                 # Only genuinely masked photos receive a derived transparent image.
                 # The exact original file remains registered and shared; all ordinary
                 # (including rect-coded custom) photos reference it directly.
                 if shape_kind != 'rect':
-                    preset,mask_paths=shape_paths(sh._element)
+                    preset,mask_paths=shape_paths(geometry_element)
                     # Fail closed on adjustable Office preset guides and compound
                     # rotated freeform picture fills: v2's original-image placement
                     # is visually safer until guide/transform parity is verified.
@@ -895,6 +910,10 @@ for slide_no,slide in enumerate(prs.slides,1):
                     legacy_polygon=(preset=='custom' and shape_kind=='polygon'
                                     and abs(pl['rotation'])<.01 and not pl['flip_y']
                                     and abs(pl['skew'])<.001)
+                    inherited_layout_mask=(geometry_element is not sh._element and
+                                           preset=='custom' and shape_kind=='complex' and
+                                           abs(pl['rotation'])<.01 and not pl['flip_y'] and
+                                           abs(pl['skew'])<.001)
                     validated_curve=(preset in ('ellipse','roundRect') and
                                      abs(pl['skew'])<.001 and not pl['flip_y']
                                      and abs(pl['rotation'])<.01)
@@ -902,7 +921,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                                         abs(pl['skew'])<.001 and not pl['flip_y'])
                     rotated_preset=(preset in ('ellipse','roundRect') and
                                     abs(pl['skew'])<.001 and not pl['flip_y'])
-                    mask_is_safe=(legacy_polygon or
+                    mask_is_safe=(legacy_polygon or inherited_layout_mask or
                                   (args.mask_mode in ('validated','experimental') and validated_curve) or
                                   (args.mask_mode=='experimental' and (experimental_curve or rotated_preset)))
                     # Allow users to opt in only specific PPTX shapes after a
