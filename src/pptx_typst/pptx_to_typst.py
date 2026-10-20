@@ -333,6 +333,11 @@ if args.template.resolve() != (OUT/'template.typ').resolve():
     shutil.copy2(args.template,OUT/'template.typ')
 
 prs=Presentation(SRC)
+TABLE_STYLES_ROOT=None
+for rel in prs.part.rels.values():
+    if rel.reltype.endswith('/tableStyles') and not rel.is_external:
+        try:TABLE_STYLES_ROOT=etree.fromstring(rel.target_part.blob)
+        except Exception:pass
 def stylize(s):
  return '\\"'.join([]) if False else '"'+s.replace('\\','\\\\').replace('"','\\"').replace('\n','\\n').replace('\t',' ' ).replace('\v','\\n')+'"'
 
@@ -527,6 +532,113 @@ def content_for_text(sh, ew, eh, sx, sy):
  if valign != 'top':result.append(']')
  result.append(']');result.append(']')
  return '\n'.join(result)
+
+def table_style_color(scheme,transform=None):
+    transform=transform or ''
+    node=etree.fromstring(f'<a:schemeClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" val="{scheme}">{transform}</a:schemeClr>'.encode())
+    return resolve_color_node(node,'#FFFFFF')
+
+def table_cell_typst(sh, row_idx, col_idx, cell, table_style, banded):
+    """Build an editable Typst table cell with source text and direct formatting."""
+    tcPr=cell._tc.tcPr
+    row_count=len(sh.table.rows);col_count=len(sh.table.columns)
+    fill_node=tcPr.xpath('./a:solidFill/*')
+    fill=('rgb("'+resolve_color_node(fill_node[0],'#FFFFFF')+'")' if fill_node else 'none')
+    # A table style can be materialized in the package, or be the built-in
+    # default style whose definition is intentionally omitted by PowerPoint.
+    style_cell=None
+    if table_style is not None:
+        names=['wholeTbl']
+        if row_idx==0 and sh.table.first_row:names.append('firstRow')
+        elif banded and row_idx%2==1:names.append('band1H')
+        if col_idx==0 and sh.table.first_col:names.append('firstCol')
+        if col_idx==col_count-1 and sh.table.last_col:names.append('lastCol')
+        if row_idx==row_count-1 and sh.table.last_row:names.append('lastRow')
+        for name in names:
+            zone=table_style.xpath('./*[local-name()="'+name+'"]/*[local-name()="tcStyle"]')
+            if zone:style_cell=zone[0]
+            if zone and not fill_node:
+                sf=zone[0].xpath('./*[local-name()="fill"]/*[local-name()="solidFill"]/*')
+                if sf:fill='rgb("'+resolve_color_node(sf[0],'#FFFFFF')+'")'
+                elif zone[0].xpath('./*[local-name()="fill"]/*[local-name()="noFill"]'):fill='none'
+    elif not fill_node and table_style is None:
+        # PowerPoint omits definitions of its built-in table styles. Approximate
+        # the default Medium 2 / Accent 1 style used when its id is in effect.
+        tbl=sh._element.xpath('.//a:tbl/a:tblPr')[0]
+        style_id=tbl.xpath('./a:tableStyleId')
+        style_id=[style_id[0].text] if style_id else []
+        default_id=TABLE_STYLES_ROOT.get('def') if TABLE_STYLES_ROOT is not None else None
+        if style_id and default_id and style_id[0]==default_id:
+            if row_idx==0 and sh.table.first_row:fill='rgb("'+table_style_color('accent1')+'")'
+            elif banded and row_idx%2==0:fill='rgb("'+table_style_color('accent1','<a:tint val="40000"/>')+'")'
+            else:fill='rgb("'+table_style_color('accent1','<a:tint val="20000"/>')+'")'
+    margin_x=(cell.margin_left+cell.margin_right)/(2*EMU)
+    margin_y=(cell.margin_top+cell.margin_bottom)/(2*EMU)
+    valign={1:'top',3:'center + horizon',4:'bottom'}.get(int(cell.vertical_anchor or 3),'center + horizon')
+    align=valign
+    paragraphs=[]
+    for pa in cell.text_frame.paragraphs:
+        ha='center' if pa.alignment==PP_ALIGN.CENTER else 'right' if pa.alignment==PP_ALIGN.RIGHT else 'left'
+        align=ha+(' + horizon' if valign=='center + horizon' else '')
+        bits=[]
+        for run in pa.runs:
+            if not run.text:continue
+            font=font_mapping(run.font.name)
+            size=run.font.size.pt if run.font.size else 14.0
+            color=color_of(run) or TEXT_FALLBACK
+            bold='bold' if run.font.bold else 'regular'
+            italic=run.font.italic
+            for j,line in enumerate(run.text.replace('\v','\n').split('\n')):
+                if line:
+                    bits.append(f'#text(font: {typst_font_fallback(font)}, size: {size:.2f}pt, weight: "{bold}", fill: rgb("{color}"), '+('style: "italic", ' if italic else '')+f'{stylize(line)})')
+                if j<len(run.text.replace('\v','\n').split('\n'))-1:bits.append('#linebreak()')
+        paragraphs.append(''.join(bits))
+    body='#parbreak()'.join(paragraphs)
+    stroke='none'
+    # Respect direct cell edge lines. Missing edges use a light, thin gridline.
+    edges=[]
+    edge_names={'left':'lnL','right':'lnR','top':'lnT','bottom':'lnB'}
+    for side,tag in edge_names.items():
+        edge=tcPr.xpath('./a:'+tag)
+        if not edge and style_cell is not None:
+            edge=style_cell.xpath('./*[local-name()="tcBdr"]/*[local-name()="'+side+'"]')
+        if edge:
+            nofill=edge[0].xpath('./*[local-name()="noFill"] | ./*[local-name()="solidFill"]/*[local-name()="noFill"]')
+            if nofill:edges.append(side+': none');continue
+            col=edge[0].xpath('./*[local-name()="solidFill"]/*')
+            color=resolve_color_node(col[0],'#FFFFFF') if col else '#FFFFFF'
+            line=edge[0].xpath('./*[local-name()="ln"]')
+            weight=(float(line[0].get('w','6350'))/EMU) if line else 0.5
+            edges.append(side+f': {weight:.3f}pt + rgb("{color}")')
+        else:edges.append(side+': 0.5pt + rgb("#FFFFFF")')
+    stroke='('+', '.join(edges)+')'
+    return f'table.cell(fill:{fill},stroke:{stroke},inset:(x:{margin_x:.3f}pt,y:{margin_y:.3f}pt),align:{align})[{body}]'
+
+def typst_table(sh):
+    tbl=sh._element.xpath('.//a:tbl')[0]
+    tblpr=tbl.xpath('./a:tblPr')[0]
+    style_id=tblpr.xpath('./a:tableStyleId')
+    style_id=[style_id[0].text] if style_id else []
+    table_style=None
+    if style_id and TABLE_STYLES_ROOT is not None:
+        found=TABLE_STYLES_ROOT.xpath('./*[local-name()="tblStyle"][@styleId="'+style_id[0]+'"]')
+        if found:table_style=found[0]
+    widths=[c.width/EMU for c in sh.table.columns]
+    heights=[r.height/EMU for r in sh.table.rows]
+    column_expr='('+', '.join(f'{w:.3f}pt' for w in widths)+')'
+    row_expr='('+', '.join(f'{h:.3f}pt' for h in heights)+')'
+    banded=tblpr.get('bandRow') in ('1','true') or sh.table.horz_banding
+    cells=[]
+    for ri in range(len(sh.table.rows)):
+        for ci in range(len(sh.table.columns)):
+            cells.append(table_cell_typst(sh,ri,ci,sh.table.cell(ri,ci),table_style,banded))
+    return (f'table(columns:{column_expr},rows:{row_expr},gutter:0pt,stroke:none,'+
+            ',\n  '.join(cells)+')')
+
+def table_has_spans(sh):
+    """Merged cells need colspan/rowspan mapping and are not flattened silently."""
+    cells=sh._element.xpath('.//a:tbl/a:tr/a:tc')
+    return any(tc.xpath('./a:tcPr[@gridSpan or @rowSpan or @hMerge or @vMerge]') for tc in cells)
 
 
 TEXT_FALLBACK='#111111'
@@ -1094,6 +1206,14 @@ for slide_no,slide in enumerate(prs.slides,1):
                     counts['smartart_placements']+=1
                     sm['placements'].append(obj)
                     continue
+            if getattr(sh,'has_table',False) and not table_has_spans(sh):
+                table=typst_table(sh)
+                lines.append(f'  // Editable PowerPoint table: {sh.name}')
+                lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{table})')
+                obj.update(type='table',rows=len(sh.table.rows),columns=len(sh.table.columns))
+                counts['table_placements']+=1
+                sm['placements'].append(obj)
+                continue
             istext=sh.has_text_frame and bool(sh.text.strip())
             imgpart=image_blip(sh)
             if abs(pl['skew'])>0.001:

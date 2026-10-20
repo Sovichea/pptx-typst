@@ -64,3 +64,4 @@
 #let PptxRect = rect
 #let PptxEllipse = ellipse
 #let PptxLine = line
+#let PptxTable = table

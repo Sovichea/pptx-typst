@@ -16,7 +16,7 @@
     "inherited_master_layers": 13,
     "media_placements": 32,
     "geometry_rect": 29,
-    "other_placements": 39,
+    "other_placements": 37,
     "vector_shapes": 37,
     "inherited_layout_layers": 13,
     "text_placements": 33,
@@ -27,8 +27,7 @@
     "geometry_complex": 3,
     "autofit_shrink": 10,
     "smartart_placements": 1,
-    "unsupported_table": 2,
-    "unsupported_placements": 2
+    "table_placements": 2
   },
   "media": {
     "1a23b57b9161752385891b0e631c642154ecbfccbb498cb72907887bc5b4e436": {
@@ -2068,9 +2067,9 @@
           "rot": 0.0,
           "flip_y": false,
           "group_skew": 0.0,
-          "type": "unsupported",
-          "unsupported_kind": "table",
-          "warning": "Unsupported table: original preserved in source PPTX, not silently claimed as converted"
+          "type": "table",
+          "rows": 5,
+          "columns": 4
         },
         {
           "z_index": 3,
@@ -2158,9 +2157,9 @@
           "rot": 0.0,
           "flip_y": false,
           "group_skew": 0.0,
-          "type": "unsupported",
-          "unsupported_kind": "table",
-          "warning": "Unsupported table: original preserved in source PPTX, not silently claimed as converted"
+          "type": "table",
+          "rows": 6,
+          "columns": 4
         },
         {
           "z_index": 2,

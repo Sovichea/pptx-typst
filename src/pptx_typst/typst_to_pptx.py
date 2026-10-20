@@ -33,6 +33,7 @@ STARTER_ALIASES = {
     'PptxRect': 'rect',
     'PptxEllipse': 'ellipse',
     'PptxLine': 'line',
+    'PptxTable': 'table',
 }
 
 
@@ -278,6 +279,73 @@ def add_native(slide,child,x,y,rot,audit,slide_num):
     return False
 
 
+def table_cells(raw):
+    """Read the generated Typst table subset and its per-cell formatting."""
+    m=re.match(r'#?table\(',raw)
+    if not m:return None
+    args=kwargs(balanced(raw,m.end()-1)[0])
+    cells=[]
+    for cell in args.get('_pos',[]):
+        style={};body=cell
+        cm=re.match(r'#?table\.cell\(',cell)
+        if cm:
+            style=kwargs(balanced(cell,cm.end()-1)[0])
+            _,end=balanced(cell,cm.end()-1)
+            rest=cell[end:].strip()
+            if not rest.startswith('['):return None
+            body=balanced(rest,0,'[',']')[0]
+        elif cell.startswith('[') and cell.endswith(']'):
+            body=cell[1:-1]
+        else:return None
+        cells.append((style,body))
+    def values(name):
+        return [length(v) for v in re.findall(NUM+r'\s*(?:pt|mm|cm|in)?',args.get(name,''))]
+    cols=values('columns');rows=values('rows')
+    if not cells or not cols or not rows or len(cells)!=len(cols)*len(rows):return None
+    return cols,rows,cells
+
+
+def add_table(slide,child,x,y,rot,audit,slide_num):
+    parsed=table_cells(child)
+    if not parsed:return False
+    cols,rows,cells=parsed
+    if any(v<=0 for v in cols+rows):return False
+    total_w=sum(cols);total_h=sum(rows)
+    shape=slide.shapes.add_table(len(rows),len(cols),Pt(x),Pt(y),Pt(total_w),Pt(total_h))
+    table=shape.table
+    for i,w in enumerate(cols):table.columns[i].width=Pt(w)
+    for i,h in enumerate(rows):table.rows[i].height=Pt(h)
+    for idx,(style,body) in enumerate(cells):
+        cell=table.cell(idx//len(cols),idx%len(cols))
+        fill=style.get('fill','none')
+        if fill=='none':cell.fill.background()
+        else:cell.fill.solid();cell.fill.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
+        inset=style.get('inset','')
+        vals=[length(v) for v in re.findall(NUM+r'\s*pt',inset)]
+        if vals:
+            mx=vals[0];my=vals[1] if len(vals)>1 else mx
+            cell.margin_left=cell.margin_right=Pt(mx);cell.margin_top=cell.margin_bottom=Pt(my)
+        align=style.get('align','left')
+        cell.text_frame.paragraphs[0].alignment=(PP_ALIGN.RIGHT if 'right' in align else PP_ALIGN.CENTER if 'center' in align else PP_ALIGN.LEFT)
+        cell.vertical_anchor=MSO_ANCHOR.MIDDLE if ('horizon' in align or 'center' in align) else MSO_ANCHOR.BOTTOM if 'bottom' in align else MSO_ANCHOR.TOP
+        tf=cell.text_frame;tf.clear();tf.word_wrap=True;p=tf.paragraphs[0]
+        for item in text_runs(body):
+            r=p.add_run();r.text=item['text'];r.font.name=item['font'];r.font.size=Pt(item['size']);r.font.bold=item['bold'];r.font.color.rgb=RGBColor(*item['color'])
+        stroke=style.get('stroke','')
+        for side,tag in (('left','lnL'),('right','lnR'),('top','lnT'),('bottom','lnB')):
+            found=re.search(side+r'\s*:\s*(none|'+NUM+r'pt\s*\+\s*rgb\("#[\da-fA-F]{6}"\))',stroke)
+            if not found or found.group(1)=='none':continue
+            width=length(found.group(1),.5);col=re.search(r'#[\da-fA-F]{6}',found.group(1))
+            edge=OxmlElement('a:'+tag);edge.set('w',str(round(width*12700)))
+            sf=OxmlElement('a:solidFill');sc=OxmlElement('a:srgbClr');sc.set('val',col.group(0)[1:].upper());sf.append(sc);edge.append(sf)
+            cell._tc.get_or_add_tcPr().append(edge)
+    if abs(rot)>0.001:shape._element.xfrm.set('rot',str(round(rot*60000)))
+    audit['tables']+=1
+    audit['items'].append({'slide':slide_num,'type':'table','x':round(x,2),'y':round(y,2),'w':round(total_w,2),'h':round(total_h,2),'rows':len(rows),'columns':len(cols),'rotation':round(rot,2)})
+    audit['text_content'].extend(''.join(r['text'] for r in text_runs(body)) for _,body in cells)
+    return True
+
+
 def parse_root(raw):
     head=kwargs(raw)
     m=re.search(r'\bchildren\s*:\s*\[',raw)
@@ -299,6 +367,7 @@ def export_one(content,slide,base,cache,audit,n,ox=0.0,oy=0.0,angle=0):
             export_one(ch,slide,base,cache,audit,n,ox=x,oy=y,angle=rot)
             audit['groups_flattened']+=1
             continue
+        if add_table(slide,child,x,y,rot,audit,n):continue
         if add_image(slide,child,base,x,y,rot,cache,audit,n):continue
         if add_text(slide,child,x,y,rot,audit,n):continue
         if add_native(slide,child,x,y,rot,audit,n):continue
@@ -318,7 +387,7 @@ def convert(main,output):
     if sw<=0 or sh<=0:raise RuntimeError('Invalid logical slide size')
     prs=Presentation();prs.slide_width=Pt(sw);prs.slide_height=Pt(sh)
     cache=output.parent/'raster_cache';cache.mkdir(parents=True,exist_ok=True)
-    audit={'scope':'Place-based v8 generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[]}
+    audit={'scope':'Place-based generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'tables':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[]}
     for n,(raw,_,_) in enumerate(slide_calls,1):
         head,body=parse_root(raw)
         w=length(head.get('width'),sw);h=length(head.get('height'),sh)
@@ -336,5 +405,5 @@ def convert(main,output):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('main_typ');p.add_argument('--output',default='converted.pptx');a=p.parse_args()
     report=convert(a.main_typ,Path(a.output).resolve())
-    print(json.dumps({k:v for k,v in report.items() if k in ('slides','pictures','text_boxes','native_shapes','groups_flattened','unique_source_media','cropped_instance_fallbacks','svg_assets_as_png')},indent=2))
+    print(json.dumps({k:v for k,v in report.items() if k in ('slides','pictures','text_boxes','native_shapes','tables','groups_flattened','unique_source_media','cropped_instance_fallbacks','svg_assets_as_png')},indent=2))
 if __name__=='__main__':main()

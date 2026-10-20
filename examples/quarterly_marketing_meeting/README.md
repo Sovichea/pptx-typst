@@ -15,3 +15,5 @@ Decorative SVG pictures inherited from PowerPoint masters and layouts are includ
 Slide picture placeholders also inherit custom clipping geometry from their matching layout placeholders, preserving torn and shaped image edges.
 
 The product timeline SmartArt on slide 6 is included as a vector SVG generated from PowerPoint's stored drawing cache. Its text is part of the SVG artwork rather than separately editable Typst text.
+
+The tables on slides 9 and 10 are emitted as native Typst tables with editable cell text, sizing, alignment, and common fills and borders. The reverse converter reconstructs basic rectangular tables as native PowerPoint tables.
