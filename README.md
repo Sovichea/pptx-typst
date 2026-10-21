@@ -2,7 +2,7 @@
 
 `pptx-typst` converts PowerPoint presentations (`.pptx`) to editable Typst source and converts a bounded Typst presentation subset back to PowerPoint.
 
-Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, table, layout, and transparency cases. Tables preserve cell text, dimensions, alignment, fills, and common borders; merged cells remain unsupported. SmartArt with a stored PowerPoint drawing cache is included as vector artwork; its text is rendered in the SVG rather than emitted as independently editable Typst text. The reverse converter supports the explicit `#Root` / `#Place` subset emitted by the forward converter, including basic rectangular tables; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
+Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, table, layout, and transparency cases. Tables preserve cell text, dimensions, alignment, fills, and common borders; merged cells remain unsupported. SmartArt with a stored PowerPoint drawing cache is included as vector artwork; its text is rendered in the SVG rather than emitted as independently editable Typst text. The converters preserve reusable PowerPoint masters and layouts through explicit `PptxMaster`, `PptxLayout`, and `PptxSlide` declarations. The reverse converter also accepts legacy `#Root` / `#Place` projects, including basic rectangular tables; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
 
 ## Example
 
@@ -35,6 +35,7 @@ typst compile presentation-typst/main.typ presentation.pdf
 ```
 
 Mask and text handling options remain available. Run `pptx-to-typst --help` to see them.
+Use `--layout-mode flat` to keep the legacy output that repeats inherited master/layout artwork inside each slide.
 
 ## Convert Typst to PowerPoint
 
@@ -54,9 +55,9 @@ typst compile my-deck/main.typ my-deck/preview.pdf
 typst-to-pptx my-deck/main.typ --output my-deck.pptx
 ```
 
-To generate just the reusable module, run `pptx-typst module --output pptx-typst.typ`. Import it with `#import "pptx-typst.typ": *`. The module provides `PptxSlide`, `PptxPlace`, `PptxGroup`, `PptxClip`, `PptxBox`, `PptxText`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable` aliases for the converter's supported constructs.
+To generate just the reusable module, run `pptx-typst module --output pptx-typst.typ`. Import it with `#import "pptx-typst.typ": *`. The module provides `PptxMaster` and `PptxLayout` for shared artwork and `PptxSlide` for slide content, plus `PptxPlace`, `PptxGroup`, `PptxClip`, `PptxBox`, `PptxText`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable` helpers.
 
-Keep one `PptxSlide` call per slide and place supported content inside `PptxPlace`. The reverse converter recognizes these module aliases and the documented subset; it does not evaluate arbitrary Typst macros or compile-time code. The starter `main.typ` shows the supported pattern.
+Define each master and its layouts once, then reference a layout from every `PptxSlide`. Shared objects stay in the corresponding PowerPoint master/layout parts. Projects without these declarations continue to use the legacy `Root` / `Place` pattern. The reverse converter recognizes only the statically resolvable supported subset; it does not evaluate arbitrary Typst macros or compile-time code. The [master/layout report](docs/master-layout-poc.md) documents its supported subset and validation results.
 
 ## Python API
 
@@ -85,7 +86,7 @@ Development-only visual and geometry utilities live under `tools/`.
 
 This is an alpha proof of concept. Review conversion reports and visually inspect presentations before relying on converted output. The project does not claim pixel-perfect rendering or support for arbitrary Typst source.
 
-The proposed PowerPoint master/layout reuse model has been tested in an isolated proof of concept, but it is not yet implemented by the converters. See the [master/layout POC report](docs/master-layout-poc.md) for architecture, results, and current gaps.
+Master/layout reuse is implemented for the documented static subset. See the [master/layout support report](docs/master-layout-poc.md) for architecture, results, and current limits.
 
 ## License
 

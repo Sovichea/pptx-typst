@@ -3,10 +3,14 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import posixpath
 from pathlib import Path
 import shutil
 import subprocess
 import sys
+from zipfile import ZipFile
+
+from lxml import etree
 
 from PIL import Image
 import pytest
@@ -289,6 +293,137 @@ def test_roundtrip_preserves_dimensions_text_and_shared_image(tmp_path: Path) ->
         if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
     }
     assert len(image_hashes) == 1
+
+
+def test_master_layout_hierarchy_is_shared_and_roundtrips(tmp_path: Path) -> None:
+    from pptx_typst.typst_to_pptx import convert
+
+    write_pixel(tmp_path / "pixel.png")
+    main = tmp_path / "main.typ"
+    main.write_text(
+        '''#import "pptx-typst.typ": PptxMaster, PptxLayout, PptxSlide, Place
+#let Brand = PptxMaster(fill:rgb("#112233"),children:[
+  #Place(x:10pt,y:10pt,child:rect(width:12pt,height:12pt,fill:rgb("#123456")))
+  #Place(x:30pt,y:10pt,child:image("pixel.png",width:20pt,height:20pt))
+])
+#let Other = PptxMaster(children:[
+  #Place(x:10pt,y:10pt,child:rect(width:14pt,height:14pt,fill:rgb("#654321")))
+])
+#let Alpha = PptxLayout(master:Brand,fill:rgb("#223344"),children:[
+  #Place(x:10pt,y:40pt,child:rect(width:30pt,height:8pt,fill:rgb("#CC0000")))
+])
+#let Beta = PptxLayout(master:Brand,children:[
+  #Place(x:10pt,y:60pt,child:rect(width:30pt,height:8pt,fill:rgb("#00CC00")))
+])
+#let Gamma = PptxLayout(master:Other,children:[
+  #Place(x:10pt,y:80pt,child:rect(width:30pt,height:8pt,fill:rgb("#0000CC")))
+])
+#PptxSlide(width:320pt,height:180pt,layout:Alpha,children:[#Place(x:80pt,y:20pt,child:text(size:18pt)[Slide one])])
+#pagebreak()
+#PptxSlide(width:320pt,height:180pt,layout:Alpha,children:[#Place(x:80pt,y:20pt,child:text(size:18pt)[Slide two])])
+#pagebreak()
+#PptxSlide(width:320pt,height:180pt,layout:Beta,children:[#Place(x:80pt,y:20pt,child:text(size:18pt)[Slide three])])
+#pagebreak()
+#PptxSlide(width:320pt,height:180pt,layout:Gamma,children:[#Place(x:80pt,y:20pt,child:text(size:18pt)[Slide four])])
+''',
+        encoding="utf-8",
+    )
+    # The starter module supports both composition and the bounded static parser.
+    (tmp_path / "template.typ").write_text((ROOT / "src/pptx_typst/template.typ").read_text(encoding="utf-8"), encoding="utf-8")
+    (tmp_path / "pptx-typst.typ").write_text((ROOT / "src/pptx_typst/templates/pptx-typst.typ").read_text(encoding="utf-8"), encoding="utf-8")
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run([typst, "compile", "main.typ", "authored.pdf"], cwd=tmp_path, check=True, capture_output=True, text=True, timeout=120)
+        pdftotext = shutil.which("pdftotext")
+        if pdftotext:
+            extracted = subprocess.run([pdftotext, "authored.pdf", "-"], cwd=tmp_path, check=True, capture_output=True, text=True, timeout=30).stdout
+            assert "," not in extracted
+    output = tmp_path / "hierarchy.pptx"
+    report = convert(main, output)
+
+    deck = Presentation(output)
+    assert report["hierarchy_written"] is True
+    assert len(deck.slides) == 4
+    assert len(deck.slide_masters) == 2
+    assert [slide.slide_layout.name for slide in deck.slides] == ["Alpha", "Alpha", "Beta", "Gamma"]
+    assert [str(slide.slide_layout.slide_master.part.partname) for slide in deck.slides] == [
+        str(deck.slide_masters[0].part.partname), str(deck.slide_masters[0].part.partname),
+        str(deck.slide_masters[0].part.partname), str(deck.slide_masters[1].part.partname),
+    ]
+    assert [len(slide.shapes) for slide in deck.slides] == [1, 1, 1, 1]
+    assert "Slide four" in text_in(deck)[-1]
+    assert sum(shape.shape_type == MSO_SHAPE_TYPE.PICTURE for shape in deck.slide_masters[0].shapes) == 1
+    assert sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes) == 2
+    assert sum(not shape.is_placeholder for shape in deck.slide_masters[1].shapes) == 1
+    assert [len(master.slide_layouts) for master in deck.slide_masters] == [2, 1]
+    assert len({str(master.part.related_part(rel.rId).partname) for master in deck.slide_masters for rel in master.part.rels.values() if rel.reltype.endswith("/theme")}) == 2
+
+    # Inspect package ownership and relationship targets directly. Slide parts
+    # contain only slide-owned text; shared artwork lives in its master/layout.
+    ns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main", "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships", "rel": "http://schemas.openxmlformats.org/package/2006/relationships"}
+    with ZipFile(output) as package:
+        names = set(package.namelist())
+        presentation = etree.fromstring(package.read("ppt/presentation.xml"))
+        presentation_rels = etree.fromstring(package.read("ppt/_rels/presentation.xml.rels"))
+        rel_map = {rel.get("Id"): rel.get("Target") for rel in presentation_rels}
+        slide_ids = presentation.xpath("./p:sldIdLst/p:sldId", namespaces=ns)
+        assert len(slide_ids) == 4
+        slide_parts = []
+        for slide_id in slide_ids:
+            target = rel_map[slide_id.get("{%s}id" % ns["r"])]
+            slide_part = "ppt/" + target
+            slide_parts.append(slide_part)
+            slide_xml = etree.fromstring(package.read(slide_part))
+            assert len(slide_xml.xpath("./p:cSld/p:spTree/p:sp", namespaces=ns)) == 1
+            rel_path = str(Path(slide_part).parent / "_rels" / (Path(slide_part).name + ".rels")).replace("\\", "/")
+            slide_rels = etree.fromstring(package.read(rel_path))
+            layout_rel = next(rel for rel in slide_rels if rel.get("Type", "").endswith("/slideLayout"))
+            assert layout_rel.get("Target").startswith("../slideLayouts/")
+        assert slide_parts[0] != slide_parts[1]
+        master_parts = [name for name in names if name.startswith("ppt/slideMasters/slideMaster") and name.endswith(".xml")]
+        assert len(master_parts) == 2
+        layout_ids = []
+        master1_rels = etree.fromstring(package.read("ppt/slideMasters/_rels/slideMaster1.xml.rels"))
+        master1_targets = {rel.get("Target") for rel in master1_rels if rel.get("Type", "").endswith("/slideLayout")}
+        assert len(master1_targets) == 2
+        for master_part in master_parts:
+            master_xml = etree.fromstring(package.read(master_part))
+            layout_ids.extend(master_xml.xpath("./p:sldLayoutIdLst/p:sldLayoutId/@id", namespaces=ns))
+            assert len(master_xml.xpath("./p:cSld/p:spTree/p:sp", namespaces=ns)) >= 1
+            master_rels_path = str(Path(master_part).parent / "_rels" / (Path(master_part).name + ".rels")).replace("\\", "/")
+            owner_rels = etree.fromstring(package.read(master_rels_path))
+            for rel in owner_rels:
+                if rel.get("Type", "").endswith("/image"):
+                    target = posixpath.normpath(posixpath.join(posixpath.dirname(master_part), rel.get("Target")))
+                    assert target in names
+        assert len(layout_ids) == len(set(layout_ids))
+        master1_xml = etree.fromstring(package.read("ppt/slideMasters/slideMaster1.xml"))
+        alpha_layout = next(name for name in names if name.endswith("slideLayout12.xml"))
+        alpha_xml = etree.fromstring(package.read(alpha_layout))
+        assert master1_xml.xpath("string(./p:cSld/p:bg/p:bgPr/a:solidFill/a:srgbClr/@val)", namespaces={**ns, "a": "http://schemas.openxmlformats.org/drawingml/2006/main"}) == "112233"
+        assert alpha_xml.xpath("string(./p:cSld/p:bg/p:bgPr/a:solidFill/a:srgbClr/@val)", namespaces={**ns, "a": "http://schemas.openxmlformats.org/drawingml/2006/main"}) == "223344"
+
+    # Forward conversion must recover the same explicit declarations and use
+    # every shared object only once in the generated Typst source.
+    project = tmp_path / "forward-project"
+    run_forward(output, project)
+    manifest = json.loads((project / "asset_manifest.json").read_text(encoding="utf-8"))
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    assert len(manifest["masters"]) == 2
+    assert len(manifest["layouts"]) == 3
+    assert generated.count(" = PptxMaster(") == 2
+    assert generated.count(" = PptxLayout(") == 3
+    assert generated.count('"Slide one"') == 1
+    assert 'PptxMaster(fill:rgb("#112233")' in generated
+    assert 'PptxLayout(master:Master01,fill:rgb("#223344")' in generated
+
+    if typst:
+        subprocess.run([typst, "compile", "main.typ", "hierarchy.pdf"], cwd=project, check=True, capture_output=True, text=True, timeout=120)
+        pdftotext = shutil.which("pdftotext")
+        if pdftotext:
+            extracted = subprocess.run([pdftotext, "hierarchy.pdf", "-"], cwd=project, check=True, capture_output=True, text=True, timeout=30).stdout
+            assert extracted.count("Slide one") == 1
+            assert "," not in extracted
 
 
 def test_table_fill_transparency_survives_pptx_to_typst(tmp_path: Path) -> None:

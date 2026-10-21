@@ -18,6 +18,20 @@
   ]
 }
 
+#let PptxMaster(children: [], fill: none) = (children: children, fill: fill)
+#let PptxLayout(master: none, children: [], fill: none, show-master: true) = (
+  master: master,
+  children: children,
+  fill: fill,
+  show-master: show-master,
+)
+#let PptxSlide(width: W, height: H, fill: none, format: (width: W, height: H), layout: none, show-master: true, children: []) = {
+  let master = if layout == none { none } else { layout.master }
+  let inherited-fill = if fill != none { fill } else if layout != none and layout.fill != none { layout.fill } else if master != none and master.fill != none { master.fill } else { white }
+  let inherited = if layout == none { [] } else if master == none { layout.children } else if show-master and layout.show-master { master.children + layout.children } else { layout.children }
+  Root(width: width, height: height, fill: inherited-fill, format: format, children: inherited + children)
+}
+
 #let Place(
   x: 0pt,
   y: 0pt,

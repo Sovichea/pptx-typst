@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Bounded reverse POC for v8 generated Place-based Typst, not an arbitrary Typst interpreter.
+"""Convert the supported Place-based Typst subset into editable PowerPoint.
 
-Input: main.typ + original media. Output: PPTX with native pictures, editable text,
-rectangles and lines. Group local coordinates are resolved; grouping editability is
-not yet reconstructed. Unsupported Typst forms are reported in a JSON audit.
+Static PptxMaster, PptxLayout, and PptxSlide declarations are written as real
+PresentationML owner parts. This is not a general Typst interpreter. Unsupported
+constructs are reported in a JSON audit.
 """
 import argparse, ast, hashlib, io, json, math, os, re
 from pathlib import Path
@@ -448,32 +448,104 @@ def clear_theme_shadows(slide):
             effect_ref.set('idx', '0')
 
 
+def find_definitions(source, kind):
+    """Read simple #let name = PptxMaster/Layout(...) declarations only."""
+    pattern=re.compile(r"#let\s+([A-Za-z_][\w-]*)\s*=\s*"+re.escape(kind)+r"\s*\(")
+    out=[]
+    pos=0
+    while True:
+        match=pattern.search(source,pos)
+        if not match:break
+        raw,end=balanced(source,match.end()-1)
+        out.append((match.group(1),raw,match.start(),end))
+        pos=end
+    return out
+
+
+def remove_spans(source, spans):
+    for start,end in sorted(spans,reverse=True):
+        source=source[:start]+source[end:]
+    return source
+
+
 def convert(main,output):
     main=Path(main).resolve();base=main.parent
     content=main.read_text(encoding='utf-8')
-    # Generated Typst contains source comments with quotes and parentheses.
-    # Strip whole-line comments before structural parsing.
     content=re.sub(r'(?m)^\s*//[^\n]*$', '', content)
+    master_defs=find_definitions(content,'PptxMaster')
+    layout_defs=find_definitions(content,'PptxLayout')
+    declaration_spans=[(v[2],v[3]) for v in master_defs+layout_defs]
+    master_records=[]
+    master_fills={}
+    for name,raw,start,end in master_defs:
+        head,body=parse_root(raw)
+        master_records.append((name,body,start,end))
+        master_fills[name]=head.get('fill','none')
+    layout_records={}
+    for name,raw,_,_ in layout_defs:
+        head,body=parse_root(raw)
+        master_name=head.get('master','').strip()
+        if not re.fullmatch(r'[A-Za-z_][\w-]*',master_name):
+            raise RuntimeError(f'Layout {name!r} must reference a statically named PptxMaster')
+        layout_records[name]=(master_name,body,head.get('show-master','true').strip().lower() not in ('false','0'),head.get('fill','none'))
+    content=remove_spans(content,declaration_spans)
     content=normalize_starter_aliases(content)
     slide_calls=list(find_calls(content,'Root'))
-    if not slide_calls:raise RuntimeError('No explicit #Root(...) slides; this POC needs Root/Place source')
+    if not slide_calls:raise RuntimeError('No explicit #Root/#PptxSlide slides; expected the supported Root/Place source subset')
     first=kwargs(slide_calls[0][0]);sw=length(first.get('width'),960);sh=length(first.get('height'),540)
     if sw<=0 or sh<=0:raise RuntimeError('Invalid logical slide size')
     prs=Presentation();prs.slide_width=Pt(sw);prs.slide_height=Pt(sh)
     cache=output.parent/'raster_cache';cache.mkdir(parents=True,exist_ok=True)
-    audit={'scope':'Place-based generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'tables':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[]}
+    audit={'scope':'Place-based generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'tables':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[],'masters':len(master_records),'layouts':len(layout_records)}
+    slide_assignments={}
+    slide_visibility={}
     for n,(raw,_,_) in enumerate(slide_calls,1):
         head,body=parse_root(raw)
         w=length(head.get('width'),sw);h=length(head.get('height'),sh)
         if (w,h)!=(sw,sh):show_unsupported(audit,'mixed_slide_dimensions',str((w,h)),n)
         slide=prs.slides.add_slide(prs.slide_layouts[6])
-        bg=slide.background.fill;bg.solid();bg.fore_color.rgb=RGBColor(*simple_color(head.get('fill'),(255,255,255)))
+        fill=head.get('fill','none').strip()
+        if fill!='none':
+            bg=slide.background.fill;bg.solid();bg.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
+            if 'gradient.' in fill:show_unsupported(audit,'slide_background_gradient',fill,n)
         export_one(body,slide,base,cache,audit,n)
         clear_theme_shadows(slide)
-        audit.setdefault('per_slide',[]).append({'slide':n,'objects':len(slide.shapes)})
+        layout_name=head.get('layout','').strip()
+        if layout_name:
+            if layout_name not in layout_records:
+                raise RuntimeError(f'Slide {n} references unknown PptxLayout {layout_name!r}')
+            slide_assignments[str(slide.part.partname)]=layout_name
+            slide_visibility[str(slide.part.partname)]=head.get('show-master','true').strip().lower() not in ('false','0')
+        audit.setdefault('per_slide',[]).append({'slide':n,'objects':len(slide.shapes),'layout':layout_name or None,'master':layout_records[layout_name][0] if layout_name else None})
+
+    # Stage each owner's supported native objects on a temporary slide. The
+    # package writer moves these shape trees and their image rels into real parts.
+    stage_parts={};master_parts={};layout_parts={};master_object_counts={};layout_object_counts={}
+    for index,(name,body,_,_) in enumerate(master_records,1):
+        stage=prs.slides.add_slide(prs.slide_layouts[6]);stage_parts[name]=str(stage.part.partname);master_parts[name]=str(stage.part.partname)
+        export_one(body,stage,base,cache,audit,f'master:{name}')
+        master_object_counts[name]=len(stage.shapes)
+        clear_theme_shadows(stage)
+    layout_visibility={};layout_fills={}
+    for index,(name,(master_name,body,show_master,fill)) in enumerate(layout_records.items(),1):
+        if not any(defn[0]==master_name for defn in master_records):
+            raise RuntimeError(f'Layout {name!r} references undefined master {master_name!r}')
+        stage=prs.slides.add_slide(prs.slide_layouts[6]);stage_parts[name]=str(stage.part.partname);layout_parts[name]=(master_name,str(stage.part.partname));layout_visibility[name]=show_master;layout_fills[name]=fill
+        export_one(body,stage,base,cache,audit,f'layout:{name}')
+        layout_object_counts[name]=len(stage.shapes)
+        clear_theme_shadows(stage)
+    for name,fill in master_fills.items():
+        if 'gradient.' in fill:show_unsupported(audit,'master_background_gradient',fill,f'master:{name}')
+    for name,(_,_,_,fill) in layout_records.items():
+        if 'gradient.' in fill:show_unsupported(audit,'layout_background_gradient',fill,f'layout:{name}')
     output.parent.mkdir(parents=True,exist_ok=True);prs.save(output)
+    if master_parts and layout_parts and slide_assignments:
+        from .ooxml_hierarchy import install_hierarchy
+        install_hierarchy(output,masters=master_parts,layouts=layout_parts,slide_layouts=slide_assignments,stage_parts=stage_parts,layout_show_master=layout_visibility,slide_show_master=slide_visibility,master_fills=master_fills,layout_fills=layout_fills)
     audit['unique_source_media']=len(audit['source_media']);audit['source_media']=sorted(audit['source_media'])
-    (output.parent/'conversion_report.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2))
+    audit['hierarchy_written']=bool(master_parts and layout_parts and slide_assignments)
+    audit['hierarchy']={'masters':[{'id':name,'shared_objects':master_object_counts.get(name,0)} for name in master_parts], 'layouts':[{'id':name,'master':layout_parts[name][0],'shared_objects':layout_object_counts.get(name,0),'show_master':layout_visibility.get(name,True),'fill':layout_fills.get(name,'none')} for name in layout_parts], 'slides':[{'part':part,'layout':layout_name} for part,layout_name in slide_assignments.items()]}
+    (output.parent/'conversion_report.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2),encoding='utf-8')
     return audit
 
 

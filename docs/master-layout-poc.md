@@ -1,59 +1,58 @@
-# PowerPoint master and layout reuse POC
+# PowerPoint master and layout support
 
-This document records an isolated proof of concept for representing the PowerPoint hierarchy `Master → Layout → Slide` in Typst and rebuilding it as editable PowerPoint parts. The experiments ran in a temporary directory and did not change the converter implementation. The proposed `PptxMaster` and `PptxLayout` declarations are not currently supported by the shipped conversion commands.
+The converter now preserves the supported PowerPoint `Master -> Layout -> Slide` hierarchy in both directions. The implementation uses explicit Typst declarations and creates actual editable PresentationML master, layout, and slide parts. It remains a bounded static-object subset, not a general Typst interpreter or a full PowerPoint renderer.
 
-## Proposed model
-
-Create each master once, each layout once under its master, then reference a layout from each slide:
+## Typst representation
 
 ```typst
-#let brand = PptxMaster(children: [...])
-#let title-layout = PptxLayout(master: brand, children: [...])
-#let content-layout = PptxLayout(master: brand, children: [...])
+#let brand = PptxMaster(fill: rgb("#112233"), children: [
+  #Place(x: 24pt, y: 24pt, child: image("assets/logo.png", width: 48pt, height: 48pt))
+])
 
-#PptxSlide(layout: title-layout, children: [...])
-#PptxSlide(layout: content-layout, children: [...])
+#let title-layout = PptxLayout(master: brand, children: [
+  #Place(x: 90pt, y: 24pt, child: rect(width: 200pt, height: 4pt, fill: rgb("#DD8047")))
+])
+
+#PptxSlide(layout: title-layout, children: [
+  #Place(x: 90pt, y: 60pt, child: text(size: 28pt)[Quarterly review])
+])
 ```
 
-The render order is master artwork, layout artwork, then slide-owned content. `Root` remains the canvas and coordinate frame. The initial conversion should retain layouts referenced by slides, preserve the slide-to-layout relationship, and keep placeholder content materialized on its slide. It should key shared parts by their owning PowerPoint part rather than infer sharing from similar appearance.
+`PptxMaster` and `PptxLayout` hold reusable content. `PptxSlide` composes master content, layout content, then slide content. The shared template supports optional inherited RGB fills and the `show-master` flag. Legacy `Root` and `Place` projects still convert without hierarchy declarations. PPTX-to-Typst also provides `--layout-mode flat` as a compatibility option that repeats inherited artwork as before.
 
-## Synthetic package experiments
+## Validation results
 
-A three-slide PPTX was created with one master, two layouts, editable slide content, and an image on the master. The experiments established that:
+### Synthetic shared and multiple-master fixture
 
-- The current PPTX-to-Typst converter emits inherited master and layout content into every slide.
-- A structured Typst prototype with one master and two layouts compiles to three pages.
-- The current Typst-to-PPTX converter ignores the master/layout declarations.
-- A temporary OOXML adapter can place editable shapes and pictures into a master and layout parts, create their package relationships, and retain slide-owned content on slides.
-- Registering a custom layout part and cloning a second master worked. The second master required its own cloned theme relationship.
+The automated fixture contains four slides, two masters, three layouts, one master image, distinct master/layout artwork, and two slides sharing the same layout. It validates both conversion directions and reads the OOXML package relationships directly.
 
-The synthetic experiment did not cover placeholder inheritance, visibility flags, animations, or all picture crop cases.
+- Reverse output contains four slide parts, two master parts, and three custom layout parts. The two slides assigned to `Alpha` reference the same layout part.
+- Slide parts contain only their individual slide-owned text boxes. Shared shapes and the image live in their master/layout parts.
+- The package contains independent theme parts and relationships for the two masters, scoped image relationships, and matching master -> layout -> slide references. `python-pptx` reopens the package.
+- Forward conversion recovers two master and three layout declarations. Typst compiles to four pages. Extracted text contains no stray comma glyphs.
 
-## Quarterly marketing deck test
+### Quarterly marketing deck
 
-The local `Quarterly marketing meeting.pptx` sample contains 13 slides, one master, and 13 layouts. Every slide uses a different layout. The master has five placeholders and no non-placeholder artwork. The layouts contain 66 non-placeholder placements; slides contain 39 slide-owned placements.
+The 13-slide local sample uses one master and 13 layouts, each used by one slide. Its source master contains five placeholders and no non-placeholder artwork. The layouts have 66 non-placeholder placements; the slides have 39 slide-owned placements.
 
-### PPTX to Typst
+- Structured and legacy-flat Typst both compile to 13 pages. At 960 x 540 pixels, all 13 corresponding page renders are pixel-identical in the same Typst environment.
+- Reverse conversion produces 13 slides, one master, exactly 13 custom layouts, and 13 slide-to-layout assignments. The 11 unused starter layouts are removed from the generated package.
+- The reverse converter reports 8 unsupported empty-box constructs (43.26 x 28.75 pt); the remaining 97 supported objects are represented in the deck. These are existing subset limitations, not silently discarded support claims.
 
-The existing converted Typst was reorganized temporarily into one master declaration, 13 layout declarations, and 13 slides referencing their corresponding layouts. The flat and structured sources both compiled to 13 pages. All 13 pages rendered at 960 × 540 pixels and were pixel-identical.
+The quarterly sample does not demonstrate shared-layout reuse because every slide uses a different layout; the synthetic fixture covers that case.
 
-This confirms that the proposed layer order and references can preserve this deck's forward rendering. It does not demonstrate artwork deduplication: each layout is used once and the master has no visible artwork.
+![Selected synthetic slides rendered from Typst and from the PowerPoint output](images/master-layout-comparison.png)
 
-### Typst to PPTX
+## Feature status
 
-Passing the structured Typst directly to the current reverse converter produces 13 slides but omits all 66 layout placements. The converter needs to resolve layout declarations before this model can work in the reverse direction.
+**Supported:** Source-part ownership and references; multiple masters; multiple layouts per master; slide layout assignment; shared image relationships; solid RGB backgrounds; editable supported text, shapes, lines, pictures, and tables; master/layout/slide stacking; static master visibility flags; compatibility with existing `Root`/`Place` projects.
 
-A temporary package adapter was tested using the existing flat reverse-conversion output. It created 13 custom layout parts, remapped image relationships, assigned each slide to its corresponding layout, and moved 58 emitted layout objects out of slide parts. `python-pptx` reopened the package and confirmed one master, 13 custom layouts, 13 slide-to-layout assignments, and the expected slide-owned shape counts. The package also contains the 11 default layouts from the reverse converter's starting template.
+**Partially supported:** Theme handling is relationship-safe, and each generated master gets an independent theme part, but the Typst subset does not model the complete theme editor. Solid fills round-trip; gradient backgrounds are reported by reverse conversion and are not recreated as gradients. Placeholder content remains materialized on slides rather than dynamically inherited. Shapes the forward converter materializes as SVGs remain picture objects when converted back. Unsupported reverse constructs appear in `conversion_report.json`.
 
-Eight empty-box constructs, each 43.26 × 28.75 pt, were unsupported by the reverse converter and remain absent. The package passed structural validation but was not visually rendered in desktop PowerPoint.
+**Unsupported:** Dynamic placeholder inheritance, animations and transitions, arbitrary Typst evaluation, non-static advanced visibility behavior, and exact font rendering.
 
-## Engineering implications
+Desktop validation: the synthetic package passed XML relationship checks, reopened in `python-pptx`, and opened and rendered as a four-page PDF in desktop PowerPoint. Editing a master shape in PowerPoint changed slides 1-3 only; editing the `Alpha` layout shape changed slides 1-2 only. Pixel diffs showed 384 changed pixels on slides 1-2, 144 on slide 3, and 0 on slide 4, matching the master/layout assignments. Visual inspection confirmed the shared master image and master/layout shapes were inherited in the expected order.
 
-The POC supports the `Deck → Master → Layout → Slide` intermediate model. A production implementation needs to:
+## Implementation notes
 
-1. Extract each master's and layout's non-placeholder objects once, retaining the owning part and relationships.
-2. Emit explicit master and layout declarations in Typst and preserve each slide's layout reference.
-3. Resolve those declarations in the reverse converter, then create real PresentationML master/layout parts and relationships.
-4. Preserve shared image relationships on the part that owns each picture, and clone theme parts when creating a distinct master.
-
-The forward structure has a positive result on the quarterly sample. The reverse package structure also passed a temporary adapter test, while direct reverse conversion still drops layout content and has the eight empty-box limitation. These findings validate the architecture, not production support or broad visual fidelity. The prototype should remain separate from the supported converter API until the reverse resolver and focused regression tests are implemented.
+The forward converter keys declarations by the source master/layout part URI, not shape similarity. The reverse resolver accepts only named `PptxMaster`, `PptxLayout`, and `PptxSlide` declarations with statically resolvable references. It stages supported shapes through the existing shape exporter, moves those editable shape trees into actual OOXML owner parts, scopes media relationships to those parts, registers each layout on exactly one master, then removes the staging slides.
