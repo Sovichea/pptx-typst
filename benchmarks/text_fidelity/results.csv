@@ -1,0 +1,453 @@
+﻿title,creator,doi,license,file,file_bytes,status,error,slides_source,text_shapes_source,text_runs_source,source_run_characters,source_fonts,installed_font_char_share,text_placements_output,table_placements_output,unsupported_objects_output,word_recall,word_precision,source_pdf_words,converted_pdf_words,source_pdf_text_chars,matched_pdf_text_chars,char_recall,pages_source_pdf,pages_typst_pdf,source_pdf_mean_font_pt,typst_pdf_mean_font_pt,mean_font_size_abs_delta_pt,slide_size_matches,text_frame_edge_f1,inherited_font_char_share,failure_category,installed_font_characters,explicit_font_characters
+20th SIG-NOC Meeting: What does the NIS2 Directive mean for the network operations and NOC?,GÉANT,10.5281/zenodo.11354525,CC BY 4.0,benchmarks/text_fidelity/data/input/001_5._Alf_NIS2_impact_for_SIG-NOC.pptx,14473784,ok,,20,106,252,4244,(inherited):3931; EUAlbertina:140; Calibri:117; +mj-lt:56,0.3738,146,0,18,0.941,0.9957,746,705,4011,3885,0.9686,20,20,21.948,22.309,0.361,True,0.5470397741426555,0.9262,,117,313
+A Benchmark Data Set for Coronal Hole Detections: Results from a Community Wide Assessment Project,Muglach Karin,10.5281/zenodo.8403530,CC BY 4.0,benchmarks/text_fidelity/data/input/002_DASH-2023-CH-talk-KMuglach-3oct2023-final.pptx,5103350,ok,,13,42,176,5377,(inherited):4935; Segoe UI Semibold:308; Arial:134,0.3032,42,0,5,0.9913,0.4872,346,704,1684,1675,0.9947,6,13,24.78,25.758,0.978,False,0.40235950149729865,0.9178,,134,442
+A Proposal to Revise and Simplify the Disruption Indicator,"Leydesdorff, Loet; Tekles, Alexander; Lutz, Borman",10.5281/zenodo.5071577,CC BY 4.0,benchmarks/text_fidelity/data/input/003_LoetLeydesdorff.pptx,1728144,error,"RuntimeError: typst compile: 8.00pt,weight:""regular"",fill:rgb(""#000000""),""1."")],indent:0.00pt,body-indent:40.50pt,tight:true,spacing:0pt,[#text(font: (""Calibri"", ""Libertinus Serif""), size: 28.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Breakthrough"")])
+    │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-7dh5mtvz\typst\main.typ:592:29
+    │
+592 │     #list(marker:[#text(font:(""Calibri Light"", ""Libertinus Serif""),size:28.00pt,weight:""regular"",fill:rgb(""#000000""),""2."")],indent:0.00pt,body-indent:40.50pt,tight:true,spacing:0pt,[#text(font: (""Calibri"", ""Libertinus Serif""), size: 28.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Creative destruction"")])
+    │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-7dh5mtvz\typst\main.typ:597:29
+    │
+597 │     #list(marker:[#text(font:(""Calibri Light"", ""Libertinus Serif""),size:28.00pt,weight:""regular"",fill:rgb(""#000000""),""3."")],indent:0.00pt,body-indent:40.50pt,tight:true,spacing:0pt,[#text(font: (""Calibri"", ""Libertinus Serif""), size: 28.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Options "")#text(font: (""Calibri"", ""Libertinus Serif""), size: 28.00pt, weight: ""regular"", fill: rgb(""#000000""), ""(redundancy) VERSUS past performance"")])
+    │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",16,25,162,5162,(inherited):3444; Times New Roman:1227; +mn-lt:357; Arial:134,0.7922,25,2,6,,,,,,,,,,,,,,,0.6672,Generated Typst syntax/structure error,1361,1718
+Accessing Digital Culture: Barriers for Vulnerable Groups - Webinar 10th December 2021: Presentations,"Ferri, Delia; Sganga, Caterina; Martinelli, Arianna; Donnellan, Katie; Higgins, Noelle",10.5281/zenodo.5776188,CC BY 4.0,benchmarks/text_fidelity/data/input/004_2_Arianna_Martinelli_Maynooth_Recreating_Europe_Workshop_10_December_2021.pptx,3102327,error,"RuntimeError: typst compile: amily: calibri light
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-hx3f2z9k\typst\main.typ:700:132
+    │
+700 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Thanks"")#text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""!"")#text(font: (""Calibri Light"", ""Libertinus Serif""), size: 28.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Arianna.martinelli@santannapisa.it"")
+    │                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-hx3f2z9k\typst\main.typ:700:243
+    │
+700 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Thanks"")#text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""!"")#text(font: (""Calibri Light"", ""Libertinus Serif""), size: 28.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Arianna.martinelli@santannapisa.it"")
+    │                                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",16,28,122,6080,Calibri Light:5494; (inherited):395; Calibri:191,0.0336,28,16,2,,,,,,,,,,,,,,,0.065,Generated Typst syntax/structure error,191,5685
+Ako vytvoriť plán manažmentu vedeckých dát,"Dobšovičová, Alexandra",10.5281/zenodo.4626901,CC BY 4.0,benchmarks/text_fidelity/data/input/005_DMP.pptx,5719997,ok,,28,53,219,4109,(inherited):4003; Tahoma:106,1.0,53,0,18,0.9847,0.983,588,589,3572,3511,0.9829,28,28,22.635,22.63,0.005,True,0.5105065826956889,0.9742,,106,106
+Analysis of Radio Single Dish Combination Methods,"Lucas, Miles",10.5281/zenodo.2537342,CC BY 4.0,benchmarks/text_fidelity/data/input/006_Radio_Imaging_Presentation.pptx,13587882,ok,,63,142,359,11005,(inherited):10559; Lato:446,1.0,142,0,0,1.0,1.0,1723,1723,8996,8996,1.0,63,63,13.943,14.884,0.941,True,0.6306893504197967,0.9595,,446,446
+Analyzing Your Institution's Publishing Output,"Langham-Putrow, Allison; Enriquez, Ana",10.5281/zenodo.13840384,CC BY 4.0,benchmarks/text_fidelity/data/input/007_Lesson_2.5_OpenRefine.pptx,2119065,ok,,5,6,12,261,(inherited):261,,6,0,3,1.0,1.0,47,47,212,212,1.0,5,5,35.257,28.898,6.359,True,0.12043249922767997,1.0,,0,0
+Arterial system of brain [Webinar Presentation],"Sarwar, Muhammad Haroon",10.5281/zenodo.3911121,CC BY 4.0,benchmarks/text_fidelity/data/input/008_Arterial_System_of_Brain.pptx,10188952,error,"RuntimeError: typst compile: r"", fill: rgb(""#000000""), ""Vertebrobasilary Artery"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-0tcrwd_0\typst\main.typ:911:16
+    │
+911 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Circle of Willis"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-0tcrwd_0\typst\main.typ:1016:16
+     │
+1016 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#000000""), ""MR Angiography."")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-0tcrwd_0\typst\main.typ:1051:16
+     │
+1051 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#000000""), ""CLINICAL NOTES"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-0tcrwd_0\typst\main.typ:1135:16
+     │
+1135 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#000000""), ""CLINICAL NOTES"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",24,79,175,7059,(inherited):6678; Amirsys:381,0.0,79,0,8,,,,,,,,,,,,,,,0.946,Generated Typst syntax/structure error,0,381
+Artificial Intelligence-Based Detection of Cancer Survivors' Depression Cues: A Narrative Review,Urška Smrke; Izidor Mlakar; Umut Arioz; Nejc Plohl,10.5281/zenodo.7300056,CC BY 4.0,benchmarks/text_fidelity/data/input/009_ICCMSE-USmrke-AI_based_detection_of_depression_cues.pptx,132481,ok,,8,30,143,9047,(inherited):8805; +mj-lt:242,0.0,38,0,3,0.844,0.9366,1699,1531,7712,6465,0.8383,8,8,20.781,20.883,0.102,True,0.24821264004066484,0.9733,,0,242
+"Best Practice im ""neuen Hybrid"". Good Practices aus dem Forschungsdatenmanagement.",Annette Strauch-Davey,10.5281/zenodo.6320366,CC BY 4.0,benchmarks/text_fidelity/data/input/010_as_DINI_Februar_2022.pptx,2553382,ok,,15,73,299,4764,(inherited):2303; +mn-lt:2181; +mj-lt:280,0.0,73,0,10,0.9789,0.8821,665,738,3994,3974,0.995,15,15,17.699,18.331,0.632,True,0.6018116970205791,0.4834,,0,2461
+Biodiversity Digitization Challenges & Opportunities,"Braker, Emily",10.5281/zenodo.10529187,CC BY 4.0,benchmarks/text_fidelity/data/input/011_CU_Digitization_EB_final.pptx,25985801,ok,,18,60,183,6243,Calibri:4195; (inherited):2048,1.0,60,1,0,0.9041,0.9683,845,789,5157,4690,0.9094,18,18,19.874,19.448,0.426,True,0.4949994397923949,0.328,,4195,4195
+"Black Mother, Hypertension, Mental Health",Shabnam Bhuiyan,10.5281/zenodo.3964401,CC BY 4.0,benchmarks/text_fidelity/data/input/012_Bhuiyan_Shabnam_BMH_Summit_2020_New.pptx,310139,ok,,11,24,101,6071,(inherited):5065; Calibri:1006,1.0,24,2,0,0.8647,0.9755,968,858,4983,4279,0.8587,11,11,15.82,16.179,0.359,True,0.5034010322148861,0.8343,,1006,1006
+Bridging scientific domains with metadata: CESSDA and ECRIN,"Ohmann, Christian; Canham, Steve; Panagiotopoulou, Maria; Kleemola, Mari; Moilanen, Katja",10.5281/zenodo.7406078,CC BY 4.0,benchmarks/text_fidelity/data/input/013_EDDI2022_BY-COVID_CESSDA_ECRIN.pptx,3359724,ok,,18,52,212,7940,(inherited):6793; IBM Plex Sans:1116; IBM Plex Serif:25; Tahoma:6,0.0052,53,4,1,0.9984,0.9952,1242,1246,6896,6883,0.9981,18,18,15.349,13.383,1.966,True,0.4458556328284183,0.8555,,6,1147
+Capacitação sobre as Fontes de Informação da BVS para a Rede Brasileira de Informação em Ciências da Saúde - 2021  -  Seção V – Tema: Criação de Recursos Educacionais Abertos no sistema FI-Admin,"BIREME/OPS/OMS; Biruel, Elisabeth; Suga, Sueli Mitiko Yano",10.5281/zenodo.7789779,CC BY 4.0,benchmarks/text_fidelity/data/input/014_Recursos_Educacionais_Abertos.pptx,4298841,ok,,31,64,345,4576,(inherited):2871; Arial:319; +mj-lt:269; Calibri:264; Calibri-Bold:230; Bell MT:212; Arial Nova Cond:138; Arial Rounded MT Bold:92; ff9:80; ff5:37; Arial Unicode MS:36; Aharoni:26; Roboto:2,0.4663,64,0,5,0.9766,0.9421,683,708,3664,3535,0.9648,31,31,29.496,29.201,0.295,True,0.42402435922936327,0.6274,,795,1705
+Capturing Data Provenance from Statistical Software,George Alter,10.5281/zenodo.4700531,CC BY 4.0,benchmarks/text_fidelity/data/input/015_C2Metadata_IDCC_v2.pptx,892052,ok,,44,134,1163,16878,(inherited):15063; Calibri:1474; Arial:320; +mn-lt:21,0.9884,134,4,1,0.9687,0.9883,1916,1878,12048,11566,0.96,44,44,20.378,20.339,0.039,True,0.33015400465022005,0.8925,,1794,1815
+Challenges in doing research with migrant children,"Sedmak, Mateja",10.5281/zenodo.10786579,CC BY 4.0,benchmarks/text_fidelity/data/input/016_Coordinate_WS_2023_Sedmak.pptx,913489,ok,,13,27,391,7793,Calibri:3995; (inherited):2994; Aller:660; ITC Giovanni Std Book:144,0.8325,27,0,1,0.9818,0.9917,1100,1089,6512,6363,0.9771,13,13,18.677,17.787,0.89,True,0.44010980733197586,0.3842,,3995,4799
+Challenges of tracking SARS Cov-2 M-protease inhibitors from patents,Christopher Southan,10.5281/zenodo.6633661,CC BY 4.0,benchmarks/text_fidelity/data/input/017_Southan_MProt_patents.pptx,10543896,ok,,20,60,125,6625,(inherited):6287; +mn-lt:262; Arial:44; Calibri:32,0.2249,60,0,1,0.9366,0.9543,1025,1006,5523,5233,0.9475,20,20,20.743,20.739,0.004,True,0.5375302041802585,0.949,,76,338
+Characterizing network paths in and out of the Clouds,Igor Sfiligoi; John Graham; Frank Wuerthwein,10.5281/zenodo.3599265,CC BY 4.0,benchmarks/text_fidelity/data/input/018_CHEP2019_328.pptx,12976786,error,"RuntimeError: typst compile: ertinus Serif""), size: 24.00pt, weight: ""regular"", fill: rgb(""#000000""), "", both UCSD"")
+   │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: cooper black
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-_w_iq09r\typst\main.typ:1918:16
+     │
+1918 │     #text(font: (""Cooper Black"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#C00000""), ""Early October test results"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-_w_iq09r\typst\main.typ:6415:16
+     │
+6415 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#000000""), ""External material used"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",52,492,765,14697,(inherited):12997; +mn-lt:1561; Calibri:113; Cooper Black:26,0.0665,492,1,1,,,,,,,,,,,,,,,0.8843,Generated Typst syntax/structure error,113,1700
+"Coffee Lecture Digital: Planen und Strukturieren (SUH Hildesheim, UB Hildesheim).",Annette Strauch,10.5281/zenodo.3822340,CC BY 4.0,benchmarks/text_fidelity/data/input/019_as_FDM_Planen_Strukturieren_DIGITAL_13.05.2020.pptx,7168114,ok,,20,94,374,5442,+mn-lt:2448; (inherited):1795; Calibri:1199,0.3288,94,0,3,0.9577,0.9647,685,680,4653,4532,0.974,20,20,19.596,20.07,0.474,True,0.640269231358777,0.3298,,1199,3647
+Colonieros de pelo en pecho. Masculinidades franquistas en los trópicos,"Vivó Capdevila, Emilio Pedro",10.5281/zenodo.10058582,CC BY 4.0,benchmarks/text_fidelity/data/input/020_Colonieros_de_pelo_en_pecho._Masculinidades_franquistas_en_los_tr_picos.pptx,38117136,error,"RuntimeError: typst compile: error: unknown image format
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-pu13dp9a\typst\main.typ:155:57
+    │
+155 │   #Place(x:5.314pt,y:20.163pt,orientation:0.000deg,child:image(""assets/media/image9_80baab2450.emf"",width:324.605pt,height:216.632pt,fit:""stretch""))
+    │                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",18,44,109,10813,Times New Roman:8495; (inherited):1650; Calibri:668,1.0,44,0,3,,,,,,,,,,,,,,,0.1526,Typst rejected media format,9163,9163
+Conhecendo as normas para trabalhos acadêmicos e Zotero,"Costa, Elaine Hipólito dos Santos",10.5281/zenodo.10701761,CC BY 4.0,benchmarks/text_fidelity/data/input/021_Vers_oFinal_18_03_2024_8h_12h_EPE_professora_Karla.pptx,7559590,ok,,90,200,628,20939,Helvetica Neue:8796; Arial:5103; (inherited):4104; Calibri:2205; Tahoma:389; PT Sans Narrow:225; Cambria:94; Times New Roman:15; Trebuchet MS:8,0.4642,200,4,0,0.9235,0.9886,3098,2894,17457,16097,0.9221,90,90,17.724,16.359,1.365,True,0.4105072309753731,0.196,,7814,16835
+COVID-X OC2 Pitch presentation template,AUSTRALO,10.5281/zenodo.5167036,CC BY 4.0,benchmarks/text_fidelity/data/input/022_COVID-X_OC2_Pitch_Presentation_Template.pptx,1858897,ok,,14,55,76,3065,Abel:1586; (inherited):1448; Saira:31,0.0,55,0,3,0.996,0.998,504,503,2537,2524,0.9949,14,14,33.389,33.325,0.064,True,0.4593083734929623,0.4724,,0,1617
+Crosstalk between Mast Cells and Lung Fibroblasts Is Modified by Alveolar Extracellular Matrix and Influences Epithelial Migration,"Bagher, Mariam; Rosmark, Oskar; Elowsson Rendin, Linda; Nybom, Annika; Wasserstrom, Sebastian; Müller, Catharina; Zhou, Xiao-Hong; Dellgren, Göran; Hallgren, Oskar; Bjermer, Leif; Larsson-Callerfelt, Anna-Karin; Westergren-Thorsson, Gunilla",10.5281/zenodo.4460638,CC BY 4.0,benchmarks/text_fidelity/data/input/023_Fig_4_WB_alfa_SMA.pptx,2275171,error,"RuntimeError: typst compile: error: unknown image format
+   ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-gt3tiy28\typst\main.typ:14:151
+   │
+14 │   #Place(x:406.204pt,y:40.853pt,orientation:0.000deg,child:box(width:336.068pt,height:184.048pt,clip:true)[#place(top+left,dx:-47.705pt,dy:-97.750pt)[#image(""assets/media/image1_183bd81bbf.tiff"",width:767.576pt,height:276.851pt,fit:""stretch"")]])
+   │                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",1,3,18,232,(inherited):214; Arial:18,1.0,3,0,0,,,,,,,,,,,,,,,0.9224,Typst rejected media format,18,18
+Dancing with the Scientists: The Costs of Piddling in Science without PIDs,"Kaiser, Kathryn",10.5281/zenodo.3631989,CC BY 4.0,benchmarks/text_fidelity/data/input/024_KKaiser_PIDapalooza_2020_shared.pptx,31547692,ok,,63,183,412,11939,(inherited):11575; Calibri:267; Proxima Nova:74; Proxima Nova Rg:23,0.7335,302,2,11,0.9166,0.9403,2302,2244,11459,10324,0.901,63,63,22.016,22.299,0.283,True,0.42639745766265613,0.9695,,267,364
+"Data Management, Biomedical Research informatics, and REDCap","Chase, Philip",10.5281/zenodo.13694085,CC BY 4.0,benchmarks/text_fidelity/data/input/025_CTS-IT_Informatics_Services_-_Data_Management_Biomedical_Research_informatics_and_REDCap_2023-10-31.pptx,5104041,ok,,22,50,111,2178,(inherited):1893; Calibri:285,1.0,50,0,22,0.9791,0.9816,382,381,1822,1771,0.972,22,22,24.447,24.458,0.011,True,0.6222426127973161,0.8691,,285,285
+Datenschutzrechtliche Fragen im FIS-Kontext,"Friedrichsen, Eiken",10.5281/zenodo.4646880,CC BY 4.0,benchmarks/text_fidelity/data/input/026_VIVO-Workshop_2021_Vortrag_Datenschutz.pptx,206496,ok,,13,38,207,5243,Tahoma:5241; (inherited):2,1.0,51,0,0,0.8934,0.9899,769,694,5079,4494,0.8848,13,13,17.737,17.888,0.151,True,0.4309568368170829,0.0004,,5241,5241
+DCC Spring Training Days 2023 - Session 3: Introduction to Anonymisation and pseudonymisation By Hanne Vlietinck (Hasselt University) and Afshin Amighi (Rotterdam University of Applied Sciences),Hanne Vlietinck; Afshin Amighi,10.5281/zenodo.12566953,CC BY 4.0,benchmarks/text_fidelity/data/input/027_SRW2022_Domingus_en_Miedema_20220511_DEF_wo_ochtend.pptx,10553592,ok,,33,67,185,8303,Calibri:3721; Trebuchet MS:3537; Calibri Light:834; Arial Narrow:115; Arial:62; Museo Sans 500:34,0.8816,67,0,0,0.9778,0.9681,1305,1318,6759,6586,0.9744,33,33,21.769,21.655,0.114,True,0.9075395202191785,0.0,,7320,8303
+DDI 2.5 to EQB metadata transformation,"Žibert, Gregor; Štebe, Janez",10.5281/zenodo.10473065,CC BY 4.0,benchmarks/text_fidelity/data/input/028_EDDI_2023_Zibert_Stebe.pptx,1995269,ok,,11,32,294,5839,(inherited):5839,,32,0,0,0.9564,0.9793,940,918,4997,4718,0.9442,11,11,20.11,20.177,0.067,True,0.5373721569554948,1.0,,0,0
+Defund the Journals!,Björn Brembs,10.5281/zenodo.7194078,CC BY 4.0,benchmarks/text_fidelity/data/input/029_madrid_22.pptx,18635180,error,"RuntimeError: typst compile: lato
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-fsx3i8o2\typst\main.typ:1617:129
+     │
+1617 │     #text(font: (""Slack-Lato"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#1D1C1D""), ""Credit"")#text(font: (""Slack-Lato"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#1D1C1D""), "": Mónica González-Márquez, "")#text(font: (""Slack-Lato"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#1D1C1D""), ""Liberate Science"")
+     │                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: slack-lato
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-fsx3i8o2\typst\main.typ:1617:263
+     │
+1617 │     #text(font: (""Slack-Lato"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#1D1C1D""), ""Credit"")#text(font: (""Slack-Lato"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#1D1C1D""), "": Mónica González-Márquez, "")#text(font: (""Slack-Lato"", ""Libertinus Serif""), size: 18.00pt, weight: ""regular"", fill: rgb(""#1D1C1D""), ""Liberate Science"")
+     │                                                                                                                                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",51,97,329,4921,(inherited):3646; Verdana:516; +mn-lt:255; Arial:204; DS Moster:158; Corbel:61; Slack-Lato:49; Times New Roman:32,0.6376,97,2,25,,,,,,,,,,,,,,,0.7409,Generated Typst syntax/structure error,813,1275
+Developing and Valuing Climate Services,Mark R Payne,10.5281/zenodo.3556850,CC BY 4.0,benchmarks/text_fidelity/data/input/030_20190128_Applicate_Blue_Action_WP5.pptx,3671212,error,"RuntimeError: typst compile: error: unknown image format
+   ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-wog2nqo4\typst\main.typ:12:63
+   │
+12 │   #Place(x:-179.380pt,y:184.564pt,orientation:-90.000deg,child:image(""assets/media/image1_983d2ba00c.tiff"",width:425.244pt,height:63.678pt,fit:""stretch""))
+   │                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: cooper black
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-wog2nqo4\typst\main.typ:106:16
+    │
+106 │     #text(font: (""Cooper Black"", ""Libertinus Serif""), size: 72.00pt, weight: ""regular"", fill: rgb(""#000000""), ""?"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: cooper black
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-wog2nqo4\typst\main.typ:120:16
+    │
+120 │     #text(font: (""Cooper Black"", ""Libertinus Serif""), size: 72.00pt, weight: ""regular"", fill: rgb(""#000000""), ""?"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: cooper black
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-wog2nqo4\typst\main.typ:134:16
+    │
+134 │     #text(font: (""Cooper Black"", ""Libertinus Serif""), size: 72.00pt, weight: ""regular"", fill: rgb(""#000000""), ""?"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",19,54,288,3910,(inherited):3869; +mn-lt:38; Cooper Black:3,0.0,60,0,6,,,,,,,,,,,,,,,0.9895,Typst rejected media format,0,41
+DEVELOPING COMPETITIVENESS OF INDUSTRIAL ENGINEERING GRADUATES IN THE ERA OF ASEAN ECONOMIC COMMUNITY,"Hadiguna, Rika Ampuh",10.5281/zenodo.5232323,CC BY 4.0,benchmarks/text_fidelity/data/input/031_2014.11_UNIMAL_MEMBANGUN_DAYA_SAING_LULUSAN_TEKNIK_INDUSTRI_DI_ERA_MASYARAKAT_EKONOMI_ASEAN_MEA_.pptx,2139111,error,"RuntimeError: typst compile:                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: arabic typesetting
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-qjfyclo3\typst\main.typ:527:16
+    │
+527 │     #text(font: (""Arabic Typesetting"", ""Libertinus Serif""), size: 60.00pt, weight: ""bold"", fill: rgb(""#000099""), ""The Three Principles"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: arabic typesetting
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-qjfyclo3\typst\main.typ:561:16
+    │
+561 │     #text(font: (""Arabic Typesetting"", ""Libertinus Serif""), size: 60.00pt, weight: ""bold"", fill: rgb(""#000099""), ""Work Capabilities"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: arabic typesetting
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-qjfyclo3\typst\main.typ:640:16
+    │
+640 │     #text(font: (""Arabic Typesetting"", ""Libertinus Serif""), size: 60.00pt, weight: ""bold"", fill: rgb(""#000099""), ""Knowledge Mastery"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: arabic typesetting
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-qjfyclo3\typst\main.typ:689:16
+    │
+689 │     #text(font: (""Arabic Typesetting"", ""Libertinus Serif""), size: 60.00pt, weight: ""bold"", fill: rgb(""#000099""), ""Managerial Skills"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",20,44,82,2365,(inherited):1636; Arabic Typesetting:367; AR CENA:195; AR BLANCA:102; Andalus:61; Harlow Solid Italic:4,0.0,44,0,2,,,,,,,,,,,,,,,0.6918,Generated Typst syntax/structure error,0,729
+EOSC Synergy Online Training Handbook materials,"Clare, Helen; Cepinskas, Linas; Leenarts, Ellen; Krzyzanek, Mateusz",10.5281/zenodo.7254522,CC BY 4.0,benchmarks/text_fidelity/data/input/032_2-03-EOSC_Synergy_Making_Learning_Memorable_Turing.pptx,4462857,error,"RuntimeError: typst compile:                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: plusjakartasans
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-3803r4kn\typst\main.typ:696:548
+    │
+696 │     #text(font: (""PlusJakartaSans"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), ""7. Photo by "")#text(font: (""PlusJakartaSans"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Pixabay"")#text(font: (""PlusJakartaSans"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), "": "")#text(font: (""PlusJakartaSans"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), ""https://www.pexels.com/photo/blue-and-yellow-board-game-207924/"")#text(font: (""PlusJakartaSans"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), "" "")
+    │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",10,36,72,1416,PlusJakartaSans:670; (inherited):384; Nunito:362,0.0,45,0,6,,,,,,,,,,,,,,,0.2712,Generated Typst syntax/structure error,0,1032
+"Epistemic Insight ""Galaxy Zoo"" Workshop Slides: Artificial Intelligence and Science",Joshua Heyes; Berry Billingsley; Tim Lesworth,10.5281/zenodo.6546829,CC BY 4.0,benchmarks/text_fidelity/data/input/033_Galaxy_Zoo_EI_Draft4.pptx,5252975,error,"RuntimeError: typst compile: w.epistemicinsight.com  "")#text(font: (""Humnst777 Lt BT"", ""Libertinus Serif""), size: 19.10pt, weight: ""regular"", fill: rgb(""#FFFFFF""), ""LASAR@canterbury.ac.uk"")
+     │                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: humnst777 lt bt
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-0u917ir6\typst\main.typ:1193:16
+     │
+1193 │     #text(font: (""Humnst777 Lt BT"", ""Libertinus Serif""), size: 19.10pt, weight: ""regular"", fill: rgb(""#FFFFFF""), ""www.epistemicinsight.com  "")#text(font: (""Humnst777 Lt BT"", ""Libertinus Serif""), size: 19.10pt, weight: ""regular"", fill: rgb(""#FFFFFF""), ""LASAR@canterbury.ac.uk"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: humnst777 lt bt
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-0u917ir6\typst\main.typ:1193:154
+     │
+1193 │     #text(font: (""Humnst777 Lt BT"", ""Libertinus Serif""), size: 19.10pt, weight: ""regular"", fill: rgb(""#FFFFFF""), ""www.epistemicinsight.com  "")#text(font: (""Humnst777 Lt BT"", ""Libertinus Serif""), size: 19.10pt, weight: ""regular"", fill: rgb(""#FFFFFF""), ""LASAR@canterbury.ac.uk"")
+     │                                                                                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",17,34,86,4567,(inherited):4186; Arial:381,1.0,68,0,1,,,,,,,,,,,,,,,0.9166,Generated Typst syntax/structure error,381,381
+eScience Center Fellowship Information Session 2024,"de Boer, Lieke; Martinez-Ortiz, Carlos",10.5281/zenodo.10688277,CC BY 4.0,benchmarks/text_fidelity/data/input/034_2024-02-22-Info_Session_eScience_Center.pptx,15728160,ok,,14,34,82,2548,(inherited):1439; Assistant:941; Arial:168,0.1515,34,0,8,0.9697,0.9565,363,368,2168,2114,0.9751,14,14,25.535,25.34,0.195,True,0.5139322182359223,0.5648,,168,1109
+EvoPPI 2: a web and local platform for the comparison of protein-protein interaction data from multiple sources from the same and distinct species,M. Reboiro-Jato; J. Vieira; S. Rocha; A.D. Sousa; H. López-Fernández; C.P. Vieira,10.5281/zenodo.6873704,CC BY 4.0,benchmarks/text_fidelity/data/input/035_PACBB2022_EvoPPI_2_SHAREABLE.pptx,2458616,error,"RuntimeError: typst compile:  fill: rgb(""#F2F2F2""), ""This work is licensed under a Creative Commons Attribution-"")#text(font: (""Helvetica Neue"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#F2F2F2""), ""ShareAlike"")#text(font: (""Helvetica Neue"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#F2F2F2""), "" 4.0 International License."")
+     │                                                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: helvetica neue
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-wpf5hj2x\typst\main.typ:1653:301
+     │
+1653 │     #text(font: (""Helvetica Neue"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#F2F2F2""), ""This work is licensed under a Creative Commons Attribution-"")#text(font: (""Helvetica Neue"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#F2F2F2""), ""ShareAlike"")#text(font: (""Helvetica Neue"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#F2F2F2""), "" 4.0 International License."")
+     │                                                                                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",26,94,353,7876,Helvetica Neue:5336; (inherited):2540,0.0,94,0,1,,,,,,,,,,,,,,,0.3225,Generated Typst syntax/structure error,0,5336
+FAIRVault: An Interuniversity Project on Creating a Restricted Access Data Archive,"Daniels, Nicky; Laureyns, Jacob; Leonard, Kevin; Mertens, Myriam; Moens, Philippe; Moerman, Ine; Paesmans, Jone; Peeters, Jef; Slegers, Sybren; Van de Velde, Thomas",10.5281/zenodo.13641958,CC BY 4.0,benchmarks/text_fidelity/data/input/036_iPRES_FAIRVault.pptx,1100954,ok,,1,39,146,2993,Brockmann :2993,0.0,39,0,2,0.9625,0.9847,400,391,2584,2478,0.959,1,1,43.184,43.032,0.152,True,0.21527289540856723,0.0,,0,2993
+figures_and_data_for_manuscript_contrail_formation_within_cirrus_Verma_and_Burkhardt_07032022,"Verma, Pooja",10.5281/zenodo.6337981,CC BY 4.0,benchmarks/text_fidelity/data/input/037_Fig07.pptx,2739114,ok,,1,0,0,0,,,0,0,0,,,0,0,0,0,,1,1,,,,True,,,,0,0
+Fisika Terapan - Gerak Benda dalam Bidang Datar,Yuli Nurasri,10.5281/zenodo.3577219,CC BY 4.0,benchmarks/text_fidelity/data/input/038_BAB_4_Gerak_benda_dlm_bidang_datar.pptx,411968,ok,,24,206,819,4852,(inherited):3763; Arial Unicode MS:417; +mn-lt:326; Arial:298; Tahoma:26; Symbol:10; Times New Roman:7; Verdana:5,0.3177,206,0,31,0.6622,0.9835,1261,849,4558,3914,0.8587,24,24,21.411,20.71,0.701,True,0.48586039688684246,0.7756,,346,1089
+Grupo de Estudos em SBOL do SynBio USP - 31/03/2021,Tiago Lubiana,10.5281/zenodo.4648708,CC BY 4.0,benchmarks/text_fidelity/data/input/039_SBOL_-_Grupo_de_Estudos_SynBio_USP_-_31_03_2021.pptx,1191867,ok,,23,66,178,4312,(inherited):4132; Roboto:98; Calibri:82,0.4556,66,0,5,0.9746,0.9787,708,705,3480,3396,0.9759,23,23,21.267,21.129,0.138,True,0.5185259140237847,0.9583,,82,180
+Hollanda'da Açık Bilim Çalışmaları ve  Delft Teknik Üniversitesi,"Turkyilmaz-van der Velden, Yasemin",10.5281/zenodo.3548112,CC BY 4.0,benchmarks/text_fidelity/data/input/040_20191120_Hollandada_A_k_Bilim_ve_TU_Delft_V2.pptx,20761261,ok,,35,166,1164,10449,Calibri:6427; (inherited):3063; Arial:912; +mn-lt:47,0.9936,166,0,0,0.9821,0.9841,1454,1451,8977,8802,0.9805,35,35,20.804,20.815,0.011,True,0.5689039534333027,0.2931,,7339,7386
+"How to Ensure Researchers Share Their FAIR Data: Practical Tips and Tool [Online Workshop, Package for trainers]","Magder, Cristina; Prandner, Dimitri; Chylíková, Johana; Glavica, Marijana; Watteler, Oliver",10.5281/zenodo.7296982,CC BY 4.0,benchmarks/text_fidelity/data/input/041_1.CESSDA_TT_Open_Science_Welcome_Presentation_27October2022.pptx,5460518,ok,,12,24,73,3560,(inherited):2754; Tahoma:806,1.0,28,0,0,0.9946,0.9857,553,558,2983,2943,0.9866,12,12,28.609,23.832,4.777,True,0.38149239212341285,0.7736,,806,806
+Indización de documentos LILACS 2022: calificadores revisón general,BIREME/OPS/OMS,10.5281/zenodo.6950467,CC BY 4.0,benchmarks/text_fidelity/data/input/042_sesion_5_calificadores_vision_general.pptx,5150208,ok,,40,170,982,18192,(inherited):12975; Calibri:4932; -apple-system:196; +mj-lt:72; Arial:9; Inter:8,0.9471,170,1,5,0.9898,0.9771,2546,2579,15153,14910,0.984,40,40,22.218,22.203,0.015,True,0.4957737619620844,0.7132,,4941,5217
+Indización de documentos según la Metodología LILACS 2018:  07 – Odontología (Endodoncia),"BIREME/OPS/OMS; Amadei, José Roberto Plácido; Conceição, Maria Anália da; Vidili, Ana Lucia; Suga, Sueli Mitiko Yano",10.5281/zenodo.7696653,CC BY 4.0,benchmarks/text_fidelity/data/input/043_IndizacionOdonto7.pptx,7481900,ok,,50,187,855,12069,Arial:11226; (inherited):843,1.0,187,15,15,0.9532,0.9839,1665,1613,10511,10198,0.9702,50,50,20.786,20.874,0.088,True,0.4192290591581436,0.0698,,11226,11226
+Indización de documentos según la Metodología LILACS 2019:  I - Sesiones virtuales sobre indización de documentos según metodología LILACS,"BIREME/OPS/OMS; Suga, Sueli Mitiko Yano",10.5281/zenodo.7696739,CC BY 4.0,benchmarks/text_fidelity/data/input/044_sesionesvirtuales12019.pptx,1243168,ok,,12,25,121,2787,(inherited):2787,,25,0,1,0.9385,0.9642,488,475,2667,2475,0.928,12,12,21.233,21.249,0.016,True,0.3869383010983619,1.0,,0,0
+Integrating Wikibase into research workflows,"Mietchen, Daniel",10.5281/zenodo.6807104,CC BY 4.0,benchmarks/text_fidelity/data/input/045_Integrating_Wikibase_into_research_workflows.pptx,2417965,ok,,9,25,152,3304,(inherited):2855; Lato:449,1.0,25,0,0,0.9957,0.9957,465,465,2787,2766,0.9925,9,9,16.669,14.442,2.227,True,0.4549919439488904,0.8641,,449,449
+International Journal of VLSI design & Communication Systems (VLSICS),Brajesh Kumar Kaushik,10.5281/zenodo.1291318,CC BY 4.0,benchmarks/text_fidelity/data/input/046_VLSICS.pptx,110624,ok,,4,18,54,2203,Times New Roman:2192; (inherited):11,1.0,18,0,0,0.9556,0.9825,293,285,1794,1686,0.9398,4,4,19.472,20.794,1.322,True,0.2331624306064195,0.005,,2192,2192
+Kostenmonitoring im Open Access Monitor,"Pollack, Philipp; Barbers, Irene; Herweg, Daniel",10.5281/zenodo.10065641,CC BY 4.0,benchmarks/text_fidelity/data/input/047_oat23_oam.pptx,797460,error,"RuntimeError: typst compile: error: unknown image format
+   ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-tns6nu0z\typst\main.typ:85:60
+   │
+85 │   #Place(x:774.719pt,y:474.386pt,orientation:0.000deg,child:image(""assets/media/image1_f377e83029.emf"",width:147.428pt,height:43.217pt,fit:""stretch""))
+   │                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",17,66,177,3959,(inherited):3629; +mn-lt:306; +mj-lt:24,0.0,66,1,3,,,,,,,,,,,,,,,0.9166,Typst rejected media format,0,330
+Looking to a more equitable future: the institutional repository as digital monograph archive for the small and scholar-led press,"Barnes, Miranda",10.5281/zenodo.10123353,CC BY 4.0,benchmarks/text_fidelity/data/input/048_Barnes_-_UKCORR_Members_Day_Lightning_Talk_-_13_Nov_2023.pptx,6691128,ok,,11,20,88,4609,(inherited):4609,,20,0,0,0.8597,0.9497,791,716,3900,3650,0.9359,11,11,21.09,21.192,0.102,True,0.3152021053245018,1.0,,0,0
+Mapping of Open Science Professional Networks in Europe,"Buss, Mareike Christina Harms",10.5281/zenodo.8344074,CC BY 4.0,benchmarks/text_fidelity/data/input/049_20230613_OS-network-mapping_Skills4EOSC_T6.1_CoPTrainingCoordinators.pptx,31900253,ok,,23,84,299,9259,(inherited):7272; Quicksand:1783; Century Gothic:204,0.1027,84,0,1,0.9807,0.9921,1402,1386,7559,7487,0.9905,23,23,20.091,21.161,1.07,True,0.45282205474162956,0.7854,,204,1987
+Maximus the Greek: from text correction to social correction / Максим Грек: от исправления текста до исправления общества,Garzaniti Marcello,10.5281/zenodo.5839986,CC BY 4.0,benchmarks/text_fidelity/data/input/050_pres.MassimoG._MGU2021_.pptx,23618715,ok,,49,68,866,34314,Times New Roman:33333; (inherited):964; Perpetua Titling MT Light:17,0.9995,68,0,5,0.9579,0.9901,4827,4670,28237,27102,0.9598,49,49,21.145,21.112,0.033,True,0.4461356071417307,0.0281,,33333,33350
+NAVIS.one: Challenges and Opportunities for RSE and RDM by designing a common web application from a 1990s online database,Florian Thiery M.Sc.; Dr. Allard Mees FSA,10.5281/zenodo.7142171,CC BY 4.0,benchmarks/text_fidelity/data/input/051_JCM_Cologne_CAA_DE_NL_FL_2022_NAVISONE.pptx,37542444,ok,,54,136,318,11409,(inherited):7002; Amatic SC:4387; Barlow:20,0.0,183,0,2,0.9064,0.7931,1582,1808,8192,7441,0.9083,54,54,18.703,17.39,1.313,True,0.3032543378798103,0.6137,,0,4407
+New capacity control technique for two-phase ejectors in transcritical CO2 condensing units: Preliminary experimental outcomes,Paride Gullo; Martin Ryhl Kærn; Michael BIRKELUND; Ekaterini E. KRIEZI,10.5281/zenodo.4042099,CC BY 4.0,benchmarks/text_fidelity/data/input/052_CPOTE-1266-A.pptx,9480618,error,"RuntimeError: typst compile: error: unknown image format
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-o8r4upq5\typst\main.typ:1347:59
+     │
+1347 │   #Place(x:35.428pt,y:258.779pt,orientation:0.000deg,child:image(""assets/media/image21_bf515b1dd3.tiff"",width:666.000pt,height:234.720pt,fit:""stretch""))
+     │                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",20,77,488,8153,Cambria:7787; Calibri:324; (inherited):42,1.0,157,1,26,,,,,,,,,,,,,,,0.0052,Typst rejected media format,8111,8111
+Novel Intranasal Drug Delivery: Geraniol Charged Polymeric Mixed Micelles for Targeting Cerebral Insult as a Result of Ischaemia/Reperfusion,"M. Soliman, Sara; M. Sheta, Nermin; M.M. Ibrahim, Bassant; M. El-Shawwa, Mohammad; M. Abd El-Halim, Shady",10.5281/zenodo.3543807,CC BY 4.0,benchmarks/text_fidelity/data/input/053_Figure_S3.pptx,723621,error,"RuntimeError: typst compile: error: unknown image format
+   ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-ajo1js8z\typst\main.typ:12:58
+   │
+12 │   #Place(x:17.000pt,y:12.000pt,orientation:0.000deg,child:image(""assets/media/image1_0157b58ced.tiff"",width:691.000pt,height:450.000pt,fit:""stretch""))
+   │                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",1,1,8,189,Palatino Linotype:189,1.0,1,0,0,,,,,,,,,,,,,,,0.0,Typst rejected media format,189,189
+Open knowledge engineering in NFDI contexts,"Mietchen, Daniel",10.5281/zenodo.13780637,CC BY 4.0,benchmarks/text_fidelity/data/input/054_Mietchen_FIZ_NFDI4Ing_Conference_2024-09-19.pptx,1275847,ok,,4,10,54,895,Helvetica Neue:682; (inherited):181; Montserrat Light:32,0.0,10,0,0,0.8485,1.0,132,112,748,626,0.8369,4,4,34.653,34.418,0.235,True,0.36044906237768215,0.2022,,0,714
+Open research information to inform regional policies: the case of Tuscany Region,"Bacci, Lorenzo",10.5281/zenodo.13899950,CC BY 4.0,benchmarks/text_fidelity/data/input/055_S03P02_LorenzoBacci.pptx,12805207,ok,,12,30,157,5404,(inherited):1736; Proxima Nova:1670; Arial:1658; Century Gothic:340,0.5447,30,1,1,0.9815,0.9455,813,844,4521,4450,0.9843,12,12,14.801,15.006,0.205,True,0.6067005401333702,0.3212,,1998,3668
+Open Science ETDs and Institutional Repositories: Making Research Data FAIRer,Andrew Mckenna-Foster; Mark Hahnel; Maria Cotera,10.5281/zenodo.7084796,CC BY 4.0,benchmarks/text_fidelity/data/input/056_Open_Science_ETDs_and_Institutional_Repositories_Making_Research_Data_FAIRer.pptx,11917620,ok,,35,68,160,5453,(inherited):3696; Roboto:1757,0.0,68,0,5,0.9245,0.9751,848,804,4533,4140,0.9133,35,35,15.909,14.44,1.469,True,0.42353818440253055,0.6778,,0,1757
+Open Science for a sunny future in materials research,Ana Belén Cristóbal López; Elisa Antolín; Antonio Marti; Eva Unger,10.5281/zenodo.3478158,CC BY 4.0,benchmarks/text_fidelity/data/input/057_16834_GRECO_abc02.pptx,27177358,error,"RuntimeError: typst compile: semibold
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-s69621li\typst\main.typ:1250:16
+     │
+1250 │     #text(font: (""Montserrat SemiBold"", ""Libertinus Serif""), size: 45.00pt, weight: ""bold"", fill: rgb(""#0099D8""), ""Thanks for your attention"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: montserrat medium
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-s69621li\typst\main.typ:1260:182
+     │
+1260 │     #list(marker:[#text(font:(""Arial"", ""Libertinus Serif""),size:18.00pt,weight:""bold"",fill:rgb(""#B80E80""),""•"")],indent:0.00pt,body-indent:13.50pt,tight:true,spacing:0pt,[#text(font: (""Montserrat Medium"", ""Libertinus Serif""), size: 18.00pt, weight: ""bold"", fill: rgb(""#B80E80""), ""This project has received funds from the European Union’s Horizon2020 research and innovation programme under Grant Agreement 787289"")])
+     │                                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: montserrat black
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-s69621li\typst\main.typ:1299:16
+     │
+1299 │     #text(font: (""Montserrat Black"", ""Libertinus Serif""), size: 13.50pt, weight: ""bold"", fill: rgb(""#DC358B""), ""www.greco-project.eu"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",14,100,223,5725,(inherited):4078; Arial:1162; +mj-lt:465; Montserrat Black:20,0.7055,101,0,8,,,,,,,,,,,,,,,0.7123,Generated Typst syntax/structure error,1162,1647
+OSGeo Townhall 2018: Open Science demystified,"Löwe, Peter",10.5281/zenodo.1419987,CC BY 4.0,benchmarks/text_fidelity/data/input/058_2018eguosgeotownhall-180411115734.pptx,12474932,error,"RuntimeError: typst compile: ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: miriam libre
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-vkgxl3uz\typst\main.typ:1308:128
+     │
+1308 │     #text(font: (""Miriam Libre"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#FFFFFF""), ""Peter "")#text(font: (""Miriam Libre"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#FFFFFF""), ""Löwe"")#text(font: (""Miriam Libre"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#FFFFFF""), "" (ploewe@osgeo.org)"")
+     │                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: miriam libre
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-vkgxl3uz\typst\main.typ:1308:238
+     │
+1308 │     #text(font: (""Miriam Libre"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#FFFFFF""), ""Peter "")#text(font: (""Miriam Libre"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#FFFFFF""), ""Löwe"")#text(font: (""Miriam Libre"", ""Libertinus Serif""), size: 24.00pt, weight: ""bold"", fill: rgb(""#FFFFFF""), "" (ploewe@osgeo.org)"")
+     │                                                                                                                                                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",21,73,339,5933,(inherited):3673; Calibri:912; Roboto:551; Source Sans Pro:537; Open Sans:173; Lucida Sans:66; Miriam Libre:21,0.4327,73,0,7,,,,,,,,,,,,,,,0.6191,Generated Typst syntax/structure error,978,2260
+Overcoming Language Barrier in Open Repositories: A case of Sokoine University of Agriculture,"Mushi, Gilbert",10.5281/zenodo.3873721,CC BY 4.0,benchmarks/text_fidelity/data/input/059_Mushi_OR2020_Presentation.pptx,568177,ok,,21,43,312,7116,(inherited):6744; Cambria:372,1.0,43,1,0,0.7926,0.9463,1244,1042,6010,5641,0.9386,21,21,24.588,25.036,0.448,True,0.4126909450172443,0.9477,,372,372
+Pedagogy and learning design for developing training,Helen Clare; Linas Cepinskas,10.5281/zenodo.4973294,CC BY 4.0,benchmarks/text_fidelity/data/input/060_Ghent_Synergy_Pedagogy_Design_presentation_for_Zenodo.pptx,2901037,error,"RuntimeError: typst compile:                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: nunito
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-q1lqhtun\typst\main.typ:2489:16
+     │
+2489 │     #text(font: (""Nunito"", ""Libertinus Serif""), size: 12.95pt, weight: ""bold"", fill: rgb(""#DD282E""), ""www.eosc-synergy.eu"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: nunito
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-q1lqhtun\typst\main.typ:2516:16
+     │
+2516 │     #text(font: (""Nunito"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), ""www.eosc-synergy.eu - "")#text(font: (""Nunito"", ""Libertinus Serif""), size: 10.00pt, weight: ""regular"", fill: rgb(""#000000""), ""RIA 857647"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: nunito
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-q1lqhtun\typst\main.typ:2516:141
+     │
+2516 │     #text(font: (""Nunito"", ""Libertinus Serif""), size: 14.00pt, weight: ""regular"", fill: rgb(""#000000""), ""www.eosc-synergy.eu - "")#text(font: (""Nunito"", ""Libertinus Serif""), size: 10.00pt, weight: ""regular"", fill: rgb(""#000000""), ""RIA 857647"")
+     │                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",24,123,232,5211,(inherited):3258; Nunito:1498; Arial:301; Calibri:135; Nunito SemiBold:19,0.2232,123,0,5,,,,,,,,,,,,,,,0.6252,Generated Typst syntax/structure error,436,1953
+PERTEMUAN 3_10 OCTOBER 2024_MANAJEMEN INVESTASI DAN PORTOFOLIO_UNIGRES_18.30-20.30,"Dr. Rusdiyanto, SE,. M. Ak,. CH,. CHt; Prof. Dr. Nur Fadjrih Asyik, SE,.M.Si,. CA",10.5281/zenodo.13910470,CC BY 4.0,benchmarks/text_fidelity/data/input/061_2._Risk_and_Return.pptx,4431111,ok,,18,54,572,7053,(inherited):5591; AkayaKanadaka:1022; +mj-lt:216; Arial:144; Times New Roman:32; AkayaTelivigala:27; Univers:21,0.1204,54,0,13,0.8819,0.9943,1185,1051,5923,5662,0.9559,18,18,22.196,22.167,0.029,True,0.4063739925567211,0.7927,,176,1462
+"Poster: Bontomarannu Education Park Reviewed from Conservation, Social, and Environmental Aspects",Rismawati Razak,10.5281/zenodo.4686689,CC BY 4.0,benchmarks/text_fidelity/data/input/062_RISMAWATI_-_POSTER_PPT_-_Rismawati_Razak.pptx,626692,ok,,1,17,187,4518,(inherited):3996; +mj-lt:359; Impact:163,0.3123,17,0,0,0.9757,0.9519,1400,1435,6975,6671,0.9564,1,1,17.835,18.101,0.266,True,0.43537080679937823,0.8845,,163,522
+Practical course on FAIR Data Stewardship in Life Science,"Pavone, Gina; Lazzeri, Emma; Carta, Claudio; Chiara, Matteo; Quaglia, Federica",10.5281/zenodo.6323375,CC BY 4.0,benchmarks/text_fidelity/data/input/063_1.2_FAIR_data_in_life_science.pptx,9203944,ok,,19,44,132,4245,(inherited):2344; Poppins:854; Lato:417; Montserrat:369; Playfair Display:179; Open Sans:35; Helvetica Neue:35; Oswald:12,0.6686,44,0,1,0.9466,0.9703,656,640,3436,3205,0.9328,19,19,17.129,16.724,0.405,True,0.48916071510122644,0.5522,,1271,1901
+Practical Deep Learning,Markus Koskela; Mats Sjöberg; Katja Mankinen,10.5281/zenodo.7566457,CC BY 4.0,benchmarks/text_fidelity/data/input/064_3._Images_neural_networks_CNNs.pptx,12069795,ok,,26,109,302,5883,(inherited):3745; Calibri:1205; Corbel:739; Consolas:194,1.0,109,2,17,0.9646,0.9676,990,987,4908,4787,0.9753,26,26,19.449,17.969,1.48,True,0.4760560061109395,0.6366,,2138,2138
+Presentation of results from Clarity DC 2.,Lena Strömbäck,10.5281/zenodo.4018509,CC BY 4.0,benchmarks/text_fidelity/data/input/065_Presentation_klimatradet_200420.pptx,16872371,ok,,16,116,464,3849,(inherited):2247; Helvetica:1190; Calibri:371; +mj-lt:41,0.2316,116,0,3,0.9659,0.9872,558,546,3319,3267,0.9843,16,16,16.721,16.757,0.036,True,0.5609077092925587,0.5838,,371,1602
+Presentation: The Influence of Instagram on Community Lifestyle Changes Towards the Covid-19 Endemic,Muhammad Edy Susilo; Endah Wahyurini; Prayudi,10.5281/zenodo.7258565,CC BY 4.0,benchmarks/text_fidelity/data/input/066_Conference_Presentation_-_edy_susilo.pptx,3323268,ok,,16,19,100,7088,(inherited):7088,,19,0,9,0.9947,0.9894,1125,1131,5848,5811,0.9937,16,16,27.751,27.674,0.077,True,0.39618099176325217,1.0,,0,0
+Presentation: The Role Of Cognitive Conflict As A Moderating Variable Influence Of Organizational Commitment And Attitudes On Implementation Of Good Governance  And Impact On Fraud Prevention,Arthur Simanjuntak; Erlina; Zulkarnain; Abdhy Aulia Adnans,10.5281/zenodo.4108174,CC BY 4.0,benchmarks/text_fidelity/data/input/067_PPT_Arthur_Simanjuntak.pptx,685244,ok,,11,18,102,4871,(inherited):4871,,18,0,2,0.9806,0.9819,721,720,4066,3976,0.9779,11,11,23.564,23.555,0.009,True,0.41671072184873864,1.0,,0,0
+Presentations about the Project Aurora SDG Research Dashboard,"Vanderfeesten, Maurice",10.5281/zenodo.10033043,CC BY 4.0,benchmarks/text_fidelity/data/input/068_2023-02-22_University_of_Innsbruck_-_SDG_Dashboard_-_Maurice_Vanderfeesten.pptx,19154991,error,"RuntimeError: typst compile: RIS"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: lato light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-x4j61n33\typst\main.typ:1912:16
+     │
+1912 │     #text(font: (""Lato Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#00DEB9""), ""Aurora Research Monitor "")#text(font: (""Lato Light"", ""Libertinus Serif""), size: 32.00pt, weight: ""regular"", fill: rgb(""#00DEB9""), ""– powered by OpenAIRE"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: lato light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-x4j61n33\typst\main.typ:1912:147
+     │
+1912 │     #text(font: (""Lato Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#00DEB9""), ""Aurora Research Monitor "")#text(font: (""Lato Light"", ""Libertinus Serif""), size: 32.00pt, weight: ""regular"", fill: rgb(""#00DEB9""), ""– powered by OpenAIRE"")
+     │                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: abadi extra light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-x4j61n33\typst\main.typ:1963:16
+     │
+1963 │     #text(font: (""Abadi Extra Light"", ""Libertinus Serif""), size: 44.00pt, weight: ""regular"", fill: rgb(""#00DEB9""), ""Thank you "")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",32,91,303,6464,(inherited):1977; Lato:1052; Arial:1048; Open Sans:955; Calibri:422; Salome:417; Lucida Grande:365; Lato Light:218; Abadi Extra Light:10,0.5621,93,0,3,,,,,,,,,,,,,,,0.3058,Generated Typst syntax/structure error,2522,4487
+Reading monastic history in bookbinding waste: Manuscript fragments from the Benedictine monastery of Mondsee and their new digital home Fragmentarium,"Dobcheva, Ivana",10.5281/zenodo.1210080,CC BY 4.0,benchmarks/text_fidelity/data/input/069_Reading_monastic_history_in_bookbinding_waste.pptx,30912791,ok,,33,41,105,3700,Lato:2647; Arial:866; Calibri:111; Proxima Nova:76,0.9795,41,0,0,0.938,1.0,532,499,3117,2950,0.9464,33,33,17.301,17.719,0.418,True,0.6593190941235362,0.0,,3624,3700
+Rechtssicherheit im Umgang mit Forschungsdaten,"Wünsche, Stephan; Voigt, Pia",10.5281/zenodo.7773801,CC BY 4.0,benchmarks/text_fidelity/data/input/070_20230207_Rechtssicherheit_im_Umgang_mit_Forschungsdaten.pptx,6500224,error,"RuntimeError: typst compile: error: label `<uni-leipzig.de>` does not exist in the document
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-fx3_74vr\typst\main.typ:8549:15
+     │
+8549 │ forschungsdaten@uni-leipzig.de  Datenschutzbeauftragter 
+     │                ^^^^^^^^^^^^^^^
+
+error: label `<uni-leipzig.de>` does not exist in the document
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-fx3_74vr\typst\main.typ:8589:11
+     │
+8589 │ ethikbeirat@uni-leipzig.de Ombudskommission
+     │            ^^^^^^^^^^^^^^^
+
+error: label `<uni-le>` does not exist in the document
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-fx3_74vr\typst\main.typ:8590:16
+     │
+8590 │ ombudskommission@uni-le
+     │                 ^^^^^^^
+
+",97,358,1360,37065,(inherited):27658; Arial:9376; +mn-lt:31,0.9967,446,11,10,,,,,,,,,,,,,,,0.7462,Unresolved Typst label/reference,9376,9407
+Reproducibility and Peer Review,"Nüst, Daniel",10.5281/zenodo.4292263,CC BY 4.0,benchmarks/text_fidelity/data/input/071_Reproducibility_and_Peer_Review_ORDS_Kick_off_Dec_2020_Daniel_N_st.pptx,39073729,ok,,40,148,421,9885,(inherited):7569; Source Sans Pro:1446; Open Sans:297; Source Sans Pro Light:253; Source Sans Pro SemiBold:226; Caveat:60; Source Sans Pro Black:34,0.0,148,0,0,0.8907,0.9058,1500,1475,8282,7290,0.8802,40,40,16.739,16.004,0.735,True,0.4513110175772978,0.7657,,0,2316
+Research-based Student Selected Components (SSCs),Peter H Charlton,10.5281/zenodo.8384655,CC BY 4.0,benchmarks/text_fidelity/data/input/072_20230906_research_based_SSCs_audio.pptx,33750692,ok,,19,56,162,2987,Calibri:1895; (inherited):1026; -apple-system:66,0.9663,56,0,0,0.9432,0.947,493,491,2514,2340,0.9308,19,19,21.86,22.103,0.243,True,0.4158628528525397,0.3435,,1895,1961
+Rewet-wetland observatories for the rewetting of drained peatlands,Torsten Berg,10.5281/zenodo.6418385,CC BY 4.0,benchmarks/text_fidelity/data/input/073_TRB_Pres_Rewet-wetland_observatories.pptx,3289170,error,"RuntimeError: typst compile: inus Serif""), size: 20.00pt, weight: ""regular"", fill: rgb(""#000000""), ""hallenges "")#text(font: (""AU Passata"", ""Libertinus Serif""), size: 20.00pt, weight: ""regular"", fill: rgb(""#000000""), ""include how to tackle and possibly adopt LL features such as ‘co-creation’, becoming more user centered etc. Expect to build capacity as part of the pilot network "")])
+     │                                                                                                                                                                                                                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: au passata
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-z6liy5tu\typst\main.typ:1063:189
+     │
+1063 │     #list(marker:[#text(font:(""Calibri"", ""Libertinus Serif""),size:20.00pt,weight:""regular"",fill:rgb(""#000000""),""​"")],indent:-28.00pt,body-indent:28.00pt,tight:true,spacing:0pt,[#text(font: (""AU Passata"", ""Libertinus Serif""), size: 20.00pt, weight: ""regular"", fill: rgb(""#000000""), ""13/12/2021"")])
+     │                                                                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",9,18,153,4709,(inherited):4709,,66,0,0,,,,,,,,,,,,,,,1.0,Generated Typst syntax/structure error,0,0
+RRIDs are Research Object Identifiers; a practical use case (mainly for biology),Anita Bandrowski,10.5281/zenodo.1484502,CC BY 4.0,benchmarks/text_fidelity/data/input/074_S03E03-Anita_Bandrowski_-_IEEE_RO_Slides_2018.pptx,11186659,ok,,23,76,160,6288,Calibri:4939; (inherited):928; Arial:326; Lato:95,1.0,76,0,7,0.783,0.9259,622,526,3169,2402,0.758,21,23,25.594,26.725,1.131,False,0.2211811756927282,0.1476,,5360,5360
+Scienza aperta e gestione dei dati per le scienze umane e del patrimonio culturale,"Giglia, Elena; Lazzeri, Emma; Di Donato, Francesca",10.5281/zenodo.5497914,CC BY 4.0,benchmarks/text_fidelity/data/input/075_Slides_Mod1_parte2_DiDonato_20052021_1_.pptx,7496452,ok,,48,193,739,26135,Arial:22050; (inherited):3441; Helvetica Neue:521; Calibri:64; Helvetica Neue Light:59,0.9744,193,0,8,0.9263,0.9919,4114,3842,21510,19881,0.9243,48,48,25.069,25.535,0.466,True,0.4087875557389639,0.1317,,22114,22694
+Shared repositories: building (multi-tenancy) repository services at the British Library,"Basford, Jenny; Gould, Sara; Reimer, Torsten",10.5281/zenodo.4973680,CC BY 4.0,benchmarks/text_fidelity/data/input/076_OR2021_BL_multi_tenancy.pptx,6560254,ok,,9,29,56,1329,(inherited):1329,,43,0,0,0.9711,1.0,242,235,1139,1132,0.9939,9,9,25.114,25.148,0.034,True,0.47348525831755484,1.0,,0,0
+Slides 'From Open and Citizen Science to Activism: Roles of Academic Staff' - Workshop 2,Giuseppe Delmestri; Michael Peter Edson; Gianluca Grimalda; Margaret Gold; Laura Horn; Stefania Oikonomou; Jérôme Santolini; Katerina Zourou,10.5281/zenodo.7023096,CC BY 4.0,benchmarks/text_fidelity/data/input/077_Slides_Katerina_Zourou_workshop_August_2022.pptx,12378499,ok,,21,36,92,3087,(inherited):1646; Arial:942; Calibri:484; Roboto:15,0.9896,36,0,2,0.9929,0.9168,422,457,2334,2321,0.9944,20,21,26.016,21.851,4.165,False,0.4689914159934833,0.5332,,1426,1441
+Social Life Cycle Assessments of Solar Thermal Energy Systems in Industrial Processes,"Zafar, Imaad; Stojceska, Valentina; Tassou, Savvas",10.5281/zenodo.8171554,CC BY 4.0,benchmarks/text_fidelity/data/input/078_Zafar_Social_Life_Cycle_Assessments_of_Solar_Thermal_Energy_Systems_in_Industrial_Processes.pptx,287130,ok,,1,31,122,7070,Calibri:3073; (inherited):2006; +mn-lt:1961; +mj-lt:30,0.6068,31,1,2,0.9517,0.9865,1077,1039,6025,5739,0.9525,1,1,30.306,30.274,0.032,True,0.4196155102465904,0.2837,,3073,5064
+State of Astropy 2022,"Günther, Hans Moritz",10.5281/zenodo.6374127,CC BY 4.0,benchmarks/text_fidelity/data/input/079_StateofAstropy2022.pptx,196837,ok,,11,26,120,4348,(inherited):4348,,26,0,0,0.9899,0.9928,696,694,3579,3540,0.9891,11,11,17.115,13.987,3.128,True,0.47245153076997465,1.0,,0,0
+Summary of Solid State Tracking,"Haber, Carl",10.5281/zenodo.4637719,CC BY 4.0,benchmarks/text_fidelity/data/input/080_Solid_State_Tracking_Summary.pptx,6088425,error,"RuntimeError: typst compile: 00000""), ""Panel on Electronics for Fast Timing"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-sbza0n_6\typst\main.typ:907:16
+    │
+907 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""PRD 19"")
+    │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-sbza0n_6\typst\main.typ:1028:16
+     │
+1028 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""PRD 20"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-sbza0n_6\typst\main.typ:1123:16
+     │
+1123 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 39.60pt, weight: ""regular"", fill: rgb(""#000000""), ""Composites Manufacturing & Simulation Center"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: calibri light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-sbza0n_6\typst\main.typ:1171:16
+     │
+1171 │     #text(font: (""Calibri Light"", ""Libertinus Serif""), size: 60.00pt, weight: ""regular"", fill: rgb(""#000000""), ""The End"")
+     │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",24,44,136,2983,(inherited):1793; Calibri:835; Century Gothic:282; Segoe UI:51; Times New Roman:21; Symbol:1,1.0,44,2,5,,,,,,,,,,,,,,,0.6011,Generated Typst syntax/structure error,1190,1190
+SustainGraph: a Knowledge Graph for tracking the progress towards the SDGs,Eleni Fotopoulou; Ioanna Mandilara; Christina-Maria Androna; Anastasios Zafeiropoulos; Symeon Papavassiliou,10.5281/zenodo.7821554,CC BY 4.0,benchmarks/text_fidelity/data/input/081_5-10_430P_5-V_Fotopoulou.pptx,7973649,ok,,26,96,152,5681,(inherited):2554; Verdana:1698; Calibri:948; Arial:481,1.0,105,0,0,0.967,0.9941,878,854,5159,5074,0.9835,26,26,17.849,17.876,0.027,True,0.5981505639164126,0.4496,,3127,3127
+Systemic and Technical migrations,"Michael Ayas, Hamdy; Leitner, Philipp; Hebig, Regina",10.5281/zenodo.6422058,CC BY 4.0,benchmarks/text_fidelity/data/input/082_Memos-notes-methodology.pptx,2415285,ok,,15,50,376,6981,(inherited):6981,,50,2,0,0.8494,0.9832,1102,952,5949,5009,0.842,15,15,18.169,18.164,0.005,True,0.3658088157376048,1.0,,0,0
+TEKNIK PENYUNTINGAN SUBSTANSI ARTIKEL,Eko Sumartono,10.5281/zenodo.4120043,CC BY 4.0,benchmarks/text_fidelity/data/input/083_3.Penyuntingan_Substansi_Artikel-Eko_Sumartono.pptx,5480023,ok,,39,218,6865,12421,Calibri:11245; Arial:773; Garamond:312; Arial Rounded MT Bold:55; Symbola:33; Times New Roman:2; Verdana:1,0.9929,218,0,0,0.8795,0.9706,1726,1564,10381,9173,0.8836,39,39,23.462,28.483,5.021,True,0.47886854519885,0.0,,12333,12421
+TERRAVISION General Presentation,Institute of Communication and Computer Systems,10.5281/zenodo.13927788,CC BY 4.0,benchmarks/text_fidelity/data/input/084_TERRAVISION_general_presentation.pptx,16435700,ok,,9,31,73,4317,Roboto:1960; Roboto Medium:1327; Roboto Light:950; (inherited):80,0.0,31,1,11,0.9649,0.9839,570,559,3705,3589,0.9687,9,9,14.309,14.293,0.016,True,0.5141017995580034,0.0185,,0,4237
+The Error is the Message: Extracting Insights from Deceptive Data for Nazi-looted art,"Zuckerman, Laurel",10.5281/zenodo.7843373,CC BY 4.0,benchmarks/text_fidelity/data/input/085_10May2023at330pmRm4Zuckerman.pptx,38814528,ok,,51,517,934,16908,(inherited):16908,,517,0,2,0.9652,0.9207,2442,2560,13222,12602,0.9531,51,51,39.213,37.924,1.289,True,0.24544158408827252,1.0,,0,0
+The INVoLVED Study: Investigating Lay members' Views in Guideline Development,Biggane Alice,10.5281/zenodo.1454091,CC BY 4.0,benchmarks/text_fidelity/data/input/086_GIN_2018_Submitted_version.pptx,1142283,ok,,18,58,297,9987,(inherited):9239; Calibri:669; +mn-lt:77; Comic Sans MS:2,0.8971,58,0,8,0.8641,0.9891,1575,1376,8370,7305,0.8728,18,18,22.67,24.916,2.246,True,0.44738413316450065,0.9251,,671,748
+The Low Countries' Plakkaatboeken: Entangled Histories between ±1500-1800?!  Text-segmentation and machine-learned meta-dating.,"Romein, Christel Annemieke; Veldhoen, Sara; de Gruijter, Michel",10.5281/zenodo.3551781,CC BY 4.0,benchmarks/text_fidelity/data/input/087_07_22_2019_DHOxSS.pptx,12090578,ok,,1,14,104,1190,(inherited):830; +mj-lt:218; +mn-lt:125; UGent Panno Text Medium:11; Garamond:6,0.0167,14,0,1,0.9761,0.9623,209,212,1190,1149,0.9655,1,1,38.92,38.32,0.6,True,0.30295473846802734,0.6975,,6,360
+The Turing Way Book Dash: Manchester,"Ainsworth, Rachael",10.5281/zenodo.3233611,CC BY 4.0,benchmarks/text_fidelity/data/input/088_IntroBookDashMCR.pptx,21264056,error,"RuntimeError: typst compile: error: unknown variable: TuringWay
+   ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-jpp537fl\typst\main.typ:30:5
+   │
+30 │ The #TuringWay team
+   │      ^^^^^^^^^
+
+",44,173,364,9988,(inherited):8056; +mj-lt:792; +mn-lt:721; Gill Sans MT:291; Zilla Slab:75; Arial:53,0.1781,218,1,5,,,,,,,,,,,,,,,0.8066,Unescaped text interpreted as Typst markup,344,1932
+The Ubiquitin Ligase WWP1 Contributes to Shifts in Matrix Proteolytic Profiles and a Myocardial Aging Phenotype with Diastolic Heart Failure,"Matesic, Lydia; Freeburg, Lisa; Snyder, Laura; Duncan, Lauren-Ashley; Moore, Amber; Perreault, Paige; Zellars, Kia; Goldsmith, Edie; Spinale, Francis",10.5281/zenodo.3998027,CC BY 4.0,benchmarks/text_fidelity/data/input/089_Supplemental_Figure_1.pptx,1212782,error,"RuntimeError: typst compile: error: unknown image format
+   ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-d5uqomlg\typst\main.typ:12:60
+   │
+12 │   #Place(x:328.883pt,y:134.463pt,orientation:0.000deg,child:image(""assets/media/image1_987ccdb9ac.tiff"",width:184.320pt,height:184.320pt,fit:""stretch""))
+   │                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",1,6,12,386,(inherited):385; Symbol:1,1.0,6,0,0,,,,,,,,,,,,,,,0.9974,Typst rejected media format,1,1
+"Theory and applications of linear regression model, the model assumptions and problem of estimation",Shokhrukh Komilov,10.5281/zenodo.7303475,CC BY 4.0,benchmarks/text_fidelity/data/input/090_Econometrics_Presentation_Task_1_A_and_B_.pptx,872815,ok,,3,5,38,1355,(inherited):1355,,5,0,0,0.9356,0.9277,233,235,1084,1012,0.9336,3,3,17.131,17.111,0.02,True,0.0942303715447715,1.0,,0,0
+Towards a national PID roadmap,"Akcaova, Gül; Slot, Pim; de Smaele, Madeleine; Hoogerwerf, Maarten; Sesink, Laurents; Baars, Chris; de Jong, Maaike; Coombs, Sarah; van de Sanden, Mark; Voorburg, René",10.5281/zenodo.7660190,CC BY 4.0,benchmarks/text_fidelity/data/input/091_Towards_NL_PID_roadmap_20230221.pptx,7737032,ok,,18,162,989,24810,(inherited):17308; Calibri:7045; +mj-lt:427; +mn-lt:30,0.9391,162,3,2,0.9546,0.9572,3746,3736,21643,20381,0.9417,17,18,12.838,13.75,0.912,False,0.43697441698041933,0.6976,,7045,7502
+Towards an Efficient Method of Soundscape Assessment for Massive and Rapid Data Collection,Rifqi Ikhwanuddin,10.5281/zenodo.3519246,CC BY 4.0,benchmarks/text_fidelity/data/input/092_Web-Soundscape-ICoSITeR-2019.pptx,30024340,error,"RuntimeError: typst compile: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: abadi mt condensed light
+     ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-brh55ko9\typst\main.typ:1620:518
+     │
+1620 │     #text(font: (""Abadi MT Condensed Light"", ""Libertinus Serif""), size: 12.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Gedung "")#text(font: (""Abadi MT Condensed Light"", ""Libertinus Serif""), size: 12.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Kuliah"")#text(font: (""Abadi MT Condensed Light"", ""Libertinus Serif""), size: 12.00pt, weight: ""regular"", fill: rgb(""#000000""), "" "")#text(font: (""Abadi MT Condensed Light"", ""Libertinus Serif""), size: 12.00pt, weight: ""regular"", fill: rgb(""#000000""), ""Umum"")#text(font: (""Abadi MT Condensed Light"", ""Libertinus Serif""), size: 12.00pt, weight: ""regular"", fill: rgb(""#000000""), "" (GKU), Institut Teknologi Sumatera (ITERA), Lampung Selatan, Lampung, Indonesia"")
+     │                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",24,104,231,5542,(inherited):4366; Abadi MT Condensed Light:1176,0.0,104,1,3,,,,,,,,,,,,,,,0.7878,Generated Typst syntax/structure error,0,1176
+Transkribus webinar #3 update & pylaia (powerpoint),"Romein, Christel Annemieke",10.5281/zenodo.4073462,CC BY 4.0,benchmarks/text_fidelity/data/input/093_Transkribus_webinar3.pptx,12377190,ok,,45,41,274,6759,(inherited):6759,,41,0,43,0.9587,0.9595,1259,1258,5661,5464,0.9652,45,45,26.016,25.885,0.131,True,0.2987931057420301,1.0,,0,0
+Understanding metadata management in longitudinal studies,"Johnson, Jon; Mills, Hayley",10.5281/zenodo.3813483,CC BY 4.0,benchmarks/text_fidelity/data/input/094_5.1_Variables_and_Variable_Cascade.pptx,792086,ok,,21,63,474,4692,(inherited):4608; Calibri:84,1.0,63,42,4,1.0,0.9331,753,807,4295,4295,1.0,21,21,18.062,17.901,0.161,True,0.23896397720522794,0.9821,,84,84
+UNIMIB 38° cycle of Doctoral courses  - Hands on RRI,"Casati, Sara; Datteri, Edoardo; Zogmaister, Cristina; Vezzoli, Michela; Lazzeri, Emma; Scisci, Domingo",10.5281/zenodo.7646077,CC BY 4.0,benchmarks/text_fidelity/data/input/095_CRISTINA_ZOGMAISTER_4_Preregistration_and_RRs_HANDS_ON_RRI_20230207.pptx,1900781,ok,,23,109,429,6647,(inherited):6281; Calibri:366,1.0,109,0,57,0.9936,0.9739,939,958,5703,5668,0.9939,23,23,16.21,14.234,1.976,True,0.4662199722384587,0.9449,,366,366
+Virtual Layer-fMRI Dinner #1,Luca Vizioli; Laurentius (Renzo) Huber; Cheryl Olman; Kamil Uludag,10.5281/zenodo.3874364,CC BY 4.0,benchmarks/text_fidelity/data/input/096_3_Renzo_Huber_Whatever_works.pptx,38844175,ok,,12,81,171,9121,(inherited):8870; Verdana:223; Roboto:28,0.8884,81,0,22,0.9962,0.9554,1590,1658,7045,7028,0.9976,8,12,7.585,7.793,0.208,False,0.7258983903920558,0.9725,,223,251
+Vpliv psihološke razdalje na zaznavanje podnebnih tveganj: primer analize preferenc slovenskih potrošnikov pri prenovi in opremljanju stanovanj,"Slavec, Ana; Sajinčič, Nežka; Primožič, Lea",10.5281/zenodo.10108033,CC BY 4.0,benchmarks/text_fidelity/data/input/097_SSD_Slavec_v1.pptx,9618896,ok,,15,59,233,6679,(inherited):6586; +mn-lt:93,0.0,91,2,3,0.795,0.992,1249,1001,6580,5501,0.836,15,15,18.917,21.467,2.55,True,0.4264364566828107,0.9861,,0,93
+Využití techniky difúzního gradientu v tenkém filmu pro hodnocení arsenu ve vodních ekosystémech,Vendula Smolíková; Pavlína Pelcová; Andrea Ridošková; Martine Leermakers,10.5281/zenodo.7641096,CC BY 4.0,benchmarks/text_fidelity/data/input/098_MVMB_2020_Presentation_Vendula_Smolikova.pptx,7425364,error,"RuntimeError: typst compile: rning: unknown font family: +mn-lt
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-yeea5cbc\typst\main.typ:730:235
+    │
+730 │   table.cell(fill:rgb(""#729ACA""),stroke:(left: 0.500pt + rgb(""#FFFFFF""), right: 0.500pt + rgb(""#FFFFFF""), top: 0.500pt + rgb(""#FFFFFF""), bottom: 0.500pt + rgb(""#FFFFFF"")),inset:(x:6.310pt,y:0.000pt),align:center + horizon)[#text(font: (""+mn-lt"", ""Libertinus Serif""), size: 14.00pt, weight: ""bold"", fill: rgb(""#111111""), ""175.18"")],
+    │                                                                                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unknown font family: +mn-lt
+    ┌─ \\?\C:\Users\Sovichea\AppData\Local\Temp\pptx-typst-bench-yeea5cbc\typst\main.typ:731:235
+    │
+731 │   table.cell(fill:rgb(""#729ACA""),stroke:(left: 0.500pt + rgb(""#FFFFFF""), right: 0.500pt + rgb(""#FFFFFF""), top: 0.500pt + rgb(""#FFFFFF""), bottom: 0.500pt + rgb(""#FFFFFF"")),inset:(x:6.310pt,y:0.000pt),align:center + horizon)[#text(font: (""+mn-lt"", ""Libertinus Serif""), size: 14.00pt, weight: ""bold"", fill: rgb(""#111111""), ""113.71"")],
+    │                                                                                                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+",10,49,152,2027,(inherited):1363; Cambria:641; +mn-lt:23,0.9654,49,1,5,,,,,,,,,,,,,,,0.6724,Generated Typst syntax/structure error,641,664
+WEFE data collection for a pilot smallholder farm in Costa Rica,Julian Fleischmann; Christian Birkel; Philipp Blechinger; Lars Ribbe; Alexandra Nauditt; Silvia Corigliano; Werner Platzer,10.5281/zenodo.8030262,CC BY 4.0,benchmarks/text_fidelity/data/input/099_S17_Graphical_Abstract.pptx,659062,ok,,1,11,51,692,Arial:403; (inherited):289,1.0,11,0,4,0.8842,0.9333,95,90,620,530,0.8548,1,1,14.62,14.664,0.044,True,0.49875132960273777,0.4176,,403,403
+XML-Workshop: Praktische Einführung in XML und Metadatenschemata,"Pietsch, Andre Manuel",10.5281/zenodo.6355645,CC BY 4.0,benchmarks/text_fidelity/data/input/100_20220311_HeFDI-Data-Talks_XML_Einfuehrung_V1.pptx,1905820,ok,,15,93,150,4648,(inherited):4648,,108,0,2,0.8713,0.9615,917,831,5186,4607,0.8884,15,15,20.8,20.889,0.089,True,0.3158962236109119,1.0,,0,0

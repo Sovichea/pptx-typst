@@ -580,7 +580,7 @@ def table_style_color(scheme,transform=None):
 
 def table_cell_typst(sh, row_idx, col_idx, cell, table_style, banded):
     """Build an editable Typst table cell with source text and direct formatting."""
-    tcPr=cell._tc.tcPr
+    tcPr=cell._tc.tcPr or cell._tc.get_or_add_tcPr()
     row_count=len(sh.table.rows);col_count=len(sh.table.columns)
     fill_node=tcPr.xpath('./a:solidFill/*')
     fill=typst_color_expr(fill_node[0]) if fill_node else 'none'
@@ -1232,6 +1232,19 @@ for slide_no,slide in enumerate(prs.slides,1):
                     lines.append('  ]))')
                 else:
                     recur(sh.shapes,group_parent,group_path+(gid,),origin)
+                continue
+            if None in (sh.left,sh.top,sh.width,sh.height):
+                # Some slide-number/date/footer placeholders have no transform
+                # on the slide, layout, or master. Keep converting the deck and
+                # report the unplaced placeholder instead of aborting all slides.
+                counts['unsupported_unpositioned_shape']+=1
+                counts['unsupported_placements']+=1
+                obj={'z_index':zindex,'group_path':list(group_path),
+                     'source_shape_id':sh.shape_id,'name':sh.name,
+                     'type':'unsupported','unsupported_kind':'unpositioned_shape',
+                     'text':sh.text[:200] if sh.has_text_frame else '',
+                     'warning':'Shape has no resolvable position or size in slide, layout, or master.'}
+                sm['placements'].append(obj)
                 continue
             pl=placement_info(sh,parent)
             obj={'z_index':zindex,'group_path':list(group_path),'source_shape_id':sh.shape_id,'name':sh.name,'x':round(pl['x'],2),'y':round(pl['y'],2),'w':round(pl['w'],2),'h':round(pl['h'],2),'rot':round(pl['rotation'],2),'flip_y':pl['flip_y'],'group_skew':round(pl['skew'],5)}
