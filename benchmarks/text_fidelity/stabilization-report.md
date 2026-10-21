@@ -18,7 +18,7 @@ Validation on the supported Python 3.12 environment:
 - Installed `pptx-to-typst` and `typst-to-pptx` entry points converted a one-slide sample in both directions; the forward output compiled with Typst.
 - A focused TIFF fixture compiled and confirmed that its original TIFF remains in the project while the manifest points to a derived RGBA PNG for rendering.
 
-The final GitHub Actions result is recorded after pushing this commit.
+GitHub Actions passed for code commit [`e97e4cf`](https://github.com/Sovichea/pptx-typst/commit/e97e4cf): [tests run 39558380224](https://github.com/Sovichea/pptx-typst/actions/runs/39558380224).
 
 ## Paragraph-spacing validation
 
