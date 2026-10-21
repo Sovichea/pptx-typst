@@ -301,16 +301,16 @@ def test_master_layout_hierarchy_is_shared_and_roundtrips(tmp_path: Path) -> Non
     write_pixel(tmp_path / "pixel.png")
     main = tmp_path / "main.typ"
     main.write_text(
-        '''#import "pptx-typst.typ": PptxMaster, PptxLayout, PptxSlide, Place
+        '''#import "pptx-typst.typ": PptxMaster, PptxLayout, PptxSlide, Place, PptxPlace, PptxRect, PptxImage
 #let Brand = PptxMaster(fill:rgb("#112233"),children:[
-  #Place(x:10pt,y:10pt,child:rect(width:12pt,height:12pt,fill:rgb("#123456")))
-  #Place(x:30pt,y:10pt,child:image("pixel.png",width:20pt,height:20pt))
+  #PptxPlace(x:10pt,y:10pt,child:PptxRect(width:12pt,height:12pt,fill:rgb("#123456")))
+  #PptxPlace(x:30pt,y:10pt,child:PptxImage("pixel.png",width:20pt,height:20pt))
 ])
 #let Other = PptxMaster(children:[
   #Place(x:10pt,y:10pt,child:rect(width:14pt,height:14pt,fill:rgb("#654321")))
 ])
 #let Alpha = PptxLayout(master:Brand,fill:rgb("#223344"),children:[
-  #Place(x:10pt,y:40pt,child:rect(width:30pt,height:8pt,fill:rgb("#CC0000")))
+  #PptxPlace(x:10pt,y:40pt,child:PptxRect(width:30pt,height:8pt,fill:rgb("#CC0000")))
 ])
 #let Beta = PptxLayout(master:Brand,children:[
   #Place(x:10pt,y:60pt,child:rect(width:30pt,height:8pt,fill:rgb("#00CC00")))

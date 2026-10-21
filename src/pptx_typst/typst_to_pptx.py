@@ -479,11 +479,13 @@ def convert(main,output):
     master_fills={}
     for name,raw,start,end in master_defs:
         head,body=parse_root(raw)
+        body=normalize_starter_aliases(body)
         master_records.append((name,body,start,end))
         master_fills[name]=head.get('fill','none')
     layout_records={}
     for name,raw,_,_ in layout_defs:
         head,body=parse_root(raw)
+        body=normalize_starter_aliases(body)
         master_name=head.get('master','').strip()
         if not re.fullmatch(r'[A-Za-z_][\w-]*',master_name):
             raise RuntimeError(f'Layout {name!r} must reference a statically named PptxMaster')
