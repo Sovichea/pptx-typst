@@ -2,18 +2,18 @@
 
 - Corpus: [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K), sampled deterministically; all selected records are CC BY 4.0.
 - Sample size: 100 downloaded decks; measurements recorded for 100.
-- Successful conversions and renders: 78; failures: 22.
-- Source slides rendered: 1778.
-- Source PDF words: 55,509.
-- Weighted visible-word recall: 92.8%.
-- Mean per-deck visible-word recall: 93.0%; median 95.6%.
-- Layout fidelity (text glyph pixels masked; all rendered slides): 87.7% mean per deck; 91.8% median.
-- Text metrics include 1,128 of 1,709 source-text slides with all used font families available; 581 slides were skipped for unsupported fonts.
-- Text fidelity (font-supported slides only): 42.3% mean per deck; 41.3% median.
-- Full-slide fidelity (font-supported slides only; equal-weight layout + text): 65.4% mean per deck; 66.0% median.
-- Text ink edge F1: 39.2%; mean start-position accuracy: 46.9%; mean start-position error: 46.14 pt.
-- Text wrap line-count match (diagnostic only; excluded from scores): 73.1%.
-- Mean per-deck absolute PDF font-size difference: 1.10 pt; median 0.35 pt.
+- Successful conversions and renders: 89; failures: 11.
+- Source slides rendered: 1980.
+- Source PDF words: 60,591.
+- Weighted visible-word recall: 95.2%.
+- Mean per-deck visible-word recall: 94.3%; median 97.9%.
+- Layout fidelity (text glyph pixels masked; all rendered slides): 88.9% mean per deck; 92.1% median.
+- Text metrics include 1,249 of 1,910 source-text slides with all used font families available; 661 slides were skipped for unsupported fonts.
+- Text fidelity (font-supported slides only): 46.9% mean per deck; 46.1% median.
+- Full-slide fidelity (font-supported slides only; equal-weight layout + text): 68.4% mean per deck; 68.3% median.
+- Text ink edge F1: 41.9%; mean start-position accuracy: 53.0%; mean start-position error: 37.84 pt.
+- Text wrap line-count match (diagnostic only; excluded from scores): 81.7%.
+- Mean per-deck absolute PDF font-size difference: 1.30 pt; median 0.35 pt.
 - Resolved source font families are locally available for 83.2% of text characters across the sample; mean per-deck share 82.5%.
 - Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): 64.3%.
 - Layout score compares full-slide edges, foreground colors, and background color after masking extracted text glyph regions in both PDFs. Text itself does not contribute to this score. Layout includes slides with unsupported fonts because their text is masked.
@@ -28,4 +28,4 @@
 
 ## Failure categories
 
-- Typst rejected media format: 22 deck(s). Details are in `results.csv`.
+- Typst rejected media format: 11 deck(s). Details are in `results.csv`.
