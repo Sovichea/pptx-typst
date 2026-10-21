@@ -57,6 +57,40 @@ def run_forward(source: Path, output: Path) -> None:
     )
 
 
+def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from pptx_typst.cli import main as cli_main
+    from pptx_typst.typst_to_pptx import convert
+
+    project = tmp_path / "starter"
+    monkeypatch.setattr(sys, "argv", ["pptx-typst", "init", str(project)])
+    cli_main()
+
+    packaged_macro = (ROOT / "src/pptx_typst/templates/pptx-typst.typ").read_text(encoding="utf-8")
+    copied_macro = (project / "pptx-typst.typ").read_text(encoding="utf-8")
+    starter = (project / "main.typ").read_text(encoding="utf-8")
+    assert copied_macro == packaged_macro
+    assert "#let Brand = PptxMaster(" in starter
+    assert "#let ContentLayout = PptxLayout(" in starter
+    assert "layout: ContentLayout," in starter
+
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "starter.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+
+    output = project / "starter.pptx"
+    report = convert(project / "main.typ", output)
+    deck = Presentation(output)
+    assert report["hierarchy_written"] is True
+    assert len(deck.slides) == 1
+    assert len(deck.slide_masters) == 1
+    assert deck.slides[0].slide_layout.name == "ContentLayout"
+    assert sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes) == 1
+    assert "A slide authored in Typst" in text_in(deck)
+
+
 def text_in(deck: Presentation) -> list[str]:
     return [shape.text for slide in deck.slides for shape in slide.shapes if shape.has_text_frame]
 
