@@ -157,10 +157,16 @@ def viewport(child):
 
 def text_runs(child):
     out=[]
-    for raw,_,_ in find_calls(child,'text'):
+    for raw,_,end in find_calls(child,'text'):
         a=kwargs(raw); pos=a.get('_pos',[])
-        if not pos:continue
-        content=txt_decode(pos[-1]);
+        if pos:
+            content=txt_decode(pos[-1])
+        else:
+            block=re.match(r'\s*\[',child[end:])
+            if not block:continue
+            body_start=end+block.end()-1
+            content,_=balanced(child,body_start,'[',']')
+            content=content.strip()
         if not content:continue
         out.append(dict(text=content,font=txt_decode(a.get('font','"Aptos"')),size=length(a.get('size'),20),color=simple_color(a.get('fill')),bold='bold' in a.get('weight','').lower()))
     return out
@@ -173,8 +179,9 @@ def show_unsupported(audit,kind,expr,slide):
 def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
     child=obj; im=img_call(child)
     if not im:return False
-    f=(base/im['path']).resolve()
-    if not str(f).startswith(str(base.resolve())) or not f.is_file():
+    root=base.resolve()
+    f=(root/im['path']).resolve()
+    if not f.is_relative_to(root) or not f.is_file():
         show_unsupported(audit,'missing_media',str(f),slide_num);return True
     W=im['iw'];H=im['ih']; crop=viewport(child)
     if W<=0 or H<=0:return True

@@ -4,12 +4,20 @@
 
 Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, table, layout, and transparency cases. Tables preserve cell text, dimensions, alignment, fills, and common borders; merged cells remain unsupported. SmartArt with a stored PowerPoint drawing cache is included as vector artwork; its text is rendered in the SVG rather than emitted as independently editable Typst text. The reverse converter supports the explicit `#Root` / `#Place` subset emitted by the forward converter, including basic rectangular tables; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
 
+## Example
+
+The comparison below shows slide 5 rendered from the original PowerPoint and from the generated Typst project. The artwork and palette carry across, while text styling and placement remain approximate.
+
+![Original PowerPoint slide and its Typst conversion, side by side](docs/images/market-expansion-comparison.png)
+
 ## Install
 
 Python 3.10 or newer is required.
 
+This project has not yet been published to PyPI. From a local clone, install it with:
+
 ```console
-python -m pip install pptx-typst
+python -m pip install .
 ```
 
 The forward converter can produce Typst source without the Typst compiler. To render the output as PDF, install the [Typst CLI](https://typst.app/) separately. It keeps the PowerPoint text point sizes and text-frame coordinates, resolves inherited text and bullet styles by default, and preserves bullet hanging indents. It tries the requested font followed by Typst's bundled Libertinus Serif. If the requested font is unavailable, fallback glyph metrics can still change wrapping and line appearance.
@@ -63,11 +71,15 @@ report = typst_to_pptx("presentation-typst/main.typ", "presentation.pptx")
 ## Development build
 
 ```console
+python -m pip install -e ".[test]"
+pytest
 python -m pip install --upgrade build
 python -m build
 ```
 
-The source distribution and wheel are written to `dist/`. The repository includes a converted sample under `examples/quarterly_marketing_meeting/`; generated slide media is kept out of the PyPI distributions.
+The source distribution and wheel are written to `dist/`. The full converted sample under `examples/quarterly_marketing_meeting/` stays in the repository; its media assets are excluded from package distributions. The smaller README comparison image is included in the source distribution.
+
+Development-only visual and geometry utilities live under `tools/`.
 
 ## Project status
 
@@ -75,4 +87,4 @@ This is an alpha proof of concept. Review conversion reports and visually inspec
 
 ## License
 
-The source archive did not specify a license. Select and add the intended license before publishing to PyPI.
+Licensed under the [Apache License, Version 2.0](LICENSE).

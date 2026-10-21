@@ -7,7 +7,7 @@ regression. This does NOT substitute a new raster illustration for the original:
 media assets are shared and the alpha-mask derivative is cached separately.
 """
 from __future__ import annotations
-import argparse,json,subprocess,tempfile,sys
+import argparse,json,os,subprocess,tempfile,sys
 from pathlib import Path
 import numpy as np,fitz
 from skimage.metrics import structural_similarity as ssim
@@ -20,7 +20,7 @@ p.add_argument('--min-local-gain',type=float,default=.002)
 p.add_argument('--max-slide-loss',type=float,default=.0005)
 p.add_argument('--max-candidates',type=int,default=30)
 p.add_argument('--render-width',type=int,default=640)
-a=p.parse_args();BASE=Path(__file__).resolve().parent;out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+a=p.parse_args();BASE=Path(__file__).resolve().parent.parent;out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
 refpdf=fitz.open(a.reference_pdf);src=a.pptx.resolve()
 
 def render(doc):
@@ -35,8 +35,9 @@ ref=render(refpdf)
 def build(tag,pairs):
     project=out/tag;project.mkdir(parents=True,exist_ok=True)
     allow=project/'allowlist.json';allow.write_text(json.dumps({'placements':[{'slide':i,'shape_id':j} for i,j in pairs]},indent=2))
-    cmd=[sys.executable,str(BASE/'pptx_to_typst.py'),str(src),'--output',str(project),'--mask-mode','experimental','--mask-allowlist',str(allow)]
-    cr=subprocess.run(cmd,capture_output=True,text=True)
+    cmd=[sys.executable,'-m','pptx_typst.pptx_to_typst',str(src),'--output',str(project),'--mask-mode','experimental','--mask-allowlist',str(allow)]
+    env=os.environ.copy();env['PYTHONPATH']=str(BASE/'src')+os.pathsep+env.get('PYTHONPATH','')
+    cr=subprocess.run(cmd,capture_output=True,text=True,cwd=BASE,env=env)
     if cr.returncode:raise RuntimeError(f'converter failure {tag}: '+cr.stderr[-2000:])
     co=subprocess.run([str(a.typst),'compile',str(project/'main.typ'),str(project/'converted.pdf')],capture_output=True,text=True)
     if co.returncode:raise RuntimeError(f'Typst compile failure {tag}: '+co.stderr[-2000:])
