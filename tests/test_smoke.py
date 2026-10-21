@@ -12,7 +12,9 @@ from PIL import Image
 import pytest
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.dml.color import RGBColor
 from pptx.util import Pt
+from pptx.oxml.xmlchemy import OxmlElement
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -135,6 +137,48 @@ def test_roundtrip_preserves_dimensions_text_and_shared_image(tmp_path: Path) ->
         if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
     }
     assert len(image_hashes) == 1
+
+
+def test_table_fill_transparency_survives_pptx_to_typst(tmp_path: Path) -> None:
+    source = tmp_path / "transparent-table.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    table = slide.shapes.add_table(1, 1, Pt(20), Pt(20), Pt(160), Pt(40)).table
+    cell = table.cell(0, 0)
+    cell.fill.solid()
+    cell.fill.fore_color.rgb = RGBColor(51, 102, 153)
+    srgb = cell._tc.get_or_add_tcPr().xpath('./a:solidFill/a:srgbClr')[0]
+    alpha = OxmlElement('a:alpha')
+    alpha.set('val', '40000')
+    srgb.append(alpha)
+    cell.text = "Transparent cell"
+    deck.save(source)
+
+    run_forward(source, project)
+    typst = (project / "main.typ").read_text(encoding="utf-8")
+    assert 'fill:rgb("#33669966")' in typst
+
+
+def test_table_fill_transparency_survives_typst_to_pptx(tmp_path: Path) -> None:
+    from pptx_typst.typst_to_pptx import convert
+
+    main = tmp_path / "main.typ"
+    main.write_text(
+        '''#PptxSlide(width:320pt,height:180pt,fill:rgb("#FFFFFF"),children:[
+  #PptxPlace(x:20pt,y:20pt,child:table(columns:(100pt),rows:(40pt),
+    table.cell(fill:rgb("#33669966"),stroke:none)[Transparent cell]))
+])
+''',
+        encoding="utf-8",
+    )
+    output = tmp_path / "table.pptx"
+
+    convert(main, output)
+    deck = Presentation(output)
+    cell = next(shape.table.cell(0, 0) for shape in deck.slides[0].shapes if shape.has_table)
+    alpha = cell._tc.get_or_add_tcPr().xpath('./a:solidFill/a:srgbClr/a:alpha/@val')
+    assert alpha == ['40000']
 
 
 def test_image_path_cannot_escape_project_to_prefix_sibling(tmp_path: Path) -> None:

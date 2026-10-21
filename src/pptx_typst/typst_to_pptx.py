@@ -119,6 +119,13 @@ def simple_color(s,default=(0,0,0)):
     return default
 
 
+def simple_color_alpha(s):
+    """Return Typst's RGB color and optional alpha from #RRGGBBAA syntax."""
+    match=re.search(r'#([\da-fA-F]{8})',s or '')
+    return (tuple(int(match.group(1)[i:i+2],16) for i in (0,2,4)),
+            int(match.group(1)[6:8],16)/255) if match else (simple_color(s),1.0)
+
+
 def txt_decode(v):
     if not v:return ''
     v=v.strip()
@@ -326,7 +333,14 @@ def add_table(slide,child,x,y,rot,audit,slide_num):
         cell=table.cell(idx//len(cols),idx%len(cols))
         fill=style.get('fill','none')
         if fill=='none':cell.fill.background()
-        else:cell.fill.solid();cell.fill.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
+        else:
+            color,opacity=simple_color_alpha(fill)
+            cell.fill.solid();cell.fill.fore_color.rgb=RGBColor(*color)
+            if opacity<.99999:
+                solid_fill=cell._tc.get_or_add_tcPr().xpath('./a:solidFill')
+                srgb=solid_fill[0].xpath('./a:srgbClr') if solid_fill else []
+                if srgb:
+                    alpha=OxmlElement('a:alpha');alpha.set('val',str(round(opacity*100000)));srgb[0].append(alpha)
         inset=style.get('inset','')
         vals=[length(v) for v in re.findall(NUM+r'\s*pt',inset)]
         if vals:

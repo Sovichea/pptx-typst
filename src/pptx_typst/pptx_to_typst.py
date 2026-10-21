@@ -296,6 +296,15 @@ def color_opacity_in(parent, prefix):
     nodes=parent.xpath(prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
     return color_opacity(nodes[0]) if nodes else 1.0
 
+def typst_color_expr(node, default='#FFFFFF'):
+    """Represent a DrawingML color and its alpha in Typst's 8-digit hex form."""
+    color=resolve_color_node(node,default)
+    if not color:return 'none'
+    opacity=color_opacity(node)
+    if opacity<.99999:
+        color+=f'{round(opacity*255):02X}'
+    return f'rgb("{color}")'
+
 def gradient_expr(gf):
     stops=[]
     for gs in gf.xpath('./a:gsLst/a:gs'):
@@ -574,7 +583,7 @@ def table_cell_typst(sh, row_idx, col_idx, cell, table_style, banded):
     tcPr=cell._tc.tcPr
     row_count=len(sh.table.rows);col_count=len(sh.table.columns)
     fill_node=tcPr.xpath('./a:solidFill/*')
-    fill=('rgb("'+resolve_color_node(fill_node[0],'#FFFFFF')+'")' if fill_node else 'none')
+    fill=typst_color_expr(fill_node[0]) if fill_node else 'none'
     # A table style can be materialized in the package, or be the built-in
     # default style whose definition is intentionally omitted by PowerPoint.
     style_cell=None
@@ -590,7 +599,7 @@ def table_cell_typst(sh, row_idx, col_idx, cell, table_style, banded):
             if zone:style_cell=zone[0]
             if zone and not fill_node:
                 sf=zone[0].xpath('./*[local-name()="fill"]/*[local-name()="solidFill"]/*')
-                if sf:fill='rgb("'+resolve_color_node(sf[0],'#FFFFFF')+'")'
+                if sf:fill=typst_color_expr(sf[0])
                 elif zone[0].xpath('./*[local-name()="fill"]/*[local-name()="noFill"]'):fill='none'
     elif not fill_node and table_style is None:
         # PowerPoint omits definitions of its built-in table styles. Approximate
