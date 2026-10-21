@@ -409,7 +409,7 @@ def add_table(slide,child,x,y,rot,audit,slide_num):
 def parse_root(raw):
     head=kwargs(raw)
     m=re.search(r'\bchildren\s*:\s*\[',raw)
-    if not m:raise ValueError('Root without children')
+    if not m:return head,''
     content,_=balanced(raw,m.end()-1,'[',']')
     return head,content
 
@@ -462,6 +462,160 @@ def find_definitions(source, kind):
     return out
 
 
+def find_macro_records(expression, kind):
+    """Read a static array of named PptxPlaceholder records."""
+    pattern=re.compile(r'(?<![\w-])#?'+re.escape(kind)+r'\s*\(')
+    records=[];pos=0
+    while True:
+        match=pattern.search(expression or '',pos)
+        if not match:break
+        raw,end=balanced(expression,match.end()-1)
+        records.append(kwargs(raw));pos=end
+    return records
+
+
+PLACEHOLDER_TYPES={'title':'title','centered-title':'ctrTitle','body':'body'}
+
+def placeholder_type(record):
+    value=txt_decode(record.get('type','"body"'))
+    if value not in PLACEHOLDER_TYPES:
+        raise RuntimeError(f'Unsupported native placeholder type {value!r}')
+    return value
+
+
+def placeholder_text(record):
+    value=record.get('text','""')
+    text=txt_decode(value)
+    if text:return text
+    paragraphs=find_macro_records(record.get('paragraphs','()'),'PptxPlaceholderParagraph')
+    if paragraphs:return '\n'.join(txt_decode(item.get('text','""')) for item in paragraphs)
+    content=record.get('content','')
+    return ''.join(run['text'] for run in text_runs(content))
+
+
+def merged_placeholder(slots, parent_slots, instance=None):
+    """Resolve static render geometry while preserving local override fields."""
+    instance=instance or {}
+    slot_id=txt_decode(instance.get('id','""'))
+    own=next((item for item in slots if txt_decode(item.get('id','""'))==slot_id),None)
+    parent=next((item for item in parent_slots if txt_decode(item.get('id','""'))==slot_id),None)
+    result={}
+    for key in ('x','y','width','height','rotation','font','size','fill','weight','align','bullet',
+                'anchor','margin-left','margin-right','margin-top','margin-bottom'):
+        value=instance.get(key)
+        if value is None and own is not None:value=own.get(key)
+        if value is None and parent is not None:value=parent.get(key)
+        if value is not None:result[key]=value
+    result['id']=slot_id
+    result['type']=instance.get('type',own.get('type') if own else parent.get('type') if parent else '"body"')
+    result['idx']=instance.get('idx',own.get('idx') if own else parent.get('idx') if parent else '0')
+    return result,own,parent
+
+
+def add_native_placeholder(slide, record, resolved, *, keep_geometry=False, marker=None):
+    """Create a real p:sp placeholder; omitted local transforms inherit from layout."""
+    x=length(resolved.get('x'));y=length(resolved.get('y'))
+    w=length(resolved.get('width'));h=length(resolved.get('height'))
+    if w<=0 or h<=0:
+        raise RuntimeError(f'Placeholder {txt_decode(record.get("id", "\"?\""))!r} has no resolvable layout geometry')
+    shape=slide.shapes.add_textbox(Pt(x),Pt(y),Pt(w),Pt(h))
+    kind=placeholder_type(record)
+    idx=int(length(record.get('idx'),0))
+    shape.name=marker or f'PptxTypst {kind} placeholder {idx}'
+    ph=OxmlElement('p:ph')
+    ph.set('type',PLACEHOLDER_TYPES[kind]);ph.set('idx',str(idx))
+    shape._element.nvSpPr.nvPr.append(ph)
+    tf=shape.text_frame;tf.clear()
+    body_pr=shape._element.txBody.bodyPr
+    for attr in ('lIns','rIns','tIns','bIns','anchor','wrap'):
+        body_pr.attrib.pop(attr,None)
+    text=placeholder_text(record)
+    paragraph_records=find_macro_records(record.get('paragraphs','()'),'PptxPlaceholderParagraph')
+    paragraph_values=([(txt_decode(item.get('text','""')),item) for item in paragraph_records]
+                      if paragraph_records else [(part,{}) for part in text.replace('\v','\n').split('\n')])
+    for para_index,(part,paragraph_record) in enumerate(paragraph_values):
+        para=tf.paragraphs[0] if para_index==0 else tf.add_paragraph()
+        para.level=int(length(paragraph_record.get('level'),0))
+        if paragraph_record.get('align'):
+            alignment=txt_decode(paragraph_record['align'])
+            if alignment in ('left','center','right'):
+                para.alignment={'left':PP_ALIGN.LEFT,'center':PP_ALIGN.CENTER,'right':PP_ALIGN.RIGHT}[alignment]
+        if paragraph_record.get('bullet'):
+            ppr=para._p.get_or_add_pPr()
+            bullet=OxmlElement('a:buChar');bullet.set('char',txt_decode(paragraph_record['bullet']));ppr.append(bullet)
+        run=para.add_run();run.text=part
+        if any(k in record for k in ('font','size','fill','weight')):
+            if record.get('fill'):
+                run.font.color.rgb=RGBColor(*simple_color(record['fill']))
+            if record.get('font'):run.font.name=txt_decode(record['font'])
+            if record.get('size'):run.font.size=Pt(length(record['size']))
+            if record.get('weight'):run.font.bold=txt_decode(record['weight'])=='bold'
+    for key,attr in (('margin-left','margin_left'),('margin-right','margin_right'),
+                     ('margin-top','margin_top'),('margin-bottom','margin_bottom')):
+        if key in record:setattr(tf,attr,Pt(length(record[key])))
+    if record.get('align'):
+        alignment=txt_decode(record['align'])
+        if alignment in ('left','center','right'):
+            tf.paragraphs[0].alignment={'left':PP_ALIGN.LEFT,'center':PP_ALIGN.CENTER,'right':PP_ALIGN.RIGHT}[alignment]
+    if record.get('anchor'):
+        anchor=txt_decode(record['anchor'])
+        tf.vertical_anchor={'top':MSO_ANCHOR.TOP,'center':MSO_ANCHOR.MIDDLE,'bottom':MSO_ANCHOR.BOTTOM}.get(anchor,MSO_ANCHOR.TOP)
+    if not text and any(record.get(key) is not None for key in
+                        ('align','size','weight','font','fill','bullet')):
+        # Emit a local placeholder text style only when the declaration defines
+        # one. An empty lvl1pPr blocks the parent master/layout text style.
+        tx_body=shape._element.txBody
+        lst=tx_body.find(qn('a:lstStyle'))
+        if lst is None:
+            lst=OxmlElement('a:lstStyle')
+            tx_body.insert(1,lst)
+        lvl=OxmlElement('a:lvl1pPr')
+        if record.get('align'):
+            alignment=txt_decode(record['align'])
+            lvl.set('algn',{'left':'l','center':'ctr','right':'r','justify':'just'}.get(alignment,'l'))
+        props=OxmlElement('a:defRPr')
+        if record.get('size'):props.set('sz',str(round(length(record['size'])*100)))
+        if record.get('weight'):props.set('b','1' if txt_decode(record['weight'])=='bold' else '0')
+        if record.get('fill'):
+            solid=OxmlElement('a:solidFill');color=OxmlElement('a:srgbClr')
+            color.set('val','%02X%02X%02X'%simple_color(record['fill']));solid.append(color);props.append(solid)
+        if record.get('font'):
+            latin=OxmlElement('a:latin');latin.set('typeface',txt_decode(record['font']));props.append(latin)
+        if record.get('bullet'):
+            bullet=OxmlElement('a:buChar');bullet.set('char',txt_decode(record['bullet']));lvl.append(bullet)
+        lvl.append(props);lst.append(lvl)
+    elif not text:
+        # python-pptx leaves an empty a:lstStyle after clearing a text frame;
+        # remove it so the placeholder can inherit its parent's text style.
+        tx_body=shape._element.txBody
+        lst=tx_body.find(qn('a:lstStyle'))
+        if lst is not None and len(lst)==0:
+            tx_body.remove(lst)
+    if resolved.get('rotation'):
+        shape.rotation=length(resolved['rotation'])%360
+    if not keep_geometry:
+        xfrm=shape._element.spPr.find(qn('a:xfrm'))
+        if xfrm is not None:shape._element.spPr.remove(xfrm)
+    return shape
+
+
+def background_asset(expression, base, audit, owner):
+    expression=(expression or 'none').strip()
+    if expression=='none':return None
+    image=img_call(expression)
+    if not image:
+        show_unsupported(audit,'background_expression',expression,owner)
+        return None
+    root=base.resolve();path=(root/image['path']).resolve()
+    if not path.is_relative_to(root) or not path.is_file():
+        show_unsupported(audit,'missing_background_media',image['path'],owner)
+        return None
+    if path.suffix.lower() not in ('.png','.jpeg','.jpg','.bmp','.gif','.tif','.tiff'):
+        show_unsupported(audit,'background_media_format',image['path'],owner)
+        return None
+    return path
+
+
 def remove_spans(source, spans):
     for start,end in sorted(spans,reverse=True):
         source=source[:start]+source[end:]
@@ -477,12 +631,18 @@ def convert(main,output):
     declaration_spans=[(v[2],v[3]) for v in master_defs+layout_defs]
     master_records=[]
     master_fills={}
+    master_background_exprs={}
+    master_placeholders={}
     for name,raw,start,end in master_defs:
         head,body=parse_root(raw)
         body=normalize_starter_aliases(body)
         master_records.append((name,body,start,end))
         master_fills[name]=head.get('fill','none')
+        master_background_exprs[name]=head.get('background','none')
+        master_placeholders[name]=find_macro_records(head.get('placeholders','[]'),'PptxPlaceholderSlot')
     layout_records={}
+    layout_background_exprs={}
+    layout_placeholders={}
     for name,raw,_,_ in layout_defs:
         head,body=parse_root(raw)
         body=normalize_starter_aliases(body)
@@ -490,6 +650,8 @@ def convert(main,output):
         if not re.fullmatch(r'[A-Za-z_][\w-]*',master_name):
             raise RuntimeError(f'Layout {name!r} must reference a statically named PptxMaster')
         layout_records[name]=(master_name,body,head.get('show-master','true').strip().lower() not in ('false','0'),head.get('fill','none'))
+        layout_background_exprs[name]=head.get('background','none')
+        layout_placeholders[name]=find_macro_records(head.get('placeholders','[]'),'PptxPlaceholderSlot')
     content=remove_spans(content,declaration_spans)
     content=normalize_starter_aliases(content)
     slide_calls=list(find_calls(content,'Root'))
@@ -499,6 +661,10 @@ def convert(main,output):
     prs=Presentation();prs.slide_width=Pt(sw);prs.slide_height=Pt(sh)
     cache=output.parent/'raster_cache';cache.mkdir(parents=True,exist_ok=True)
     audit={'scope':'Place-based generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'tables':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[],'masters':len(master_records),'layouts':len(layout_records)}
+    master_backgrounds={name:path for name,expr in master_background_exprs.items()
+                       if (path:=background_asset(expr,base,audit,f'master:{name}')) is not None}
+    layout_backgrounds={name:path for name,expr in layout_background_exprs.items()
+                        if (path:=background_asset(expr,base,audit,f'layout:{name}')) is not None}
     slide_assignments={}
     slide_visibility={}
     for n,(raw,_,_) in enumerate(slide_calls,1):
@@ -511,8 +677,26 @@ def convert(main,output):
             bg=slide.background.fill;bg.solid();bg.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
             if 'gradient.' in fill:show_unsupported(audit,'slide_background_gradient',fill,n)
         export_one(body,slide,base,cache,audit,n)
-        clear_theme_shadows(slide)
+        slide_placeholder_records=find_macro_records(head.get('placeholders','[]'),'PptxPlaceholder')
         layout_name=head.get('layout','').strip()
+        parent_slots=master_placeholders.get(layout_records.get(layout_name,('', '', False, ''))[0],[])
+        local_slots=layout_placeholders.get(layout_name,[])
+        for item in slide_placeholder_records:
+            resolved,local,parent=merged_placeholder(local_slots,parent_slots,item)
+            local_geometry=any(key in item for key in ('x','y','width','height','rotation'))
+            shape=add_native_placeholder(
+                slide,item,resolved,keep_geometry=local_geometry,
+                marker='PptxTypst placeholder '+txt_decode(item.get('id','""')),
+            )
+            audit['items'].append({'slide':n,'type':'placeholder','placeholder_type':placeholder_type(item),
+                                   'idx':int(length(item.get('idx'),0)),'id':txt_decode(item.get('id','""')),
+                                   'inherited_from_layout':local is not None,'inherited_from_master':local is None and parent is not None,
+                                   'geometry_override':local_geometry,'text':placeholder_text(item)})
+            audit['text_content'].append(placeholder_text(item))
+            audit.setdefault('placeholders',[]).append({'slide':n,'id':txt_decode(item.get('id','""')),
+                'type':placeholder_type(item),'idx':int(length(item.get('idx'),0)),
+                'layout':layout_name or None,'geometry_override':local_geometry,'native':True})
+        clear_theme_shadows(slide)
         if layout_name:
             if layout_name not in layout_records:
                 raise RuntimeError(f'Slide {n} references unknown PptxLayout {layout_name!r}')
@@ -526,6 +710,9 @@ def convert(main,output):
     for index,(name,body,_,_) in enumerate(master_records,1):
         stage=prs.slides.add_slide(prs.slide_layouts[6]);stage_parts[name]=str(stage.part.partname);master_parts[name]=str(stage.part.partname)
         export_one(body,stage,base,cache,audit,f'master:{name}')
+        for item in master_placeholders.get(name,[]):
+            resolved,_,_=merged_placeholder([],[],item)
+            add_native_placeholder(stage,item,resolved,keep_geometry=any(k in item for k in ('x','y','width','height','rotation')))
         master_object_counts[name]=len(stage.shapes)
         clear_theme_shadows(stage)
     layout_visibility={};layout_fills={}
@@ -534,6 +721,9 @@ def convert(main,output):
             raise RuntimeError(f'Layout {name!r} references undefined master {master_name!r}')
         stage=prs.slides.add_slide(prs.slide_layouts[6]);stage_parts[name]=str(stage.part.partname);layout_parts[name]=(master_name,str(stage.part.partname));layout_visibility[name]=show_master;layout_fills[name]=fill
         export_one(body,stage,base,cache,audit,f'layout:{name}')
+        for item in layout_placeholders.get(name,[]):
+            resolved,_,_=merged_placeholder(layout_placeholders.get(name,[]),master_placeholders.get(master_name,[]),item)
+            add_native_placeholder(stage,item,resolved,keep_geometry=any(k in item for k in ('x','y','width','height','rotation')))
         layout_object_counts[name]=len(stage.shapes)
         clear_theme_shadows(stage)
     for name,fill in master_fills.items():
@@ -543,7 +733,7 @@ def convert(main,output):
     output.parent.mkdir(parents=True,exist_ok=True);prs.save(output)
     if master_parts and layout_parts and slide_assignments:
         from .ooxml_hierarchy import install_hierarchy
-        install_hierarchy(output,masters=master_parts,layouts=layout_parts,slide_layouts=slide_assignments,stage_parts=stage_parts,layout_show_master=layout_visibility,slide_show_master=slide_visibility,master_fills=master_fills,layout_fills=layout_fills)
+        install_hierarchy(output,masters=master_parts,layouts=layout_parts,slide_layouts=slide_assignments,stage_parts=stage_parts,layout_show_master=layout_visibility,slide_show_master=slide_visibility,master_fills=master_fills,layout_fills=layout_fills,master_backgrounds=master_backgrounds,layout_backgrounds=layout_backgrounds)
     audit['unique_source_media']=len(audit['source_media']);audit['source_media']=sorted(audit['source_media'])
     audit['hierarchy_written']=bool(master_parts and layout_parts and slide_assignments)
     audit['hierarchy']={'masters':[{'id':name,'shared_objects':master_object_counts.get(name,0)} for name in master_parts], 'layouts':[{'id':name,'master':layout_parts[name][0],'shared_objects':layout_object_counts.get(name,0),'show_master':layout_visibility.get(name,True),'fill':layout_fills.get(name,'none')} for name in layout_parts], 'slides':[{'part':part,'layout':layout_name} for part,layout_name in slide_assignments.items()]}

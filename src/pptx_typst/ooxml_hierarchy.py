@@ -10,6 +10,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 from lxml import etree
 
 P = "http://schemas.openxmlformats.org/presentationml/2006/main"
+A = "http://schemas.openxmlformats.org/drawingml/2006/main"
 R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 PKG = "http://schemas.openxmlformats.org/package/2006/relationships"
 CT = "http://schemas.openxmlformats.org/package/2006/content-types"
@@ -26,6 +27,52 @@ def _xml(data: bytes):
 
 def _dump(root) -> bytes:
     return etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True)
+
+
+def _sync_master_placeholder_styles(master_xml) -> None:
+    """Expose master placeholder defaults through the standard p:txStyles part."""
+    tx_styles = master_xml.find("{%s}txStyles" % P)
+    if tx_styles is None:
+        tx_styles = etree.SubElement(master_xml, "{%s}txStyles" % P)
+    for shape in master_xml.xpath('.//p:sp[p:nvSpPr/p:nvPr/p:ph]', namespaces={"p": P}):
+        ph = shape.find("{%s}nvSpPr/{%s}nvPr/{%s}ph" % (P, P, P))
+        kind = ph.get("type", "obj")
+        style_name = "titleStyle" if kind in ("title", "ctrTitle") else "bodyStyle" if kind == "body" else None
+        if style_name is None:
+            continue
+        source = shape.find("{%s}txBody/{%s}lstStyle/{%s}lvl1pPr" % (P, A, A))
+        if source is None:
+            continue
+        style = tx_styles.find("{%s}%s" % (P, style_name))
+        if style is None:
+            style = etree.SubElement(tx_styles, "{%s}%s" % (P, style_name))
+        level = style.find("{%s}lvl1pPr" % A)
+        if level is None:
+            level = etree.SubElement(style, "{%s}lvl1pPr" % A)
+        for attr in ("algn",):
+            if source.get(attr) is not None:
+                level.set(attr, source.get(attr))
+        source_props = source.find("{%s}defRPr" % A)
+        if source_props is None:
+            continue
+        props = level.find("{%s}defRPr" % A)
+        if props is None:
+            props = etree.SubElement(level, "{%s}defRPr" % A)
+        for attr in ("sz", "b", "i"):
+            if source_props.get(attr) is not None:
+                props.set(attr, source_props.get(attr))
+        fill = source_props.find("{%s}solidFill" % A)
+        if fill is not None:
+            old = props.find("{%s}solidFill" % A)
+            if old is not None:
+                props.remove(old)
+            props.insert(0, deepcopy(fill))
+        latin = source_props.find("{%s}latin" % A)
+        if latin is not None:
+            old = props.find("{%s}latin" % A)
+            if old is not None:
+                props.remove(old)
+            props.append(deepcopy(latin))
 
 
 def _rels_path(part: str) -> str:
@@ -62,6 +109,8 @@ def install_hierarchy(
     slide_show_master: dict[str, bool] | None = None,
     master_fills: dict[str, str] | None = None,
     layout_fills: dict[str, str] | None = None,
+    master_backgrounds: dict[str, Path] | None = None,
+    layout_backgrounds: dict[str, Path] | None = None,
 ) -> None:
     """Move generated objects from staging slides into real owner parts.
 
@@ -78,6 +127,8 @@ def install_hierarchy(
     layout_show_master = layout_show_master or {}
     master_fills = master_fills or {}
     layout_fills = layout_fills or {}
+    master_backgrounds = master_backgrounds or {}
+    layout_backgrounds = layout_backgrounds or {}
     slide_show_master = {part.lstrip("/"): value for part, value in (slide_show_master or {}).items()}
     with ZipFile(pptx_path, "r") as source:
         files = {name: source.read(name) for name in source.namelist()}
@@ -179,6 +230,7 @@ def install_hierarchy(
         layout_parts[name] = part
         layout_xml = _xml(files[blank_layout])
         _set_creation_ids(layout_xml, part)
+        _remove_placeholder_shapes(layout_xml)
         layout_root = layout_xml.find("{%s}cSld" % P)
         layout_xml.set("showMasterSp", "0" if layout_show_master.get(name) is False else "1")
         _set_solid_background(layout_xml, layout_fills.get(name, 'none'))
@@ -191,6 +243,8 @@ def install_hierarchy(
         # Copy only editable objects from the staging slide into the layout.
         _move_stage_shapes(files, stage_part, part, layout_xml)
         layout_rels = _rels(files.get(_rels_path(part)))
+        if name in layout_backgrounds:
+            _set_image_background(layout_xml, part, layout_rels, layout_backgrounds[name], files, content_types)
         target = "../slideMasters/" + PurePosixPath(master_parts[master_name]).name
         _append_rel(layout_rels, "rId1", REL_MASTER, target)
         files[part] = _dump(layout_xml)
@@ -239,9 +293,15 @@ def install_hierarchy(
     for name, stage_part in masters.items():
         part = master_parts[name]
         root = _xml(files[part])
+        _remove_placeholder_shapes(root)
         _set_solid_background(root, master_fills.get(name, 'none'))
+        master_rels = _xml(files[_rels_path(part)])
+        if name in master_backgrounds:
+            _set_image_background(root, part, master_rels, master_backgrounds[name], files, content_types)
         _move_stage_shapes(files, stage_part, part, root)
+        _sync_master_placeholder_styles(root)
         files[part] = _dump(root)
+        files[_rels_path(part)] = _dump(master_rels)
 
     for slide_part, layout_name in slide_layouts.items():
         relpath = _rels_path(slide_part)
@@ -310,6 +370,52 @@ def _set_solid_background(owner_xml, expression: str) -> None:
     cSld.insert(0, bg)
 
 
+def _set_image_background(owner_xml, owner_part: str, owner_rels, image_path: Path,
+                          files: dict[str, bytes], content_types) -> None:
+    """Write a shared raster background to a master/layout part."""
+    image_path = Path(image_path)
+    data = image_path.read_bytes()
+    suffix = image_path.suffix.lower()
+    if suffix == ".jpeg": suffix = ".jpg"
+    media_name = f"pptx_typst_bg_{hashlib.sha256(data).hexdigest()[:12]}{suffix}"
+    media_part = f"ppt/media/{media_name}"
+    files[media_part] = data
+    ext = suffix.lstrip(".")
+    mime = {"png":"image/png", "jpg":"image/jpeg", "gif":"image/gif",
+            "bmp":"image/bmp", "tif":"image/tiff", "tiff":"image/tiff"}.get(ext)
+    if mime and not any(item.get("Extension", "").lower() == ext for item in content_types):
+        default = etree.SubElement(content_types, "{%s}Default" % CT)
+        default.set("Extension", ext)
+        default.set("ContentType", mime)
+
+    rid = "rIdPptxTypstBackground"
+    used = {rel.get("Id") for rel in owner_rels}
+    serial = 1
+    while rid in used:
+        serial += 1
+        rid = f"rIdPptxTypstBackground{serial}"
+    owner_dir = PurePosixPath(owner_part).parent.as_posix()
+    target = posixpath.relpath(media_part, owner_dir)
+    _append_rel(owner_rels, rid, REL_IMAGE, target)
+
+    c_sld = owner_xml.find("{%s}cSld" % P)
+    if c_sld is None:
+        return
+    old = c_sld.find("{%s}bg" % P)
+    if old is not None:
+        c_sld.remove(old)
+    a = "http://schemas.openxmlformats.org/drawingml/2006/main"
+    bg = etree.Element("{%s}bg" % P)
+    props = etree.SubElement(bg, "{%s}bgPr" % P)
+    blip_fill = etree.SubElement(props, "{%s}blipFill" % a)
+    blip = etree.SubElement(blip_fill, "{%s}blip" % a)
+    blip.set("{%s}embed" % R, rid)
+    stretch = etree.SubElement(blip_fill, "{%s}stretch" % a)
+    etree.SubElement(stretch, "{%s}fillRect" % a)
+    etree.SubElement(props, "{%s}effectLst" % a)
+    c_sld.insert(0, bg)
+
+
 def _set_creation_ids(owner_xml, part: str) -> None:
     token = int.from_bytes(hashlib.sha256(part.encode("utf-8")).digest()[:4], "big") or 1
     for node in owner_xml.xpath("//*[local-name()='creationId']"):
@@ -349,3 +455,13 @@ def _move_stage_shapes(files: dict[str, bytes], stage_part: str, owner_part: str
                 node.set(attr, rid)
         owner_tree.append(shape)
     files[_rels_path(owner_part)] = _dump(owner_rels)
+
+
+def _remove_placeholder_shapes(owner_xml) -> None:
+    """Remove template placeholders before installing explicitly declared slots."""
+    tree=owner_xml.find("{%s}cSld/{%s}spTree" % (P,P))
+    if tree is None:return
+    for shape in list(tree):
+        if shape.tag!="{%s}sp" % P:continue
+        if shape.find("{%s}nvSpPr/{%s}nvPr/{%s}ph" % (P,P,P)) is not None:
+            tree.remove(shape)

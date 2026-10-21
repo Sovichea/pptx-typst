@@ -2,6 +2,7 @@
 """Convert PowerPoint slides to editable Typst source and shared media assets."""
 from __future__ import annotations
 from pathlib import Path
+from copy import deepcopy
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 from pptx.enum.text import PP_ALIGN
@@ -46,6 +47,15 @@ CURRENT_THEME={}
 CURRENT_MAP={}
 CURRENT_FONTS={"major":"Aptos Display","minor":"Aptos"}
 CURRENT_SLIDE=None
+DRAWINGML_NS={
+    'a':'http://schemas.openxmlformats.org/drawingml/2006/main',
+    'r':'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+}
+
+def xpath_ns(element,path):
+    """Run an XPath against either python-pptx XML or a plain lxml element."""
+    try:return element.xpath(path)
+    except etree.XPathEvalError:return element.xpath(path,namespaces=DRAWINGML_NS)
 
 def theme_context(slide):
     master=slide.slide_layout.slide_master
@@ -252,14 +262,14 @@ def body_tab_size(sh,pa):
         return int(ppr[0].get('defTabSz'))/EMU
     return 36.0
 
-def resolve_color_node(node, default=None):
+def resolve_color_node(node, default=None, color_map=None):
     if node is None:return default
     k=etree.QName(node).localname
     if k=='srgbClr':color='#'+(node.get('val') or '000000')
     elif k=='sysClr':color='#'+(node.get('lastClr') or '000000')
     elif k=='schemeClr':
         key=node.get('val','')
-        key=CURRENT_MAP.get(key,key)
+        key=(CURRENT_MAP if color_map is None else color_map).get(key,key)
         color=CURRENT_THEME.get(key,default or '#000000')
     elif k=='prstClr':
         table={'black':'#000000','white':'#FFFFFF','red':'#FF0000','blue':'#0000FF','gray':'#808080','yellow':'#FFFF00'}
@@ -277,9 +287,9 @@ def resolve_color_node(node, default=None):
     except Exception:pass
     return color
 
-def color_in(parent, prefix, default=None):
+def color_in(parent, prefix, default=None, color_map=None):
     el=parent.xpath(prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
-    return resolve_color_node(el[0],default) if el else default
+    return resolve_color_node(el[0],default,color_map) if el else default
 
 def color_opacity(node):
     """Resolve DrawingML alpha transforms on one color node."""
@@ -306,12 +316,12 @@ def typst_color_expr(node, default='#FFFFFF'):
         color+=f'{round(opacity*255):02X}'
     return f'rgb("{color}")'
 
-def gradient_expr(gf):
+def gradient_expr(gf,color_map=None):
     stops=[]
-    for gs in gf.xpath('./a:gsLst/a:gs'):
+    for gs in xpath_ns(gf,'./a:gsLst/a:gs'):
         node=next((child for child in gs if etree.QName(child).localname in ('srgbClr','schemeClr','sysClr','prstClr')),None)
         if node is None:continue
-        rgb=resolve_color_node(node,'#000000')
+        rgb=resolve_color_node(node,'#000000',color_map)
         alpha=next((child for child in node if etree.QName(child).localname=='alpha'),None)
         opacity=float(alpha.get('val','100000'))/100000 if alpha is not None else 1
         if opacity<.999:rgb=rgb+f'{round(opacity*255):02X}'
@@ -322,18 +332,101 @@ def gradient_expr(gf):
     if stops[0][0]>0:stops.insert(0,(0,stops[0][1]))
     if stops[-1][0]<100000:stops.append((100000,stops[-1][1]))
     values=[f'(rgb("{c}"),{pos/1000:.3f}%)' for pos,c in stops]
-    ln=gf.xpath('./a:lin')
+    ln=xpath_ns(gf,'./a:lin')
     if not ln:return 'gradient.radial('+','.join(values)+')'
     a=float(ln[0].get('ang','0'))/60000
     return 'gradient.linear('+','.join(values)+f',angle:{a:.3f}deg)'
 
-def owner_background(owner):
+def owner_background_color_map(owner):
+    """Resolve theme color mappings at the level that owns a background."""
+    part=str(owner.part.partname)
+    if '/slideMasters/' in part:
+        master=owner; overrides=[]
+    elif '/slideLayouts/' in part:
+        master=owner.slide_master; overrides=[owner]
+    else:
+        master=owner.slide_layout.slide_master
+        overrides=[owner.slide_layout,owner]
+    maps=master._element.xpath('./p:clrMap')
+    result=dict(maps[0].attrib) if maps else {}
+    for item in overrides:
+        override=item._element.xpath('./p:clrMapOvr/a:overrideClrMapping')
+        if override:result.update(override[0].attrib)
+    return result
+
+
+def owner_theme_part(owner):
+    part=str(owner.part.partname)
+    if '/slideMasters/' in part:master=owner
+    elif '/slideLayouts/' in part:master=owner.slide_master
+    else:master=owner.slide_layout.slide_master
+    return next((rel.target_part for rel in master.part.rels.values()
+                 if rel.reltype.endswith('/theme') and not rel.is_external),None)
+
+
+def theme_background_style(owner,bg_ref,color_map):
+    """Resolve a p:bgRef style through the owning master theme."""
+    try:style_index=int(bg_ref.get('idx','0'))-1001
+    except (TypeError,ValueError):return None
+    if style_index<0:return None
+    theme_part=owner_theme_part(owner)
+    if theme_part is None:return None
+    root=etree.fromstring(theme_part.blob)
+    styles=xpath_ns(root,'./a:themeElements/a:fmtScheme/a:bgFillStyleLst/*')
+    if style_index>=len(styles):return None
+    style=deepcopy(styles[style_index])
+    ref_colors=owner._element.xpath(
+        './p:cSld/p:bg/p:bgRef/a:srgbClr | ./p:cSld/p:bg/p:bgRef/a:schemeClr | '
+        './p:cSld/p:bg/p:bgRef/a:sysClr | ./p:cSld/p:bg/p:bgRef/a:prstClr')
+    if ref_colors:
+        ref_color=ref_colors[0]
+        for placeholder in xpath_ns(style,'.//a:schemeClr[@val="phClr"]'):
+            replacement=deepcopy(ref_color)
+            for transform in placeholder:
+                replacement.append(deepcopy(transform))
+            placeholder.getparent().replace(placeholder,replacement)
+    style_name=etree.QName(style).localname
+    solid=xpath_ns(style,'./a:srgbClr | ./a:schemeClr | ./a:sysClr | ./a:prstClr') if style_name=='solidFill' else []
+    if solid:
+        color=resolve_color_node(solid[0],color_map=color_map)
+        if color:
+            opacity=color_opacity(solid[0])
+            if opacity<.99999:color+=f'{round(opacity*255):02X}'
+            return ('color',color,None)
+    if style_name=='gradFill':return ('gradient',style,None)
+    blips=xpath_ns(style,'./a:blip') if style_name=='blipFill' else []
+    if blips:
+        rid=blips[0].get(qn('r:embed'))
+        if rid and rid in theme_part.rels:
+            return ('image',theme_part.related_part(rid),style)
+    return None
+
+
+def owner_background(owner,color_map=None):
     """Return only the background declared by this PPTX part, if any."""
+    color_map=owner_background_color_map(owner) if color_map is None else color_map
+    # PowerPoint commonly stores a master/layout background as a theme style
+    # reference instead of a p:bgPr fill. Resolve the referenced scheme color
+    # through the current slide's theme and color map just like shape colors.
+    bg_ref=owner._element.xpath('./p:cSld/p:bg/p:bgRef')
+    if bg_ref:
+        if bg_ref[0].get('idx')=='0':return None
+        styled=theme_background_style(owner,bg_ref[0],color_map)
+        if styled:return styled
+        color_nodes=owner._element.xpath(
+            './p:cSld/p:bg/p:bgRef/a:srgbClr | ./p:cSld/p:bg/p:bgRef/a:schemeClr | '
+            './p:cSld/p:bg/p:bgRef/a:sysClr | ./p:cSld/p:bg/p:bgRef/a:prstClr')
+        if color_nodes:
+            color=resolve_color_node(color_nodes[0],color_map=color_map)
+            if color:
+                opacity=color_opacity(color_nodes[0])
+                if opacity<.99999:color+=f'{round(opacity*255):02X}'
+                return ('color',color,None)
     bg=owner._element.xpath('./p:cSld/p:bg/p:bgPr')
     if not bg:return None
     el=bg[0]
     if el.xpath('./a:noFill'):return None
-    col=color_in(el,'./a:solidFill')
+    col=color_in(el,'./a:solidFill',color_map=color_map)
     if col:return ('color',col,None)
     grad=el.xpath('./a:gradFill')
     if grad:return ('gradient',grad[0],None)
@@ -347,7 +440,9 @@ def owner_background(owner):
 def source_background(slide):
     # Resolve slide, layout, then master without changing the owning layer.
     for owner in (slide,slide.slide_layout,slide.slide_layout.slide_master):
-        background=owner_background(owner)
+        # Inherited background references are colored in the slide's effective
+        # clrMap context, which may differ from the master's own theme mapping.
+        background=owner_background(owner,color_map=CURRENT_MAP)
         if background:return background
     return ('color','#FFFFFF',None)
 
@@ -377,6 +472,87 @@ def typst_place(x,y,child,rotation=0,indent='    '):
     lines[-1]+=','
     lines.append(f'{indent})')
     return '\n'.join(lines)
+
+PLACEHOLDER_KINDS={
+    'TITLE':'title', 'CENTER_TITLE':'centered-title', 'BODY':'body',
+}
+
+def placeholder_kind(shape):
+    if not shape.is_placeholder:return None
+    raw=str(shape.placeholder_format.type).split(' ')[0]
+    return PLACEHOLDER_KINDS.get(raw)
+
+def placeholder_id(kind,idx):
+    return f'{kind}-{int(idx)}'
+
+def placeholder_direct_geometry(shape):
+    xfrm=shape._element.xpath('./p:spPr/a:xfrm')
+    if not xfrm:return None
+    off=xfrm[0].xpath('./a:off');ext=xfrm[0].xpath('./a:ext')
+    if not off or not ext:return None
+    return {
+        'x':float(off[0].get('x','0'))/EMU,
+        'y':float(off[0].get('y','0'))/EMU,
+        'width':float(ext[0].get('cx','0'))/EMU,
+        'height':float(ext[0].get('cy','0'))/EMU,
+        'rotation':float(xfrm[0].get('rot','0'))/60000,
+    }
+
+def placeholder_style_fields(shape):
+    """Read local placeholder text properties without resolving parents."""
+    fields={}
+    tx=shape._element.xpath('./p:txBody')
+    if not tx:return fields
+    ppr=tx[0].xpath('./a:p/a:pPr')
+    alignment=ppr[0].get('algn') if ppr else None
+    if alignment is None:
+        levels=tx[0].xpath('./a:lstStyle/a:lvl1pPr')
+        alignment=levels[0].get('algn') if levels else None
+    if alignment:
+        fields['align']={'l':'left','ctr':'center','r':'right','just':'justify'}.get(alignment)
+    body=tx[0].xpath('./a:bodyPr')
+    if body:
+        attrs={'lIns':'margin-left','rIns':'margin-right','tIns':'margin-top','bIns':'margin-bottom'}
+        for attr,key in attrs.items():
+            if body[0].get(attr) is not None:fields[key]=float(body[0].get(attr))/EMU
+        if body[0].get('anchor'):
+            fields['anchor']={'t':'top','ctr':'center','b':'bottom'}.get(body[0].get('anchor'))
+    candidates=(tx[0].xpath('./a:lstStyle/a:lvl1pPr/a:defRPr')+
+                tx[0].xpath('./a:p/a:pPr/a:defRPr')+
+                tx[0].xpath('./a:p/a:r/a:rPr')+
+                tx[0].xpath('./a:p/a:endParaRPr'))
+    rpr=next((node for node in candidates if node is not None),None)
+    if rpr is not None:
+        latin=rpr.xpath('./a:latin/@typeface')
+        if latin and latin[0] not in ('+mj-lt','+mn-lt'):fields['font']=latin[0]
+        if rpr.get('sz'):fields['size']=float(rpr.get('sz'))/100
+        if rpr.get('b') is not None:fields['weight']='bold' if rpr.get('b') in ('1','true') else 'regular'
+        colors=rpr.xpath('./a:solidFill/a:srgbClr | ./a:solidFill/a:schemeClr | ./a:solidFill/a:sysClr | ./a:solidFill/a:prstClr')
+        if colors:
+            fields['fill']=typst_color_expr(colors[0])
+    bullets=(tx[0].xpath('./a:lstStyle/a:lvl1pPr/a:buChar')+
+             tx[0].xpath('./a:p/a:pPr/a:buChar'))
+    if bullets and bullets[0].get('char'):
+        fields['bullet']=bullets[0].get('char')
+    return fields
+
+def placeholder_slot_expression(shape):
+    kind=placeholder_kind(shape)
+    if not kind:return None
+    idx=shape.placeholder_format.idx
+    fields={'id':placeholder_id(kind,idx),'type':kind,'idx':idx}
+    fields.update(placeholder_direct_geometry(shape) or {})
+    fields.update(placeholder_style_fields(shape))
+    args=[]
+    for key,value in fields.items():
+        if key in ('id','type','font','weight','align','anchor','bullet'):
+            rendered=stylize(str(value))
+        elif key=='fill':rendered=value
+        elif key=='idx':rendered=str(value)
+        elif key=='rotation':rendered=f'{float(value):.3f}deg'
+        else:rendered=f'{float(value):.3f}pt'
+        args.append(f'{key}:{rendered}')
+    return 'PptxPlaceholderSlot('+', '.join(args)+')',fields
 
 def typst_font_fallback(f):
     """Prefer the requested family, then Typst's bundled fallback family."""
@@ -1209,7 +1385,7 @@ def group_world_bounds(shapes, parent):
 
 lines=['// Source-faithful PPTX conversion with original shared media and editable text.',
        '// Source slide format, theme-resolved colors and image backgrounds.',
-       '#import "template.typ": Root, PptxMaster, PptxLayout, PptxSlide, Place, GroupContent, ClipContent',
+       '#import "template.typ": Root, PptxMaster, PptxLayout, PptxSlide, PptxPlaceholderSlot, PptxPlaceholder, PptxPlaceholderParagraph, Place, GroupContent, ClipContent',
        f'#let ppt-format=(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt)',
        f'#set page(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,margin:0pt,fill:white)',
        '#set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)',
@@ -1221,6 +1397,9 @@ master_declarations={}
 layout_declarations={}
 master_manifest=[]
 layout_manifest=[]
+master_placeholder_manifest=[]
+layout_placeholder_manifest=[]
+placeholder_warnings=[]
 master_ids={}
 layout_ids={}
 
@@ -1238,6 +1417,13 @@ for slide_no,slide in enumerate(prs.slides,1):
     elif bgtype=='gradient':
         bg_expr=gradient_expr(bgval)
     else:bg_expr='white'
+    slide_map_override=bool(slide._element.xpath('./p:clrMapOvr/a:overrideClrMapping'))
+    emitted_fill=slide_fill if args.layout_mode=='structured' else bg_expr
+    # clrMapOvr can intentionally recolor an inherited bgRef for one slide.
+    # Keep the shared master fill canonical and encode that color-map exception
+    # as a slide fill override.
+    if args.layout_mode=='structured' and slide_bg is None and slide_map_override and bgtype in ('color','gradient'):
+        emitted_fill=bg_expr
     lines=[]
     master=slide.slide_layout.slide_master
     layout=slide.slide_layout
@@ -1249,11 +1435,78 @@ for slide_no,slide in enumerate(prs.slides,1):
     layout_id=layout_ids[layout_part]
     master_allowed=slide._element.get('showMasterSp','1') not in ('0','false')
     layout_allowed=layout._element.get('showMasterSp','1') not in ('0','false')
+    slide_placeholder_records=[]
+    slide_placeholder_exprs=[]
+    if args.layout_mode=='structured':
+        declared_slots=set()
+        for owner in (master,layout):
+            for candidate in owner.shapes:
+                candidate_kind=placeholder_kind(candidate)
+                if candidate_kind:
+                    declared_slots.add(placeholder_id(candidate_kind,candidate.placeholder_format.idx))
+        for shape in slide.shapes:
+            kind=placeholder_kind(shape)
+            if shape.is_placeholder and not kind:
+                placeholder_warnings.append({'owner':'slide','slide':slide_no,'shape_id':shape.shape_id,
+                    'placeholder_type':str(shape.placeholder_format.type),'action':'ordinary-object fallback'})
+            if not kind or not shape.has_text_frame or not shape.text:
+                continue
+            idx=shape.placeholder_format.idx
+            slot_id=placeholder_id(kind,idx)
+            direct=placeholder_direct_geometry(shape)
+            effective=placement_info(shape,np.identity(3))
+            # An unresolved placeholder without its own complete geometry
+            # remains in the ordinary fallback path rather than disappearing.
+            if slot_id not in declared_slots and direct is None:
+                placeholder_warnings.append({'owner':'slide','slide':slide_no,'shape_id':shape.shape_id,
+                    'placeholder_type':kind,'idx':idx,'action':'unresolved slot; ordinary-object fallback'})
+                continue
+            fields={'id':slot_id,'type':kind,'idx':idx}
+            if direct:
+                fields.update(direct)
+            fields.update(placeholder_style_fields(shape))
+            args_out=[]
+            for key,value in fields.items():
+                if key in ('id','type','font','weight','align','anchor','bullet'):value=stylize(str(value))
+                elif key=='fill':pass
+                elif key=='idx':value=str(value)
+                elif key=='rotation':value=f'{float(value):.3f}deg'
+                else:value=f'{float(value):.3f}pt'
+                args_out.append(f'{key}:{value}')
+            paragraph_exprs=[]
+            for paragraph in shape.text_frame.paragraphs:
+                paragraph_fields=[f'text:{stylize(paragraph.text)}',f'level:{paragraph.level}']
+                direct_ppr=paragraph._p.xpath('./a:pPr')
+                if direct_ppr:
+                    bullets=direct_ppr[0].xpath('./a:buChar')
+                    if bullets and bullets[0].get('char'):
+                        paragraph_fields.append(f'bullet:{stylize(bullets[0].get("char"))}')
+                    alignment=direct_ppr[0].get('algn')
+                    if alignment:
+                        paragraph_fields.append(f'align:{stylize({"l":"left","ctr":"center","r":"right","just":"justify"}.get(alignment,"left"))}')
+                paragraph_exprs.append('PptxPlaceholderParagraph('+', '.join(paragraph_fields)+')')
+            paragraph_tuple = '(' + ', '.join(paragraph_exprs) + (',' if len(paragraph_exprs) == 1 else '') + ')'
+            args_out.extend([f'text:{stylize(shape.text)}',f'paragraphs:{paragraph_tuple}'])
+            slide_placeholder_exprs.append('PptxPlaceholder('+', '.join(args_out)+')')
+            slide_placeholder_records.append({
+                'id':slot_id,'type':kind,'idx':idx,'text':shape.text,
+                'source_shape_id':shape.shape_id,'source_name':shape.name,
+                'layout_reference':slot_id if slot_id in declared_slots else None,
+                'geometry_override':direct,
+                'unresolved_layout_slot':slot_id not in declared_slots,
+            })
+            if slot_id not in declared_slots:
+                placeholder_warnings.append({'owner':'slide','slide':slide_no,'shape_id':shape.shape_id,
+                    'placeholder_type':kind,'idx':idx,'action':'native slide placeholder has no reusable owner slot'})
     slide_call='PptxSlide' if args.layout_mode=='structured' else 'Root'
     lines.extend([f'// Slide {slide_no:02d}',f'#{slide_call}(',
                   f'  width:{SLIDE_W:.3f}pt,',f'  height:{SLIDE_H:.3f}pt,',
-                  f'  fill:{bg_expr},','  format:ppt-format,'])
+                  f'  fill:{emitted_fill},','  format:ppt-format,'])
     if args.layout_mode=='structured':lines.append(f'  layout:{layout_id},')
+    if args.layout_mode=='structured' and slide_placeholder_exprs:
+        lines.append('  placeholders:(')
+        lines.extend(f'    {expr},' for expr in slide_placeholder_exprs)
+        lines.append('  ),')
     lines.append('  children:[')
     if bgtype=='color':
         try:
@@ -1269,8 +1522,9 @@ for slide_no,slide in enumerate(prs.slides,1):
         lines.append(typst_place(0,0,f'image("{bgasset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'))
         counts['background_images']+=1
     elif bgtype=='color':counts['background_colors']+=1
-    else:counts['background_gradients']+=1
-    sm={'slide':slide_no,'layout':layout_id,'master':master_id,'placements':[],'groups':[]}
+    elif bgtype=='gradient':counts['background_gradients']+=1
+    sm={'slide':slide_no,'layout':layout_id,'master':master_id,'placements':[],'groups':[],
+        'placeholders':slide_placeholder_records}
     def recur(shapes,parent=np.identity(3),group_path=(),origin=(0.,0.),indent='  '):
         for zindex,sh in enumerate(shapes):
             if sh.shape_type==MSO_SHAPE_TYPE.GROUP:
@@ -1464,16 +1718,16 @@ for slide_no,slide in enumerate(prs.slides,1):
         return [sh for sh in owner.shapes if not sh.is_placeholder]
     def background_fill(owner):
         background=owner_background(owner)
-        if not background:return 'none'
-        if background[0]=='color':return f'rgb("{background[1]}")'
-        if background[0]=='gradient':return gradient_expr(background[1])
+        if not background:return 'none','none'
+        if background[0]=='color':return f'rgb("{background[1]}")','none'
+        if background[0]=='gradient':return gradient_expr(background[1],owner_background_color_map(owner)),'none'
         if background[0]=='image':
             asset=register_media(background[1])
             bgsha=hashlib.sha256(background[1].blob).hexdigest()
             media_contents[bgsha]['placements'].append({'owner':sm['owner'],'owner_id':sm['id'],'background':True})
-            lines.append(typst_place(0,0,f'image("{asset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'))
             counts['background_images']+=1
-        return 'none'
+            return 'none',f'image("{asset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'
+        return 'none','none'
     master_allowed=slide._element.get('showMasterSp','1') not in ('0','false')
     layout_allowed=slide.slide_layout._element.get('showMasterSp','1') not in ('0','false')
     if args.layout_mode=='structured':
@@ -1481,10 +1735,21 @@ for slide_no,slide in enumerate(prs.slides,1):
             saved_lines,saved_sm=lines,sm
             lines=[]
             sm={'owner':'master','id':master_id,'part':master_part,'placements':[],'groups':[]}
-            master_fill=background_fill(master)
+            master_fill,master_background=background_fill(master)
+            master_placeholder_exprs=[]
+            for candidate in master.shapes:
+                if candidate.is_placeholder and not placeholder_kind(candidate):
+                    placeholder_warnings.append({'owner':'master','owner_id':master_id,'shape_id':candidate.shape_id,
+                        'placeholder_type':str(candidate.placeholder_format.type),'action':'unsupported; omitted from structured output'})
+                resolved=placeholder_slot_expression(candidate)
+                if resolved:
+                    expr,record=resolved
+                    if record['id'] not in {item['id'] for item in master_placeholder_manifest if item.get('owner_id')==master_id}:
+                        master_placeholder_exprs.append(expr)
+                        master_placeholder_manifest.append({'owner':'master','owner_id':master_id,**record})
             recur(decorative_shapes(master))
             lines.append('])')
-            master_declarations[master_part]=(f'#let {master_id} = PptxMaster(fill:{master_fill},children:[',lines[:])
+            master_declarations[master_part]=(f'#let {master_id} = PptxMaster(fill:{master_fill},background:{master_background},placeholders:('+', '.join(master_placeholder_exprs)+'),children:[',lines[:])
             master_manifest.append(sm)
             lines,sm=saved_lines,saved_sm
             counts['inherited_master_layers']+=1
@@ -1492,10 +1757,21 @@ for slide_no,slide in enumerate(prs.slides,1):
             saved_lines,saved_sm=lines,sm
             lines=[]
             sm={'owner':'layout','id':layout_id,'master':master_id,'part':layout_part,'placements':[],'groups':[]}
-            layout_fill=background_fill(layout)
+            layout_fill,layout_background=background_fill(layout)
+            layout_placeholder_exprs=[]
+            for candidate in layout.shapes:
+                if candidate.is_placeholder and not placeholder_kind(candidate):
+                    placeholder_warnings.append({'owner':'layout','owner_id':layout_id,'shape_id':candidate.shape_id,
+                        'placeholder_type':str(candidate.placeholder_format.type),'action':'unsupported; omitted from structured output'})
+                resolved=placeholder_slot_expression(candidate)
+                if resolved:
+                    expr,record=resolved
+                    if record['id'] not in {item['id'] for item in layout_placeholder_manifest if item.get('owner_id')==layout_id}:
+                        layout_placeholder_exprs.append(expr)
+                        layout_placeholder_manifest.append({'owner':'layout','owner_id':layout_id,'master':master_id,**record})
             recur(decorative_shapes(layout))
             lines.append('])')
-            layout_declarations[layout_part]=(f'#let {layout_id} = PptxLayout(master:{master_id},fill:{layout_fill},show-master:{str(layout_allowed).lower()},children:[',lines[:])
+            layout_declarations[layout_part]=(f'#let {layout_id} = PptxLayout(master:{master_id},fill:{layout_fill},background:{layout_background},placeholders:('+', '.join(layout_placeholder_exprs)+f'),show-master:{str(layout_allowed).lower()},children:[',lines[:])
             layout_manifest.append(sm)
             lines,sm=saved_lines,saved_sm
     else:
@@ -1505,7 +1781,16 @@ for slide_no,slide in enumerate(prs.slides,1):
         if layout_allowed:
             recur(decorative_shapes(layout))
             counts['inherited_layout_layers']+=1
-    recur(slide.shapes,indent='    ')
+    # PowerPoint materializes text placeholders above later slide artwork in
+    # its rendered slide, even when the placeholder node precedes a picture in
+    # the slide's spTree. Keep ordinary shape order intact, then paint text
+    # placeholders last so Typst preserves that visible layering.
+    native_placeholder_ids={record['source_shape_id'] for record in slide_placeholder_records}
+    slide_shapes=[shape for shape in slide.shapes if shape.shape_id not in native_placeholder_ids]
+    slide_shapes.sort(key=lambda shape: bool(
+        shape.is_placeholder and shape.has_text_frame and shape.text.strip()
+    ))
+    recur(slide_shapes,indent='    ')
     lines.append('])')
     if slide_no<len(prs.slides):lines.append('#pagebreak()')
     slide_sources.extend(lines)
@@ -1514,5 +1799,5 @@ for slide_no,slide in enumerate(prs.slides,1):
 master_lines=[line for decl in master_declarations.values() for line in [decl[0],*decl[1]]]
 layout_lines=[line for decl in layout_declarations.values() for line in [decl[0],*decl[1]]]
 (OUT/'main.typ').write_text('\n'.join(preamble+master_lines+layout_lines+slide_sources),encoding='utf8')
-(OUT/'asset_manifest.json').write_text(json.dumps({'source_file':SRC.name,'source_slide_count':len(prs.slides),'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,'layout_mode':args.layout_mode,'counts':dict(counts),'masters':master_manifest,'layouts':layout_manifest,'media':media_contents,'slides':manifest},ensure_ascii=False,indent=2),encoding='utf8')
+(OUT/'asset_manifest.json').write_text(json.dumps({'source_file':SRC.name,'source_slide_count':len(prs.slides),'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,'layout_mode':args.layout_mode,'counts':dict(counts),'masters':master_manifest,'layouts':layout_manifest,'master_placeholders':master_placeholder_manifest,'layout_placeholders':layout_placeholder_manifest,'placeholder_warnings':placeholder_warnings,'media':media_contents,'slides':manifest},ensure_ascii=False,indent=2),encoding='utf8')
 print('Saved',OUT,'assets',len(media_contents),'stats',dict(counts),'sizesMB',sum(v['bytes'] for v in media_contents.values())/1024**2)

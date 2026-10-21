@@ -18,7 +18,7 @@ The converter now preserves the supported PowerPoint `Master -> Layout -> Slide`
 ])
 ```
 
-`PptxMaster` and `PptxLayout` hold reusable content. `PptxSlide` composes master content, layout content, then slide content. The shared template supports optional inherited RGB fills and the `show-master` flag. Legacy `Root` and `Place` projects still convert without hierarchy declarations. PPTX-to-Typst also provides `--layout-mode flat` as a compatibility option that repeats inherited artwork as before.
+`PptxMaster` and `PptxLayout` hold reusable content and backgrounds. A background image can be declared once with `background: image("assets/brand-background.jpg", width: 960pt, height: 540pt, fit: "stretch")`; slide-level fills override inherited master backgrounds. `PptxSlide` composes the background, master content, layout content, then slide content. The shared template supports inherited fills, background images, and the `show-master` flag. Legacy `Root` and `Place` projects still convert without hierarchy declarations. PPTX-to-Typst also provides `--layout-mode flat` as a compatibility option that repeats inherited artwork as before.
 
 ## Validation results
 
@@ -45,11 +45,11 @@ The quarterly sample does not demonstrate shared-layout reuse because every slid
 
 ## Feature status
 
-**Supported:** Source-part ownership and references; multiple masters; multiple layouts per master; slide layout assignment; shared image relationships; solid RGB backgrounds; editable supported text, shapes, lines, pictures, and tables; master/layout/slide stacking; static master visibility flags; compatibility with existing `Root`/`Place` projects.
+**Supported:** Source-part ownership and references; multiple masters; multiple layouts per master; slide layout assignment; shared image relationships; solid RGB and image backgrounds; editable supported text, shapes, lines, pictures, and tables; master/layout/slide stacking; static master visibility flags; compatibility with existing `Root`/`Place` projects.
 
-**Partially supported:** Theme handling is relationship-safe, and each generated master gets an independent theme part, but the Typst subset does not model the complete theme editor. Solid fills round-trip; gradient backgrounds are reported by reverse conversion and are not recreated as gradients. Placeholder content remains materialized on slides rather than dynamically inherited. Shapes the forward converter materializes as SVGs remain picture objects when converted back. Unsupported reverse constructs appear in `conversion_report.json`.
+**Partially supported:** The forward converter resolves theme background references through the theme fill-style list, including solid, gradient, and image fills. Slide color-map overrides remain slide-specific. Solid and image backgrounds round-trip; gradient backgrounds are reported by reverse conversion and are not recreated as gradients. Theme editing is not modeled as a complete PowerPoint theme editor. Native title and body placeholder support has since been added for a bounded subset; see [placeholder support](placeholder-support.md) for its behavior and limitations. Shapes the forward converter materializes as SVGs remain picture objects when converted back. Unsupported reverse constructs appear in `conversion_report.json`.
 
-**Unsupported:** Dynamic placeholder inheritance, animations and transitions, arbitrary Typst evaluation, non-static advanced visibility behavior, and exact font rendering.
+**Unsupported:** Placeholder types and dynamic behaviors outside the subset documented in [placeholder support](placeholder-support.md), animations and transitions, arbitrary Typst evaluation, non-static advanced visibility behavior, and exact font rendering.
 
 Desktop validation: the synthetic package passed XML relationship checks, reopened in `python-pptx`, and opened and rendered as a four-page PDF in desktop PowerPoint. Editing a master shape in PowerPoint changed slides 1-3 only; editing the `Alpha` layout shape changed slides 1-2 only. Pixel diffs showed 384 changed pixels on slides 1-2, 144 on slide 3, and 0 on slide 4, matching the master/layout assignments. Visual inspection confirmed the shared master image and master/layout shapes were inherited in the expected order.
 

@@ -57,6 +57,322 @@ def run_forward(source: Path, output: Path) -> None:
     )
 
 
+def test_theme_background_references_are_resolved_for_master_and_layout(tmp_path: Path) -> None:
+    source = tmp_path / "theme-backgrounds.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+
+    def set_theme_background(owner, scheme: str) -> None:
+        background = OxmlElement("p:bg")
+        reference = OxmlElement("p:bgRef")
+        reference.set("idx", "1001")
+        color = OxmlElement("a:schemeClr")
+        color.set("val", scheme)
+        reference.append(color)
+        background.append(reference)
+        owner._element.cSld.insert(0, background)
+
+    set_theme_background(deck.slide_masters[0], "bg2")
+    set_theme_background(slide.slide_layout, "bg1")
+    deck.save(source)
+
+    with ZipFile(source) as package:
+        master = etree.fromstring(package.read("ppt/slideMasters/slideMaster1.xml"))
+        theme_name = master.xpath("string(./p:clrMap/@bg2)", namespaces={
+            "p": "http://schemas.openxmlformats.org/presentationml/2006/main",
+        })
+        theme = etree.fromstring(package.read("ppt/theme/theme1.xml"))
+        color_node = theme.xpath(
+            f"//*[local-name()='{theme_name}']/*[1]"
+        )[0]
+        expected_master = (color_node.get("val") if etree.QName(color_node).localname == "srgbClr"
+                           else color_node.get("lastClr")).upper()
+        light_name = master.xpath("string(./p:clrMap/@bg1)", namespaces={
+            "p": "http://schemas.openxmlformats.org/presentationml/2006/main",
+        })
+        light_node = theme.xpath(f"//*[local-name()='{light_name}']/*[1]")[0]
+        expected_layout = (light_node.get("val") if etree.QName(light_node).localname == "srgbClr"
+                           else light_node.get("lastClr")).upper()
+
+    run_forward(source, project)
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    assert f'PptxMaster(fill:rgb("#{expected_master}")' in generated
+    assert f'PptxLayout(master:Master01,fill:rgb("#{expected_layout}")' in generated
+    assert "fill:none," in generated
+
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "backgrounds.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        assert (project / "backgrounds.pdf").is_file()
+
+
+def test_slide_color_map_override_does_not_change_shared_master_fill(tmp_path: Path) -> None:
+    source = tmp_path / "slide-color-map.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    master = deck.slide_masters[0]
+    background = OxmlElement("p:bg")
+    reference = OxmlElement("p:bgRef")
+    reference.set("idx", "1001")
+    color = OxmlElement("a:schemeClr")
+    color.set("val", "bg2")
+    reference.append(color)
+    background.append(reference)
+    master._element.cSld.insert(0, background)
+
+    master_mapping = master._element.xpath("./p:clrMap")[0].attrib
+    slide_mapping = dict(master_mapping)
+    slide_mapping["bg2"] = "lt1" if master_mapping.get("bg2") != "lt1" else "dk1"
+    override = OxmlElement("p:clrMapOvr")
+    override_mapping = OxmlElement("a:overrideClrMapping")
+    for key, value in slide_mapping.items():
+        override_mapping.set(key, value)
+    override.append(override_mapping)
+    slide._element.append(override)
+    deck.save(source)
+
+    with ZipFile(source) as package:
+        theme = etree.fromstring(package.read("ppt/theme/theme1.xml"))
+        colors = {}
+        for scheme in theme.xpath("//*[local-name()='clrScheme']/*"):
+            node = scheme[0]
+            colors[etree.QName(scheme).localname] = (
+                node.get("val") if etree.QName(node).localname == "srgbClr" else node.get("lastClr")
+            ).upper()
+    expected_master = colors[master_mapping["bg2"]]
+    expected_slide = colors[slide_mapping["bg2"]]
+
+    run_forward(source, project)
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    assert f'PptxMaster(fill:rgb("#{expected_master}")' in generated
+    assert f'fill:rgb("#{expected_slide}")' in generated
+    assert expected_master != expected_slide
+
+
+def test_theme_image_background_is_shared_and_roundtrips(tmp_path: Path) -> None:
+    from pptx_typst.typst_to_pptx import convert
+
+    source = tmp_path / "theme-image-source.pptx"
+    styled = tmp_path / "theme-image-styled.pptx"
+    project = tmp_path / "typst-project"
+    image_path = tmp_path / "theme-background.png"
+    write_pixel(image_path)
+    deck = Presentation()
+    deck.slides.add_slide(deck.slide_layouts[6]).shapes.add_picture(
+        str(image_path), Pt(8), Pt(8), width=Pt(24), height=Pt(24)
+    )
+    deck.save(source)
+
+    a_ns = "http://schemas.openxmlformats.org/drawingml/2006/main"
+    r_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    p_ns = "http://schemas.openxmlformats.org/presentationml/2006/main"
+    pkg_ns = "http://schemas.openxmlformats.org/package/2006/relationships"
+    theme_rels_path = "ppt/theme/_rels/theme1.xml.rels"
+    with ZipFile(source) as original, ZipFile(styled, "w") as output:
+        original_names = set(original.namelist())
+        rel_root = etree.fromstring(original.read(theme_rels_path)) if theme_rels_path in original_names else etree.Element(f"{{{pkg_ns}}}Relationships", nsmap={None: pkg_ns})
+        rel = etree.SubElement(rel_root, f"{{{pkg_ns}}}Relationship")
+        rel.set("Id", "rIdThemeBackground")
+        rel.set("Type", r_ns + "/image")
+        rel.set("Target", "../media/image1.png")
+        rel_data = etree.tostring(rel_root, xml_declaration=True, encoding="UTF-8", standalone=True)
+        for info in original.infolist():
+            data = original.read(info.filename)
+            if info.filename == "ppt/theme/theme1.xml":
+                root = etree.fromstring(data)
+                styles = root.xpath("//*[local-name()='bgFillStyleLst']")[0]
+                image_fill = etree.Element(f"{{{a_ns}}}blipFill")
+                blip = etree.SubElement(image_fill, f"{{{a_ns}}}blip")
+                blip.set(f"{{{r_ns}}}embed", "rIdThemeBackground")
+                stretch = etree.SubElement(image_fill, f"{{{a_ns}}}stretch")
+                etree.SubElement(stretch, f"{{{a_ns}}}fillRect")
+                styles.replace(styles[2], image_fill)
+                data = etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True)
+            elif info.filename == theme_rels_path:
+                data = rel_data
+            elif info.filename == "ppt/slideMasters/slideMaster1.xml":
+                root = etree.fromstring(data)
+                c_sld = root.find(f"{{{p_ns}}}cSld")
+                background = etree.Element(f"{{{p_ns}}}bg")
+                reference = etree.SubElement(background, f"{{{p_ns}}}bgRef")
+                reference.set("idx", "1003")
+                scheme = etree.SubElement(reference, f"{{{a_ns}}}schemeClr")
+                scheme.set("val", "bg2")
+                c_sld.insert(0, background)
+                data = etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True)
+            output.writestr(info, data)
+        if theme_rels_path not in original_names:
+            output.writestr(theme_rels_path, rel_data)
+
+    run_forward(styled, project)
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    assert 'PptxMaster(fill:none,background:image("assets/media/' in generated
+    manifest = json.loads((project / "asset_manifest.json").read_text(encoding="utf-8"))
+    assert any(media_placement.get("owner") == "master" and media_placement.get("background")
+               for media in manifest["media"].values()
+               for media_placement in media["placements"])
+
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "background.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        assert (project / "background.pdf").is_file()
+
+    output = tmp_path / "background-roundtrip.pptx"
+    convert(project / "main.typ", output)
+    with ZipFile(output) as package:
+        master = etree.fromstring(package.read("ppt/slideMasters/slideMaster1.xml"))
+        rels = etree.fromstring(package.read("ppt/slideMasters/_rels/slideMaster1.xml.rels"))
+        rid = master.xpath("string(./p:cSld/p:bg/p:bgPr/a:blipFill/a:blip/@r:embed)", namespaces={
+            "p": p_ns, "a": a_ns, "r": r_ns,
+        })
+        rel = next(item for item in rels if item.get("Id") == rid)
+        target = Path("ppt/slideMasters") / rel.get("Target")
+        target = Path(posixpath.normpath(target.as_posix()))
+        assert rid and rel.get("Type").endswith("/image")
+        assert package.read(target.as_posix()) == image_path.read_bytes()
+
+
+def test_slide_text_placeholders_render_over_later_artwork(tmp_path: Path) -> None:
+    source = tmp_path / "placeholder-over-artwork.pptx"
+    project = tmp_path / "typst-project"
+    image = tmp_path / "overlay.png"
+    write_pixel(image)
+
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[0])
+    slide.shapes.title.text = "Visible placeholder title"
+    slide.shapes.add_picture(str(image), Pt(0), Pt(0), width=Pt(720), height=Pt(405))
+    deck.save(source)
+
+    run_forward(source, project)
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    assert "PptxPlaceholder(" in generated
+    assert "Visible placeholder title" in generated
+    assert "// Editable text: Title 1" not in generated
+
+
+def test_native_title_body_placeholder_relationships_roundtrip(tmp_path: Path) -> None:
+    from pptx_typst.typst_to_pptx import convert
+
+    project = tmp_path / "placeholder-project"
+    project.mkdir()
+    (project / "template.typ").write_text(
+        (ROOT / "src/pptx_typst/template.typ").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    (project / "main.typ").write_text(
+        '''#import "template.typ": *
+#let Brand = PptxMaster(placeholders:(
+  PptxPlaceholderSlot(id:"title-0",type:"title",idx:0,x:32pt,y:24pt,width:896pt,height:72pt,font:"Arial",size:36pt,fill:rgb("#123456"),weight:"bold"),
+  PptxPlaceholderSlot(id:"body-1",type:"body",idx:1,x:40pt,y:120pt,width:880pt,height:360pt,font:"Arial",size:20pt,fill:rgb("#111111")),
+))
+#let Content = PptxLayout(master:Brand,placeholders:(
+  PptxPlaceholderSlot(id:"title-0",type:"title",idx:0,x:40pt,y:50pt,width:800pt,height:60pt),
+  PptxPlaceholderSlot(id:"body-1",type:"body",idx:1,x:40pt,y:130pt,width:800pt,height:320pt,bullet:"•"),
+))
+#let Cover = PptxLayout(master:Brand,placeholders:(
+  PptxPlaceholderSlot(id:"title-0",type:"title",idx:0,x:80pt,y:100pt,width:760pt,height:100pt),
+  PptxPlaceholderSlot(id:"body-1",type:"body",idx:1,x:80pt,y:240pt,width:760pt,height:220pt),
+))
+#PptxSlide(width:960pt,height:540pt,layout:Content,placeholders:(
+  PptxPlaceholder(id:"title-0",type:"title",idx:0,text:"Slide One",size:48pt),
+  PptxPlaceholder(id:"body-1",type:"body",idx:1,text:"First body\nSecond body"),
+))
+#pagebreak()
+#PptxSlide(width:960pt,height:540pt,layout:Content,placeholders:(
+  PptxPlaceholder(id:"title-0",type:"title",idx:0,text:"Slide Two"),
+  PptxPlaceholder(id:"body-1",type:"body",idx:1,text:"Independent content"),
+))
+#pagebreak()
+#PptxSlide(width:960pt,height:540pt,layout:Cover,placeholders:(
+  PptxPlaceholder(id:"title-0",type:"title",idx:0,text:"Slide Three"),
+  PptxPlaceholder(id:"body-1",type:"body",idx:1,text:"Cover content"),
+))
+#pagebreak()
+#PptxSlide(width:960pt,height:540pt,layout:Content,placeholders:(
+  PptxPlaceholder(id:"title-0",type:"title",idx:0,text:"Slide Four"),
+  PptxPlaceholder(id:"body-1",type:"body",idx:1,text:"Fourth content"),
+))
+''',
+        encoding="utf-8",
+    )
+
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run([typst, "compile", "main.typ", "before.pdf"], cwd=project,
+                       check=True, capture_output=True, text=True, timeout=120)
+    output = tmp_path / "native-placeholders.pptx"
+    report = convert(project / "main.typ", output)
+    assert report["slides"] == 4
+    assert len(report["placeholders"]) == 8
+
+    p_ns = "http://schemas.openxmlformats.org/presentationml/2006/main"
+    a_ns = "http://schemas.openxmlformats.org/drawingml/2006/main"
+    r_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    ns = {"p": p_ns, "a": a_ns, "r": r_ns}
+    with ZipFile(output) as package:
+        master = etree.fromstring(package.read("ppt/slideMasters/slideMaster1.xml"))
+        master_slots = master.xpath(".//p:sp[p:nvSpPr/p:nvPr/p:ph]", namespaces=ns)
+        assert {(x.xpath("string(p:nvSpPr/p:nvPr/p:ph/@type)", namespaces=ns),
+                 x.xpath("string(p:nvSpPr/p:nvPr/p:ph/@idx)", namespaces=ns)) for x in master_slots} == {
+            ("title", "0"), ("body", "1")
+        }
+        assert master.xpath('string(p:txStyles/p:titleStyle/a:lvl1pPr/a:defRPr/a:solidFill/a:srgbClr/@val)', namespaces=ns) == "123456"
+        assert master.xpath('string(p:txStyles/p:titleStyle/a:lvl1pPr/a:defRPr/@sz)', namespaces=ns) == "3600"
+
+        slide_layout_targets = []
+        for number in range(1, 5):
+            slide = etree.fromstring(package.read(f"ppt/slides/slide{number}.xml"))
+            slots = slide.xpath(".//p:sp[p:nvSpPr/p:nvPr/p:ph]", namespaces=ns)
+            assert len(slots) == 2
+            assert not slide.xpath(".//p:sp[not(p:nvSpPr/p:nvPr/p:ph)]//a:t", namespaces=ns)
+            assert all(not x.xpath("./p:spPr/a:xfrm", namespaces=ns) for x in slots)
+            assert {x.xpath("string(p:nvSpPr/p:nvPr/p:ph/@type)", namespaces=ns) for x in slots} == {"title", "body"}
+            rels = etree.fromstring(package.read(f"ppt/slides/_rels/slide{number}.xml.rels"))
+            layout = next(rel for rel in rels if rel.get("Type", "").endswith("/slideLayout"))
+            slide_layout_targets.append(layout.get("Target"))
+        assert slide_layout_targets[0] == slide_layout_targets[1] == slide_layout_targets[3]
+        assert slide_layout_targets[2] != slide_layout_targets[0]
+        content_layout = etree.fromstring(package.read(
+            "ppt/slideLayouts/" + slide_layout_targets[0].rsplit("/", 1)[-1]
+        ))
+        inherited_body_bullet = content_layout.xpath(
+            './/p:sp[p:nvSpPr/p:nvPr/p:ph[@type="body"]]//a:lvl1pPr/a:buChar/@char',
+            namespaces=ns,
+        )
+        assert inherited_body_bullet == ["•"]
+
+        slide1 = etree.fromstring(package.read("ppt/slides/slide1.xml"))
+        title = slide1.xpath('.//p:sp[p:nvSpPr/p:nvPr/p:ph[@type="title"]]', namespaces=ns)[0]
+        assert title.xpath(".//a:rPr/@sz", namespaces=ns) == ["4800"]
+        slide2 = etree.fromstring(package.read("ppt/slides/slide2.xml"))
+        title2 = slide2.xpath('.//p:sp[p:nvSpPr/p:nvPr/p:ph[@type="title"]]', namespaces=ns)[0]
+        assert not title2.xpath(".//a:rPr/@sz", namespaces=ns)
+
+    reopened = Presentation(output)
+    assert len(reopened.slides) == 4
+    assert reopened.slides[0].shapes.title.text == "Slide One"
+    assert reopened.slides[1].shapes.title.text == "Slide Two"
+
+    imported = tmp_path / "roundtrip-typst"
+    run_forward(output, imported)
+    generated = (imported / "main.typ").read_text(encoding="utf-8")
+    assert generated.count("PptxPlaceholder(") == 8
+    assert 'text:"Slide One"' in generated
+    assert 'bullet:"•"' in generated
+    if typst:
+        subprocess.run([typst, "compile", "main.typ", "after.pdf"], cwd=imported,
+                       check=True, capture_output=True, text=True, timeout=120)
+
+
 def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     from pptx_typst.cli import main as cli_main
     from pptx_typst.typst_to_pptx import convert
