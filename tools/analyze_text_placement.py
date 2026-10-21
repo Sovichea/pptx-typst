@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter
-from difflib import SequenceMatcher
 import json
 import math
 import os
@@ -17,16 +15,17 @@ import numpy as np
 from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx_typst.text_diagnostics import assign_pdf_blocks_to_shapes, match_text_blocks_spatial
 
 try:
     from .run_text_fidelity_benchmark import (
         ROOT, export_powerpoint_pdf, get_typst_font_names, match_text_blocks,
-        match_text_blocks_spatial, page_image, pdf_text_blocks, pptx_stats, WORD_RE,
+        page_image, pdf_text_blocks, pptx_stats,
     )
 except ImportError:
     from run_text_fidelity_benchmark import (
         ROOT, export_powerpoint_pdf, get_typst_font_names, match_text_blocks,
-        match_text_blocks_spatial, page_image, pdf_text_blocks, pptx_stats, WORD_RE,
+        page_image, pdf_text_blocks, pptx_stats,
     )
 
 
@@ -146,72 +145,6 @@ def geometry_metrics(deck, manifest):
             for key, values in diffs.items()
         },
     }
-
-
-def block_frame_evidence(block, shape):
-    x, y, width, height = (float(shape["geometry"][key]) for key in ("x", "y", "w", "h"))
-    x0, y0, x1, y1 = block["bbox"]
-    intersection = max(0., min(x1, x + width) - max(x0, x)) * max(0., min(y1, y + height) - max(y0, y))
-    area = max(1., (x1 - x0) * (y1 - y0))
-    overlap = intersection / area
-    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
-    dx = max(x - cx, 0., cx - (x + width))
-    dy = max(y - cy, 0., cy - (y + height))
-    return overlap, math.hypot(dx, dy)
-
-
-def assign_pdf_blocks_to_shapes(blocks, shapes, *, minimum_text_evidence=0.58,
-                                maximum_frame_distance_pt=72., ambiguity_distance_pt=3.):
-    """Attach rendered PDF blocks to known PPTX/Typst text objects by text and frame."""
-    assigned = {shape_id: [] for shape_id in shapes}
-    ambiguous = unmatched = 0
-    pieces = [span for block in blocks for span in block.get("spans", [])]
-    if not pieces:
-        pieces = blocks
-    for block in pieces:
-        block_words = Counter(WORD_RE.findall(block["text"].casefold()))
-        if not block_words:
-            unmatched += 1
-            continue
-        if len(block_words) == 1:
-            only_word = next(iter(block_words))
-            # Page numbers and single-character bullets routinely occur in long
-            # text frames by coincidence; they are not reliable object identity.
-            if only_word.isdecimal() or len(only_word) <= 1:
-                unmatched += 1
-                continue
-        candidates = []
-        for shape_id, shape in shapes.items():
-            shape_words = Counter(WORD_RE.findall(shape["text"].casefold()))
-            if not shape_words:
-                continue
-            common = sum((block_words & shape_words).values())
-            coverage = common / sum(block_words.values())
-            sequence = SequenceMatcher(None,
-                                       " ".join(block_words.elements()),
-                                       " ".join(shape_words.elements()),
-                                       autojunk=False).ratio()
-            evidence = max(coverage, sequence)
-            if evidence < minimum_text_evidence:
-                continue
-            overlap, distance = block_frame_evidence(block, shape)
-            if distance > maximum_frame_distance_pt:
-                continue
-            rank = evidence + .08 * overlap - .001 * distance
-            candidates.append((rank, evidence, overlap, distance, shape_id))
-        candidates.sort(reverse=True)
-        if not candidates:
-            unmatched += 1
-            continue
-        if len(candidates) > 1:
-            best, second = candidates[:2]
-            if (abs(best[1] - second[1]) <= .02
-                    and abs(best[2] - second[2]) <= .08
-                    and abs(best[3] - second[3]) <= ambiguity_distance_pt):
-                ambiguous += 1
-                continue
-        assigned[candidates[0][4]].append(block)
-    return assigned, ambiguous, unmatched
 
 
 def combine_shape_blocks(blocks):

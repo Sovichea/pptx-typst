@@ -691,7 +691,7 @@ def table_has_spans(sh):
 
 
 TEXT_FALLBACK='#111111'
-registered={}; media_contents={}; media_uses=defaultdict(list); manifest=[]; counts=Counter(); vector_assets={}
+registered={}; media_contents={}; media_uses=defaultdict(list); manifest=[]; counts=Counter(); vector_assets={}; compatible_media={}
 # Export assets on demand, reference by embedded original name and SHA256.
 def register_media(part):
     name=Path(str(part.partname)).name
@@ -704,6 +704,23 @@ def register_media(part):
     rel='assets/media/'+out_name
     registered[sha]=rel
     media_contents[sha]={'path':rel,'source':str(part.partname),'bytes':len(data),'sha256':sha,'placements':[]}
+    return rel
+
+def typst_compatible_media(part, original_path):
+    """Return a Typst-readable derivative for supported TIFF image content."""
+    ext=Path(str(part.partname)).suffix.lower()
+    if ext not in ('.tif','.tiff'):
+        return original_path
+    sha=hashlib.sha256(part.blob).hexdigest()
+    if sha in compatible_media:return compatible_media[sha]
+    from PIL import Image
+    import io
+    name=f'{Path(original_path).stem}_typst.png'
+    rel='assets/media/'+name
+    with Image.open(io.BytesIO(part.blob)) as source:
+        source.convert('RGBA').save(ASSETS/name,optimize=True)
+    compatible_media[sha]=rel
+    media_contents[sha]['render_path']=rel
     return rel
 
 def trans(x,y):return np.array([[1,0,x],[0,1,y],[0,0,1]],float)
@@ -1288,7 +1305,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                 crop,fillrect,alpha=image_fill_params(sh)
                 authored_crop=({**crop} if crop else None)
                 authored_fillrect=({**fillrect} if fillrect else None)
-                rendered_rel=alpha_variant(imgpart,rel,alpha)
+                rendered_rel=typst_compatible_media(imgpart,rel)
+                rendered_rel=alpha_variant(imgpart,rendered_rel,alpha)
                 geometry_element=effective_shape_geometry(sh)
                 shape_kind=geometry_kind(sh,geometry_element)
                 # Only genuinely masked photos receive a derived transparent image.

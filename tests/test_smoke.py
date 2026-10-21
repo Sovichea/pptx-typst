@@ -12,6 +12,7 @@ from PIL import Image
 import pytest
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.enum.text import MSO_ANCHOR
 from pptx.dml.color import RGBColor
 from pptx.util import Pt
 from pptx.oxml.xmlchemy import OxmlElement
@@ -82,9 +83,42 @@ def test_pptx_converts_to_compilable_typst(tmp_path: Path) -> None:
     assert (project / "smoke.pdf").is_file()
 
 
+def test_tiff_media_gets_a_typst_compatible_derivative(tmp_path: Path) -> None:
+    typst = shutil.which("typst")
+    if not typst:
+        pytest.skip("Typst CLI is required for the TIFF media regression test")
+    image_path = tmp_path / "source.tiff"
+    Image.new("RGBA", (12, 8), (40, 120, 200, 128)).save(image_path, format="TIFF")
+    source = tmp_path / "tiff.pptx"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    slide.shapes.add_picture(str(image_path), Pt(20), Pt(20), width=Pt(60), height=Pt(40))
+    deck.save(source)
+
+    project = tmp_path / "typst-project"
+    run_forward(source, project)
+    manifest = json.loads((project / "asset_manifest.json").read_text(encoding="utf-8"))
+    media = next(iter(manifest["media"].values()))
+    assert media["path"].endswith(".tiff")
+    assert media["render_path"].endswith("_typst.png")
+    assert (project / media["path"]).is_file()
+    with Image.open(project / media["render_path"]) as converted:
+        assert converted.format == "PNG"
+        assert converted.mode == "RGBA"
+        assert converted.getpixel((0, 0))[3] == 128
+
+    subprocess.run(
+        [typst, "compile", "main.typ", "tiff.pdf"], cwd=project,
+        check=True, capture_output=True, text=True, timeout=120,
+    )
+    assert (project / "tiff.pdf").is_file()
+
+
 def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_path: Path) -> None:
     source = tmp_path / "paragraphs.pptx"
     project = tmp_path / "typst-project"
+    image_path = tmp_path / "pixel.png"
+    write_pixel(image_path)
     deck = Presentation()
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     frame = slide.shapes.add_textbox(Pt(40), Pt(40), Pt(500), Pt(300)).text_frame
@@ -93,6 +127,7 @@ def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_
     frame.add_paragraph().text = "Second paragraph"
     for paragraph in frame.paragraphs:
         paragraph.runs[0].font.size = Pt(20)
+    slide.shapes.add_picture(str(image_path), Pt(60), Pt(360), width=Pt(48), height=Pt(32))
     deck.save(source)
 
     env = os.environ.copy()
@@ -121,6 +156,50 @@ def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_
         cwd=ROOT, env=env, check=True, capture_output=True, text=True, timeout=120,
     )
     assert "#v(26.00pt)" in (legacy_project / "main.typ").read_text(encoding="utf-8")
+    default_manifest = json.loads((project / "asset_manifest.json").read_text(encoding="utf-8"))
+    legacy_manifest = json.loads((legacy_project / "asset_manifest.json").read_text(encoding="utf-8"))
+    non_text = lambda manifest: [
+        placement for slide in manifest["slides"] for placement in slide["placements"]
+        if placement.get("type") != "text"
+    ]
+    assert non_text(default_manifest) == non_text(legacy_manifest)
+
+
+def test_default_text_layout_compiles_multiline_bullets_and_vertical_anchor(tmp_path: Path) -> None:
+    source = tmp_path / "bullets.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    shape = slide.shapes.add_textbox(Pt(40), Pt(40), Pt(360), Pt(200))
+    shape.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+    first = shape.text_frame.paragraphs[0]
+    first.text = "A multiline bullet\nwith a continued line"
+    first._p.get_or_add_pPr().append(OxmlElement("a:buChar"))
+    first._p.pPr[-1].set("char", "•")
+    second = shape.text_frame.add_paragraph()
+    second.text = "A second bullet"
+    second._p.get_or_add_pPr().append(OxmlElement("a:buChar"))
+    second._p.pPr[-1].set("char", "•")
+    deck.save(source)
+
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(ROOT / "src") + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    subprocess.run(
+        [sys.executable, "-m", "pptx_typst.pptx_to_typst", str(source), "--output", str(project)],
+        cwd=ROOT, env=env, check=True, capture_output=True, text=True, timeout=120,
+    )
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    assert "A multiline bullet" in generated and "with a continued line" in generated
+    assert "A second bullet" in generated
+    assert "#list(" in generated
+    assert "#align(center + horizon)[" in generated
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "bullets.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        assert (project / "bullets.pdf").is_file()
 
 
 def test_supported_typst_converts_to_pptx(tmp_path: Path) -> None:

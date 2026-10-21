@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from tools.analyze_text_placement import assign_pdf_blocks_to_shapes
-from tools.run_text_fidelity_benchmark import match_text_blocks_spatial
+from pptx_typst.text_diagnostics import assign_pdf_blocks_to_shapes, match_text_blocks_spatial
 
 
 def block(text: str, x: float, y: float) -> dict:
