@@ -11,11 +11,12 @@ import sys
 from PIL import Image
 import pytest
 from pptx import Presentation
-from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.enum.shapes import MSO_SHAPE, MSO_SHAPE_TYPE
 from pptx.enum.text import MSO_ANCHOR
 from pptx.dml.color import RGBColor
 from pptx.util import Pt
 from pptx.oxml.xmlchemy import OxmlElement
+from pptx.oxml.ns import qn
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -214,6 +215,7 @@ def test_supported_typst_converts_to_pptx(tmp_path: Path) -> None:
     #PptxText(font:"Arial",size:18pt,fill:rgb("#111111"))[Supported reverse conversion]
   ])
   #PptxPlace(x:20pt,y:80pt,child:PptxImage("pixel.png",width:32pt,height:24pt))
+  #PptxPlace(x:20pt,y:120pt,child:PptxText(font:"Arial",size:16pt,fill:rgb("#222222"))[Direct starter text call])
 ])
 ''',
         encoding="utf-8",
@@ -226,7 +228,37 @@ def test_supported_typst_converts_to_pptx(tmp_path: Path) -> None:
     assert deck.slide_width == Pt(320)
     assert deck.slide_height == Pt(180)
     assert any("Supported reverse conversion" in text for text in text_in(deck))
+    assert any("Direct starter text call" in text for text in text_in(deck))
     assert picture_count(deck) == 1
+
+
+def test_reverse_conversion_preserves_image_fit_and_rounded_panel_style(tmp_path: Path) -> None:
+    from pptx_typst.typst_to_pptx import convert
+
+    wide = tmp_path / "wide.png"
+    Image.new("RGB", (200, 100), (80, 120, 160)).save(wide)
+    main = tmp_path / "main.typ"
+    main.write_text(
+        '''#PptxSlide(width:320pt,height:180pt,fill:rgb("#FFFFFF"),children:[
+  #PptxPlace(x:20pt,y:20pt,child:PptxImage("wide.png",width:40pt,height:40pt,fit:"cover"))
+  #PptxPlace(x:80pt,y:20pt,child:PptxRect(width:100pt,height:60pt,fill:rgb("#FF000080"),stroke:1pt + rgb("#223344"),radius:8pt))
+])
+''',
+        encoding="utf-8",
+    )
+    output = tmp_path / "fit-and-panel.pptx"
+
+    convert(main, output)
+    deck = Presentation(output)
+    picture = next(shape for shape in deck.slides[0].shapes if shape.shape_type == MSO_SHAPE_TYPE.PICTURE)
+    panel = next(shape for shape in deck.slides[0].shapes if shape.shape_type == MSO_SHAPE_TYPE.AUTO_SHAPE)
+    assert picture.crop_left == pytest.approx(0.25, abs=0.01)
+    assert picture.crop_right == pytest.approx(0.25, abs=0.01)
+    assert panel.auto_shape_type == MSO_SHAPE.ROUNDED_RECTANGLE
+    assert panel.line.width == Pt(1)
+    effect_ref = panel._element.find(qn("p:style")).find(qn("a:effectRef"))
+    assert effect_ref.get("idx") == "0"
+    assert panel._element.spPr.find(".//" + qn("a:outerShdw")) is None
 
 
 def test_roundtrip_preserves_dimensions_text_and_shared_image(tmp_path: Path) -> None:

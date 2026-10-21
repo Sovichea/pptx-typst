@@ -14,6 +14,7 @@ from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.oxml.xmlchemy import OxmlElement
+from pptx.oxml.ns import qn
 
 PX_PER_PT = 1.0
 NUM = r'[-+]?\d+(?:\.\d+)?'
@@ -144,7 +145,7 @@ def img_call(child):
     raw,end=balanced(child,match.end()-1)
     a=kwargs(raw)
     if not a.get('_pos'):return None
-    path=txt_decode(a['_pos'][0]);return dict(path=path,iw=length(a.get('width')),ih=length(a.get('height')))
+    path=txt_decode(a['_pos'][0]);return dict(path=path,iw=length(a.get('width')),ih=length(a.get('height')),fit=txt_decode(a.get('fit','"stretch"')))
 
 
 def flip(child):
@@ -164,7 +165,16 @@ def viewport(child):
 
 def text_runs(child):
     out=[]
-    for raw,_,end in find_calls(child,'text'):
+    # Starter-module calls such as ``child: PptxText(...)`` are ordinary
+    # function expressions and therefore have no leading Typst markup ``#``.
+    # The generated Root/Place form also commonly contains ``#text(...)``.
+    pattern=re.compile(r'(?<![\w-])#?text\(')
+    cursor=0
+    while True:
+        match=pattern.search(child,cursor)
+        if not match:break
+        raw,end=balanced(child,match.end()-1)
+        cursor=end
         a=kwargs(raw); pos=a.get('_pos',[])
         if pos:
             content=txt_decode(pos[-1])
@@ -174,6 +184,7 @@ def text_runs(child):
             body_start=end+block.end()-1
             content,_=balanced(child,body_start,'[',']')
             content=content.strip()
+            content=re.sub(r'\\([@#$\[\]\\])',r'\1',content)
         if not content:continue
         out.append(dict(text=content,font=txt_decode(a.get('font','"Aptos"')),size=length(a.get('size'),20),color=simple_color(a.get('fill')),bold='bold' in a.get('weight','').lower()))
     return out
@@ -216,7 +227,6 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
         name=hashlib.sha256((str(f)+str(crop)+str((W,H))).encode()).hexdigest()[:16]+'.png'
         dst=alpha_cache/name
         if not dst.exists():
-            from PIL import Image
             source=Image.open(image_path).convert('RGBA')
             scale=2
             src=source.resize((max(1,round(W*scale)),max(1,round(H*scale))),Image.Resampling.LANCZOS)
@@ -226,10 +236,28 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
         image_path=dst
         audit['cropped_instance_fallbacks']+=1
         left=right=top=bottom=0
+    # Preserve Typst image fitting. Cover uses a native PowerPoint crop so the
+    # source bitmap remains replaceable; contain keeps the asset's aspect ratio.
+    image_w,image_h=image_path and Image.open(image_path).size or (0,0)
+    fit=im.get('fit','stretch')
+    fit_crop=None
+    if not crop and image_w and image_h and fit in ('cover','contain'):
+        source_ratio=image_w/image_h; target_ratio=w/h
+        if fit=='cover':
+            if source_ratio>target_ratio:
+                side=(1-target_ratio/source_ratio)/2;fit_crop=(side,0.0,side,0.0)
+            elif source_ratio<target_ratio:
+                side=(1-source_ratio/target_ratio)/2;fit_crop=(0.0,side,0.0,side)
+        elif source_ratio>target_ratio:
+            fit_h=w/source_ratio; y += (h-fit_h)/2; h=fit_h
+        else:
+            fit_w=h*source_ratio; x += (w-fit_w)/2; w=fit_w
     shape=slide.shapes.add_picture(str(image_path),Pt(x),Pt(y),width=Pt(w),height=Pt(h))
     if safe and crop:
         shape.crop_left=max(0,left);shape.crop_top=max(0,top)
         shape.crop_right=max(0,right);shape.crop_bottom=max(0,bottom)
+    elif fit_crop:
+        shape.crop_left,shape.crop_top,shape.crop_right,shape.crop_bottom=fit_crop
     if abs(rot)>0.001:shape.rotation=rot%360
     if xf or yf:
         transform=shape._element.spPr.xfrm
@@ -272,18 +300,29 @@ def add_native(slide,child,x,y,rot,audit,slide_num):
         if not m:continue
         a=kwargs(balanced(child,m.end()-1)[0])
         w=length(a.get('width'),100);h=length(a.get('height'),w)
+        radius=length(a.get('radius'))
         if ty in ('circle','ellipse'):
             if ty=='circle':w=h=length(a.get('radius'),50)*2 if 'radius' in a else length(a.get('diameter'),100)
             shp=MSO_SHAPE.OVAL
-        elif ty=='rect':shp=MSO_SHAPE.RECTANGLE
+        elif ty=='rect':shp=MSO_SHAPE.ROUNDED_RECTANGLE if radius>0 else MSO_SHAPE.RECTANGLE
         else:shp=None
         if shp:
             obj=slide.shapes.add_shape(shp,Pt(x),Pt(y),Pt(w),Pt(h))
             fill=a.get('fill','none')
             if fill=='none':obj.fill.background()
             else:
-                obj.fill.solid();obj.fill.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
-            obj.line.fill.background()
+                color,opacity=simple_color_alpha(fill)
+                obj.fill.solid();obj.fill.fore_color.rgb=RGBColor(*color)
+                if opacity<.99999:
+                    solid_fill=obj._element.spPr.xpath('./a:solidFill')
+                    srgb=solid_fill[0].xpath('./a:srgbClr') if solid_fill else []
+                    if srgb:
+                        alpha=OxmlElement('a:alpha');alpha.set('val',str(round(opacity*100000)));srgb[0].append(alpha)
+            stroke=a.get('stroke','none')
+            if stroke=='none':obj.line.fill.background()
+            else:
+                obj.line.color.rgb=RGBColor(*simple_color(stroke,(0,0,0)))
+                obj.line.width=Pt(max(.1,length(stroke,.8)))
         else:
             obj=slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT,Pt(x),Pt(y),Pt(x+w),Pt(y+h))
         if rot:obj.rotation=rot%360
@@ -395,6 +434,20 @@ def export_one(content,slide,base,cache,audit,n,ox=0.0,oy=0.0,angle=0):
         show_unsupported(audit,'child_construct',child,n)
 
 
+def clear_theme_shadows(slide):
+    """Disable PowerPoint theme effects on objects generated from Typst.
+
+    python-pptx assigns auto-shapes an effect reference to theme effect style
+    2 by default. Many Office themes define that style as a drop shadow, even
+    when the Typst source has no shadow at all.
+    """
+    for shape in slide.shapes:
+        style = shape._element.find(qn('p:style'))
+        effect_ref = style.find(qn('a:effectRef')) if style is not None else None
+        if effect_ref is not None:
+            effect_ref.set('idx', '0')
+
+
 def convert(main,output):
     main=Path(main).resolve();base=main.parent
     content=main.read_text(encoding='utf-8')
@@ -416,6 +469,7 @@ def convert(main,output):
         slide=prs.slides.add_slide(prs.slide_layouts[6])
         bg=slide.background.fill;bg.solid();bg.fore_color.rgb=RGBColor(*simple_color(head.get('fill'),(255,255,255)))
         export_one(body,slide,base,cache,audit,n)
+        clear_theme_shadows(slide)
         audit.setdefault('per_slide',[]).append({'slide':n,'objects':len(slide.shapes)})
     output.parent.mkdir(parents=True,exist_ok=True);prs.save(output)
     audit['unique_source_media']=len(audit['source_media']);audit['source_media']=sorted(audit['source_media'])
