@@ -53,4 +53,4 @@ include-package-data = true
 where = ["src"]
 
 [tool.setuptools.package-data]
-pptx_typst = ["template.typ", "templates/*.typ"]
+pptx_typst = ["template.typ", "templates/*.typ", "templates/assets/*.svg"]

@@ -69,9 +69,12 @@ def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pyte
     copied_macro = (project / "pptx-typst.typ").read_text(encoding="utf-8")
     starter = (project / "main.typ").read_text(encoding="utf-8")
     assert copied_macro == packaged_macro
-    assert "#let Brand = PptxMaster(" in starter
-    assert "#let ContentLayout = PptxLayout(" in starter
-    assert "layout: ContentLayout," in starter
+    packaged_assets = ROOT / "src/pptx_typst/templates/assets"
+    assert {path.name for path in (project / "assets").iterdir()} == {path.name for path in packaged_assets.iterdir()}
+    assert "#let FieldNotes = PptxMaster(" in starter
+    assert "#let CoverLayout = PptxLayout(" in starter
+    assert "#let StoryLayout = PptxLayout(" in starter
+    assert "#let InsightLayout = PptxLayout(" in starter
 
     typst = shutil.which("typst")
     if typst:
@@ -84,11 +87,16 @@ def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pyte
     report = convert(project / "main.typ", output)
     deck = Presentation(output)
     assert report["hierarchy_written"] is True
-    assert len(deck.slides) == 1
+    assert len(deck.slides) == 3
     assert len(deck.slide_masters) == 1
-    assert deck.slides[0].slide_layout.name == "ContentLayout"
-    assert sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes) == 1
-    assert "A slide authored in Typst" in text_in(deck)
+    assert [slide.slide_layout.name for slide in deck.slides] == ["CoverLayout", "StoryLayout", "InsightLayout"]
+    master_part = deck.slide_masters[0].part.partname
+    assert all(slide.slide_layout.slide_master.part.partname == master_part for slide in deck.slides)
+    assert sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes) == 3
+    slide_text = text_in(deck)
+    assert any("Systems for a more resilient future" in text for text in slide_text)
+    assert any("Care should flow around people" in text for text in slide_text)
+    assert any("Small shifts, measurable change" in text for text in slide_text)
 
 
 def text_in(deck: Presentation) -> list[str]:

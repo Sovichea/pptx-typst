@@ -34,6 +34,11 @@ def _write_template(name: str, destination: Path, force: bool) -> None:
     print(f"Created {destination}")
 
 
+def _starter_assets() -> list[tuple[str, bytes]]:
+    assets = resources.files("pptx_typst").joinpath("templates", "assets")
+    return [(asset.name, asset.read_bytes()) for asset in sorted(assets.iterdir(), key=lambda item: item.name) if asset.is_file()]
+
+
 def main() -> None:
     """Create the starter Typst module or initialize an authoring project."""
     parser = argparse.ArgumentParser(
@@ -57,6 +62,8 @@ def main() -> None:
 
     project = args.directory
     outputs = [project / "pptx-typst.typ", project / "main.typ"]
+    assets = _starter_assets()
+    outputs.extend(project / "assets" / name for name, _ in assets)
     conflicts = [path for path in outputs if path.exists()]
     if conflicts and not args.force:
         names = ", ".join(str(path) for path in conflicts)
@@ -65,4 +72,7 @@ def main() -> None:
     for name in ("pptx-typst.typ", "main.typ"):
         _write_template(name, project / name, force=True)
     (project / "assets").mkdir(exist_ok=True)
-    print(f"Created {project / 'assets'}")
+    for name, content in assets:
+        destination = project / "assets" / name
+        destination.write_bytes(content)
+        print(f"Created {destination}")
