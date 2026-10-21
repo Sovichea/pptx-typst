@@ -85,6 +85,8 @@ Development-only visual and geometry utilities live under `tools/`.
 
 This is an alpha proof of concept. Review conversion reports and visually inspect presentations before relying on converted output. The project does not claim pixel-perfect rendering or support for arbitrary Typst source.
 
+The proposed PowerPoint master/layout reuse model has been tested in an isolated proof of concept, but it is not yet implemented by the converters. See the [master/layout POC report](docs/master-layout-poc.md) for architecture, results, and current gaps.
+
 ## License
 
 Licensed under the [Apache License, Version 2.0](LICENSE).
