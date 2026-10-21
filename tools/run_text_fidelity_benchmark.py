@@ -299,7 +299,7 @@ def match_text_blocks(source_blocks, output_blocks):
     return pairs
 
 
-def slide_fidelity(source_pdf, typst_pdf, supported_slides):
+def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides):
     """Return text-masked layout plus font-gated text and full-slide scores."""
     scale = 1.25
     layout_scores = []
@@ -346,12 +346,14 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides):
         if edge_score is not None:
             layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
 
-        # Unsupported-font slides are excluded from text and full-slide scores.
-        if page_index not in supported_slides:
-            continue
-
-        if edge_score is not None:
+        # Full-slide layout uses every slide whose resolved fonts are supported.
+        if page_index in supported_slides and edge_score is not None:
             supported_layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
+
+        # Text metrics require actual source text and support for all its fonts.
+        # Slides with no detected source font must not become eligible by default.
+        if page_index not in supported_text_slides:
+            continue
 
         # Text ink is compared from rendered text span regions. Position is measured separately.
         src_text_edges = src_edges & src_mask
@@ -461,6 +463,7 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
             else:
                 supported_slides.add(slide_index)
         text_source_slides = {index for index, families in enumerate(slide_fonts) if families}
+        supported_text_slides = text_source_slides & supported_slides
         record["text_source_slide_count"] = len(text_source_slides)
         record["text_font_supported_slide_count"] = len(text_source_slides & supported_slides)
         record["text_font_skipped_slide_count"] = len(text_source_slides - supported_slides)
@@ -501,11 +504,11 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
             export_powerpoint_pdf(app, source, original_pdf_path)
             stage = "pdf_metrics"
             source_pdf, source_text, source_sizes, source_page_sizes = pdf_text_and_sizes(
-                original_pdf_path, supported_slides
+                original_pdf_path, supported_text_slides
             )
             try:
                 typst_pdf, converted_text, converted_sizes, converted_page_sizes = pdf_text_and_sizes(
-                    converted_pdf_path, supported_slides
+                    converted_pdf_path, supported_text_slides
                 )
                 record.update(overlap_metrics(source_text, converted_text))
                 record["pages_source_pdf"] = len(source_pdf)
@@ -522,7 +525,7 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                     and all(abs(a - c) < 1 for p, q in zip(source_page_sizes, converted_page_sizes)
                             for a, c in zip(p, q))
                 )
-                record.update(slide_fidelity(source_pdf, typst_pdf, supported_slides))
+                record.update(slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides))
             finally:
                 source_pdf.close()
                 source_pdf = None
