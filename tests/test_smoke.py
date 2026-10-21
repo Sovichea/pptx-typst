@@ -414,6 +414,8 @@ def test_master_layout_hierarchy_is_shared_and_roundtrips(tmp_path: Path) -> Non
     assert generated.count(" = PptxMaster(") == 2
     assert generated.count(" = PptxLayout(") == 3
     assert generated.count('"Slide one"') == 1
+    assert "#PptxSlide(\n" in generated
+    assert "#Place(\n    x:" in generated
     assert 'PptxMaster(fill:rgb("#112233")' in generated
     assert 'PptxLayout(master:Master01,fill:rgb("#223344")' in generated
 

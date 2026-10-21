@@ -369,6 +369,15 @@ def typst_comment(value):
     """Collapse controls and line separators so source metadata stays a comment."""
     return re.sub(r'\s+',' ',re.sub(r'[\x00-\x1f\x7f-\x9f\u2028\u2029]+',' ',str(value))).strip()
 
+def typst_place(x,y,child,rotation=0,indent='    '):
+    """Write a readable multiline Place call while keeping its child editable."""
+    lines=[f'{indent}#Place(',f'{indent}  x:{x:.3f}pt,',f'{indent}  y:{y:.3f}pt,',
+           f'{indent}  orientation:{rotation:.3f}deg,',f'{indent}  child:']
+    lines.extend(f'{indent}    {line}' for line in str(child).splitlines())
+    lines[-1]+=','
+    lines.append(f'{indent})')
+    return '\n'.join(lines)
+
 def typst_font_fallback(f):
     """Prefer the requested family, then Typst's bundled fallback family."""
     families=[]
@@ -1241,8 +1250,11 @@ for slide_no,slide in enumerate(prs.slides,1):
     master_allowed=slide._element.get('showMasterSp','1') not in ('0','false')
     layout_allowed=layout._element.get('showMasterSp','1') not in ('0','false')
     slide_call='PptxSlide' if args.layout_mode=='structured' else 'Root'
-    layout_arg=f',layout:{layout_id}' if args.layout_mode=='structured' else ''
-    lines.extend([f'// Slide {slide_no:02d}', f'#{slide_call}(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fill:{bg_expr},format:ppt-format{layout_arg},children:['])
+    lines.extend([f'// Slide {slide_no:02d}',f'#{slide_call}(',
+                  f'  width:{SLIDE_W:.3f}pt,',f'  height:{SLIDE_H:.3f}pt,',
+                  f'  fill:{bg_expr},','  format:ppt-format,'])
+    if args.layout_mode=='structured':lines.append(f'  layout:{layout_id},')
+    lines.append('  children:[')
     if bgtype=='color':
         try:
             vals=[int(bgval[i:i+2],16) for i in (1,3,5)]
@@ -1254,12 +1266,12 @@ for slide_no,slide in enumerate(prs.slides,1):
         bgasset=register_media(image_bg[1])
         bgsha=hashlib.sha256(image_bg[1].blob).hexdigest()
         media_contents[bgsha]['placements'].append({'owner':'slide' if slide_bg else 'inherited-background','owner_id':slide_no,'slide':slide_no,'background':True})
-        lines.append(f'  #Place(x:0pt,y:0pt,child:image("{bgasset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch"))')
+        lines.append(typst_place(0,0,f'image("{bgasset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'))
         counts['background_images']+=1
     elif bgtype=='color':counts['background_colors']+=1
     else:counts['background_gradients']+=1
     sm={'slide':slide_no,'layout':layout_id,'master':master_id,'placements':[],'groups':[]}
-    def recur(shapes,parent=np.identity(3),group_path=(),origin=(0.,0.)):
+    def recur(shapes,parent=np.identity(3),group_path=(),origin=(0.,0.),indent='  '):
         for zindex,sh in enumerate(shapes):
             if sh.shape_type==MSO_SHAPE_TYPE.GROUP:
                 counts['group']+=1
@@ -1288,14 +1300,15 @@ for slide_no,slide in enumerate(prs.slides,1):
                     # the coordinate origin changes. This is intentionally NOT an
                     # additional group rotation, which would double-transform it.
                     # Original rotation, flips and child-space are in the manifest.
-                    lines.append(f'  // Group: {typst_comment(sh.name)} | id: {gid}')
-                    lines.append(f'  #Place(x:{bx-origin[0]:.3f}pt,y:{by-origin[1]:.3f}pt,child:GroupContent(width:{br-bx:.3f}pt,height:{bb-by:.3f}pt,children:[')
+                    lines.append(f'{indent}// Group: {typst_comment(sh.name)} | id: {gid}')
+                    lines.extend([f'{indent}#Place(',f'{indent}  x:{bx-origin[0]:.3f}pt,',f'{indent}  y:{by-origin[1]:.3f}pt,',
+                                  f'{indent}  child:GroupContent(width:{br-bx:.3f}pt,height:{bb-by:.3f}pt,children:[' ])
                     counts['group_containers']+=1
                     sm['groups'][-1]['render_bounds_pt']=[round(v,4) for v in bounds]
-                    recur(sh.shapes,group_parent,group_path+(gid,),(bx,by))
-                    lines.append('  ]))')
+                    recur(sh.shapes,group_parent,group_path+(gid,),(bx,by),indent+'    ')
+                    lines.append(f'{indent}  ]))')
                 else:
-                    recur(sh.shapes,group_parent,group_path+(gid,),origin)
+                    recur(sh.shapes,group_parent,group_path+(gid,),origin,indent)
                 continue
             if None in (sh.left,sh.top,sh.width,sh.height):
                 # Some slide-number/date/footer placeholders have no transform
@@ -1317,16 +1330,17 @@ for slide_no,slide in enumerate(prs.slides,1):
             if smartart is not None:
                 asset=smartart_svg(sh,smartart)
                 if asset:
-                    lines.append(f'  // SmartArt layout drawing: {typst_comment(sh.name)}')
-                    lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{asset}",width:{pl["w"]:.3f}pt,height:{pl["h"]:.3f}pt,fit:"stretch"))')
+                    lines.append(f'{indent}// SmartArt layout drawing: {typst_comment(sh.name)}')
+                    lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],
+                                             f'image("{asset}",width:{pl["w"]:.3f}pt,height:{pl["h"]:.3f}pt,fit:"stretch")',pl['rotation'],indent))
                     obj.update(type='smartart',source=asset,rendering='materialized vector drawing')
                     counts['smartart_placements']+=1
                     sm['placements'].append(obj)
                     continue
             if getattr(sh,'has_table',False) and not table_has_spans(sh):
                 table=typst_table(sh)
-                lines.append(f'  // Editable PowerPoint table: {typst_comment(sh.name)}')
-                lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{table})')
+                lines.append(f'{indent}// Editable PowerPoint table: {typst_comment(sh.name)}')
+                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],table,pl['rotation'],indent))
                 obj.update(type='table',rows=len(sh.table.rows),columns=len(sh.table.columns))
                 counts['table_placements']+=1
                 sm['placements'].append(obj)
@@ -1392,8 +1406,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                         counts['unsupported_clip_masks']+=1
                         obj['clip_warning']='Mask uses adjustable presets, curves, or rotation not yet validated. Original picture kept without a generated mask.'
                 core=typst_img(rendered_rel,pl,crop,fillrect)
-                lines.append(f'  // Source media: {typst_comment(rel)} | shape: {typst_comment(sh.name)} | {typst_comment(shape_kind)}')
-                lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{core})')
+                lines.append(f'{indent}// Source media: {typst_comment(rel)} | shape: {typst_comment(sh.name)} | {typst_comment(shape_kind)}')
+                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent))
                 media_contents[sha]['placements'].append({'owner':sm.get('owner','slide'),'owner_id':sm.get('id',slide_no),'slide':slide_no if sm.get('owner','slide')=='slide' else None,'shape':sh.name,'crop':authored_crop,'fillrect':authored_fillrect,'alpha':alpha,'geometry':shape_kind})
                 obj.update(type='image',source=rel,render_source=rendered_rel,geometry=shape_kind,crop=authored_crop,fillrect=authored_fillrect,render_crop=crop,render_fillrect=fillrect,alpha=alpha,mask_applied=(rendered_rel!=rel and rendered_rel.startswith('assets/media/clip_')))
                 counts['geometry_'+shape_kind]+=1
@@ -1406,8 +1420,9 @@ for slide_no,slide in enumerate(prs.slides,1):
                     rel,pad,w0,h0=backing
                     pscale=(pl['w']/w0+pl['h']/h0)/2 if w0*h0 else 1
                     extra=pad*pscale
-                    lines.append(f'  // Fill and outline behind text shape: {typst_comment(sh.name)}')
-                    lines.append(f'  #Place(x:{pl["x"]-extra-origin[0]:.3f}pt,y:{pl["y"]-extra-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch"))')
+                    lines.append(f'{indent}// Fill and outline behind text shape: {typst_comment(sh.name)}')
+                    lines.append(typst_place(pl['x']-extra-origin[0],pl['y']-extra-origin[1],
+                                             f'image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch")',pl['rotation'],indent))
                     obj['background_shape']=rel
                     counts['text_backing_shapes']+=1
                 counts['text_placements']+=1
@@ -1415,10 +1430,10 @@ for slide_no,slide in enumerate(prs.slides,1):
                 # Source text can contain vertical tabs and Unicode line breaks.
                 # Keep it on one comment line so it cannot become Typst markup.
                 comment=typst_comment(f'{sh.name} | {sh.text[:80]}')
-                lines.append(f'  // Editable text: {comment}')
+                lines.append(f'{indent}// Editable text: {comment}')
                 # Keep the text frame at the source shape origin. Text insets,
                 # paragraph anchors, and point sizes are handled inside its box.
-                lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{core})')
+                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent))
                 obj.update(type='text',text=sh.text[:200],anchor=(sh._element.xpath('./p:txBody/a:bodyPr')[0].get('anchor','t') if sh._element.xpath('./p:txBody/a:bodyPr') else 't'),autofit_mode=text_autofit(sh)[0],font_scale=text_autofit(sh)[1],line_spacing_reduction=text_autofit(sh)[2])
                 counts['autofit_'+text_autofit(sh)[0]]+=1
             else:
@@ -1430,8 +1445,9 @@ for slide_no,slide in enumerate(prs.slides,1):
                     # Stroke padding also scales with grouped shape transformation.
                     pscale=(pl['w']/w0+pl['h']/h0)/2 if w0*h0 else 1
                     extra=pad*pscale
-                    lines.append(f'  // Original editable PowerPoint shape: {typst_comment(sh.name)}')
-                    lines.append(f'  #Place(x:{pl["x"]-extra-origin[0]:.3f}pt,y:{pl["y"]-extra-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch"))')
+                    lines.append(f'{indent}// Original editable PowerPoint shape: {typst_comment(sh.name)}')
+                    lines.append(typst_place(pl['x']-extra-origin[0],pl['y']-extra-origin[1],
+                                             f'image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch")',pl['rotation'],indent))
                     obj['type']='vector_shape';obj['source']=rel;counts['vector_shapes']+=1
                 else:
                     obj['type']='unsupported'
@@ -1455,7 +1471,7 @@ for slide_no,slide in enumerate(prs.slides,1):
             asset=register_media(background[1])
             bgsha=hashlib.sha256(background[1].blob).hexdigest()
             media_contents[bgsha]['placements'].append({'owner':sm['owner'],'owner_id':sm['id'],'background':True})
-            lines.append(f'  #Place(x:0pt,y:0pt,child:image("{asset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch"))')
+            lines.append(typst_place(0,0,f'image("{asset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'))
             counts['background_images']+=1
         return 'none'
     master_allowed=slide._element.get('showMasterSp','1') not in ('0','false')
@@ -1489,7 +1505,7 @@ for slide_no,slide in enumerate(prs.slides,1):
         if layout_allowed:
             recur(decorative_shapes(layout))
             counts['inherited_layout_layers']+=1
-    recur(slide.shapes)
+    recur(slide.shapes,indent='    ')
     lines.append('])')
     if slide_no<len(prs.slides):lines.append('#pagebreak()')
     slide_sources.extend(lines)
