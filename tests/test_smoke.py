@@ -82,6 +82,47 @@ def test_pptx_converts_to_compilable_typst(tmp_path: Path) -> None:
     assert (project / "smoke.pdf").is_file()
 
 
+def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_path: Path) -> None:
+    source = tmp_path / "paragraphs.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    frame = slide.shapes.add_textbox(Pt(40), Pt(40), Pt(500), Pt(300)).text_frame
+    frame.clear()
+    frame.paragraphs[0].text = "First paragraph"
+    frame.add_paragraph().text = "Second paragraph"
+    for paragraph in frame.paragraphs:
+        paragraph.runs[0].font.size = Pt(20)
+    deck.save(source)
+
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(ROOT / "src") + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    subprocess.run(
+        [sys.executable, "-m", "pptx_typst.pptx_to_typst", str(source), "--output", str(project)],
+        cwd=ROOT, env=env, check=True, capture_output=True, text=True, timeout=120,
+    )
+
+    typst_source = (project / "main.typ").read_text(encoding="utf-8")
+    assert "First paragraph" in typst_source and "Second paragraph" in typst_source
+    assert "#v(26.00pt)" not in typst_source
+    assert "#v(5.20pt)" in typst_source
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "paragraphs.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        assert (project / "paragraphs.pdf").is_file()
+
+    legacy_project = tmp_path / "legacy-project"
+    subprocess.run(
+        [sys.executable, "-m", "pptx_typst.pptx_to_typst", str(source), "--output", str(legacy_project),
+         "--text-layout", "anchors"],
+        cwd=ROOT, env=env, check=True, capture_output=True, text=True, timeout=120,
+    )
+    assert "#v(26.00pt)" in (legacy_project / "main.typ").read_text(encoding="utf-8")
+
+
 def test_supported_typst_converts_to_pptx(tmp_path: Path) -> None:
     from pptx_typst.typst_to_pptx import convert
 

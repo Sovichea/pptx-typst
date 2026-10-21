@@ -29,4 +29,12 @@ The font installer downloads matching families only when the Google Fonts upstre
 
 Text boxes for masking and rendered glyph measurements come from PDF text extraction, so PDF text extraction issues can affect pixel metrics. PDF text blocks are matched by normalized text to compare starting positions; block matching and pixel thresholds are approximate corpus-level measures rather than a claim of exact visual equivalence.
 
+The original 100-deck scores above are retained for historical comparison. Their greedy text-block matcher uses a text-similarity threshold but does not constrain matches by slide position; repeated titles, merged PDF blocks, and fragmented PDF text can therefore create misleading start-position errors. For targeted investigation, `tools/analyze_text_placement.py` reports three separate views: (1) structural PPTX-to-manifest text-object geometry joined by slide and shape ID, with content preservation; (2) rendered first-glyph positions, baselines, text bounds, line pitches, and frame overflow, assigned to source text objects using both text and spatial evidence, with ambiguous and unassigned spans counted; and (3) typographic diagnostics such as font availability, size differences, ink similarity, and wrap count. It does not combine those diagnostic measures into a new score. Run it on Windows with PowerPoint and Typst installed, for example:
+
+```powershell
+python tools/analyze_text_placement.py path\to\sample.pptx
+```
+
+The diagnostic is deliberately run on a small representative sample. The 22 corpus media-format compilation failures remain separate from text-placement measurements.
+
 The PDFs are rendered on this Windows machine with PowerPoint and Typst using its installed fonts. Different PowerPoint versions, Typst versions, operating systems, and font installations can change the pixel-level results.

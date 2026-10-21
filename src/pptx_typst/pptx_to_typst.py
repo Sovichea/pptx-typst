@@ -22,7 +22,7 @@ cli=argparse.ArgumentParser(description="Convert PPTX to Typst with original sha
 cli.add_argument("input_pptx",type=Path,help="source PowerPoint document")
 cli.add_argument("--output",type=Path,default=Path("./typst-output"),help="Typst project output directory")
 cli.add_argument("--template",type=Path,default=Path(__file__).with_name("template.typ"),help="Typst template defining Root, Place, and related layout helpers")
-cli.add_argument("--text-layout",choices=["v3","anchors","spacing","anchors-spacing"],default="anchors",help="vertical text anchor fidelity. Alternate spacing strategies are experimental; v3 preserves the old baseline")
+cli.add_argument("--text-layout",choices=["v3","anchors","spacing","anchors-spacing"],default="anchors-spacing",help="vertical text anchor fidelity. Default uses a small paragraph advance; anchors retains the legacy full-line gap")
 cli.add_argument("--text-features", choices=["legacy","inherit","structure","all"], default="all", help="Text inheritance/bullets/tabs features (default: all)")
 cli.add_argument("--group-mode",choices=["safe","nested","flatten"],default="safe",help="Emit editable nested GroupContent containers or v5 flattened placements")
 cli.add_argument("--clip-mode",choices=["component","legacy"],default="legacy",help="Rectangular picture crop representation")
@@ -566,8 +566,13 @@ def content_for_text(sh, ew, eh, sx, sy):
    continue
   result.append(f'  #align({align})[\n    #set par(leading: {leading:.2f}pt, spacing: 0pt)\n    {frags}\n  ]')
   if i<len(paragraphs)-1:
-   if args.text_layout in ('spacing','anchors-spacing'):pass
-   else:result.append(f'  #v({max(0.0,(line_size or size*1.3)):.2f}pt)')
+   paragraph_pitch=max(0.0,(line_size or size*1.3))
+   if args.text_layout=='spacing':pass
+   elif args.text_layout=='anchors-spacing':
+    # A full baseline pitch per paragraph accumulated 66pt of overflow in the
+    # sample; no advance let separate Typst align blocks overlap.
+    result.append(f'  #v({paragraph_pitch*.20:.2f}pt)')
+   else:result.append(f'  #v({paragraph_pitch:.2f}pt)')
   if after>0:result.append(f'  #v({after:.2f}pt)')
  if valign != 'top':result.append(']')
  result.append(']');result.append(']')

@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import argparse
-from collections import Counter
+from collections import Counter, defaultdict
 import csv
 from difflib import SequenceMatcher
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -243,9 +244,25 @@ def pdf_text_blocks(page):
             first_line_spans = next((line.get("spans", []) for line in lines
                                      if any(s.get("text", "").strip() for s in line.get("spans", []))), [])
             first = next((span for span in first_line_spans if span.get("text", "").strip()), spans[0])
-            blocks.append({"text": text, "lines": sum(any(s.get("text", "").strip() for s in line.get("spans", [])) for line in lines),
+            boxes = [span["bbox"] for span in spans]
+            first_origin = first.get("origin", first["bbox"][:2])
+            block_lines = [line for line in lines if any(s.get("text", "").strip() for s in line.get("spans", []))]
+            baselines = []
+            for line in block_lines:
+                line_first = next(s for s in line.get("spans", []) if s.get("text", "").strip())
+                baselines.append(float(line_first.get("origin", line_first["bbox"][:2])[1]))
+            blocks.append({"text": text, "lines": len(block_lines),
                            "start": (float(first["bbox"][0]), float(first["bbox"][1])),
-                           "boxes": [span["bbox"] for span in spans]})
+                           "baseline": (float(first_origin[0]), float(first_origin[1])),
+                           "bbox": (min(b[0] for b in boxes), min(b[1] for b in boxes),
+                                    max(b[2] for b in boxes), max(b[3] for b in boxes)),
+                           "baselines": baselines,
+                           "spans": [{"text": span["text"],
+                                      "bbox": tuple(float(v) for v in span["bbox"]),
+                                      "start": (float(span["bbox"][0]), float(span["bbox"][1])),
+                                      "baseline": tuple(float(v) for v in span.get("origin", span["bbox"][:2]))}
+                                     for span in spans],
+                           "boxes": boxes})
     return blocks
 
 
@@ -297,6 +314,76 @@ def match_text_blocks(source_blocks, output_blocks):
             unused.remove(index)
             pairs.append((source, output_blocks[index]))
     return pairs
+
+
+def match_text_blocks_spatial(source_blocks, output_blocks, *, min_similarity=0.72,
+                              max_distance_pt=180.0, ambiguity_tolerance_pt=4.0):
+    """Match PDF text blocks by content and location; return uncertain counts separately.
+
+    This diagnostic deliberately rejects low-similarity or very distant candidates.
+    Near-tied repeated-text candidates are marked ambiguous rather than assigned.
+    """
+    candidates = []
+    by_source = defaultdict(list)
+    by_output = defaultdict(list)
+    for source_index, source in enumerate(source_blocks):
+        source_text = " ".join(WORD_RE.findall(source["text"].casefold()))
+        if not source_text:
+            continue
+        for output_index, output in enumerate(output_blocks):
+            output_text = " ".join(WORD_RE.findall(output["text"].casefold()))
+            if not output_text:
+                continue
+            similarity = SequenceMatcher(None, source_text, output_text, autojunk=False).ratio()
+            if similarity < min_similarity:
+                continue
+            dx = float(source["start"][0]) - float(output["start"][0])
+            dy = float(source["start"][1]) - float(output["start"][1])
+            distance = math.hypot(dx, dy)
+            if distance > max_distance_pt:
+                continue
+            # Content determines identity; distance breaks repeated-text ties.
+            rank = similarity - 0.12 * distance / max_distance_pt
+            item = {"source_index": source_index, "output_index": output_index,
+                    "similarity": similarity, "dx": dx, "dy": dy,
+                    "distance": distance, "rank": rank}
+            candidates.append(item)
+            by_source[source_index].append(item)
+            by_output[output_index].append(item)
+
+    ambiguous_sources = set()
+    ambiguous_outputs = set()
+    for mapping, key_name in ((by_source, "output_index"), (by_output, "source_index")):
+        for index, items in mapping.items():
+            ranked = sorted(items, key=lambda item: (-item["rank"], item["distance"]))
+            if len(ranked) < 2:
+                continue
+            first, second = ranked[:2]
+            # Repeated text is only ambiguous when content and spatial evidence tie.
+            if (abs(first["similarity"] - second["similarity"]) <= 0.02
+                    and abs(first["distance"] - second["distance"]) <= ambiguity_tolerance_pt):
+                if key_name == "output_index":
+                    ambiguous_sources.add(index)
+                else:
+                    ambiguous_outputs.add(index)
+
+    blocked_sources = set(ambiguous_sources)
+    blocked_outputs = set(ambiguous_outputs)
+    used_sources, used_outputs, matches = set(), set(), []
+    for item in sorted(candidates, key=lambda pair: (-pair["rank"], pair["distance"])):
+        si, oi = item["source_index"], item["output_index"]
+        if si in blocked_sources or oi in blocked_outputs or si in used_sources or oi in used_outputs:
+            continue
+        used_sources.add(si)
+        used_outputs.add(oi)
+        matches.append({**item, "source": source_blocks[si], "output": output_blocks[oi]})
+    return {
+        "matches": matches,
+        "ambiguous_source_count": len(ambiguous_sources),
+        "ambiguous_output_count": len(ambiguous_outputs),
+        "unmatched_source_count": len(source_blocks) - len(used_sources) - len(ambiguous_sources),
+        "unmatched_output_count": len(output_blocks) - len(used_outputs) - len(ambiguous_outputs),
+    }
 
 
 def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides):
