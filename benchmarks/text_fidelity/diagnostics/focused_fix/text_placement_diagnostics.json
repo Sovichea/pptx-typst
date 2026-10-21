@@ -1,0 +1,875 @@
+{
+  "sample_decks": [
+    {
+      "source": "benchmarks\\text_fidelity\\data\\input\\051_JCM_Cologne_CAA_DE_NL_FL_2022_NAVISONE.pptx",
+      "source_text_slides": 54,
+      "font_supported_text_slides": 10,
+      "font_unsupported_text_slides": 44,
+      "structural": {
+        "source_text_shapes": 136,
+        "output_text_shapes": 183,
+        "matched_by_slide_and_shape_id": 136,
+        "missing_output_text_shapes": 0,
+        "output_only_text_shapes": 47,
+        "grouped_text_shapes": 7,
+        "text_preview_exact_matches": 136,
+        "geometry_abs_delta_pt": {
+          "x": {
+            "mean": 0.001703913848993821,
+            "max": 0.004960629921356485
+          },
+          "y": {
+            "mean": 0.0031553960166691105,
+            "max": 0.004960629921299642
+          },
+          "w": {
+            "mean": 0.0013872163038239904,
+            "max": 0.004566929133858366
+          },
+          "h": {
+            "mean": 0.0034645669291339027,
+            "max": 0.0049606299212427984
+          },
+          "rot": {
+            "mean": 0.00050502450980392,
+            "max": 0.004750000000000004
+          }
+        }
+      },
+      "rendered": {
+        "source_pdf_text_blocks": 26,
+        "typst_pdf_text_blocks": 31,
+        "historical_text_only_greedy_match": {
+          "matched": 16,
+          "mean_start_displacement_pt": 59.9455264278058,
+          "within_12pt_share": 0.1875
+        },
+        "spatially_constrained_match": {
+          "matched": 15,
+          "ambiguous_source_blocks": 0,
+          "ambiguous_output_blocks": 0,
+          "unmatched_source_blocks": 11,
+          "unmatched_output_blocks": 16,
+          "mean_first_glyph_displacement_pt": 54.273645964997236,
+          "median_first_glyph_displacement_pt": 45.91139846165031,
+          "within_12pt_share": 0.2,
+          "mean_first_glyph_baseline_delta_pt": 19.119406127929686,
+          "mean_text_bbox_edge_delta_pt": 35.29285356203715,
+          "mean_line_spacing_delta_pt_when_wrap_count_matches": 3.3944244384765625,
+          "wrap_line_count_match": 0.5333333333333333,
+          "largest_displacements": [
+            {
+              "distance_pt": 138.83,
+              "dx_pt": -138.83,
+              "dy_pt": 0.76,
+              "similarity": 0.879,
+              "source_text": "What part will the “community” play, what part the “Systemic institutions”?",
+              "typst_text": "thesaurus entities? What part will the “community” play, what part the “Systemic institutions”?"
+            },
+            {
+              "distance_pt": 115.01,
+              "dx_pt": 74.02,
+              "dy_pt": 88.02,
+              "similarity": 0.808,
+              "source_text": "■ EN1: Ship Wreck ■ EN2: Ship Reconstruction or Model ■ EN3: Roman Coin ● Features as E25 (“Human-Made Feature",
+              "typst_text": "● Objects as E22 (“Human-Made Object”) ○ This class comprises all persistent physical objects of any size that"
+            },
+            {
+              "distance_pt": 113.25,
+              "dx_pt": 111.88,
+              "dy_pt": -17.56,
+              "similarity": 1.0,
+              "source_text": "NAVIS.one is minimally Mapped on CIDOC CRM (v.7.1.2, June 2022)",
+              "typst_text": "NAVIS.one is minimally Mapped on CIDOC CRM (v.7.1.2, June 2022)"
+            },
+            {
+              "distance_pt": 78.22,
+              "dx_pt": 78.21,
+              "dy_pt": 1.44,
+              "similarity": 0.976,
+              "source_text": "This talk will demonstrate the example of NAVIS.one. NAVIS.one has its origin in three online databases from t",
+              "typst_text": "This talk will demonstrate the example of NAVIS.one. NAVIS.one has its origin in three online databases from t"
+            },
+            {
+              "distance_pt": 70.95,
+              "dx_pt": 68.74,
+              "dy_pt": -17.56,
+              "similarity": 1.0,
+              "source_text": "But how to get to a “single” NAVIS.one solution?",
+              "typst_text": "But how to get to a “single” NAVIS.one solution?"
+            },
+            {
+              "distance_pt": 59.84,
+              "dx_pt": 59.41,
+              "dy_pt": 7.16,
+              "similarity": 0.903,
+              "source_text": "refined data enable opportunities in Semantic Web applications, LOD and community work.",
+              "typst_text": "refined data enable opportunities in Semantic Web applications, LOD and"
+            },
+            {
+              "distance_pt": 53.07,
+              "dx_pt": 53.05,
+              "dy_pt": 1.44,
+              "similarity": 0.881,
+              "source_text": "Who will take care about the software, curate the data and maintain the thesaurus entities?",
+              "typst_text": "Who will take care about the software, curate the data and maintain the"
+            },
+            {
+              "distance_pt": 45.91,
+              "dx_pt": 43.76,
+              "dy_pt": -13.88,
+              "similarity": 0.774,
+              "source_text": "Designing a common web app causes challenges in merging three different individual",
+              "typst_text": "Designing a common web app causes challenges in merging three  different individualMS Access data models focus"
+            }
+          ]
+        },
+        "object_linked_rendered_position": {
+          "source_text_objects": 12,
+          "typst_text_objects": 12,
+          "objects_with_glyphs_in_both_pdfs": 12,
+          "objects_missing_source_glyphs": 0,
+          "objects_missing_typst_glyphs": 0,
+          "ambiguous_source_pdf_spans": 0,
+          "ambiguous_typst_pdf_spans": 0,
+          "unassigned_source_pdf_spans": 45,
+          "unassigned_typst_pdf_spans": 35,
+          "mean_first_glyph_displacement_pt": 43.949650059073804,
+          "median_first_glyph_displacement_pt": 41.24563464168715,
+          "within_12pt_share": 0.16666666666666666,
+          "mean_first_glyph_baseline_delta_pt": 12.297903696695963,
+          "mean_text_bbox_edge_delta_pt": 31.168401042620342,
+          "mean_line_spacing_delta_pt_when_line_count_matches": null,
+          "objects_overflowing_frame_by_more_than_2pt": {
+            "powerpoint": 2,
+            "typst": 10
+          },
+          "mean_overflow_beyond_frame_pt": {
+            "powerpoint": 2.348994097371739,
+            "typst": 8.503807288142317
+          }
+        },
+        "glyph_boxes_outside_slide": {
+          "powerpoint": 0,
+          "typst": 1
+        },
+        "slides": [
+          {
+            "slide": 6,
+            "source_blocks": 2,
+            "output_blocks": 3,
+            "spatial_matches": 1,
+            "mean_start_displacement_pt": 78.222485225798,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 2,
+              "unassigned_typst_pdf_spans": 1,
+              "mean_first_glyph_displacement_pt": 78.222485225798,
+              "median_first_glyph_displacement_pt": 78.222485225798,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 7.265350341796875,
+              "mean_text_bbox_edge_delta_pt": 48.39173126220703,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 4.206852469857267
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "113",
+                  "distance_pt": 78.22,
+                  "dx_pt": 78.21,
+                  "dy_pt": 1.44,
+                  "text": "This talk will demonstrate the example of NAVIS.one.\nNAVIS.one has its origin in three online databa",
+                  "source_glyph_bbox": [
+                    136.6,
+                    327.3,
+                    583.3,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    48.9,
+                    325.8,
+                    676.6,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 4.21,
+                  "source_line_count": 2,
+                  "typst_line_count": 3,
+                  "source_mean_baseline_pitch_pt": 24.099999999999966,
+                  "typst_mean_baseline_pitch_pt": 21.5
+                }
+              ]
+            }
+          },
+          {
+            "slide": 19,
+            "source_blocks": 2,
+            "output_blocks": 2,
+            "spatial_matches": 1,
+            "mean_start_displacement_pt": 70.94966305152846,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 2,
+              "unassigned_typst_pdf_spans": 1,
+              "mean_first_glyph_displacement_pt": 70.94966305152846,
+              "median_first_glyph_displacement_pt": 70.94966305152846,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 11.76300048828125,
+              "mean_text_bbox_edge_delta_pt": 41.505943298339844,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 4.206852469857267
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "254",
+                  "distance_pt": 70.95,
+                  "dx_pt": 68.74,
+                  "dy_pt": -17.56,
+                  "text": "But how to get to a “single” NAVIS.one solution?",
+                  "source_glyph_bbox": [
+                    215.5,
+                    351.3,
+                    504.6,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    146.7,
+                    368.9,
+                    573.2,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 4.21,
+                  "source_line_count": 1,
+                  "typst_line_count": 1,
+                  "source_mean_baseline_pitch_pt": null,
+                  "typst_mean_baseline_pitch_pt": null
+                }
+              ]
+            }
+          },
+          {
+            "slide": 20,
+            "source_blocks": 3,
+            "output_blocks": 4,
+            "spatial_matches": 1,
+            "mean_start_displacement_pt": 45.91139846165031,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 2,
+              "unassigned_typst_pdf_spans": 1,
+              "mean_first_glyph_displacement_pt": 45.91139846165031,
+              "median_first_glyph_displacement_pt": 45.91139846165031,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 8.07598876953125,
+              "mean_text_bbox_edge_delta_pt": 24.039620399475098,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 1,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 21.23639012133981,
+                "typst": 26.674351249154142
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "260",
+                  "distance_pt": 45.91,
+                  "dx_pt": 43.76,
+                  "dy_pt": -13.88,
+                  "text": "Designing a common web app causes challenges in merging three different individual\u000bMS Access data mo",
+                  "source_glyph_bbox": [
+                    61.0,
+                    303.3,
+                    658.8,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    41.7,
+                    317.2,
+                    688.3,
+                    410.1
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 21.24,
+                  "typst_overflow_pt": 26.67,
+                  "source_line_count": 3,
+                  "typst_line_count": 4,
+                  "source_mean_baseline_pitch_pt": 24.049999999999983,
+                  "typst_mean_baseline_pitch_pt": 24.73333333333333
+                }
+              ]
+            }
+          },
+          {
+            "slide": 21,
+            "source_blocks": 3,
+            "output_blocks": 4,
+            "spatial_matches": 3,
+            "mean_start_displacement_pt": 21.90969570027511,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 12,
+              "unassigned_typst_pdf_spans": 11,
+              "mean_first_glyph_displacement_pt": 8.173359335919113,
+              "median_first_glyph_displacement_pt": 8.173359335919113,
+              "within_12pt_share": 1.0,
+              "mean_first_glyph_baseline_delta_pt": 0.62103271484375,
+              "mean_text_bbox_edge_delta_pt": 45.57963418960571,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 1,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 6.951539047121059,
+                "typst": 22.53991795337106
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "269",
+                  "distance_pt": 8.17,
+                  "dx_pt": 0.02,
+                  "dy_pt": -8.17,
+                  "text": "Differences\n\nNAVIS I\n“real” Ship Objects such as Wrecks, Reconstructions and Models\n“exact dating” b",
+                  "source_glyph_bbox": [
+                    45.8,
+                    23.7,
+                    526.0,
+                    345.7
+                  ],
+                  "typst_glyph_bbox": [
+                    45.8,
+                    31.9,
+                    684.6,
+                    361.3
+                  ],
+                  "frame_bbox": [
+                    38.6,
+                    17.8,
+                    697.5,
+                    338.7
+                  ],
+                  "source_overflow_pt": 6.95,
+                  "typst_overflow_pt": 22.54,
+                  "source_line_count": 12,
+                  "typst_line_count": 14,
+                  "source_mean_baseline_pitch_pt": 26.41818181818182,
+                  "typst_mean_baseline_pitch_pt": 23.56153846153846
+                }
+              ]
+            }
+          },
+          {
+            "slide": 23,
+            "source_blocks": 3,
+            "output_blocks": 4,
+            "spatial_matches": 1,
+            "mean_start_displacement_pt": 27.01538134873476,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 2,
+              "unassigned_typst_pdf_spans": 1,
+              "mean_first_glyph_displacement_pt": 27.01538134873476,
+              "median_first_glyph_displacement_pt": 27.01538134873476,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 13.66534423828125,
+              "mean_text_bbox_edge_delta_pt": 19.090229034423828,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 5.101624496339809
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "288",
+                  "distance_pt": 27.02,
+                  "dx_pt": 25.85,
+                  "dy_pt": 7.84,
+                  "text": "To create a lightweight “community standard” also for data interoperability and exchange in the RGZM",
+                  "source_glyph_bbox": [
+                    61.2,
+                    327.3,
+                    658.5,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    35.4,
+                    319.4,
+                    690.1,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 5.1,
+                  "source_line_count": 2,
+                  "typst_line_count": 3,
+                  "source_mean_baseline_pitch_pt": 24.099999999999966,
+                  "typst_mean_baseline_pitch_pt": 24.69999999999999
+                }
+              ]
+            }
+          },
+          {
+            "slide": 25,
+            "source_blocks": 4,
+            "output_blocks": 3,
+            "spatial_matches": 2,
+            "mean_start_displacement_pt": 114.12817464390642,
+            "object_linked_position": {
+              "source_shape_count": 2,
+              "typst_shape_count": 2,
+              "objects_with_glyphs_in_both_pdfs": 2,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 12,
+              "unassigned_typst_pdf_spans": 11,
+              "mean_first_glyph_displacement_pt": 63.27439253613104,
+              "median_first_glyph_displacement_pt": 63.27439253613104,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 8.623611450195312,
+              "mean_text_bbox_edge_delta_pt": 38.184563398361206,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 2
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 13.347765704778226
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "307",
+                  "distance_pt": 113.25,
+                  "dx_pt": 111.88,
+                  "dy_pt": -17.56,
+                  "text": "NAVIS.one is minimally Mapped on CIDOC CRM (v.7.1.2, June 2022)",
+                  "source_glyph_bbox": [
+                    164.4,
+                    351.3,
+                    555.5,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    52.5,
+                    368.9,
+                    667.5,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 4.21,
+                  "source_line_count": 1,
+                  "typst_line_count": 1,
+                  "source_mean_baseline_pitch_pt": null,
+                  "typst_mean_baseline_pitch_pt": null
+                },
+                {
+                  "shape_id": "309",
+                  "distance_pt": 13.3,
+                  "dx_pt": -13.27,
+                  "dy_pt": -0.83,
+                  "text": "Objects as E22 (“Human-Made Object”)\nThis class comprises all persistent physical objects of any siz",
+                  "source_glyph_bbox": [
+                    81.8,
+                    23.9,
+                    688.4,
+                    325.2
+                  ],
+                  "typst_glyph_bbox": [
+                    95.1,
+                    24.7,
+                    691.3,
+                    361.2
+                  ],
+                  "frame_bbox": [
+                    38.6,
+                    17.8,
+                    697.5,
+                    338.7
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 22.49,
+                  "source_line_count": 14,
+                  "typst_line_count": 18,
+                  "source_mean_baseline_pitch_pt": 21.161538461538463,
+                  "typst_mean_baseline_pitch_pt": 18.658823529411762
+                }
+              ]
+            }
+          },
+          {
+            "slide": 26,
+            "source_blocks": 3,
+            "output_blocks": 4,
+            "spatial_matches": 2,
+            "mean_start_displacement_pt": 4.84738437248341,
+            "object_linked_position": {
+              "source_shape_count": 2,
+              "typst_shape_count": 2,
+              "objects_with_glyphs_in_both_pdfs": 2,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 9,
+              "unassigned_typst_pdf_spans": 7,
+              "mean_first_glyph_displacement_pt": 10.540421785220948,
+              "median_first_glyph_displacement_pt": 10.540421785220948,
+              "within_12pt_share": 0.5,
+              "mean_first_glyph_baseline_delta_pt": 9.22369384765625,
+              "mean_text_bbox_edge_delta_pt": 13.326246500015259,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 2.1034262349286337
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "317",
+                  "distance_pt": 13.3,
+                  "dx_pt": -13.27,
+                  "dy_pt": -0.83,
+                  "text": "Literature references as E31 (“Document”)\nThis class comprises identifiable immaterial items that ma",
+                  "source_glyph_bbox": [
+                    81.8,
+                    23.9,
+                    688.2,
+                    200.4
+                  ],
+                  "typst_glyph_bbox": [
+                    95.1,
+                    24.7,
+                    695.4,
+                    255.7
+                  ],
+                  "frame_bbox": [
+                    38.6,
+                    17.8,
+                    697.5,
+                    338.7
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 0.0,
+                  "source_line_count": 8,
+                  "typst_line_count": 12,
+                  "source_mean_baseline_pitch_pt": 21.47142857142857,
+                  "typst_mean_baseline_pitch_pt": 19.236363636363635
+                },
+                {
+                  "shape_id": "315",
+                  "distance_pt": 7.78,
+                  "dx_pt": 3.04,
+                  "dy_pt": 7.16,
+                  "text": "NAVIS.one is minimally Mapped on CIDOC CRM (v.7.1.2, June 2022) and CRM dig Extension (v.3.2.1, Apri",
+                  "source_glyph_bbox": [
+                    36.0,
+                    351.3,
+                    683.8,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    33.0,
+                    344.1,
+                    692.5,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 4.21,
+                  "source_line_count": 1,
+                  "typst_line_count": 2,
+                  "source_mean_baseline_pitch_pt": null,
+                  "typst_mean_baseline_pitch_pt": 24.69999999999999
+                }
+              ]
+            }
+          },
+          {
+            "slide": 39,
+            "source_blocks": 3,
+            "output_blocks": 3,
+            "spatial_matches": 2,
+            "mean_start_displacement_pt": 95.95195032722901,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 2,
+              "unassigned_typst_pdf_spans": 1,
+              "mean_first_glyph_displacement_pt": 53.0722290433671,
+              "median_first_glyph_displacement_pt": 53.0722290433671,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 7.265350341796875,
+              "mean_text_bbox_edge_delta_pt": 34.00667381286621,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 4.206852469857267
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "429",
+                  "distance_pt": 53.07,
+                  "dx_pt": 53.05,
+                  "dy_pt": 1.44,
+                  "text": "Who will take care about the software, curate the data and maintain the thesaurus entities?\nWhat par",
+                  "source_glyph_bbox": [
+                    97.9,
+                    327.3,
+                    621.9,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    36.2,
+                    325.8,
+                    683.8,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 4.21,
+                  "source_line_count": 2,
+                  "typst_line_count": 3,
+                  "source_mean_baseline_pitch_pt": 24.099999999999966,
+                  "typst_mean_baseline_pitch_pt": 21.5
+                }
+              ]
+            }
+          },
+          {
+            "slide": 40,
+            "source_blocks": 2,
+            "output_blocks": 3,
+            "spatial_matches": 1,
+            "mean_start_displacement_pt": 59.841784777460006,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 2,
+              "unassigned_typst_pdf_spans": 1,
+              "mean_first_glyph_displacement_pt": 59.841784777460006,
+              "median_first_glyph_displacement_pt": 59.841784777460006,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 12.963165283203125,
+              "mean_text_bbox_edge_delta_pt": 35.66087341308594,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 1
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 4.206852469857267
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "435",
+                  "distance_pt": 59.84,
+                  "dx_pt": 59.41,
+                  "dy_pt": 7.16,
+                  "text": "refined data enable opportunities in Semantic Web applications, LOD and community work.",
+                  "source_glyph_bbox": [
+                    94.4,
+                    351.3,
+                    625.5,
+                    376.6
+                  ],
+                  "typst_glyph_bbox": [
+                    35.0,
+                    344.1,
+                    690.5,
+                    387.6
+                  ],
+                  "frame_bbox": [
+                    23.9,
+                    324.5,
+                    696.1,
+                    383.4
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 4.21,
+                  "source_line_count": 1,
+                  "typst_line_count": 2,
+                  "source_mean_baseline_pitch_pt": null,
+                  "typst_mean_baseline_pitch_pt": 24.69999999999999
+                }
+              ]
+            }
+          },
+          {
+            "slide": 50,
+            "source_blocks": 1,
+            "output_blocks": 1,
+            "spatial_matches": 1,
+            "mean_start_displacement_pt": 36.57987082172399,
+            "object_linked_position": {
+              "source_shape_count": 1,
+              "typst_shape_count": 1,
+              "objects_with_glyphs_in_both_pdfs": 1,
+              "objects_missing_source_glyphs": 0,
+              "objects_missing_typst_glyphs": 0,
+              "ambiguous_source_pdf_spans": 0,
+              "ambiguous_typst_pdf_spans": 0,
+              "unassigned_source_pdf_spans": 0,
+              "unassigned_typst_pdf_spans": 0,
+              "mean_first_glyph_displacement_pt": 36.57987082172399,
+              "median_first_glyph_displacement_pt": 36.57987082172399,
+              "within_12pt_share": 0.0,
+              "mean_first_glyph_baseline_delta_pt": 50.26100158691406,
+              "mean_text_bbox_edge_delta_pt": 22.7244873046875,
+              "mean_line_spacing_delta_pt_when_line_count_matches": null,
+              "objects_overflowing_frame_by_more_than_2pt": {
+                "powerpoint": 0,
+                "typst": 0
+              },
+              "mean_overflow_beyond_frame_pt": {
+                "powerpoint": 0.0,
+                "typst": 0.0
+              },
+              "largest_displacements": [
+                {
+                  "shape_id": "545",
+                  "distance_pt": 36.58,
+                  "dx_pt": -24.51,
+                  "dy_pt": 27.16,
+                  "text": "Future WORK",
+                  "source_glyph_bbox": [
+                    219.9,
+                    150.6,
+                    500.0,
+                    251.6
+                  ],
+                  "typst_glyph_bbox": [
+                    235.6,
+                    123.5,
+                    497.8,
+                    297.4
+                  ],
+                  "frame_bbox": [
+                    153.3,
+                    63.2,
+                    566.7,
+                    341.8
+                  ],
+                  "source_overflow_pt": 0.0,
+                  "typst_overflow_pt": 0.0,
+                  "source_line_count": 1,
+                  "typst_line_count": 2,
+                  "source_mean_baseline_pitch_pt": null,
+                  "typst_mean_baseline_pitch_pt": 98.90000000000003
+                }
+              ]
+            }
+          }
+        ],
+        "comparison_image": "051_JCM_Cologne_CAA_DE_NL_FL_2022_NAVISONE_slide_021.png",
+        "comparison_slide": 21
+      }
+    }
+  ]
+}
