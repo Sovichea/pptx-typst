@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 import csv
+from difflib import SequenceMatcher
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,8 @@ import sys
 import tempfile
 import time
 import traceback
+import zipfile
+import xml.etree.ElementTree as ET
 
 import pymupdf as fitz
 import numpy as np
@@ -45,11 +48,92 @@ def walk_shapes(shapes):
             yield shape
 
 
+def theme_font_families(path: Path):
+    result = {"major": "", "minor": ""}
+    ns = {"a": "http://schemas.openxmlformats.org/drawingml/2006/main"}
+    try:
+        with zipfile.ZipFile(path) as archive:
+            themes = sorted(name for name in archive.namelist()
+                            if re.fullmatch(r"ppt/theme/theme\d+\.xml", name))
+            if themes:
+                root = ET.fromstring(archive.read(themes[0]))
+                for key in ("major", "minor"):
+                    node = root.find(f".//a:fontScheme/a:{key}Font/a:latin", ns)
+                    if node is not None:
+                        result[key] = node.attrib.get("typeface", "").strip()
+    except (OSError, zipfile.BadZipFile, ET.ParseError):
+        pass
+    return result
+
+
+def effective_font_name(name, theme_fonts):
+    raw = (name or "").strip()
+    if raw.casefold() in {"+mj-lt", "+mj-ea", "+mj-cs"}:
+        raw = theme_fonts["major"]
+    elif raw.casefold() in {"+mn-lt", "+mn-ea", "+mn-cs"} or not raw:
+        raw = theme_fonts["minor"] or "(inherited)"
+    return raw or "(inherited)"
+
+
+def resolved_run_font(shape, paragraph, run, theme_fonts, slide):
+    rp = run._r.xpath("./a:rPr")
+    rp = rp[0] if rp else None
+    font = run.font.name or (rp.xpath("./a:latin")[0].get("typeface") if rp is not None and rp.xpath("./a:latin") else None)
+    if not font:
+        level = min(9, max(1, paragraph.level + 1))
+        defaults = paragraph._p.xpath("./a:pPr/a:defRPr")
+        defaults += shape._element.xpath(f"./p:txBody/a:lstStyle/a:lvl{level}pPr/a:defRPr")
+        if getattr(shape, "is_placeholder", False):
+            try:
+                idx = shape.placeholder_format.idx
+                peer = next((item for item in slide.slide_layout.placeholders
+                             if item.placeholder_format.idx == idx), None)
+                if peer is not None:
+                    defaults += peer._element.xpath(f"./p:txBody/a:lstStyle/a:lvl{level}pPr/a:defRPr")
+            except Exception:
+                pass
+        master = slide.slide_layout.slide_master
+        is_title = getattr(shape, "is_placeholder", False) and "TITLE" in str(shape.placeholder_format.type).upper()
+        contexts = ["titleStyle"] if is_title else (["bodyStyle", "otherStyle"] if shape.is_placeholder else ["otherStyle"])
+        for context in contexts:
+            defaults += master._element.xpath(f"./p:txStyles/p:{context}/a:lvl{level}pPr/a:defRPr")
+        for node in defaults:
+            latin = node.xpath("./a:latin")
+            if latin and latin[0].get("typeface"):
+                font = latin[0].get("typeface")
+                break
+    if not font:
+        style = shape._element.xpath("./p:style/a:fontRef")
+        idx = style[0].get("idx") if style else "minor"
+        font = "+mj-lt" if idx == "major" else "+mn-lt"
+    return effective_font_name(font, theme_fonts)
+
+
+def run_slide_fonts(slide, theme_fonts):
+    fonts = set()
+    for shape in walk_shapes(slide.shapes):
+        if getattr(shape, "has_text_frame", False):
+            for paragraph in shape.text_frame.paragraphs:
+                for run in paragraph.runs:
+                    if run.text and run.text.strip():
+                        fonts.add(resolved_run_font(shape, paragraph, run, theme_fonts, slide))
+        if getattr(shape, "has_table", False):
+            for row in shape.table.rows:
+                for cell in row.cells:
+                    for paragraph in cell.text_frame.paragraphs:
+                        for run in paragraph.runs:
+                            if run.text and run.text.strip():
+                                fonts.add(resolved_run_font(shape, paragraph, run, theme_fonts, slide))
+    return fonts
+
+
 def pptx_stats(path: Path, installed_fonts: set[str]):
     deck = Presentation(path)
+    theme_fonts = theme_font_families(path)
     fonts = Counter()
     runs = 0
     characters = 0
+    inherited_characters = 0
     text_shapes = []
     for slide in deck.slides:
         for shape in walk_shapes(slide.shapes):
@@ -64,7 +148,9 @@ def pptx_stats(path: Path, installed_fonts: set[str]):
                         if run.text:
                             runs += 1
                             characters += len(run.text)
-                            fonts[run.font.name or "(inherited)"] += len(run.text)
+                            fonts[resolved_run_font(shape, paragraph, run, theme_fonts, slide)] += len(run.text)
+                            if not run.font.name:
+                                inherited_characters += len(run.text)
             if getattr(shape, "has_table", False):
                 for row in shape.table.rows:
                     for cell in row.cells:
@@ -73,21 +159,22 @@ def pptx_stats(path: Path, installed_fonts: set[str]):
                                 if run.text:
                                     runs += 1
                                     characters += len(run.text)
-                                    fonts[run.font.name or "(inherited)"] += len(run.text)
+                                    fonts[resolved_run_font(shape, paragraph, run, theme_fonts, slide)] += len(run.text)
+                                    if not run.font.name:
+                                        inherited_characters += len(run.text)
+    slide_fonts = [run_slide_fonts(slide, theme_fonts) for slide in deck.slides]
     font_chars = sum(fonts.values())
-    explicit_chars = sum(count for name, count in fonts.items() if name != "(inherited)")
     installed_chars = sum(count for name, count in fonts.items()
                           if name.casefold() in installed_fonts)
-    inherited_chars = fonts.get("(inherited)", 0)
     return deck, {
         "slides_source": len(deck.slides),
         "text_shapes_source": len(text_shapes),
         "text_runs_source": runs,
         "source_run_characters": characters,
         "source_fonts": "; ".join(f"{name}:{count}" for name, count in fonts.most_common()),
-        "installed_font_char_share": round(installed_chars / explicit_chars, 4) if explicit_chars else None,
-        "inherited_font_char_share": round(inherited_chars / font_chars, 4) if font_chars else None,
-    }, text_shapes
+        "installed_font_char_share": round(installed_chars / characters, 4) if characters else None,
+        "inherited_font_char_share": round(inherited_characters / characters, 4) if characters else None,
+    }, text_shapes, slide_fonts
 
 
 def export_powerpoint_pdf(app, source: Path, output: Path):
@@ -102,13 +189,16 @@ def export_powerpoint_pdf(app, source: Path, output: Path):
         raise RuntimeError("PowerPoint did not produce a PDF")
 
 
-def pdf_text_and_sizes(path: Path):
+def pdf_text_and_sizes(path: Path, included_pages=None):
     pdf = fitz.open(path)
     text_parts = []
     weighted_font_sizes = []
     page_sizes = []
-    for page in pdf:
+    included_pages = set(included_pages) if included_pages is not None else None
+    for page_index, page in enumerate(pdf):
         page_sizes.append((page.rect.width, page.rect.height))
+        if included_pages is not None and page_index not in included_pages:
+            continue
         text_parts.append(page.get_text("text", sort=True))
         data = page.get_text("dict")
         for block in data.get("blocks", []):
@@ -138,60 +228,167 @@ def overlap_metrics(original: str, converted: str):
     }
 
 
-def text_boxes_by_slide(deck):
-    result = []
-    for slide in deck.slides:
-        current = []
-        for shape in walk_shapes(slide.shapes):
-            if (getattr(shape, "has_text_frame", False) and shape.text.strip()
-                    and None not in (shape.left, shape.top, shape.width, shape.height)):
-                current.append((shape.left / EMU_PER_PT, shape.top / EMU_PER_PT,
-                                shape.width / EMU_PER_PT, shape.height / EMU_PER_PT))
-        result.append(current)
-    return result
+def page_image(page, scale):
+    pix = page.get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=False)
+    return Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
 
 
-def text_edge_f1(source_pdf, typst_pdf, boxes_by_slide):
+def pdf_text_blocks(page):
+    blocks = []
+    for block in page.get_text("dict").get("blocks", []):
+        lines = block.get("lines", [])
+        spans = [span for line in lines for span in line.get("spans", []) if span.get("text", "").strip()]
+        text = " ".join(span["text"] for span in spans).strip()
+        if text:
+            first_line_spans = next((line.get("spans", []) for line in lines
+                                     if any(s.get("text", "").strip() for s in line.get("spans", []))), [])
+            first = next((span for span in first_line_spans if span.get("text", "").strip()), spans[0])
+            blocks.append({"text": text, "lines": sum(any(s.get("text", "").strip() for s in line.get("spans", [])) for line in lines),
+                           "start": (float(first["bbox"][0]), float(first["bbox"][1])),
+                           "boxes": [span["bbox"] for span in spans]})
+    return blocks
+
+
+def text_region_mask(blocks, scale, size, padding=1.5):
+    width, height = size
+    mask = np.zeros((height, width), dtype=bool)
+    for block in blocks:
+        for x0, y0, x1, y1 in block["boxes"]:
+            left = max(0, int(x0 * scale - padding)); top = max(0, int(y0 * scale - padding))
+            right = min(width, int(np.ceil(x1 * scale + padding))); bottom = min(height, int(np.ceil(y1 * scale + padding)))
+            if right > left and bottom > top:
+                mask[top:bottom, left:right] = True
+    return mask
+
+
+def edge_map(image):
+    return np.asarray(image.convert("L").filter(ImageFilter.FIND_EDGES).point(lambda p: 255 if p >= 28 else 0)) > 0
+
+
+def tolerant_f1(source, output, valid=None):
+    if valid is not None:
+        source = source & valid
+        output = output & valid
+    source_count, output_count = int(source.sum()), int(output.sum())
+    if not source_count and not output_count:
+        return None
+    if not source_count or not output_count:
+        return 0.0
+    source_dilated = np.asarray(Image.fromarray(source.astype("uint8") * 255).filter(ImageFilter.MaxFilter(3))) > 0
+    output_dilated = np.asarray(Image.fromarray(output.astype("uint8") * 255).filter(ImageFilter.MaxFilter(3))) > 0
+    precision = int((output & source_dilated).sum()) / output_count
+    recall = int((source & output_dilated).sum()) / source_count
+    return 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+
+
+def match_text_blocks(source_blocks, output_blocks):
+    unused = set(range(len(output_blocks)))
+    pairs = []
+    for source in sorted(source_blocks, key=lambda block: len(block["text"]), reverse=True):
+        normalized = " ".join(WORD_RE.findall(source["text"].casefold()))
+        if not normalized or not unused:
+            continue
+        ranked = []
+        for index in unused:
+            candidate = " ".join(WORD_RE.findall(output_blocks[index]["text"].casefold()))
+            ranked.append((SequenceMatcher(None, normalized, candidate, autojunk=False).ratio(), index))
+        score, index = max(ranked)
+        if score >= 0.6:
+            unused.remove(index)
+            pairs.append((source, output_blocks[index]))
+    return pairs
+
+
+def slide_fidelity(source_pdf, typst_pdf, supported_slides):
+    """Return text-masked layout plus font-gated text and full-slide scores."""
     scale = 1.25
-    matrix = fitz.Matrix(scale, scale)
-    source_count = converted_count = true_positive = 0
-    pages = min(len(source_pdf), len(typst_pdf), len(boxes_by_slide))
+    layout_scores = []
+    supported_layout_scores = []
+    text_scores = []
+    ink_scores = []
+    position_scores = []
+    position_errors = []
+    wrap_matches = wrap_equal = 0
+    pages = min(len(source_pdf), len(typst_pdf))
     for page_index in range(pages):
-        spix = source_pdf[page_index].get_pixmap(matrix=matrix, alpha=False)
-        tpix = typst_pdf[page_index].get_pixmap(matrix=matrix, alpha=False)
-        source_image = Image.frombytes("RGB", (spix.width, spix.height), spix.samples).convert("L")
-        typst_image = Image.frombytes("RGB", (tpix.width, tpix.height), tpix.samples).convert("L")
+        source_page, output_page = source_pdf[page_index], typst_pdf[page_index]
+        source_blocks, output_blocks = pdf_text_blocks(source_page), pdf_text_blocks(output_page)
+        source_image, typst_image = page_image(source_page, scale), page_image(output_page, scale)
         if typst_image.size != source_image.size:
             typst_image = typst_image.resize(source_image.size, Image.Resampling.LANCZOS)
-        for x, y, width, height in boxes_by_slide[page_index]:
-            left = max(0, int(x * scale)); top = max(0, int(y * scale))
-            right = min(source_image.width, int((x + width) * scale))
-            bottom = min(source_image.height, int((y + height) * scale))
-            if right - left < 5 or bottom - top < 5:
-                continue
-            src_crop = source_image.crop((left, top, right, bottom))
-            out_crop = typst_image.crop((left, top, right, bottom))
-            src_edge = src_crop.filter(ImageFilter.FIND_EDGES).point(lambda p: 255 if p >= 28 else 0)
-            out_edge = out_crop.filter(ImageFilter.FIND_EDGES).point(lambda p: 255 if p >= 28 else 0)
-            # Ignore a narrow frame border where PowerPoint draws text-box fills/outlines.
-            if src_edge.width > 6 and src_edge.height > 6:
-                src_edge = src_edge.crop((2, 2, src_edge.width - 2, src_edge.height - 2))
-                out_edge = out_edge.crop((2, 2, out_edge.width - 2, out_edge.height - 2))
-            a = np.asarray(src_edge) > 0
-            b = np.asarray(out_edge) > 0
-            if not a.any() and not b.any():
-                continue
-            ad = np.asarray(src_edge.filter(ImageFilter.MaxFilter(3))) > 0
-            bd = np.asarray(out_edge.filter(ImageFilter.MaxFilter(3))) > 0
-            source_count += int(a.sum())
-            converted_count += int(b.sum())
-            true_positive += int((b & ad).sum())
-            # Symmetric match is averaged later with the forward match.
-            true_positive += int((a & bd).sum())
-    precision = true_positive / (2 * converted_count) if converted_count else 0.0
-    recall = true_positive / (2 * source_count) if source_count else 0.0
-    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-    return f1 if source_count else None
+        src_mask = text_region_mask(source_blocks, scale, source_image.size)
+        out_mask = text_region_mask(output_blocks, scale, source_image.size)
+        text_mask = src_mask | out_mask
+        valid = ~text_mask
+
+        # Layout score: compare non-text edges, non-background object colors, and slide background.
+        src_edges, out_edges = edge_map(source_image), edge_map(typst_image)
+        edge_score = tolerant_f1(src_edges, out_edges, valid)
+        if edge_score is None:
+            edge_score = 1.0
+        src_rgb, out_rgb = np.asarray(source_image).astype(np.int16), np.asarray(typst_image).astype(np.int16)
+        h, w = valid.shape
+        corner = max(2, min(h, w) // 40)
+        corner_pixels = np.concatenate([src_rgb[:corner, :corner].reshape(-1, 3), src_rgb[:corner, -corner:].reshape(-1, 3),
+                                        src_rgb[-corner:, :corner].reshape(-1, 3), src_rgb[-corner:, -corner:].reshape(-1, 3)])
+        out_corner_pixels = np.concatenate([out_rgb[:corner, :corner].reshape(-1, 3), out_rgb[:corner, -corner:].reshape(-1, 3),
+                                            out_rgb[-corner:, :corner].reshape(-1, 3), out_rgb[-corner:, -corner:].reshape(-1, 3)])
+        src_bg = np.median(corner_pixels, axis=0); out_bg = np.median(out_corner_pixels, axis=0)
+        bg_score = max(0.0, 1.0 - float(np.abs(src_bg - out_bg).mean()) / 255.0)
+        src_foreground = np.linalg.norm(src_rgb - src_bg, axis=2) > 24
+        out_foreground = np.linalg.norm(out_rgb - out_bg, axis=2) > 24
+        foreground = valid & (src_foreground | out_foreground)
+        if foreground.any():
+            color_delta = np.linalg.norm(src_rgb - out_rgb, axis=2)
+            foreground_score = float((color_delta[foreground] <= 36).mean())
+        else:
+            foreground_score = 1.0
+        if edge_score is not None:
+            layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
+
+        # Unsupported-font slides are excluded from text and full-slide scores.
+        if page_index not in supported_slides:
+            continue
+
+        if edge_score is not None:
+            supported_layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
+
+        # Text ink is compared from rendered text span regions. Position is measured separately.
+        src_text_edges = src_edges & src_mask
+        out_text_edges = out_edges & out_mask
+        ink = tolerant_f1(src_text_edges, out_text_edges)
+        if ink is not None:
+            ink_scores.append(ink)
+        slide_position_errors = []
+        for source, output in match_text_blocks(source_blocks, output_blocks):
+            dx, dy = source["start"][0] - output["start"][0], source["start"][1] - output["start"][1]
+            slide_position_errors.append((dx * dx + dy * dy) ** .5)
+            wrap_matches += 1
+            wrap_equal += source["lines"] == output["lines"]
+        position_errors.extend(slide_position_errors)
+        slide_position_score = (sum(max(0.0, 1.0 - error / 24.0) for error in slide_position_errors)
+                                / len(slide_position_errors) if slide_position_errors else None)
+        if slide_position_score is not None:
+            position_scores.append(slide_position_score)
+        available_text_parts = [score for score in (ink, slide_position_score) if score is not None]
+        slide_text_score = sum(available_text_parts) / len(available_text_parts) if available_text_parts else None
+        if slide_text_score is not None:
+            text_scores.append(slide_text_score)
+    layout = mean_or_none(layout_scores)
+    supported_layout = mean_or_none(supported_layout_scores)
+    ink = mean_or_none(ink_scores)
+    mean_position_error = mean_or_none(position_errors)
+    position_score = mean_or_none(position_scores)
+    text = mean_or_none(text_scores)
+    full = ((supported_layout + text) / 2 if supported_layout is not None and text is not None
+            else (supported_layout if supported_layout is not None else text))
+    return {"layout_fidelity_score": layout, "layout_fidelity_supported_slides": supported_layout,
+            "text_ink_f1": ink, "text_start_position_score": position_score,
+            "text_start_position_error_pt": mean_position_error,
+            "text_fidelity_score": text,
+            "full_slide_fidelity_score": full,
+            "text_wrap_line_count_match": round(wrap_equal / wrap_matches, 3) if wrap_matches else None,
+            "text_blocks_position_matched": wrap_matches}
 
 
 def mean_or_none(values):
@@ -209,15 +406,9 @@ def font_shares(fonts_field: str, installed_fonts: set[str]):
         except ValueError:
             continue
     total = sum(counts.values())
-    explicit = total - counts.get("(inherited)", 0)
     available = sum(count for name, count in counts.items()
                     if name != "(inherited)" and name.casefold() in installed_fonts)
-    return (
-        round(available / explicit, 4) if explicit else None,
-        round(counts.get("(inherited)", 0) / total, 4) if total else None,
-        available,
-        explicit,
-    )
+    return round(available / total, 4) if total else None, available, total
 
 
 def failure_category(error: str, stage: str = ""):
@@ -240,6 +431,17 @@ def failure_category(error: str, stage: str = ""):
     return "Benchmark error"
 
 
+def typst_failure_excerpt(output: str):
+    lines = output.splitlines()
+    error_lines = [index for index, line in enumerate(lines) if line.lstrip().startswith("error:")]
+    if error_lines:
+        excerpt = []
+        for index in error_lines[:3]:
+            excerpt.extend(lines[index:min(len(lines), index + 6)])
+        return "\n".join(excerpt)[-4000:]
+    return "\n".join(lines[:40])[-4000:]
+
+
 def benchmark_one(app, source: Path, entry, installed_fonts):
     record = {key: entry.get(key) for key in ("title", "creator", "doi", "license", "file")}
     record.update({"file_bytes": source.stat().st_size, "status": "ok", "error": ""})
@@ -247,9 +449,24 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
     source_pdf = typst_pdf = None
     stage = "source_parse"
     try:
-        deck, stats, _ = pptx_stats(source, installed_fonts)
+        deck, stats, _, slide_fonts = pptx_stats(source, installed_fonts)
         record.update(stats)
-        boxes = text_boxes_by_slide(deck)
+        supported_slides = set()
+        unsupported_fonts = Counter()
+        for slide_index, families in enumerate(slide_fonts):
+            missing = {family for family in families
+                       if family != "(inherited)" and family.casefold() not in installed_fonts}
+            if missing:
+                unsupported_fonts.update(missing)
+            else:
+                supported_slides.add(slide_index)
+        text_source_slides = {index for index, families in enumerate(slide_fonts) if families}
+        record["text_source_slide_count"] = len(text_source_slides)
+        record["text_font_supported_slide_count"] = len(text_source_slides & supported_slides)
+        record["text_font_skipped_slide_count"] = len(text_source_slides - supported_slides)
+        record["font_unsupported_families"] = "; ".join(
+            f"{family}:{count}" for family, count in unsupported_fonts.most_common()
+        )
         with tempfile.TemporaryDirectory(prefix="pptx-typst-bench-") as tmp:
             tmp_path = Path(tmp)
             project = tmp_path / "typst"
@@ -279,13 +496,17 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                 errors="replace", timeout=900,
             )
             if typst.returncode:
-                raise RuntimeError("typst compile: " + (typst.stderr or typst.stdout)[-1500:])
+                raise RuntimeError("typst compile: " + typst_failure_excerpt(typst.stderr or typst.stdout))
             stage = "powerpoint_render"
             export_powerpoint_pdf(app, source, original_pdf_path)
             stage = "pdf_metrics"
-            source_pdf, source_text, source_sizes, source_page_sizes = pdf_text_and_sizes(original_pdf_path)
+            source_pdf, source_text, source_sizes, source_page_sizes = pdf_text_and_sizes(
+                original_pdf_path, supported_slides
+            )
             try:
-                typst_pdf, converted_text, converted_sizes, converted_page_sizes = pdf_text_and_sizes(converted_pdf_path)
+                typst_pdf, converted_text, converted_sizes, converted_page_sizes = pdf_text_and_sizes(
+                    converted_pdf_path, supported_slides
+                )
                 record.update(overlap_metrics(source_text, converted_text))
                 record["pages_source_pdf"] = len(source_pdf)
                 record["pages_typst_pdf"] = len(typst_pdf)
@@ -301,7 +522,7 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                     and all(abs(a - c) < 1 for p, q in zip(source_page_sizes, converted_page_sizes)
                             for a, c in zip(p, q))
                 )
-                record["text_frame_edge_f1"] = text_edge_f1(source_pdf, typst_pdf, boxes)
+                record.update(slide_fidelity(source_pdf, typst_pdf, supported_slides))
             finally:
                 source_pdf.close()
                 source_pdf = None
@@ -337,7 +558,7 @@ def run_powerpoint_batch(entries, start, manifest, installed_fonts):
             print(f"[{index}/{len(manifest['files'])}] {entry['title']}", flush=True)
             row = benchmark_one(app, source, entry, installed_fonts)
             rows.append(row)
-            print(f"  {row['status']} | words={row.get('word_recall')} | frame-edge={row.get('text_frame_edge_f1')}"
+            print(f"  {row['status']} | layout={row.get('layout_fidelity_score')} | text={row.get('text_fidelity_score')} | full={row.get('full_slide_fidelity_score')}"
                   + (f" | {row['error'][:160]}" if row["error"] else ""), flush=True)
     finally:
         app.Quit()
@@ -380,28 +601,59 @@ def main():
                         if entry.get("file") in by_file]
         else:
             combined = rows
+    for row in combined:
+        if args.report_only:
+            source = ROOT / row.get("file", "")
+            if source.is_file():
+                try:
+                    _, fresh_stats, _, _ = pptx_stats(source, installed_fonts)
+                    row.update(fresh_stats)
+                except Exception:
+                    pass
+        for key in ("layout_fidelity_score", "layout_fidelity_supported_slides", "text_ink_f1",
+                    "text_start_position_score", "text_start_position_error_pt", "text_fidelity_score",
+                    "text_wrap_line_count_match"):
+            if row.get(key) not in (None, ""):
+                row[key] = round(float(row[key]), 3)
+        if row.get("status") == "ok":
+            supported_layout = row.get("layout_fidelity_supported_slides")
+            text = row.get("text_fidelity_score")
+            if supported_layout not in (None, "") and text not in (None, ""):
+                row["full_slide_fidelity_score"] = round((float(supported_layout) + float(text)) / 2, 3)
+            elif supported_layout not in (None, ""):
+                row["full_slide_fidelity_score"] = round(float(supported_layout), 3)
+            elif text not in (None, ""):
+                row["full_slide_fidelity_score"] = round(float(text), 3)
     succeeded = [row for row in combined if row.get("status") == "ok"]
     errors = [row for row in combined if row.get("status") != "ok"]
     weighted_words = sum(int(row.get("source_pdf_words") or 0) * float(row.get("word_recall") or 0) for row in succeeded)
     total_words = sum(int(row.get("source_pdf_words") or 0) for row in succeeded)
-    ink = [float(row["text_frame_edge_f1"]) for row in succeeded if row.get("text_frame_edge_f1") not in (None, "")]
+    layout = [float(row["layout_fidelity_score"]) for row in succeeded if row.get("layout_fidelity_score") not in (None, "")]
+    text_score = [float(row["text_fidelity_score"]) for row in succeeded if row.get("text_fidelity_score") not in (None, "")]
+    full_score = [float(row["full_slide_fidelity_score"]) for row in succeeded if row.get("full_slide_fidelity_score") not in (None, "")]
+    ink = [float(row["text_ink_f1"]) for row in succeeded if row.get("text_ink_f1") not in (None, "")]
+    position_score = [float(row["text_start_position_score"]) for row in succeeded if row.get("text_start_position_score") not in (None, "")]
+    position = [float(row["text_start_position_error_pt"]) for row in succeeded if row.get("text_start_position_error_pt") not in (None, "")]
+    wrap = [float(row["text_wrap_line_count_match"]) for row in succeeded if row.get("text_wrap_line_count_match") not in (None, "")]
+    eligible_text_slides = sum(int(row.get("text_font_supported_slide_count") or 0) for row in succeeded)
+    source_text_slides = sum(int(row.get("text_source_slide_count") or 0) for row in succeeded)
+    skipped_text_slides = sum(int(row.get("text_font_skipped_slide_count") or 0) for row in succeeded)
     font_delta = [float(row["mean_font_size_abs_delta_pt"]) for row in succeeded if row.get("mean_font_size_abs_delta_pt") not in (None, "")]
     word_recall = [float(row["word_recall"]) for row in succeeded if row.get("word_recall") not in (None, "")]
     for row in combined:
-        explicit_share, inherited_share, available_chars, explicit_chars = font_shares(
+        available_share, available_chars, resolved_chars = font_shares(
             row.get("source_fonts", ""), installed_fonts
         )
-        row["installed_font_char_share"] = explicit_share
-        row["inherited_font_char_share"] = inherited_share
+        row["installed_font_char_share"] = available_share
         row["installed_font_characters"] = available_chars
-        row["explicit_font_characters"] = explicit_chars
+        row["resolved_font_characters"] = resolved_chars
         if row.get("status") != "ok":
             row["failure_category"] = row.get("failure_category") or failure_category(
                 row.get("error", ""), row.get("failure_stage", "")
             )
     known = [float(row["installed_font_char_share"]) for row in combined if row.get("installed_font_char_share") not in (None, "")]
     inherited = [float(row["inherited_font_char_share"]) for row in combined if row.get("inherited_font_char_share") not in (None, "")]
-    explicit_total = sum(int(row.get("explicit_font_characters") or 0) for row in combined)
+    resolved_total = sum(int(row.get("resolved_font_characters") or 0) for row in combined)
     explicit_installed = sum(int(row.get("installed_font_characters") or 0) for row in combined)
     RESULTS.parent.mkdir(parents=True, exist_ok=True)
     columns = list(dict.fromkeys(key for row in combined for key in row))
@@ -410,7 +662,7 @@ def main():
         writer.writeheader()
         writer.writerows(combined)
     summary = [
-        "# PPTX to Typst text fidelity benchmark",
+        "# PPTX to Typst fidelity benchmark",
         "",
         f"- Corpus: [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K), sampled deterministically; all selected records are CC BY 4.0.",
         f"- Sample size: {len(manifest['files'])} downloaded decks; measurements recorded for {len(combined)}.",
@@ -419,13 +671,22 @@ def main():
         f"- Source PDF words: {total_words:,}.",
         f"- Weighted visible-word recall: {weighted_words / total_words:.1%}." if total_words else "- Weighted visible-word recall: n/a.",
         f"- Mean per-deck visible-word recall: {sum(word_recall) / len(word_recall):.1%}; median {sorted(word_recall)[len(word_recall) // 2]:.1%}." if word_recall else "- Per-deck visible-word recall: n/a.",
-        f"- Mean per-deck text-frame edge F1 (1 px tolerance): {sum(ink) / len(ink):.1%}; median {sorted(ink)[len(ink) // 2]:.1%}." if ink else "- Text-frame edge F1: n/a.",
+        f"- Layout fidelity (text glyph pixels masked; all rendered slides): {sum(layout) / len(layout):.1%} mean per deck; {sorted(layout)[len(layout) // 2]:.1%} median." if layout else "- Layout fidelity: n/a.",
+        f"- Text metrics include {eligible_text_slides:,} of {source_text_slides:,} source-text slides with all used font families available; {skipped_text_slides:,} slides were skipped for unsupported fonts.",
+        f"- Text fidelity (font-supported slides only): {sum(text_score) / len(text_score):.1%} mean per deck; {sorted(text_score)[len(text_score) // 2]:.1%} median." if text_score else "- Text fidelity: n/a.",
+        f"- Full-slide fidelity (font-supported slides only; equal-weight layout + text): {sum(full_score) / len(full_score):.1%} mean per deck; {sorted(full_score)[len(full_score) // 2]:.1%} median." if full_score else "- Full-slide fidelity: n/a.",
+        f"- Text ink edge F1: {sum(ink) / len(ink):.1%}; mean start-position accuracy: {sum(position_score) / len(position_score):.1%}; mean start-position error: {sum(position) / len(position):.2f} pt." if ink and position and position_score else "- Text ink and start-position metrics: n/a.",
+        f"- Text wrap line-count match (diagnostic only; excluded from scores): {sum(wrap) / len(wrap):.1%}." if wrap else "- Text wrap line-count match: n/a.",
         f"- Mean per-deck absolute PDF font-size difference: {sum(font_delta) / len(font_delta):.2f} pt; median {sorted(font_delta)[len(font_delta) // 2]:.2f} pt." if font_delta else "- PDF font-size difference: n/a.",
-        f"- Explicitly named text uses locally available fonts for {explicit_installed / explicit_total:.1%} of characters across the sample; mean per-deck share {sum(known) / len(known):.1%}." if explicit_total else "- Explicit available-font share: n/a.",
-        f"- Mean share of text inheriting a font from its theme/layout: {sum(inherited) / len(inherited):.1%}; inherited families are not counted as confirmed installed fonts." if inherited else "- Inherited-font share: n/a.",
-        "- Text-frame edge F1 compares rendered edge pixels inside source text-frame rectangles, with a one-pixel tolerance. It includes frame backgrounds and outlines, and is a coarse visual proxy for text layout, wrapping, size and font-shape similarity rather than a pure glyph mask.",
-        "- Tables contribute to PDF word metrics but are excluded from the text-frame edge score; grouped text-frame bounds can also be approximate.",
-        "- Word recall compares text extracted from PowerPoint-exported PDFs and Typst PDFs. Differences in reading order are ignored; repeated or missing visible words lower the score.",
+        f"- Resolved source font families are locally available for {explicit_installed / resolved_total:.1%} of text characters across the sample; mean per-deck share {sum(known) / len(known):.1%}." if resolved_total else "- Available-font share: n/a.",
+        f"- Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): {sum(inherited) / len(inherited):.1%}." if inherited else "- Inherited-font share: n/a.",
+        "- Layout score compares full-slide edges, foreground colors, and background color after masking extracted text glyph regions in both PDFs. Text itself does not contribute to this score. Layout includes slides with unsupported fonts because their text is masked.",
+        "- A slide is eligible for text fidelity only when every resolved source font family used on that slide is present in Typst's installed-font list. Resolved major/minor theme fonts are checked too. Unsupported-font slides are excluded from text, word, font-size, wrap, and full-slide metrics.",
+        "- Text fidelity is the mean of a one-pixel-tolerant rendered ink-edge F1 and a text-start position score. Position score falls linearly to zero at a 24 pt displacement.",
+        "- Wrap line-count match is recorded as a diagnostic and is excluded from text and full-slide scores because the renderers wrap differently.",
+        "- Full-slide score is the equal-weight mean of layout and text fidelity on font-supported slides. If a supported slide has no extractable text, its full-slide score equals its layout score. Word recall and font-size difference remain supplemental diagnostics and use only font-supported slides.",
+        "- Pixel scores use PDF output rendered locally by PowerPoint and Typst. Grouped text spans may be imperfectly extracted from PDFs.",
+        "- Word recall compares text extracted from PowerPoint-exported and Typst PDFs. Differences in reading order are ignored; repeated or missing visible words lower the score.",
         "- Font-size difference compares character-weighted average font sizes extracted from the two PDFs. These aggregate metrics are affected by unsupported objects and font substitution.",
         "- Source attribution, license, DOI and download checksums are in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv). PPTX files are in the ignored local `data/input/` directory.",
     ]

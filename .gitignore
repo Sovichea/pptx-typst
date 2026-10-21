@@ -6,3 +6,5 @@ __pycache__/
 .venv/
 benchmarks/text_fidelity/data/
 benchmarks/text_fidelity/work/
+benchmarks/text_fidelity/fonts/
+benchmarks/text_fidelity/font_installation.json

@@ -357,6 +357,10 @@ for rel in prs.part.rels.values():
 def stylize(s):
  return '\\"'.join([]) if False else '"'+s.replace('\\','\\\\').replace('"','\\"').replace('\n','\\n').replace('\t',' ' ).replace('\v','\\n')+'"'
 
+def typst_comment(value):
+    """Collapse controls and line separators so source metadata stays a comment."""
+    return re.sub(r'\s+',' ',re.sub(r'[\x00-\x1f\x7f-\x9f\u2028\u2029]+',' ',str(value))).strip()
+
 def typst_font_fallback(f):
     """Prefer the requested family, then Typst's bundled fallback family."""
     families=[]
@@ -1224,7 +1228,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                     # the coordinate origin changes. This is intentionally NOT an
                     # additional group rotation, which would double-transform it.
                     # Original rotation, flips and child-space are in the manifest.
-                    lines.append(f'  // Group: {sh.name} | id: {gid}')
+                    lines.append(f'  // Group: {typst_comment(sh.name)} | id: {gid}')
                     lines.append(f'  #Place(x:{bx-origin[0]:.3f}pt,y:{by-origin[1]:.3f}pt,child:GroupContent(width:{br-bx:.3f}pt,height:{bb-by:.3f}pt,children:[')
                     counts['group_containers']+=1
                     sm['groups'][-1]['render_bounds_pt']=[round(v,4) for v in bounds]
@@ -1253,7 +1257,7 @@ for slide_no,slide in enumerate(prs.slides,1):
             if smartart is not None:
                 asset=smartart_svg(sh,smartart)
                 if asset:
-                    lines.append(f'  // SmartArt layout drawing: {sh.name}')
+                    lines.append(f'  // SmartArt layout drawing: {typst_comment(sh.name)}')
                     lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{asset}",width:{pl["w"]:.3f}pt,height:{pl["h"]:.3f}pt,fit:"stretch"))')
                     obj.update(type='smartart',source=asset,rendering='materialized vector drawing')
                     counts['smartart_placements']+=1
@@ -1261,7 +1265,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                     continue
             if getattr(sh,'has_table',False) and not table_has_spans(sh):
                 table=typst_table(sh)
-                lines.append(f'  // Editable PowerPoint table: {sh.name}')
+                lines.append(f'  // Editable PowerPoint table: {typst_comment(sh.name)}')
                 lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{table})')
                 obj.update(type='table',rows=len(sh.table.rows),columns=len(sh.table.columns))
                 counts['table_placements']+=1
@@ -1327,7 +1331,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                         counts['unsupported_clip_masks']+=1
                         obj['clip_warning']='Mask uses adjustable presets, curves, or rotation not yet validated. Original picture kept without a generated mask.'
                 core=typst_img(rendered_rel,pl,crop,fillrect)
-                lines.append(f'  // Source media: {rel} | shape: {sh.name} | {shape_kind}')
+                lines.append(f'  // Source media: {typst_comment(rel)} | shape: {typst_comment(sh.name)} | {typst_comment(shape_kind)}')
                 lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{core})')
                 media_contents[sha]['placements'].append({'slide':slide_no,'shape':sh.name,'crop':authored_crop,'fillrect':authored_fillrect,'alpha':alpha,'geometry':shape_kind})
                 obj.update(type='image',source=rel,render_source=rendered_rel,geometry=shape_kind,crop=authored_crop,fillrect=authored_fillrect,render_crop=crop,render_fillrect=fillrect,alpha=alpha,mask_applied=(rendered_rel!=rel and rendered_rel.startswith('assets/media/clip_')))
@@ -1341,13 +1345,16 @@ for slide_no,slide in enumerate(prs.slides,1):
                     rel,pad,w0,h0=backing
                     pscale=(pl['w']/w0+pl['h']/h0)/2 if w0*h0 else 1
                     extra=pad*pscale
-                    lines.append(f'  // Fill and outline behind text shape: {sh.name}')
+                    lines.append(f'  // Fill and outline behind text shape: {typst_comment(sh.name)}')
                     lines.append(f'  #Place(x:{pl["x"]-extra-origin[0]:.3f}pt,y:{pl["y"]-extra-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch"))')
                     obj['background_shape']=rel
                     counts['text_backing_shapes']+=1
                 counts['text_placements']+=1
                 core=content_for_text(sh,pl['w'],pl['h'],1,1)
-                lines.append(f'  // Editable text: {sh.name} | {sh.text[:80].replace(chr(10)," ")}')
+                # Source text can contain vertical tabs and Unicode line breaks.
+                # Keep it on one comment line so it cannot become Typst markup.
+                comment=typst_comment(f'{sh.name} | {sh.text[:80]}')
+                lines.append(f'  // Editable text: {comment}')
                 # Keep the text frame at the source shape origin. Text insets,
                 # paragraph anchors, and point sizes are handled inside its box.
                 lines.append(f'  #Place(x:{pl["x"]-origin[0]:.3f}pt,y:{pl["y"]-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:{core})')
@@ -1362,7 +1369,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                     # Stroke padding also scales with grouped shape transformation.
                     pscale=(pl['w']/w0+pl['h']/h0)/2 if w0*h0 else 1
                     extra=pad*pscale
-                    lines.append(f'  // Original editable PowerPoint shape: {sh.name}')
+                    lines.append(f'  // Original editable PowerPoint shape: {typst_comment(sh.name)}')
                     lines.append(f'  #Place(x:{pl["x"]-extra-origin[0]:.3f}pt,y:{pl["y"]-extra-origin[1]:.3f}pt,orientation:{pl["rotation"]:.3f}deg,child:image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch"))')
                     obj['type']='vector_shape';obj['source']=rel;counts['vector_shapes']+=1
                 else:

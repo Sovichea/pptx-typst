@@ -1,4 +1,4 @@
-# Text fidelity benchmark
+# PPTX to Typst fidelity benchmark
 
 This benchmark samples 100 `.pptx` files from [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K). Every selected record declares CC BY 4.0. `manifest.json` records the title, creator, DOI, source URL, license, expected size, and checksum for each file. The source presentations are downloaded to the ignored local directory `data/input/` and are not committed to this repository.
 
@@ -10,19 +10,23 @@ On Windows, install Typst and desktop PowerPoint, then install the benchmark-onl
 
 ```powershell
 python -m pip install pyarrow pywin32 PyMuPDF
+python tools/install_benchmark_fonts.py
 python tools/download_text_benchmark.py
 python tools/run_text_fidelity_benchmark.py
 ```
 
-The downloader verifies each PPTX checksum and writes attribution details to `manifest.json`. The runner converts each file to Typst, compiles the result, exports the original through PowerPoint to PDF, and compares the PDFs. Intermediate projects and PDFs are removed after each deck. Use `--start N --end M` to run a manifest slice; completed rows are combined into `results.csv`.
+The font installer downloads matching families only when the Google Fonts upstream includes a per-family SIL Open Font License, then installs them for the current Windows user. Font binaries and the machine-specific install report remain local and ignored. The downloader verifies each PPTX checksum and writes attribution details to `manifest.json`. The runner converts each file to Typst, compiles the result, exports the original through PowerPoint to PDF, and compares the PDFs. Intermediate projects and PDFs are removed after each deck. Use `--start N --end M` to run a manifest slice; completed rows are combined into `results.csv`.
 
-## Measures
+## Scores
 
-- **Visible-word recall and precision** compare text extracted from PowerPoint-exported and Typst PDFs. They ignore reading order and case; missing and duplicated words affect the scores.
-- **Text-frame edge F1** compares rendered edge pixels inside source text-frame rectangles, allowing a one-pixel offset. It includes frame backgrounds and outlines and is a coarse visual proxy for font shape, placement, size, wrapping, and line spacing, rather than a pure glyph or positioning score. Python-PPTX's bounds for text nested in groups can be local to the group, so treat this score as an approximate corpus-level signal.
-- Table text contributes to PDF word metrics, but tables are excluded from the text-frame edge score.
-- **Mean font-size difference** compares character-weighted font sizes extracted from each PDF. It can hide per-run differences.
-- **Available-font share** is computed over explicitly named font text. Text that inherits its font from a theme or layout is reported separately because its resolved family is not always explicit in the slide XML.
-- Compile and conversion failures are counted separately from fidelity scores. `results.csv` contains per-deck errors and measurements; `summary.md` contains aggregate results.
+- **Layout fidelity** compares full-slide rendered edges, foreground colors, and slide background after masking extracted text glyph regions in both PDFs. Text ink does not contribute to this score; images, shapes, fills, lines, charts, table geometry, and text-box fills/outlines remain part of the visual comparison.
+- **Text fidelity** is the equal-weight mean of text ink edge F1 and text-start position accuracy. Ink F1 compares rendered glyph edges with a one-pixel tolerance. Start-position accuracy is based on matched rendered text blocks and falls linearly to zero at a 24 pt displacement; mean start-position error is also recorded.
+- A slide contributes to text and full-slide scores only when every resolved source font family used on that slide is available to Typst. Major/minor theme fonts and inherited text styles are resolved and checked. Unsupported-font slides remain in layout measurements, with extracted text pixels masked, but are skipped in text metrics and full-slide scores.
+- **Full-slide fidelity** is the equal-weight mean of layout and text fidelity on font-supported slides. A font-supported slide without text contributes its layout score alone.
+- **Text wrap line-count match** is recorded as a diagnostic only. It is excluded from text and full-slide scores because PowerPoint and Typst may wrap differently.
+- **Visible-word recall and precision**, **mean font-size difference**, and **available-font share** remain supplemental diagnostics, not components of the three fidelity scores.
+- Score values are on a 0–1 scale. Per-deck scores and errors are in `results.csv`; aggregate means and medians are in `summary.md`.
+
+Text boxes for masking and rendered glyph measurements come from PDF text extraction, so PDF text extraction issues can affect pixel metrics. PDF text blocks are matched by normalized text to compare starting positions; block matching and pixel thresholds are approximate corpus-level measures rather than a claim of exact visual equivalence.
 
 The PDFs are rendered on this Windows machine with PowerPoint and Typst using its installed fonts. Different PowerPoint versions, Typst versions, operating systems, and font installations can change the pixel-level results.
