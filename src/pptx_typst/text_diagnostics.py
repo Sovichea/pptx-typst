@@ -5,9 +5,103 @@ from collections import Counter, defaultdict
 from difflib import SequenceMatcher
 import math
 import re
+from statistics import median
+import unicodedata
 
 
 WORD_RE = re.compile(r"[\w]+", re.UNICODE)
+
+
+def normalize_text_tokens(text):
+    normalized = unicodedata.normalize("NFKC", text).casefold()
+    return re.findall(r"[^\W_]+", normalized, flags=re.UNICODE)
+
+
+def assign_lines_to_paragraphs(lines, paragraphs):
+    """Assign rendered lines to source paragraphs through ordered token evidence.
+
+    A line is assigned only when at least 80% of its tokens map monotonically
+    to one paragraph. Repeated words are disambiguated by sequence alignment
+    over the whole text frame rather than by a local fuzzy match.
+    """
+    paragraph_tokens = [normalize_text_tokens(paragraph) for paragraph in paragraphs]
+    expected = [token for group in paragraph_tokens for token in group]
+    expected_paragraph = [index for index, group in enumerate(paragraph_tokens) for _ in group]
+    rendered_lines = [normalize_text_tokens(line.get("text", "")) for line in lines]
+    rendered = [token for group in rendered_lines for token in group]
+    mapping = {}
+    for block in SequenceMatcher(None, expected, rendered, autojunk=False).get_matching_blocks():
+        for offset in range(block.size):
+            mapping[block.b + offset] = block.a + offset
+    output, cursor, unmatched = [], 0, 0
+    for tokens in rendered_lines:
+        mapped = [expected_paragraph[mapping[i]] for i in range(cursor, cursor + len(tokens)) if i in mapping]
+        cursor += len(tokens)
+        counts = {paragraph: mapped.count(paragraph) for paragraph in set(mapped)}
+        paragraph = max(counts, key=counts.get) if counts else None
+        confidence = counts.get(paragraph, 0) / max(1, len(tokens)) if paragraph is not None else 0.0
+        if confidence < 0.8:
+            unmatched += 1
+            output.append(None)
+        else:
+            output.append(paragraph)
+    return output, unmatched
+
+
+def paragraph_render_metrics(source_lines, output_lines, paragraphs):
+    """Separate within-paragraph line pitch from paragraph-start displacement."""
+    source_ids, source_unmatched = assign_lines_to_paragraphs(source_lines, paragraphs)
+    output_ids, output_unmatched = assign_lines_to_paragraphs(output_lines, paragraphs)
+    source_by_paragraph, output_by_paragraph = {}, {}
+    for lines, ids, target in ((source_lines, source_ids, source_by_paragraph),
+                               (output_lines, output_ids, output_by_paragraph)):
+        for line, paragraph in zip(lines, ids):
+            if paragraph is not None:
+                target.setdefault(paragraph, []).append(line)
+    start_deltas, pitch_deltas = [], []
+    paragraph_pairs = []
+    line_count_matches = line_segmentation_matches = 0
+    paragraph_count_compared = 0
+    for paragraph in sorted(source_by_paragraph.keys() & output_by_paragraph.keys()):
+        source = source_by_paragraph[paragraph]
+        output = output_by_paragraph[paragraph]
+        paragraph_count_compared += 1
+        start_delta = abs(float(source[0]["baseline"]) - float(output[0]["baseline"]))
+        start_deltas.append(start_delta)
+        same_lines = (len(source) == len(output)
+                      and all(normalize_text_tokens(a["text"]) == normalize_text_tokens(b["text"])
+                              for a, b in zip(source, output)))
+        paragraph_pairs.append({
+            "paragraph_index": paragraph,
+            "source_start_baseline_pt": float(source[0]["baseline"]),
+            "typst_start_baseline_pt": float(output[0]["baseline"]),
+            "start_displacement_pt": start_delta,
+            "source_line_count": len(source),
+            "typst_line_count": len(output),
+            "same_line_segmentation": same_lines,
+        })
+        if len(source) == len(output):
+            line_count_matches += 1
+            if same_lines:
+                line_segmentation_matches += 1
+                pitch_deltas.extend(abs((float(source[i]["baseline"]) - float(source[i - 1]["baseline"]))
+                                        - (float(output[i]["baseline"]) - float(output[i - 1]["baseline"])))
+                                    for i in range(1, len(source)))
+    return {
+        "paragraph_start_pairs": paragraph_count_compared,
+        "paragraph_start_mean_abs_displacement_pt": float(sum(start_deltas) / len(start_deltas)) if start_deltas else None,
+        "paragraph_start_median_abs_displacement_pt": median(start_deltas) if start_deltas else None,
+        "paragraphs_with_same_line_count": line_count_matches,
+        "paragraphs_with_identical_line_segmentation": line_segmentation_matches,
+        "paragraph_pairs": paragraph_pairs,
+        "line_pitch_intervals_compared": len(pitch_deltas),
+        "line_pitch_mean_abs_error_pt": float(sum(pitch_deltas) / len(pitch_deltas)) if pitch_deltas else None,
+        "line_pitch_median_abs_error_pt": median(pitch_deltas) if pitch_deltas else None,
+        "source_unmatched_lines": source_unmatched,
+        "typst_unmatched_lines": output_unmatched,
+        "_pitch_deltas": pitch_deltas,
+        "_start_deltas": start_deltas,
+    }
 
 
 def align_pdf_pages_to_slides(total_slides, hidden_slide_indices, source_pdf_pages, typst_pdf_pages):

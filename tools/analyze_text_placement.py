@@ -16,7 +16,8 @@ from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 from pptx_typst.text_diagnostics import (
-    align_pdf_pages_to_slides, assign_pdf_blocks_to_shapes, match_text_blocks_spatial,
+    align_pdf_pages_to_slides, assign_lines_to_paragraphs, assign_pdf_blocks_to_shapes,
+    match_text_blocks_spatial, normalize_text_tokens, paragraph_render_metrics,
 )
 
 try:
@@ -130,6 +131,7 @@ def source_text_shapes(deck):
                     continue
                 found[(slide_number, shape.shape_id)] = {
                     "text": shape.text,
+                    "paragraphs": [paragraph.text for paragraph in shape.text_frame.paragraphs],
                     "geometry": source_placement(shape, parent, geometry_source),
                     "grouped": grouped,
                 }
@@ -180,6 +182,12 @@ def combine_shape_blocks(blocks):
     if not blocks:
         return None
     first = min(blocks, key=lambda block: (block["bbox"][1], block["bbox"][0]))
+    line_by_key = {}
+    for block in blocks:
+        for line in block.get("line_records", []):
+            key = (round(float(line["baseline"]), 2), tuple(normalize_text_tokens(line["text"])))
+            line_by_key.setdefault(key, line)
+    line_records = sorted(line_by_key.values(), key=lambda line: (line["baseline"], line["bbox"][0]))
     return {
         "start": first.get("start", (first["bbox"][0], first["bbox"][1])),
         "baseline": first.get("baseline", first.get("start", first["bbox"][:2])),
@@ -187,6 +195,7 @@ def combine_shape_blocks(blocks):
                  max(b["bbox"][2] for b in blocks), max(b["bbox"][3] for b in blocks)),
         "baselines": sorted({round(float(block.get("baseline", block.get("start", block["bbox"][:2]))[1]), 1)
                               for block in blocks}),
+        "line_records": line_records,
     }
 
 
@@ -199,6 +208,7 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
     output_positions = {key: value for key, value in output_positions.items() if value is not None}
     common = source_positions.keys() & output_positions.keys()
     displacements, baseline_deltas, bbox_deltas, line_spacing_deltas = [], [], [], []
+    paragraph_start_deltas = []
     comparable_line_objects = line_count_mismatch_objects = 0
     source_overflows, typst_overflows = [], []
     samples = []
@@ -210,17 +220,18 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
         displacements.append(distance)
         baseline_deltas.append(abs(source["baseline"][1] - output["baseline"][1]))
         bbox_deltas.append(float(np.mean(np.abs(np.array(source["bbox"]) - np.array(output["bbox"])))) )
-        line_pitch_comparable=(len(source["baselines"]) == len(output["baselines"])
-                               and len(source["baselines"]) > 1)
-        if line_pitch_comparable:
-            comparable_line_objects+=1
-            line_spacing_deltas.extend(abs(
-                (source["baselines"][i] - source["baselines"][i - 1])
-                - (output["baselines"][i] - output["baselines"][i - 1])
-            ) for i in range(1, len(source["baselines"])))
-        elif len(source["baselines"]) != len(output["baselines"]):
-            line_count_mismatch_objects+=1
         shape = source_shapes[shape_id]
+        paragraph_metrics = paragraph_render_metrics(
+            source.get("line_records", []), output.get("line_records", []),
+            shape.get("paragraphs") or [shape.get("text", "")],
+        )
+        if paragraph_metrics["line_pitch_intervals_compared"]:
+            comparable_line_objects += 1
+            line_spacing_deltas.extend(paragraph_metrics["_pitch_deltas"])
+        if paragraph_metrics["paragraphs_with_same_line_count"] < paragraph_metrics["paragraph_start_pairs"]:
+            line_count_mismatch_objects += 1
+        if paragraph_metrics["paragraph_start_mean_abs_displacement_pt"] is not None:
+            paragraph_start_deltas.extend(paragraph_metrics["_start_deltas"])
         x, y, width, height, angle = (float(shape["geometry"][key]) for key in ("x", "y", "w", "h", "rot"))
         cx, cy = x + width / 2, y + height / 2
         corners = []
@@ -235,8 +246,10 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
                               output["bbox"][2] - frame[2], output["bbox"][3] - frame[3])
         source_overflows.append(source_overflow)
         typst_overflows.append(output_overflow)
-        src_pitch = np.diff(source["baselines"])
-        out_pitch = np.diff(output["baselines"])
+        pitch_deltas = paragraph_metrics["_pitch_deltas"]
+        line_pitch_comparable = bool(pitch_deltas)
+        paragraph_metrics.pop("_pitch_deltas", None)
+        paragraph_metrics.pop("_start_deltas", None)
         samples.append({"shape_id": shape_id, "distance_pt": round(distance, 2),
                         "dx_pt": round(dx, 2), "dy_pt": round(dy, 2),
                         "text": shape["text"][:100],
@@ -249,10 +262,12 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
                         "typst_line_count": len(output["baselines"]),
                         "line_count_delta": len(output["baselines"])-len(source["baselines"]),
                         "line_pitch_comparable": line_pitch_comparable,
+                        "line_pitch_deltas_pt": [round(float(value), 3) for value in pitch_deltas],
+                        "mean_line_pitch_delta_pt": (float(np.mean(pitch_deltas))
+                                                     if pitch_deltas else None),
                         "source_baselines_pt": source["baselines"],
                         "typst_baselines_pt": output["baselines"],
-                        "source_mean_baseline_pitch_pt": float(np.mean(src_pitch)) if len(src_pitch) else None,
-                        "typst_mean_baseline_pitch_pt": float(np.mean(out_pitch)) if len(out_pitch) else None})
+                        "paragraph_metrics": paragraph_metrics})
     return {
         "source_shape_count": len(source_shapes), "typst_shape_count": len(output_shapes),
         "objects_with_glyphs_in_both_pdfs": len(common),
@@ -275,9 +290,16 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
         "mean_first_glyph_baseline_delta_pt": float(np.mean(baseline_deltas)) if baseline_deltas else None,
         "mean_text_bbox_edge_delta_pt": float(np.mean(bbox_deltas)) if bbox_deltas else None,
         "mean_line_spacing_delta_pt_when_line_count_matches": float(np.mean(line_spacing_deltas)) if line_spacing_deltas else None,
+        "median_line_spacing_delta_pt_when_line_count_matches": float(np.median(line_spacing_deltas)) if line_spacing_deltas else None,
+        "line_pitch_definition": "within-paragraph intervals with identical rendered line segmentation; paragraph gaps excluded",
+        "mean_paragraph_start_displacement_pt": float(np.mean(paragraph_start_deltas)) if paragraph_start_deltas else None,
+        "median_paragraph_start_displacement_pt": float(np.median(paragraph_start_deltas)) if paragraph_start_deltas else None,
         "line_pitch_compared_objects": comparable_line_objects,
         "line_count_mismatch_objects": line_count_mismatch_objects,
         "line_pitch_intervals_compared": len(line_spacing_deltas),
+        "line_pitch_samples": [sample for sample in samples if sample["line_pitch_comparable"]],
+        "paragraph_start_samples": [sample for sample in samples
+                                     if sample["paragraph_metrics"]["paragraph_start_pairs"]],
         "objects_overflowing_frame_by_more_than_2pt": {
             "powerpoint": int(sum(value > 2 for value in source_overflows)),
             "typst": int(sum(value > 2 for value in typst_overflows)),
@@ -291,6 +313,7 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
         "_baseline_deltas": baseline_deltas,
         "_bbox_deltas": bbox_deltas,
         "_line_spacing_deltas": line_spacing_deltas,
+        "_paragraph_start_deltas": paragraph_start_deltas,
         "_line_pitch_compared_objects": comparable_line_objects,
         "_line_count_mismatch_objects": line_count_mismatch_objects,
         "_source_overflows": source_overflows,
@@ -310,6 +333,7 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
     object_baselines = []
     object_bboxes = []
     object_line_spacing = []
+    object_paragraph_starts = []
     object_line_pitch_compared = object_line_count_mismatch = 0
     object_source_overflows = []
     object_typst_overflows = []
@@ -360,6 +384,7 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
                 continue
             output_objects[str(item["source_shape_id"])] = {
                 "text": source_shape["text"],
+                "paragraphs": source_shape.get("paragraphs", [source_shape["text"]]),
                 "geometry": {key: float(item[key]) for key in ("x", "y", "w", "h", "rot")},
                 "grouped": bool(item.get("group_path")),
             }
@@ -368,6 +393,7 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
         object_baselines.extend(object_result.pop("_baseline_deltas"))
         object_bboxes.extend(object_result.pop("_bbox_deltas"))
         object_line_spacing.extend(object_result.pop("_line_spacing_deltas"))
+        object_paragraph_starts.extend(object_result.pop("_paragraph_start_deltas"))
         object_line_pitch_compared += object_result.pop("_line_pitch_compared_objects")
         object_line_count_mismatch += object_result.pop("_line_count_mismatch_objects")
         object_source_overflows.extend(object_result.pop("_source_overflows"))
@@ -455,6 +481,10 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
             "mean_first_glyph_baseline_delta_pt": float(np.mean(object_baselines)) if object_baselines else None,
             "mean_text_bbox_edge_delta_pt": float(np.mean(object_bboxes)) if object_bboxes else None,
             "mean_line_spacing_delta_pt_when_line_count_matches": float(np.mean(object_line_spacing)) if object_line_spacing else None,
+            "median_line_spacing_delta_pt_when_line_count_matches": float(np.median(object_line_spacing)) if object_line_spacing else None,
+            "line_pitch_definition": "within-paragraph intervals with identical rendered line segmentation; paragraph gaps excluded",
+            "mean_paragraph_start_displacement_pt": float(np.mean(object_paragraph_starts)) if object_paragraph_starts else None,
+            "median_paragraph_start_displacement_pt": float(np.median(object_paragraph_starts)) if object_paragraph_starts else None,
             "line_pitch_compared_objects": object_line_pitch_compared,
             "line_count_mismatch_objects": object_line_count_mismatch,
             "line_pitch_intervals_compared": len(object_line_spacing),

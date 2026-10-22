@@ -18,7 +18,7 @@ from collections import Counter,defaultdict
 import argparse
 from .pptx_geometry import shape_paths, preset_path
 from .pptx_mask import mask_image
-from .paragraph_layout import resolve_paragraph_style, typst_leading, typst_spacing
+from .paragraph_layout import resolve_paragraph_style, typst_target_pitch, typst_spacing
 
 cli=argparse.ArgumentParser(description="Convert PPTX to structured Typst with shared master/layout declarations and original media assets")
 cli.add_argument("input_pptx",type=Path,help="source PowerPoint document")
@@ -705,10 +705,22 @@ def _paragraph_run_expressions(sh,pa,shrink=1.0):
     run_iter=iter(pa.runs)
     max_size=0.0
     first_style=None
+    last_style=None
     for child in pa._p:
         tag=etree.QName(child).localname
         if tag=='br':
-            expressions.append('PptxPlaceholderRun(text:"\\n")')
+            # A soft break has no text run of its own. Carry the preceding
+            # run's metric/style so it does not fall back to the containing
+            # text frame's size (which differs for ordinary frames and
+            # placeholders even when their paragraph runs are identical).
+            if last_style is None:
+                expressions.append('PptxPlaceholderRun(text:"\\n")')
+            else:
+                font,size,fill,weight,italic=last_style
+                expressions.append('PptxPlaceholderRun('+', '.join((
+                    'text:"\\n"',f'font:{stylize(font)}',f'size:{size:.3f}pt',
+                    f'fill:rgb("{fill}")',f'weight:{stylize(weight)}',
+                    f'italic:{str(bool(italic)).lower()}'))+')')
             continue
         if tag not in ('r','fld'):
             continue
@@ -716,6 +728,7 @@ def _paragraph_run_expressions(sh,pa,shrink=1.0):
         if run is None or not run.text:
             continue
         font,size,fill,weight,italic=effective_run_style(sh,pa,run)
+        last_style=(font,size,fill,weight,italic)
         max_size=max(max_size,size*shrink)
         if first_style is None:
             first_style=(font,size,fill,weight)
@@ -727,14 +740,37 @@ def _paragraph_run_expressions(sh,pa,shrink=1.0):
     return expressions,max_size,first_style
 
 
-def paragraph_record_expression(sh,pa,*,shrink=1.0,spacing_reduction=0.0,bullet_counters=None,record_name='PptxParagraph'):
+def paragraph_render_styles(sh, paragraphs):
+    """Return source font size and family used for each paragraph line box.
+
+    An empty DrawingML paragraph's ``endParaRPr`` describes the insertion
+    point in PowerPoint, not a visible run. Use the nearest non-empty
+    paragraph's font size for its line box instead of treating that caret
+    style as visible content.
+    """
+    styles = []
+    for paragraph in paragraphs:
+        _, size, first_style = _paragraph_run_expressions(sh, paragraph)
+        styles.append((size, first_style[0] if first_style else None))
+    nonempty = [index for index, (paragraph, (size, _)) in enumerate(zip(paragraphs, styles))
+                if size > 0 and paragraph.text.strip()]
+    for index, (paragraph, (size, _)) in enumerate(zip(paragraphs, styles)):
+        if size > 0 or paragraph.text.strip():
+            continue
+        nearest = min(nonempty, key=lambda other: abs(other - index), default=None)
+        styles[index] = styles[nearest] if nearest is not None else (20.0, None)
+    return styles
+
+
+def paragraph_record_expression(sh,pa,*,shrink=1.0,spacing_reduction=0.0,bullet_counters=None,record_name='PptxParagraph',empty_paragraph_size=None,empty_paragraph_font=None):
     """Serialize one paragraph with source spacing semantics and resolved origin."""
     bullet_counters=bullet_counters if bullet_counters is not None else {}
     runs,max_size,first_style=_paragraph_run_expressions(sh,pa,shrink)
+    empty_paragraph = not pa.text.strip() and not runs
     if max_size<=0:
-        max_size=20.0*shrink
+        max_size=(empty_paragraph_size or 20.0)*shrink
     style=resolve_paragraph_style(paragraph_style_source_records(sh,pa),pa.level)
-    spec=bullet_spec(sh,pa,max_size) if args.text_features in ('structure','all') else None
+    spec=bullet_spec(sh,pa,max_size) if args.text_features in ('structure','all') and not empty_paragraph else None
     if spec:
         if spec['kind']=='number':
             key=(pa.level,spec['type'])
@@ -748,12 +784,16 @@ def paragraph_record_expression(sh,pa,*,shrink=1.0,spacing_reduction=0.0,bullet_
     else:
         marker=None
     record=style.effective_record()
-    leading=typst_leading(style,max_size,spacing_reduction)
+    target_pitch=typst_target_pitch(style,max_size,spacing_reduction)
     before=typst_spacing(style.space_before,max_size)
     after=typst_spacing(style.space_after,max_size)
     fields=[f'level:{pa.level}']
     if not runs:
         fields.insert(0,f'text:{stylize(pa.text.replace(chr(11), chr(10)))}')
+    if empty_paragraph:
+        fields.append(f'empty-size:{(empty_paragraph_size or 20.0):.3f}pt')
+        if empty_paragraph_font:
+            fields.append(f'empty-font:{typst_font_fallback(empty_paragraph_font)}')
     if marker is not None:
         fields.append(f'bullet:{stylize(marker)}')
         bullet_font=(spec.get('font') if spec else None) or (first_style[0] if first_style else CURRENT_FONTS.get('minor','Arial'))
@@ -789,7 +829,7 @@ def paragraph_record_expression(sh,pa,*,shrink=1.0,spacing_reduction=0.0,bullet_
         value=record.get(key)
         if value:fields.append(f'{key.replace("_","-")}:{stylize(value)}')
     for key,value in (('line-kind',record['line_kind']),('line-value',record['line_value']),
-                      ('line-source',record['line_source']),('leading',leading),
+                      ('line-source',record['line_source']),('target-pitch',target_pitch),
                       ('before-kind',record['before_kind']),('before-value',record['before_value']),
                       ('before-source',record['before_source']),('before',before),
                       ('after-kind',record['after_kind']),('after-value',record['after_value']),
@@ -813,9 +853,12 @@ def content_for_text(sh, ew, eh, sx, sy):
     paragraphs=[]
     first_style=None
     bullet_counters={}
-    for pa in sh.text_frame.paragraphs:
+    source_paragraphs = list(sh.text_frame.paragraphs)
+    paragraph_styles = paragraph_render_styles(sh, source_paragraphs)
+    for pa, (empty_size, empty_font) in zip(source_paragraphs, paragraph_styles):
         expression,run_style,_,_=paragraph_record_expression(
-            sh,pa,shrink=shrink,spacing_reduction=spacing_reduction,bullet_counters=bullet_counters)
+            sh,pa,shrink=shrink,spacing_reduction=spacing_reduction,bullet_counters=bullet_counters,
+            empty_paragraph_size=empty_size,empty_paragraph_font=empty_font)
         paragraphs.append(expression)
         if first_style is None and run_style is not None:first_style=run_style
     if first_style is None:first_style=(CURRENT_FONTS.get('minor','Arial'),20*shrink,shape_text_color(sh),'regular')
@@ -1606,11 +1649,14 @@ for slide_no,slide in enumerate(prs.slides,1):
                 args_out.append(f'{key}:{value}')
             paragraph_exprs=[]
             bullet_counters={}
-            for paragraph in shape.text_frame.paragraphs:
+            source_paragraphs = list(shape.text_frame.paragraphs)
+            paragraph_styles = paragraph_render_styles(shape, source_paragraphs)
+            for paragraph, (empty_size, empty_font) in zip(source_paragraphs, paragraph_styles):
                 expression,_,_,_=paragraph_record_expression(
                     shape,paragraph,shrink=font_scale,spacing_reduction=line_reduction,
                     bullet_counters=bullet_counters,
-                    record_name='PptxPlaceholderParagraph')
+                    record_name='PptxPlaceholderParagraph',empty_paragraph_size=empty_size,
+                    empty_paragraph_font=empty_font)
                 paragraph_exprs.append(expression)
             paragraph_tuple = '(' + ', '.join(paragraph_exprs) + (',' if len(paragraph_exprs) == 1 else '') + ')'
             args_out.extend([f'text:{stylize(shape.text)}',f'paragraphs:{paragraph_tuple}'])

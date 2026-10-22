@@ -1,73 +1,93 @@
-# Paragraph layout fidelity
+# Paragraph layout fidelity review
 
-## Result
+## Decision
 
-**PARTIAL.** Ordinary text frames and title/body placeholders now use one paragraph record and one Typst renderer. Controlled fixtures preserve spacing semantics, paragraph boundaries, soft breaks, list levels, autofit metadata, and native placeholder ownership through a round trip. Font metrics and PowerPoint/Typst line-box differences still produce visible pitch and wrapping differences in real decks.
+**PARTIAL.** The renderer now maps supported PowerPoint spacing to measured Typst font metrics consistently, and the RRI empty-paragraph defect is corrected. Controlled pitch error is below 0.4 pt. Real-deck wrapping, text matching, and font/layout inheritance differences remain; no general typography-engine work is justified by this sample.
 
 ## What changed
 
-Previously, ordinary text frames converted DrawingML line spacing to Typst leading with a fixed formula based on `0.52em` and `0.67em`, then inserted a manual paragraph advance. The placeholder path had separate paragraph rendering and did not preserve all line-spacing and before/after values. Paragraph inheritance was read from a few selected XML nodes instead of resolving each property independently.
+The previous translation treated Typst's natural line pitch as exactly `1em`, then used `target pitch − font size` as Typst leading. That is the wrong quantity: Typst leading is the gap from the previous line box's bottom edge to the next line box's top edge. With the default cap-height/baseline edges, the font's measured cap height is part of baseline advance. Typst documents these semantics in its [paragraph reference](https://typst.app/docs/reference/model/par/) and [text reference](https://typst.app/docs/reference/text/text/).
 
-`src/pptx_typst/paragraph_layout.py` now models line spacing as either a percentage or point value, plus paragraph before/after spacing, alignment, indentation, bullet properties, and the source that supplied each value. Resolution walks direct paragraph properties, shape list styles, matching layout and master placeholders, and master text styles. Each property resolves separately, so an explicit alignment does not mask inherited line spacing.
+`paragraph_layout.py` now preserves the PowerPoint spacing kind/value and computes a target pitch separately from rendering. In a controlled PowerPoint-exported Arial 14 pt fixture, percentage spacing produced baseline pitches of 13.44, 16.80, 20.16, and 25.20 pt at 80%, 100%, 120%, and 150%. The renderer measures the selected Typst font's cap-height in context and sets leading to `target pitch − measured cap-height`. Point-based spacing stays in points. Unspecified single spacing uses the measured 1.2-em baseline pitch, and `normAutofit` line reduction is applied to that target before Typst leading is calculated.
 
-The Typst API serializes that same record as `PptxParagraph` for ordinary text and `PptxPlaceholderParagraph` for native placeholders. Both are rendered through `PptxTextFrame`. The record retains source values and origins for reverse conversion; inherited placeholder paragraph properties are written to the corresponding layout/master part while direct slide overrides remain local. Bullet marker font, size, and color now travel with the record to avoid marker-metric changes shifting equivalent text frames.
+The same `PptxTextFrame` path handles ordinary text and native placeholders. Two additional real-world errors were confirmed and corrected:
 
-## Spacing translation
+- Empty DrawingML paragraphs can carry an `endParaRPr` caret size and bullet style even though PowerPoint renders only blank vertical space. Their line box now uses the nearest visible paragraph's font size/family; the empty line does not draw a bullet. This prevents a 20 pt caret style from replacing a 14 pt line pitch.
+- A soft line break has no text run of its own. It now carries the preceding run's style so an unstyled break does not inherit the different outer font size of a placeholder versus an ordinary text frame.
 
-PowerPoint's `a:spcPct` describes a target baseline pitch as a percentage of the font size; `a:spcPts` describes a pitch in points. Typst's `leading` is additional distance between line boxes. The current deterministic fallback treats the font's natural pitch as 1em, then computes:
+The renderer still retains explicit paragraph before/after spacing and source `spcPct`/`spcPts` data for reverse conversion. The `Root`, `Place`, `PptxSlide`, and native placeholder structures are unchanged.
 
-```text
-Typst leading = effective PowerPoint pitch - nominal font size
-```
+## Measurement method
 
-For autofit line-spacing reduction, the source pitch is reduced before calculating Typst leading. Explicit before/after values are translated independently. Unspecified spacing stays unspecified, except autofit reduction is reflected as a relative reduction against the same nominal natural-pitch fallback.
+The `a5c1997` and `abc593d` revisions were converted and rendered with the same diagnostic code, identical input PPTX files, the same PowerPoint PDF export, Typst `0.15.1`, installed fonts, 1.2 render scale, and source-order page map. All six decks had matching source and Typst page counts and no hidden slides, so each scored page maps to the same source slide by identity and order rather than text similarity.
 
-This preserves the source spacing kind and value but cannot reproduce each font engine's actual ascent, descent, line gap, or mixed-run metrics. No font-specific coefficients or per-deck corrections are used. Percentage spacing is not converted into an arbitrary paragraph gap.
+The analyzer reports object-linked first-glyph/paragraph starts separately from baseline pitch. Pitch enters the statistics only where source and output line segmentation is identical; paragraph gaps are excluded from pitch. The table shows every counted interval/object and matched text-object count. Unassigned PDF spans are reported rather than treated as successful matches. The historical greedy/text-similarity metrics are not used here.
 
-## Validation
+The sample is limited and not a population benchmark. Font support means the source text-slide fonts were present in Typst's installed font list. NAVIS had no object-linked glyph pairs, so it contributes no spacing measurement.
 
-The synthetic fixture contains equivalent ordinary and body-placeholder frames at the same geometry and vertical anchor. It exercises 100%, 120%, 150%, 80%, and point-based spacing; explicit before/after spacing; inherited layout spacing and a slide override; master-placeholder spacing; two bullet levels; explicit bullet font/size/color; mixed run sizes; a soft break; an empty paragraph; autofit; and top anchoring. The generated Typst compiles. PDF span origins for the same text in the text box and placeholder agree within 0.01 pt. Reverse conversion keeps native placeholders and round-trips the tested DrawingML values. All 43 tests pass.
+## Same-method real-deck comparison
 
-The text-placement analyzer now maps exported PowerPoint PDF pages to their visible source slides by deterministic slide order, excluding hidden slides. A page-count or Typst-count disagreement marks the comparison invalid and excludes it. Six representative decks had matching source/Typst page counts (54/54, 11/11, 11/11, 8/8, 23/23, and 35/35); none had hidden slides. This measurement does not rely on text similarity to establish slide identity.
+Values are mean / median absolute error in points. “Starts” are paragraph-start baseline displacement for structurally matched text objects, not line pitch.
 
-Object-linked rendered diagnostics after the change:
+| Deck | Font-supported text slides | Object matches, old → new | Pitch intervals, old → new | Pitch error, old → new | Paragraph starts, old → new | Line-count mismatch objects, old → new | Typst overflow objects >2 pt, old → new |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Depression Cues | 8 / 8 | 10 → 10 | 4 → 4 | 5.47 / 7.12 → 0.01 / 0.00 | 30.91 / 20.72 → 17.20 / 20.07 | 1 → 1 | 0 → 1 |
+| BMH Summit | 11 / 11 | 11 → 12 | 19 → 24 | 0.93 / 1.11 → 1.49 / 1.74 | 11.50 / 7.33 → 12.44 / 4.33 | 2 → 3 | 1 → 2 |
+| State of Astropy | 11 / 11 | 5 → 5 | 0 → 0 | Not measurable | 4.99 / 3.56 → 4.07 / 3.56 | 0 → 0 | 0 → 0 |
+| Preregistration / RRI | 22 / 22 | 74 → 74 | 38 → 38 | 0.53 / 0.50 → 0.01 / 0.00 | 4.58 / 2.13 → 2.49 / 2.30 | 1 → 1 | 1 → 1 |
+| Open Science ETDs | 32 / 32 | 23 → 23 | 8 → 8 | 1.07 / 0.85 → 0.00 / 0.00 | 6.44 / 3.57 → 3.55 / 3.16 | 7 → 8 | 4 → 4 |
+| NAVIS.one | 10 / 54 | 0 → 0 | 0 → 0 | Not measurable | Not measurable | 0 → 0 | 0 → 0 |
 
-| Deck | Font-supported text slides | Objects with glyphs in both PDFs | Line-pitch objects / intervals compared | Mean absolute pitch delta | Line-count mismatch objects |
-|---|---:|---:|---:|---:|---:|
-| NAVIS.one | 10 / 54 | 0 | 0 / 0 | Not measurable | 0 |
-| State of Astropy | 11 / 11 | 5 | 1 / 1 | 10.0 pt | 0 |
-| BMH Summit | 11 / 11 | 12 | 9 / 62 | 8.0 pt | 3 |
-| Depression cues | 8 / 8 | 10 | 6 / 11 | 24.7 pt | 1 |
-| Preregistration / RRI | 22 / 22 | 74 | 33 / 78 | 6.9 pt | 1 |
-| Open Science ETDs | 32 / 32 | 23 | 10 / 29 | 5.8 pt | 2 |
+The BMH pitch sample is a small exception: its mean and median pitch deltas increased by about 0.6 pt, while paragraph-start median improved. That difference is small relative to the sample's wrapping and list-matching variation; it does not support a deck-specific correction. In ETDs, pitch and paragraph starts improved while one additional object had a line-count mismatch. The aggregate overflow count stayed at four. These wrap differences are reported separately from pitch.
 
-Pitch is compared only for confidently object-linked text whose rendered line counts match. The State of Astropy estimate is based on one object; Depression cues contains a material pitch outlier; the metrics therefore do not support a general claim that real-world pitch accuracy improved. NAVIS produced no object-linked glyph matches, so its requested slide 21 is not scored. Text-start matches also remain affected by list hierarchy and line wrapping. Frame-overflow counts above 2 pt were 0 Typst objects in NAVIS, Astropy, BMH, and Depression cues; 0 versus 1 source object in RRI; and 1 source / 1 Typst object in Open Science ETDs.
+### Reconsidering the earlier outliers
 
-The old `anchors` mode and the new shared renderer are shown for RRI slide 6. The old image comes from the pre-change `a5c1997` implementation; the new image uses the current default. It is a visual comparison, not an isolated pixel experiment: the former path also had different run-style inheritance. It shows the full-line paragraph advance and overly bold text from the old path, while the shared renderer keeps mixed regular/bold/italic runs and avoids that extra gap.
+The former 24.7 pt Depression Cues “pitch” outlier combined paragraph-start gaps with line pitch. With paragraph boundaries excluded, the same-method old converter has four comparable intervals at 5.47 pt mean error; the current renderer has four at 0.01 pt. For the multi-paragraph object on slide 4, mean paragraph-start displacement falls from 34.19 to 19.52 pt, with no line-count difference. Residual start displacement includes initial anchor and glyph metrics, not a line-pitch defect.
 
-**Before (`--text-layout anchors`):**
+The 8 pt BMH figure also came from an earlier matching population. Under the fixed matcher, its old sample is 19 intervals at 0.93 pt mean error, and the new sample is 24 intervals at 1.49 pt. Wrapping, bullets, and a changed matched-object population explain more of the visual difference than pitch alone. This is not a confirmed spacing regression requiring another targeted patch.
 
-![PowerPoint and pre-change Typst output for RRI slide 6](images/paragraph-layout-before-anchors.png)
+Astropy's selected slides contain no reliable multi-line baseline pairs, and NAVIS has no object-linked glyph matches. Those cases cannot establish line-pitch fidelity. RRI slide 2 is a useful control for empty paragraphs: the nine visible source baselines and current output baselines have a 3.61 pt mean paragraph-start offset, no line-count difference, and no frame overflow. Its residual is a near-uniform starting offset.
 
-**After (shared paragraph renderer):**
+## Controlled fixture
 
-![PowerPoint and current Typst output for RRI slide 6](images/paragraph-layout-after-shared-renderer.png)
+The Arial 14 pt fixture contains equivalent ordinary text frames at 80%, 100%, 120%, and 150% spacing with three soft-break lines. The updated renderer matches the PowerPoint baseline pitch with eight comparable intervals: **0.073 pt mean absolute error, 0.025 pt median, and 0.36 pt maximum**. The old output had no line intervals accepted by the stricter line-segmentation matcher, so no comparable old numeric pitch is claimed. Its rendered sheet remains available for visual inspection.
 
-The prior `anchors-spacing` measurement on the same RRI deck had a 1.95 pt mean line-spacing delta on text-only matches; the current object-linked method reports 6.88 pt on 33 objects and 78 intervals. These values use different match populations and cannot establish a measured regression or improvement. No aggregate text score is used as an acceptance target.
+![PowerPoint reference and old/current Typst rendering for the controlled 80–150% line-spacing fixture](images/paragraph-spacing/controlled-80-150-percent.png)
 
-## Remaining limitations
+## Visual comparisons
 
-- The 1em natural-pitch fallback is deterministic, not a font-metric reproduction. Correct pitch may require reading the exact selected font's metrics and reproducing each renderer's baseline model.
-- Mixed-size runs affect the font line box and may cause different wrapping even when source geometry and point size are retained.
-- Numbered bullets and theme-derived bullet styling are represented for the current supported subset; full Office list-style cascade, tab-stop behavior, and dynamic placeholder insertion are not implemented.
-- Real-world diagnostic matching still leaves many text spans unmatched, and dense/repeated text may remain uncertain. Ambiguous page correspondence is excluded; uncertain text matches are reported and do not enter the line-pitch statistic.
-- Desktop PowerPoint behavioral comparison was unavailable for these sampled decks during this milestone. Source OOXML and the installed Typst renderer were inspected, and reverse conversion was structurally checked.
+The images show the PowerPoint PDF render, `a5c1997`, and the corrected `abc593d`-based renderer at identical slide size. They are visual checks, not additional scores. Some unrelated placeholder font sizing, glyph substitution, and overall object differences remain visible and are not attributed to line spacing.
 
-## Files and tests
+**Depression Cues, slide 4.** This multi-paragraph object exposed the former false pitch outlier. The baseline advances now match when line segmentation agrees; paragraph-start displacement remains visible.
 
-- Shared model: `src/pptx_typst/paragraph_layout.py`
-- PPTX import and Typst generation: `src/pptx_typst/pptx_to_typst.py`
+![Depression Cues slide 4 comparison](images/paragraph-spacing/009-depression-cues-slide-04.png)
+
+Source deck: Urška Smrke et al., [Zenodo record 7300056](https://doi.org/10.5281/zenodo.7300056), CC BY 4.0.
+
+**Preregistration / RRI, slide 2.** The blank list paragraphs used a 20 pt caret bullet style in OOXML although PowerPoint rendered no bullet there. The corrected Typst output keeps those blank lines at the neighboring text pitch and removes the stray markers.
+
+![RRI slide 2 empty paragraph comparison](images/paragraph-spacing/095-rri-slide-02.png)
+
+**Preregistration / RRI, slide 10.** Paragraph starts and mixed regular/italic text remain close; the smaller remaining displacement is mainly the initial anchor.
+
+![RRI slide 10 comparison](images/paragraph-spacing/095-rri-slide-10.png)
+
+Source deck: Sara Casati et al., [Zenodo record 7646077](https://doi.org/10.5281/zenodo.7646077), CC BY 4.0.
+
+## Validation and limitations
+
+- `python -m pytest -q`: **45 passed**, including the focused empty-paragraph and styled-soft-break regressions.
+- The synthetic conversion compiles in Typst and its ordinary text frame and native placeholder produce matching positions for the first line and a following paragraph. Round-trip assertions retain percentage/point spacing, before/after values, soft breaks, bullets, and native placeholder parts.
+- Non-text geometry is unchanged by the renderer patch. Structural geometry deltas in the fixed sample remain below 0.005 pt; edits affect text serialization/rendering only.
+- The six-deck sample preserves page counts and source ordering. It is not a full 100-deck benchmark rerun.
+
+Remaining differences include font-specific ascent/descent/line-gap behavior between PowerPoint and Typst, mixed-size runs that alter line boxes, autofit nuances, wrap changes, bullet indentation, and many unmatched PDF spans. The current line-height model measures Typst's selected font but does not reproduce PowerPoint's font shaping or paragraph engine. No custom shaping or per-font calibration is warranted for this PoC milestone.
+
+## Evidence files
+
+- Shared paragraph model: `src/pptx_typst/paragraph_layout.py`
+- PPTX paragraph extraction: `src/pptx_typst/pptx_to_typst.py`
 - Shared Typst renderer: `src/pptx_typst/template.typ` and `src/pptx_typst/templates/pptx-typst.typ`
-- Editable PPTX writing: `src/pptx_typst/typst_to_pptx.py`
-- Controlled regression: `tests/test_paragraph_layout.py`
-- Page alignment and rendered metrics: `tools/analyze_text_placement.py`
+- Controlled and real-deck measurements: ignored local files under `benchmarks/text_fidelity/work/paragraph-spacing-validation/`
+- Regression tests: `tests/test_paragraph_layout.py`
+- Diagnostic code: `src/pptx_typst/text_diagnostics.py` and `tools/analyze_text_placement.py`

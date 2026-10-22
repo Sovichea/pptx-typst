@@ -106,7 +106,7 @@ def test_placeholder_run_formatting_roundtrips(tmp_path: Path) -> None:
     assert "PptxPlaceholderRun" in typst_source
     assert 'weight:"bold"' in typst_source
     assert "italic:true" in typst_source
-    assert 'PptxPlaceholderRun(text:"\\n")' in typst_source
+    assert 'PptxPlaceholderRun(text:"\\n", font:"Calibri", size:44.000pt' in typst_source
 
     typst = shutil.which("typst")
     if typst:

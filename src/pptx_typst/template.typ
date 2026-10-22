@@ -40,17 +40,19 @@
 )
 #let PptxParagraph(
   text: "", level: 0, bullet: none, bullet-kind: none, bullet-type: none, bullet-start: none, bullet-source: none,
+  empty-size: none, empty-font: none,
   bullet-font: none, bullet-font-source: none, bullet-size: none, bullet-size-kind: none, bullet-size-value: none, bullet-size-source: none, bullet-fill: none, bullet-fill-source: none, bullet-weight: none,
   align: none, align-source: none, runs: (),
-  line-kind: none, line-value: none, line-source: none, leading: none,
+  line-kind: none, line-value: none, line-source: none, leading: none, target-pitch: none,
   before-kind: none, before-value: none, before-source: none, before: none,
   after-kind: none, after-value: none, after-source: none, after: none,
   margin-left: none, margin-left-source: none, indent: none, indent-source: none,
 ) = (
   text: text, level: level, bullet: bullet, bullet-kind: bullet-kind, bullet-type: bullet-type, bullet-start: bullet-start, bullet-source: bullet-source,
+  empty-size: empty-size, empty-font: empty-font,
   bullet-font: bullet-font, bullet-font-source: bullet-font-source, bullet-size: bullet-size, bullet-size-kind: bullet-size-kind, bullet-size-value: bullet-size-value, bullet-size-source: bullet-size-source, bullet-fill: bullet-fill, bullet-fill-source: bullet-fill-source, bullet-weight: bullet-weight,
   align: align, align-source: align-source, runs: runs,
-  line-kind: line-kind, line-value: line-value, line-source: line-source, leading: leading,
+  line-kind: line-kind, line-value: line-value, line-source: line-source, leading: leading, target-pitch: target-pitch,
   before-kind: before-kind, before-value: before-value, before-source: before-source, before: before,
   after-kind: after-kind, after-value: after-value, after-source: after-source, after: after,
   margin-left: margin-left, margin-left-source: margin-left-source, indent: indent, indent-source: indent-source,
@@ -75,12 +77,20 @@
   }
   let render-paragraph = (paragraph, index) => {
     let runs = paragraph.at("runs", default: ())
+    let is-empty = runs.len() == 0 and paragraph.text == ""
     let body = if runs.len() == 0 {
-      if paragraph.text == "" { text("\u{200B}") } else { paragraph.text }
+      if is-empty {
+        let empty-font = paragraph.at("empty-font")
+        let empty-size = paragraph.at("empty-size")
+        text(font: if empty-font == none { font } else { empty-font },
+          size: (if empty-size == none { size } else { empty-size }) * font-scale)[#text("\u{200B}")]
+      } else { paragraph.text }
     } else { runs.map(render-run).join() }
     let align-name = if paragraph.align == none { default-align } else { paragraph.align }
     let alignment = if align-name == "center" { center } else if align-name == "right" { right } else { left }
-    let marker = paragraph.bullet
+    // PowerPoint's endParaRPr can retain a caret style with a bullet, but an
+    // empty paragraph renders as vertical space and does not show a bullet.
+    let marker = if paragraph.text == "" and runs.len() == 0 { none } else { paragraph.bullet }
     let bullet-body = if marker == none { body } else {
       let indent = if paragraph.at("margin-left", default: none) == none { 0pt } else { paragraph.at("margin-left") }
       let hanging = if paragraph.indent == none { 0pt } else { paragraph.indent }
@@ -98,14 +108,46 @@
     let content = if marker == none and paragraph.at("margin-left", default: none) != none {
       pad(left: paragraph.at("margin-left") + if paragraph.indent == none { 0pt } else { paragraph.indent })[#bullet-body]
     } else { bullet-body }
-    let leading = if paragraph.leading == none { 0pt } else { paragraph.leading }
-    let after = if paragraph.after == none { 0pt } else { paragraph.after }
-    [
-      #if paragraph.before != none { v(paragraph.before) }
-      #set par(leading: leading, spacing: after)
-      #align(alignment)[#content]
-      #if index + 1 < paragraphs.len() { parbreak() }
-    ]
+    context {
+      let natural-heights = if runs.len() == 0 {
+        let empty-font-value = paragraph.at("empty-font")
+        let empty-size-value = paragraph.at("empty-size")
+        let empty-font = if empty-font-value == none { font } else { empty-font-value }
+        let empty-size = if empty-size-value == none { size } else { empty-size-value }
+        (measure(text(font: empty-font, size: empty-size * font-scale,
+          top-edge: "cap-height", bottom-edge: "baseline")[H]).height,)
+      } else {
+        runs.map(run => {
+          let run-font = if run.font == none { font } else { run.font }
+          let run-size = if run.size == none { size * font-scale } else { run.size * font-scale }
+          measure(text(font: run-font, size: run-size,
+            top-edge: "cap-height", bottom-edge: "baseline")[H]).height
+        })
+      }
+      let natural-height = natural-heights.fold(0pt, (largest, current) =>
+        if largest > current { largest } else { current })
+      let marker-height = if marker == none { 0pt } else {
+        let marker-font = paragraph.at("bullet-font", default: font)
+        let marker-size = paragraph.at("bullet-size", default: size * font-scale)
+        measure(text(font: marker-font, size: marker-size,
+          top-edge: "cap-height", bottom-edge: "baseline")[H]).height
+      }
+      let natural-height = if marker-height > natural-height { marker-height } else { natural-height }
+      let target-pitch = paragraph.at("target-pitch", default: none)
+      let leading = if target-pitch != none { target-pitch - natural-height }
+        else if paragraph.leading == none { 0pt } else { paragraph.leading }
+      // Paragraph breaks also advance by one source line pitch. Typst's
+      // par.spacing is an edge gap, so subtract its measured line box first.
+      let line-gap = if target-pitch != none { target-pitch - natural-height } else { leading }
+      let explicit-after = if paragraph.after == none { 0pt } else { paragraph.after }
+      let after = line-gap + explicit-after
+      [
+        #if paragraph.before != none { v(paragraph.before) }
+        #set par(leading: leading, spacing: after)
+        #align(alignment)[#content]
+        #if index + 1 < paragraphs.len() { parbreak() }
+      ]
+    }
   }
   let body = paragraphs.enumerate().map(((index, paragraph)) => render-paragraph(paragraph, index)).join()
   let vertical = if anchor == "center" { horizon } else if anchor == "bottom" { bottom } else { top }

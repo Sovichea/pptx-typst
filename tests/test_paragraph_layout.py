@@ -15,7 +15,7 @@ from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Pt
 import pytest
 
-from pptx_typst.paragraph_layout import resolve_paragraph_style, typst_leading, typst_spacing
+from pptx_typst.paragraph_layout import resolve_paragraph_style, typst_target_pitch, typst_spacing
 from pptx_typst.typst_to_pptx import convert as convert_to_pptx, find_macro_records
 
 
@@ -59,32 +59,32 @@ def test_paragraph_model_resolves_each_property_independently():
     assert style.space_after.value.kind == "percent"
     assert style.space_after.value.value == 50
     assert style.margin_left_pt.value == 20 and style.indent_pt.value == -8
-    assert typst_leading(style, 20) == 4
+    assert typst_target_pitch(style, 20) == pytest.approx(28.8)
     assert typst_spacing(style.space_before, 20) == 4.5
     # Unspecified values remain unspecified instead of receiving a source guess.
     assert resolve_paragraph_style((("direct", _ppr()),)).line_spacing is None
 
 
 @pytest.mark.parametrize(("kind", "value", "expected"), [
-    ("percent", 100000, 0.0),
-    ("percent", 120000, 4.0),
-    ("percent", 150000, 10.0),
-    ("percent", 80000, -4.0),
-    ("points", 1800, -2.0),
+    ("percent", 100000, 24.0),
+    ("percent", 120000, 28.8),
+    ("percent", 150000, 36.0),
+    ("percent", 80000, 19.2),
+    ("points", 1800, 18.0),
 ])
-def test_typst_leading_uses_source_pitch_and_one_em_fallback(kind, value, expected):
+def test_typst_target_pitch_uses_powerpoint_spacing_semantics(kind, value, expected):
     ppr = _ppr()
     _spacing(ppr, "lnSpc", kind, value)
     style = resolve_paragraph_style((("direct", ppr),))
-    assert typst_leading(style, 20) == expected
+    assert typst_target_pitch(style, 20) == pytest.approx(expected)
 
 
 def test_autofit_line_spacing_reduction_scales_the_source_pitch():
     ppr = _ppr()
     _spacing(ppr, "lnSpc", "percent", 120000)
     style = resolve_paragraph_style((("direct", ppr),))
-    assert typst_leading(style, 20, 0.1) == pytest.approx(1.6)
-    assert typst_leading(resolve_paragraph_style(()), 20, 0.1) == pytest.approx(-2.0)
+    assert typst_target_pitch(style, 20, 0.1) == pytest.approx(25.92)
+    assert typst_target_pitch(resolve_paragraph_style(()), 20, 0.1) == pytest.approx(21.6)
 
 
 def _set_paragraph_format(paragraph, line_kind, line_value):
@@ -123,7 +123,7 @@ def _make_frame_text(text_frame):
     run = second.add_run()
     run.text = "Second paragraph"
     run.font.name = "Arial"
-    run.font.size = Pt(20)
+    run.font.size = Pt(14)
     second.level = 2
     _set_paragraph_format(second, "points", 1800)
     empty = text_frame.add_paragraph()  # Distinct from the soft line break above.
@@ -132,7 +132,12 @@ def _make_frame_text(text_frame):
     _spacing(empty_ppr, "lnSpc", "percent", 100000)
     _spacing(empty_ppr, "spcBef", "points", 0)
     _spacing(empty_ppr, "spcAft", "points", 0)
-    empty_ppr.append(OxmlElement("a:buNone"))
+    empty_bullet = OxmlElement("a:buChar")
+    empty_bullet.set("char", "-")
+    empty_ppr.append(empty_bullet)
+    end_style = OxmlElement("a:endParaRPr")
+    end_style.set("sz", "4000")  # Caret style must not size an invisible blank line.
+    empty._p.append(end_style)
 
 
 def test_ordinary_text_and_placeholder_share_spacing_and_roundtrip(tmp_path: Path):
@@ -208,8 +213,11 @@ def test_ordinary_text_and_placeholder_share_spacing_and_roundtrip(tmp_path: Pat
     assert ordinary_paras[0]["level"] == placeholder_paras[0]["level"] == "1"
     assert ordinary_paras[1]["level"] == placeholder_paras[1]["level"] == "2"
     assert ordinary_paras[2].get("text") == placeholder_paras[2].get("text") == '""'
+    assert ordinary_paras[2].get("bullet") is None
+    assert placeholder_paras[2].get("bullet") is None
+    assert ordinary_paras[2]["target-pitch"] == placeholder_paras[2]["target-pitch"] == "13.6080pt"
     assert 'font-scale:0.90000' in generated and 'line-spacing-reduction:0.10000' in generated
-    assert generated.count('PptxPlaceholderRun(text:"\\n")') >= 2
+    assert generated.count('PptxPlaceholderRun(text:"\\n", font:"Arial"') >= 3
 
     typst = shutil.which("typst")
     if typst:
@@ -236,6 +244,19 @@ def test_ordinary_text_and_placeholder_share_spacing_and_roundtrip(tmp_path: Pat
                            for left, right in zip(paired_origins[0], ordinary_origin[0]))
                 assert all(abs(left - right) < 0.01
                            for left, right in zip(paired_origins[1], ordinary_origin[0]))
+
+                def text_origins(page, value):
+                    return [tuple(span["origin"]) for block in page.get_text("dict")["blocks"]
+                            if "lines" in block for line in block["lines"] for span in line["spans"]
+                            if span["text"] == value]
+
+                paired_paragraph_origins = text_origins(rendered[0], "Second paragraph")
+                ordinary_paragraph_origins = text_origins(rendered[1], "Second paragraph")
+                assert len(paired_paragraph_origins) == 2 and len(ordinary_paragraph_origins) == 1
+                assert all(abs(left - right) < 0.01
+                           for left, right in zip(paired_paragraph_origins[0], ordinary_paragraph_origins[0]))
+                assert all(abs(left - right) < 0.01
+                           for left, right in zip(paired_paragraph_origins[1], ordinary_paragraph_origins[0]))
 
     output = tmp_path / "paragraphs-roundtrip.pptx"
     convert_to_pptx(project / "main.typ", output)

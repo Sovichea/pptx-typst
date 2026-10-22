@@ -140,28 +140,29 @@ def resolve_paragraph_style(sources: Iterable[tuple[str, Any]], level: int = 0) 
     return ParagraphStyle(level=level, sources={key: value.source for key, value in selected.items() if value}, **selected)
 
 
-def typst_leading(style: ParagraphStyle, max_font_size_pt: float,
-                  line_spacing_reduction: float = 0.0) -> float | None:
-    """Translate source baseline pitch to Typst's added leading.
+def typst_target_pitch(style: ParagraphStyle, max_font_size_pt: float,
+                       line_spacing_reduction: float = 0.0) -> float | None:
+    """Return the target DrawingML baseline pitch before Typst metric adjustment.
 
-    Typst leading is additional spacing between its font-derived line boxes,
-    while DrawingML spacing specifies a baseline pitch. Without querying the
-    exact font file chosen by Typst, use a documented 1-em natural-pitch
-    fallback: percentage pitch maps relative to the run's largest size and
-    point pitch subtracts that same nominal em. This preserves the source
-    semantic and keeps 100% at zero added leading without deck-specific tuning.
+    PowerPoint's percentage line spacing scales its automatic single-line pitch.
+    Controlled Arial 14 pt renders measured 13.44, 16.80, 20.16, and 25.20 pt
+    for 80%, 100%, 120%, and 150%, respectively: 1.2 em times the percentage.
+    Absolute ``spcPts`` remains a baseline pitch in points. Unspecified spacing
+    uses the same automatic single-line pitch. The Typst renderer subtracts its
+    actual selected-font cap-height from this target because Typst's leading is
+    the gap between the previous baseline and next cap-height edge.
     """
     prop = style.line_spacing
     if max_font_size_pt <= 0:
         return None
     reduction = min(1.0, max(0.0, line_spacing_reduction))
     if prop is None:
-        return -max_font_size_pt * reduction if reduction else None
-    spacing: Spacing = prop.value
-    target = (max_font_size_pt * spacing.value / 100.0 if spacing.kind == "percent"
-              else spacing.value)
-    target *= 1.0 - reduction
-    return target - max_font_size_pt
+        target = max_font_size_pt * 1.2
+    else:
+        spacing: Spacing = prop.value
+        target = (max_font_size_pt * 1.2 * spacing.value / 100.0
+                  if spacing.kind == "percent" else spacing.value)
+    return target * (1.0 - reduction)
 
 
 def typst_spacing(prop: Property | None, max_font_size_pt: float) -> float | None:

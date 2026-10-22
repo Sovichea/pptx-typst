@@ -310,19 +310,34 @@ def pdf_text_blocks(page):
             first_origin = first.get("origin", first["bbox"][:2])
             block_lines = [line for line in lines if any(s.get("text", "").strip() for s in line.get("spans", []))]
             baselines = []
+            line_records = []
+            line_by_span = {}
             for line in block_lines:
-                line_first = next(s for s in line.get("spans", []) if s.get("text", "").strip())
+                line_spans = [s for s in line.get("spans", []) if s.get("text", "").strip()]
+                line_first = line_spans[0]
                 baselines.append(float(line_first.get("origin", line_first["bbox"][:2])[1]))
+                line_boxes = [s["bbox"] for s in line_spans]
+                line_record = {
+                    "text": " ".join(s["text"] for s in line_spans),
+                    "baseline": float(line_first.get("origin", line_first["bbox"][:2])[1]),
+                    "bbox": (min(b[0] for b in line_boxes), min(b[1] for b in line_boxes),
+                             max(b[2] for b in line_boxes), max(b[3] for b in line_boxes)),
+                }
+                line_records.append(line_record)
+                for span in line_spans:
+                    line_by_span[id(span)] = line_record
             blocks.append({"text": text, "lines": len(block_lines),
                            "start": (float(first["bbox"][0]), float(first["bbox"][1])),
                            "baseline": (float(first_origin[0]), float(first_origin[1])),
                            "bbox": (min(b[0] for b in boxes), min(b[1] for b in boxes),
                                     max(b[2] for b in boxes), max(b[3] for b in boxes)),
                            "baselines": baselines,
+                           "line_records": line_records,
                            "spans": [{"text": span["text"],
                                       "bbox": tuple(float(v) for v in span["bbox"]),
                                       "start": (float(span["bbox"][0]), float(span["bbox"][1])),
-                                      "baseline": tuple(float(v) for v in span.get("origin", span["bbox"][:2]))}
+                                      "baseline": tuple(float(v) for v in span.get("origin", span["bbox"][:2])),
+                                      "line_records": [line_by_span[id(span)]]}
                                      for span in spans],
                            "boxes": boxes})
     return blocks

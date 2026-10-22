@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from pptx_typst.text_diagnostics import (
+    assign_lines_to_paragraphs,
     align_pdf_pages_to_slides,
     assign_pdf_blocks_to_shapes,
     match_text_blocks_spatial,
+    paragraph_render_metrics,
     select_low_text_slides,
 )
 
@@ -125,3 +127,40 @@ def test_pdf_page_number_is_not_mistaken_for_a_token_in_a_long_text_frame() -> N
     assert not any(assigned.values())
     assert ambiguous == 0
     assert unmatched == 1
+
+
+def test_line_pitch_excludes_gaps_between_source_paragraphs() -> None:
+    paragraphs = ["alpha beta gamma delta", "epsilon zeta"]
+    source = [
+        {"text": "alpha beta", "baseline": 10.0},
+        {"text": "gamma delta", "baseline": 20.0},
+        {"text": "epsilon zeta", "baseline": 45.0},
+    ]
+    output = [
+        {"text": "alpha beta", "baseline": 10.0},
+        {"text": "gamma delta", "baseline": 22.0},
+        {"text": "epsilon zeta", "baseline": 60.0},
+    ]
+
+    metrics = paragraph_render_metrics(source, output, paragraphs)
+
+    assert metrics["line_pitch_intervals_compared"] == 1
+    assert metrics["line_pitch_mean_abs_error_pt"] == 2.0
+    assert metrics["paragraph_start_pairs"] == 2
+    assert metrics["paragraph_start_mean_abs_displacement_pt"] == 7.5
+    assert metrics["paragraphs_with_identical_line_segmentation"] == 2
+
+
+def test_line_pitch_is_excluded_when_wrapping_segmentation_differs() -> None:
+    metrics = paragraph_render_metrics(
+        [{"text": "alpha beta", "baseline": 10.0},
+         {"text": "gamma delta", "baseline": 20.0}],
+        [{"text": "alpha beta gamma", "baseline": 10.0},
+         {"text": "delta", "baseline": 25.0}],
+        ["alpha beta gamma delta"],
+    )
+
+    assert metrics["paragraphs_with_same_line_count"] == 1
+    assert metrics["paragraphs_with_identical_line_segmentation"] == 0
+    assert metrics["line_pitch_intervals_compared"] == 0
+    assert metrics["line_pitch_mean_abs_error_pt"] is None
