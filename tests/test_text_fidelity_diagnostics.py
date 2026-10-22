@@ -1,10 +1,23 @@
 from __future__ import annotations
 
-from pptx_typst.text_diagnostics import assign_pdf_blocks_to_shapes, match_text_blocks_spatial
+from pptx_typst.text_diagnostics import assign_pdf_blocks_to_shapes, match_text_blocks_spatial, select_low_text_slides
 
 
 def block(text: str, x: float, y: float) -> dict:
     return {"text": text, "start": (x, y)}
+
+
+def test_low_text_slide_selection_ignores_unscored_slides_and_returns_worst_first() -> None:
+    slides = [
+        {"slide": 1, "text_fidelity_score": 0.7},
+        {"slide": 2, "text_fidelity_score": 0.2},
+        {"slide": 3, "text_fidelity_score": None},
+        {"slide": 4, "text_fidelity_score": 0.4},
+    ]
+
+    selected = select_low_text_slides(slides, count=2)
+
+    assert [item["slide"] for item in selected] == [2, 4]
 
 
 def test_spatial_match_disambiguates_repeated_labels_by_location() -> None:

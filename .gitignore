@@ -8,3 +8,5 @@ benchmarks/text_fidelity/data/
 benchmarks/text_fidelity/work/
 benchmarks/text_fidelity/fonts/
 benchmarks/text_fidelity/font_installation.json
+benchmarks/text_fidelity/visual_comparisons/
+benchmarks/text_fidelity/diagnostics/new_fixes_sample/

@@ -10,6 +10,12 @@ import re
 WORD_RE = re.compile(r"[\w]+", re.UNICODE)
 
 
+def select_low_text_slides(slide_scores, count=3):
+    """Choose the lowest-scoring font-supported slides for visual review."""
+    scored = [item for item in slide_scores if item.get("text_fidelity_score") is not None]
+    return sorted(scored, key=lambda item: (item["text_fidelity_score"], item["slide"]))[:count]
+
+
 def match_text_blocks_spatial(source_blocks, output_blocks, *, min_similarity=0.72,
                               max_distance_pt=180.0, ambiguity_tolerance_pt=4.0):
     """Match PDF text blocks using text and position, reporting uncertain pairs."""

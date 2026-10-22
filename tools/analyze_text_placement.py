@@ -46,8 +46,32 @@ def rotate(degrees):
     return np.array([[c, -s, 0.], [s, c, 0.], [0., 0., 1.]])
 
 
-def source_shape_matrix(shape):
-    element = shape._element
+def _has_source_geometry(shape):
+    return all(getattr(shape, field, None) is not None
+               for field in ("left", "top", "width", "height"))
+
+
+def _placeholder_geometry_source(shape, slide):
+    """Resolve geometry inherited by a slide placeholder from its layout/master."""
+    if not getattr(shape, "is_placeholder", False):
+        return None
+    try:
+        idx = shape.placeholder_format.idx
+    except (AttributeError, ValueError):
+        return None
+    for owner in (slide.slide_layout, slide.slide_layout.slide_master):
+        for candidate in owner.placeholders:
+            try:
+                if candidate.placeholder_format.idx == idx and _has_source_geometry(candidate):
+                    return candidate
+            except (AttributeError, ValueError):
+                continue
+    return None
+
+
+def source_shape_matrix(shape, geometry_source=None):
+    geometry_source = geometry_source or shape
+    element = geometry_source._element
     xfrm = element.xpath("./p:xfrm") if element.tag.endswith("graphicFrame") else element.xpath("./p:spPr/a:xfrm")
     if xfrm:
         xf = xfrm[0]
@@ -56,8 +80,8 @@ def source_shape_matrix(shape):
         flip_v = xf.get("flipV") in ("1", "true")
     else:
         angle, flip_h, flip_v = 0., False, False
-    x, y = shape.left / EMU, shape.top / EMU
-    w, h = shape.width / EMU, shape.height / EMU
+    x, y = geometry_source.left / EMU, geometry_source.top / EMU
+    w, h = geometry_source.width / EMU, geometry_source.height / EMU
     return (trans(x + w / 2, y + h / 2) @ rotate(angle)
             @ scale(-1 if flip_h else 1, -1 if flip_v else 1)
             @ scale(w, h) @ trans(-.5, -.5))
@@ -79,8 +103,8 @@ def source_group_matrix(shape):
             @ trans(-child_x, -child_y))
 
 
-def source_placement(shape, parent):
-    matrix = parent @ source_shape_matrix(shape)
+def source_placement(shape, parent, geometry_source=None):
+    matrix = parent @ source_shape_matrix(shape, geometry_source)
     center = matrix @ np.array([.5, .5, 1.])
     vx, vy = matrix[:2, :2] @ np.array([1., 0.]), matrix[:2, :2] @ np.array([0., 1.])
     width, height = float(np.linalg.norm(vx)), float(np.linalg.norm(vy))
@@ -93,20 +117,23 @@ def source_placement(shape, parent):
 def source_text_shapes(deck):
     found = {}
 
-    def walk(shapes, slide_number, parent, grouped):
+    def walk(shapes, slide, slide_number, parent, grouped):
         for shape in shapes:
             if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
-                walk(shape.shapes, slide_number, parent @ source_group_matrix(shape), True)
+                walk(shape.shapes, slide, slide_number, parent @ source_group_matrix(shape), True)
                 continue
             if getattr(shape, "has_text_frame", False) and shape.text.strip():
+                geometry_source = shape if _has_source_geometry(shape) else _placeholder_geometry_source(shape, slide)
+                if geometry_source is None:
+                    continue
                 found[(slide_number, shape.shape_id)] = {
                     "text": shape.text,
-                    "geometry": source_placement(shape, parent),
+                    "geometry": source_placement(shape, parent, geometry_source),
                     "grouped": grouped,
                 }
 
     for slide_number, slide in enumerate(deck.slides, 1):
-        walk(slide.shapes, slide_number, np.identity(3), False)
+        walk(slide.shapes, slide, slide_number, np.identity(3), False)
     return found
 
 

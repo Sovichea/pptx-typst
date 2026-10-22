@@ -257,6 +257,39 @@ def test_slide_text_placeholders_render_over_later_artwork(tmp_path: Path) -> No
     assert "PptxPlaceholder(" in generated
     assert "Visible placeholder title" in generated
     assert "// Editable text: Title 1" not in generated
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "placeholder.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        assert (project / "placeholder.pdf").is_file()
+
+
+def test_placeholder_layout_inherits_master_placeholder_font(tmp_path: Path) -> None:
+    source = tmp_path / "placeholder-theme-font.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[1])
+    slide.shapes.title.text = "Theme font inheritance"
+
+    deck.save(source)
+
+    run_forward(source, project)
+    generated = (project / "main.typ").read_text(encoding="utf-8")
+    layout_line = next(line for line in generated.splitlines()
+                       if "PptxLayout(" in line and "PptxPlaceholderSlot(id:\"title-0\"" in line)
+    assert 'font:"Calibri"' in layout_line
+    slide_instance = next(line for line in generated.splitlines() if "PptxPlaceholder(id:\"title-0\"" in line)
+    assert 'font:"Arial"' not in slide_instance
+
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "placeholder-font.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        assert (project / "placeholder-font.pdf").is_file()
 
 
 def test_native_title_body_placeholder_relationships_roundtrip(tmp_path: Path) -> None:

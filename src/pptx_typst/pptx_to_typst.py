@@ -498,8 +498,8 @@ def placeholder_direct_geometry(shape):
         'rotation':float(xfrm[0].get('rot','0'))/60000,
     }
 
-def placeholder_style_fields(shape):
-    """Read local placeholder text properties without resolving parents."""
+def placeholder_style_fields(shape, include_inherited=False):
+    """Read local placeholder styles and optionally resolve inherited font family."""
     fields={}
     tx=shape._element.xpath('./p:txBody')
     if not tx:return fields
@@ -517,14 +517,40 @@ def placeholder_style_fields(shape):
             if body[0].get(attr) is not None:fields[key]=float(body[0].get(attr))/EMU
         if body[0].get('anchor'):
             fields['anchor']={'t':'top','ctr':'center','b':'bottom'}.get(body[0].get('anchor'))
-    candidates=(tx[0].xpath('./a:lstStyle/a:lvl1pPr/a:defRPr')+
-                tx[0].xpath('./a:p/a:pPr/a:defRPr')+
-                tx[0].xpath('./a:p/a:r/a:rPr')+
-                tx[0].xpath('./a:p/a:endParaRPr'))
-    rpr=next((node for node in candidates if node is not None),None)
+    def font_defaults(owner):
+        tx_body=owner._element.xpath('./p:txBody')
+        if not tx_body:return []
+        return (tx_body[0].xpath('./a:lstStyle/a:lvl1pPr/a:defRPr')+
+                tx_body[0].xpath('./a:p/a:pPr/a:defRPr')+
+                tx_body[0].xpath('./a:p/a:r/a:rPr')+
+                tx_body[0].xpath('./a:p/a:endParaRPr'))
+
+    local_style_sources=font_defaults(shape)
+    font_sources=list(local_style_sources)
+    if include_inherited and getattr(shape,'is_placeholder',False) and CURRENT_SLIDE is not None:
+        idx=shape.placeholder_format.idx
+        for owner in (CURRENT_SLIDE.slide_layout, CURRENT_SLIDE.slide_layout.slide_master):
+            peer=next((item for item in owner.placeholders
+                       if item.placeholder_format.idx==idx),None)
+            if peer is not None and peer is not shape:
+                font_sources.extend(font_defaults(peer))
+    typeface=next((node.xpath('./a:latin/@typeface')[0] for node in font_sources
+                   if node.xpath('./a:latin/@typeface')),None)
+    if typeface:
+        fields['font']=expand_theme_font(typeface)
+    elif include_inherited and getattr(shape,'is_placeholder',False):
+        master=CURRENT_SLIDE.slide_layout.slide_master if CURRENT_SLIDE is not None else None
+        kind=placeholder_kind(shape)
+        context='titleStyle' if kind in ('title','centered-title') else 'bodyStyle'
+        style=(master._element.xpath(f'./p:txStyles/p:{context}/a:lvl1pPr/a:defRPr')
+               if master is not None else [])
+        style_font=style[0].xpath('./a:latin/@typeface') if style else []
+        if style_font:
+            fields['font']=expand_theme_font(style_font[0])
+        elif master is not None:
+            fields['font']=CURRENT_FONTS['major' if context=='titleStyle' else 'minor']
+    rpr=next((node for node in local_style_sources if node is not None),None)
     if rpr is not None:
-        latin=rpr.xpath('./a:latin/@typeface')
-        if latin and latin[0] not in ('+mj-lt','+mn-lt'):fields['font']=latin[0]
         if rpr.get('sz'):fields['size']=float(rpr.get('sz'))/100
         if rpr.get('b') is not None:fields['weight']='bold' if rpr.get('b') in ('1','true') else 'regular'
         colors=rpr.xpath('./a:solidFill/a:srgbClr | ./a:solidFill/a:schemeClr | ./a:solidFill/a:sysClr | ./a:solidFill/a:prstClr')
@@ -542,7 +568,7 @@ def placeholder_slot_expression(shape):
     idx=shape.placeholder_format.idx
     fields={'id':placeholder_id(kind,idx),'type':kind,'idx':idx}
     fields.update(placeholder_direct_geometry(shape) or {})
-    fields.update(placeholder_style_fields(shape))
+    fields.update(placeholder_style_fields(shape,include_inherited=True))
     args=[]
     for key,value in fields.items():
         if key in ('id','type','font','weight','align','anchor','bullet'):
@@ -1749,7 +1775,10 @@ for slide_no,slide in enumerate(prs.slides,1):
                         master_placeholder_manifest.append({'owner':'master','owner_id':master_id,**record})
             recur(decorative_shapes(master))
             lines.append('])')
-            master_declarations[master_part]=(f'#let {master_id} = PptxMaster(fill:{master_fill},background:{master_background},placeholders:('+', '.join(master_placeholder_exprs)+'),children:[',lines[:])
+            master_slots = ', '.join(master_placeholder_exprs)
+            if len(master_placeholder_exprs) == 1:
+                master_slots += ','
+            master_declarations[master_part]=(f'#let {master_id} = PptxMaster(fill:{master_fill},background:{master_background},placeholders:('+master_slots+'),children:[',lines[:])
             master_manifest.append(sm)
             lines,sm=saved_lines,saved_sm
             counts['inherited_master_layers']+=1
@@ -1771,7 +1800,10 @@ for slide_no,slide in enumerate(prs.slides,1):
                         layout_placeholder_manifest.append({'owner':'layout','owner_id':layout_id,'master':master_id,**record})
             recur(decorative_shapes(layout))
             lines.append('])')
-            layout_declarations[layout_part]=(f'#let {layout_id} = PptxLayout(master:{master_id},fill:{layout_fill},background:{layout_background},placeholders:('+', '.join(layout_placeholder_exprs)+f'),show-master:{str(layout_allowed).lower()},children:[',lines[:])
+            layout_slots = ', '.join(layout_placeholder_exprs)
+            if len(layout_placeholder_exprs) == 1:
+                layout_slots += ','
+            layout_declarations[layout_part]=(f'#let {layout_id} = PptxLayout(master:{master_id},fill:{layout_fill},background:{layout_background},placeholders:('+layout_slots+f'),show-master:{str(layout_allowed).lower()},children:[',lines[:])
             layout_manifest.append(sm)
             lines,sm=saved_lines,saved_sm
     else:

@@ -21,10 +21,10 @@ import xml.etree.ElementTree as ET
 
 import pymupdf as fitz
 import numpy as np
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
-from pptx_typst.text_diagnostics import match_text_blocks_spatial
+from pptx_typst.text_diagnostics import match_text_blocks_spatial, select_low_text_slides
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +32,7 @@ BENCH = ROOT / "benchmarks" / "text_fidelity"
 MANIFEST = BENCH / "manifest.json"
 RESULTS = BENCH / "results.csv"
 SUMMARY = BENCH / "summary.md"
+COMPARISON_DIR = BENCH / "visual_comparisons"
 EMU_PER_PT = 12700
 WORD_RE = re.compile(r"[\w]+", re.UNICODE)
 
@@ -234,6 +235,58 @@ def page_image(page, scale):
     return Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
 
 
+def save_comparison_sheet(source_pdf, typst_pdf, slide_scores, destination, count=3):
+    """Save source/Typst comparisons for the lowest-scoring eligible slides."""
+    selected = select_low_text_slides(slide_scores, count)
+    if not selected:
+        return None
+    scale = 0.8
+    padding = 12
+    header_height = 54
+    panels = []
+    panel_width = panel_height = 0
+    for item in selected:
+        index = item["slide"] - 1
+        if index >= len(source_pdf) or index >= len(typst_pdf):
+            continue
+        source_image = page_image(source_pdf[index], scale)
+        typst_image = page_image(typst_pdf[index], scale)
+        if typst_image.size != source_image.size:
+            typst_image = typst_image.resize(source_image.size, Image.Resampling.LANCZOS)
+        panel_width, panel_height = source_image.size
+        panels.append((item, source_image, typst_image))
+    if not panels:
+        return None
+
+    sheet = Image.new(
+        "RGB",
+        (panel_width * 2 + padding * 3,
+         len(panels) * (panel_height + header_height) + padding * (len(panels) + 1)),
+        "#e9ecef",
+    )
+    draw = ImageDraw.Draw(sheet)
+    for row, (item, source_image, typst_image) in enumerate(panels):
+        y = padding + row * (panel_height + header_height + padding)
+        score = item["text_fidelity_score"]
+        ink = item.get("text_ink_f1")
+        position = item.get("text_start_position_score")
+        draw.text((padding, y),
+                  f"Slide {item['slide']}  |  text {score:.3f}  |  ink {ink:.3f}  |  start {position:.3f}"
+                  if ink is not None and position is not None else
+                  f"Slide {item['slide']}  |  text {score:.3f}  |  ink {ink if ink is not None else 'n/a'}  |  start {position if position is not None else 'n/a'}",
+                  fill="#111111")
+        label_y = y + 22
+        draw.text((padding, label_y), "PowerPoint", fill="#333333")
+        draw.text((padding * 2 + panel_width, label_y), "Typst", fill="#333333")
+        image_y = y + header_height
+        sheet.paste(source_image, (padding, image_y))
+        sheet.paste(typst_image, (padding * 2 + panel_width, image_y))
+    destination = Path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    sheet.save(destination, format="PNG", optimize=True)
+    return selected
+
+
 def pdf_text_blocks(page):
     blocks = []
     for block in page.get_text("dict").get("blocks", []):
@@ -325,6 +378,7 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slide
     ink_scores = []
     position_scores = []
     position_errors = []
+    slide_text_scores = []
     wrap_matches = wrap_equal = 0
     pages = min(len(source_pdf), len(typst_pdf))
     for page_index in range(pages):
@@ -393,6 +447,13 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slide
         slide_text_score = sum(available_text_parts) / len(available_text_parts) if available_text_parts else None
         if slide_text_score is not None:
             text_scores.append(slide_text_score)
+        slide_text_scores.append({
+            "slide": page_index + 1,
+            "text_fidelity_score": slide_text_score,
+            "text_ink_f1": ink,
+            "text_start_position_score": slide_position_score,
+            "text_start_position_error_pt": mean_or_none(slide_position_errors),
+        })
     layout = mean_or_none(layout_scores)
     supported_layout = mean_or_none(supported_layout_scores)
     ink = mean_or_none(ink_scores)
@@ -405,6 +466,7 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slide
             "text_ink_f1": ink, "text_start_position_score": position_score,
             "text_start_position_error_pt": mean_position_error,
             "text_fidelity_score": text,
+            "slide_text_scores": slide_text_scores,
             "full_slide_fidelity_score": full,
             "text_wrap_line_count_match": round(wrap_equal / wrap_matches, 3) if wrap_matches else None,
             "text_blocks_position_matched": wrap_matches}
@@ -542,7 +604,21 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                     and all(abs(a - c) < 1 for p, q in zip(source_page_sizes, converted_page_sizes)
                             for a, c in zip(p, q))
                 )
-                record.update(slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides))
+                fidelity = slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides)
+                slide_text_scores = fidelity.pop("slide_text_scores", [])
+                record.update(fidelity)
+                selected = save_comparison_sheet(
+                    source_pdf, typst_pdf, slide_text_scores,
+                    COMPARISON_DIR / f"{source.stem}.png", count=3,
+                )
+                if selected:
+                    record["visual_comparison"] = f"visual_comparisons/{source.stem}.png"
+                    record["comparison_slides"] = ";".join(
+                        f"{item['slide']} ({item['text_fidelity_score']:.3f})" for item in selected
+                    )
+                else:
+                    record["visual_comparison"] = ""
+                    record["comparison_slides"] = ""
             finally:
                 source_pdf.close()
                 source_pdf = None
@@ -681,6 +757,25 @@ def main():
         writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(combined)
+    COMPARISON_DIR.mkdir(parents=True, exist_ok=True)
+    index_lines = [
+        "# Low text-fidelity slide comparisons",
+        "",
+        "Each image places the PowerPoint render on the left and Typst on the right. Up to three font-supported slides with the lowest per-slide text score are selected for each successfully rendered deck.",
+        "",
+    ]
+    for row in combined:
+        visual = row.get("visual_comparison", "")
+        if not visual:
+            continue
+        image_name = Path(visual).name
+        index_lines.append(f"## {row.get('title') or Path(row.get('file', '')).stem}")
+        index_lines.append("")
+        index_lines.append(f"Selected slides: {row.get('comparison_slides') or 'n/a'}")
+        index_lines.append("")
+        index_lines.append(f"![PowerPoint and Typst slide comparison for {row.get('title', image_name)}]({image_name})")
+        index_lines.append("")
+    (COMPARISON_DIR / "index.md").write_text("\n".join(index_lines).rstrip() + "\n", encoding="utf-8")
     summary = [
         "# PPTX to Typst fidelity benchmark",
         "",
@@ -697,6 +792,7 @@ def main():
         f"- Full-slide fidelity (font-supported slides only; equal-weight layout + text): {sum(full_score) / len(full_score):.1%} mean per deck; {sorted(full_score)[len(full_score) // 2]:.1%} median." if full_score else "- Full-slide fidelity: n/a.",
         f"- Text ink edge F1: {sum(ink) / len(ink):.1%}; mean start-position accuracy: {sum(position_score) / len(position_score):.1%}; mean start-position error: {sum(position) / len(position):.2f} pt." if ink and position and position_score else "- Text ink and start-position metrics: n/a.",
         f"- Text wrap line-count match (diagnostic only; excluded from scores): {sum(wrap) / len(wrap):.1%}." if wrap else "- Text wrap line-count match: n/a.",
+        f"- Low text-fidelity comparison sheets: {sum(bool(row.get('visual_comparison')) for row in combined)} deck(s), in `visual_comparisons/index.md`; each sheet shows up to three font-supported slides with the lowest per-slide text score.",
         f"- Mean per-deck absolute PDF font-size difference: {sum(font_delta) / len(font_delta):.2f} pt; median {sorted(font_delta)[len(font_delta) // 2]:.2f} pt." if font_delta else "- PDF font-size difference: n/a.",
         f"- Resolved source font families are locally available for {explicit_installed / resolved_total:.1%} of text characters across the sample; mean per-deck share {sum(known) / len(known):.1%}." if resolved_total else "- Available-font share: n/a.",
         f"- Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): {sum(inherited) / len(inherited):.1%}." if inherited else "- Inherited-font share: n/a.",

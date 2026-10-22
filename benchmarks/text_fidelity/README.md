@@ -17,6 +17,8 @@ python tools/run_text_fidelity_benchmark.py
 
 The font installer downloads matching families only when the Google Fonts upstream includes a per-family SIL Open Font License, then installs them for the current Windows user. Font binaries and the machine-specific install report remain local and ignored. The downloader verifies each PPTX checksum and writes attribution details to `manifest.json`. The runner converts each file to Typst, compiles the result, exports the original through PowerPoint to PDF, and compares the PDFs. Intermediate projects and PDFs are removed after each deck. Use `--start N --end M` to run a manifest slice; completed rows are combined into `results.csv`.
 
+For every successfully rendered deck, the runner also saves a side-by-side contact sheet in the ignored local `visual_comparisons/` directory. Each sheet shows the PowerPoint render on the left and Typst on the right for up to three font-supported slides with the lowest per-slide text fidelity. `visual_comparisons/index.md` lists the selected slide numbers and scores for quick review. Decks with fewer than two scoreable slides show the available slides only.
+
 ## Scores
 
 - **Layout fidelity** compares full-slide rendered edges, foreground colors, and slide background after masking extracted text glyph regions in both PDFs. Text ink does not contribute to this score; images, shapes, fills, lines, charts, table geometry, and text-box fills/outlines remain part of the visual comparison.

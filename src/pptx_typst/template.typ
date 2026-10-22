@@ -84,7 +84,7 @@
     let size = if value("size") == none { 20pt } else { value("size") }
     let color = if value("fill") == none { black } else { value("fill") }
     let weight = if value("weight") == none { "regular" } else { value("weight") }
-    let alignment = if value("align") == "center" or (value("align") == none and (instance.type == "title" or instance.type == "centered-title")) { center } else if value("align") == "right" { right } else { left }
+    let alignment = if value("align") == "center" or (value("align") == none and instance.type == "centered-title") { center } else if value("align") == "right" { right } else { left }
     let vertical = if value("anchor") == "center" { horizon } else if value("anchor") == "bottom" { bottom } else { top }
     let left-inset = if value("margin-left") == none { 0pt } else { value("margin-left") }
     let right-inset = if value("margin-right") == none { 0pt } else { value("margin-right") }
