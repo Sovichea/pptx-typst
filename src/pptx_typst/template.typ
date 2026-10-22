@@ -38,17 +38,93 @@
 #let PptxPlaceholderRun(text: "", font: none, size: none, fill: none, weight: none, italic: none) = (
   text: text, font: font, size: size, fill: fill, weight: weight, italic: italic,
 )
-#let PptxPlaceholderParagraph(text: "", level: 0, bullet: none, align: none, runs: ()) = (
-  text: text, level: level, bullet: bullet, align: align, runs: runs,
+#let PptxParagraph(
+  text: "", level: 0, bullet: none, bullet-kind: none, bullet-type: none, bullet-start: none, bullet-source: none,
+  bullet-font: none, bullet-font-source: none, bullet-size: none, bullet-size-kind: none, bullet-size-value: none, bullet-size-source: none, bullet-fill: none, bullet-fill-source: none, bullet-weight: none,
+  align: none, align-source: none, runs: (),
+  line-kind: none, line-value: none, line-source: none, leading: none,
+  before-kind: none, before-value: none, before-source: none, before: none,
+  after-kind: none, after-value: none, after-source: none, after: none,
+  margin-left: none, margin-left-source: none, indent: none, indent-source: none,
+) = (
+  text: text, level: level, bullet: bullet, bullet-kind: bullet-kind, bullet-type: bullet-type, bullet-start: bullet-start, bullet-source: bullet-source,
+  bullet-font: bullet-font, bullet-font-source: bullet-font-source, bullet-size: bullet-size, bullet-size-kind: bullet-size-kind, bullet-size-value: bullet-size-value, bullet-size-source: bullet-size-source, bullet-fill: bullet-fill, bullet-fill-source: bullet-fill-source, bullet-weight: bullet-weight,
+  align: align, align-source: align-source, runs: runs,
+  line-kind: line-kind, line-value: line-value, line-source: line-source, leading: leading,
+  before-kind: before-kind, before-value: before-value, before-source: before-source, before: before,
+  after-kind: after-kind, after-value: after-value, after-source: after-source, after: after,
+  margin-left: margin-left, margin-left-source: margin-left-source, indent: indent, indent-source: indent-source,
 )
+#let PptxPlaceholderParagraph = PptxParagraph
+#let PptxTextFrame(
+  width: 300pt, height: 60pt, paragraphs: (), font: "Aptos", size: 20pt,
+  fill: black, weight: "regular", background: none, anchor: "top", default-align: "left",
+  autofit-mode: "none", font-scale: 1.0, line-spacing-reduction: 0.0,
+  margin-left: 0pt, margin-right: 0pt, margin-top: 0pt, margin-bottom: 0pt,
+) = {
+  let render-run = (run) => {
+    let pieces = run.text.split("\n")
+    pieces.map(piece => {
+      let styled = if run.italic == true { text(style: "italic")[#piece] } else { piece }
+      let styled = if run.weight == none { styled } else { text(weight: run.weight)[#styled] }
+      let styled = if run.fill == none { styled } else { text(fill: run.fill)[#styled] }
+      let styled = if run.size == none { styled } else { text(size: run.size * font-scale)[#styled] }
+      let styled = if run.font == none { styled } else { text(font: run.font)[#styled] }
+      styled
+    }).join(linebreak())
+  }
+  let render-paragraph = (paragraph, index) => {
+    let runs = paragraph.at("runs", default: ())
+    let body = if runs.len() == 0 {
+      if paragraph.text == "" { text("\u{200B}") } else { paragraph.text }
+    } else { runs.map(render-run).join() }
+    let align-name = if paragraph.align == none { default-align } else { paragraph.align }
+    let alignment = if align-name == "center" { center } else if align-name == "right" { right } else { left }
+    let marker = paragraph.bullet
+    let bullet-body = if marker == none { body } else {
+      let indent = if paragraph.at("margin-left", default: none) == none { 0pt } else { paragraph.at("margin-left") }
+      let hanging = if paragraph.indent == none { 0pt } else { paragraph.indent }
+      let marker-font = paragraph.at("bullet-font", default: font)
+      let marker-size = paragraph.at("bullet-size", default: size * font-scale)
+      let marker-fill = paragraph.at("bullet-fill", default: fill)
+      let marker-weight = paragraph.at("bullet-weight", default: weight)
+      let marker-content = text(font: marker-font, size: marker-size, fill: marker-fill, weight: marker-weight)[#marker]
+      if hanging < 0pt {
+        list(marker: [#marker-content], indent: indent + hanging, body-indent: -hanging, tight: true, spacing: 0pt)[#body]
+      } else {
+        list(marker: [#marker-content], indent: indent, body-indent: hanging, tight: true, spacing: 0pt)[#body]
+      }
+    }
+    let content = if marker == none and paragraph.at("margin-left", default: none) != none {
+      pad(left: paragraph.at("margin-left") + if paragraph.indent == none { 0pt } else { paragraph.indent })[#bullet-body]
+    } else { bullet-body }
+    let leading = if paragraph.leading == none { 0pt } else { paragraph.leading }
+    let after = if paragraph.after == none { 0pt } else { paragraph.after }
+    [
+      #if paragraph.before != none { v(paragraph.before) }
+      #set par(leading: leading, spacing: after)
+      #align(alignment)[#content]
+      #if index + 1 < paragraphs.len() { parbreak() }
+    ]
+  }
+  let body = paragraphs.enumerate().map(((index, paragraph)) => render-paragraph(paragraph, index)).join()
+  let vertical = if anchor == "center" { horizon } else if anchor == "bottom" { bottom } else { top }
+  box(width: width, height: height, fill: background)[
+    #pad(left: margin-left, right: margin-right, top: margin-top, bottom: margin-bottom)[
+      #text(font: font, size: size * font-scale, fill: fill, weight: weight)[#align(left + vertical)[#body]]
+    ]
+  ]
+}
 #let PptxPlaceholder(
   id: "", type: "body", idx: 0, text: "", content: none, paragraphs: (),
+  autofit-mode: "none", font-scale: 1.0, line-spacing-reduction: 0.0,
   x: none, y: none, width: none, height: none, rotation: none,
   font: none, size: none, fill: none, background: none, weight: none, align: none,
   bullet: none, anchor: none,
   margin-left: none, margin-right: none, margin-top: none, margin-bottom: none,
 ) = (
   id: id, type: type, idx: idx, text: text, content: content, paragraphs: paragraphs,
+  autofit-mode: autofit-mode, font-scale: font-scale, line-spacing-reduction: line-spacing-reduction,
   x: x, y: y, width: width, height: height, rotation: rotation,
   font: font, size: size, fill: fill, background: background, weight: weight, align: align, bullet: bullet,
   anchor: anchor, margin-left: margin-left, margin-right: margin-right,
@@ -97,37 +173,26 @@
     let bottom-inset = if value("margin-bottom") == none { 0pt } else { value("margin-bottom") }
     if x == none or y == none or w == none or box-height == none { none } else {
       let paragraphs = if instance.paragraphs.len() > 0 { instance.paragraphs } else {
-        instance.text.split("\n").map(text => (text: text, level: 0, bullet: none, align: none))
+        instance.text.split("\n").map(text => PptxParagraph(text: text))
       }
-      let paragraph-content = paragraphs.map(paragraph => {
-        let runs = paragraph.at("runs", default: ())
-        let marker = if paragraph.bullet == none { value("bullet") } else { paragraph.bullet }
-        let bullet = if marker == none { [] } else { [#text(marker, weight: "bold") #h(0.4em)] }
-        let indentation = paragraph.level * 1em
-        let paragraph-align = if paragraph.align == "center" { center } else if paragraph.align == "right" { right } else { alignment }
-        let run-content = if runs.len() == 0 { paragraph.text } else {
-          runs.map(run => {
-            let pieces = run.text.split("\n")
-            pieces.map(piece => {
-              let styled = if run.italic == true { text(style: "italic")[#piece] } else { piece }
-              let styled = if run.weight == none { styled } else { text(weight: run.weight)[#styled] }
-              let styled = if run.fill == none { styled } else { text(fill: run.fill)[#styled] }
-              let styled = if run.size == none { styled } else { text(size: run.size)[#styled] }
-              let styled = if run.font == none { styled } else { text(font: run.font)[#styled] }
-              styled
-            }).join(linebreak())
-          }).join()
-        }
-        [#h(indentation)#align(paragraph-align)[#bullet#run-content]#linebreak()]
-      }).join()
-      let body = if instance.content == none { paragraph-content } else { instance.content }
-      let text-layer = box(width: w, height: box-height, fill: value("background"))[
-        #pad(left: left-inset, right: right-inset, top: top-inset, bottom: bottom-inset)[
-          #text(font: font, size: size, fill: color, weight: weight)[
-            #align(alignment + vertical)[#body]
+      let text-layer = if instance.content == none {
+        PptxTextFrame(
+          width: w, height: box-height, paragraphs: paragraphs,
+          font: font, size: size, fill: color, weight: weight,
+          autofit-mode: instance.autofit-mode, font-scale: instance.font-scale,
+          line-spacing-reduction: instance.line-spacing-reduction,
+          default-align: if value("align") == none { if instance.type == "centered-title" { "center" } else { "left" } } else { value("align") },
+          background: value("background"), anchor: if vertical == horizon { "center" } else if vertical == bottom { "bottom" } else { "top" },
+          margin-left: left-inset, margin-right: right-inset,
+          margin-top: top-inset, margin-bottom: bottom-inset,
+        )
+      } else {
+        box(width: w, height: box-height, fill: value("background"))[
+          #pad(left: left-inset, right: right-inset, top: top-inset, bottom: bottom-inset)[
+            #text(font: font, size: size, fill: color, weight: weight)[#align(alignment + vertical)[#instance.content]]
           ]
         ]
-      ]
+      }
       let placed = if angle == none { text-layer } else { rotate(angle, reflow: false)[#text-layer] }
       [#place(left + top, dx: x, dy: y)[#placed]]
     }

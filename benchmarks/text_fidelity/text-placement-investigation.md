@@ -1,5 +1,7 @@
 # Text placement fidelity investigation
 
+> **Historical report:** This implementation and its measurements describe the earlier 20%-advance fix. That heuristic has since been replaced by a shared paragraph model for ordinary text and placeholders. See [the current paragraph layout fidelity report](../../docs/paragraph-layout-fidelity.md) for the active model, tests, and real-deck diagnostics. The NAVIS measurements below are not current behavior.
+
 ## Result
 
 **PARTIAL.** The old 46.14 pt mean start error is not a reliable measure of text-box geometry: its greedy PDF text-block matcher used text similarity alone, so similar or fragmented text could be paired across unrelated positions. A source-object and spatially constrained audit found that outer text-frame geometry is preserved essentially exactly. It also confirmed a paragraph-advance bug that caused large vertical overflow in one representative deck. The focused correction reduced that overflow without changing the measured first-glyph position, but it did not eliminate all text collisions or renderer-dependent wrapping.

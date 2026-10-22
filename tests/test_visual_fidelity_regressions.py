@@ -119,9 +119,10 @@ def test_placeholder_run_formatting_roundtrips(tmp_path: Path) -> None:
     converted = Presentation(output)
     title = next(shape for shape in converted.slides[0].shapes if shape.is_placeholder and shape.text)
     runs = title.text_frame.paragraphs[0].runs
-    assert [run.text for run in runs] == ["Bold title ", "\n", "italic ending"]
+    assert [run.text for run in runs] == ["Bold title ", "italic ending"]
     assert runs[0].font.bold is True
-    assert runs[2].font.italic is True
+    assert runs[1].font.italic is True
+    assert len(title.text_frame.paragraphs[0]._p.xpath('./a:br')) == 1
 
 
 def test_connector_uses_editable_typst_line_and_roundtrips(tmp_path: Path) -> None:

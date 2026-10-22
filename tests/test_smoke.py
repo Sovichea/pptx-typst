@@ -536,7 +536,9 @@ def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_
     typst_source = (project / "main.typ").read_text(encoding="utf-8")
     assert "First paragraph" in typst_source and "Second paragraph" in typst_source
     assert "#v(26.00pt)" not in typst_source
-    assert "#v(5.20pt)" in typst_source
+    assert "#v(5.20pt)" not in typst_source
+    assert "PptxTextFrame(" in typst_source
+    assert "PptxParagraph(" in typst_source
     typst = shutil.which("typst")
     if typst:
         subprocess.run(
@@ -551,7 +553,7 @@ def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_
          "--text-layout", "anchors"],
         cwd=ROOT, env=env, check=True, capture_output=True, text=True, timeout=120,
     )
-    assert "#v(26.00pt)" in (legacy_project / "main.typ").read_text(encoding="utf-8")
+    assert "#v(26.00pt)" not in (legacy_project / "main.typ").read_text(encoding="utf-8")
     default_manifest = json.loads((project / "asset_manifest.json").read_text(encoding="utf-8"))
     legacy_manifest = json.loads((legacy_project / "asset_manifest.json").read_text(encoding="utf-8"))
     non_text = lambda manifest: [
@@ -587,8 +589,9 @@ def test_default_text_layout_compiles_multiline_bullets_and_vertical_anchor(tmp_
     generated = (project / "main.typ").read_text(encoding="utf-8")
     assert "A multiline bullet" in generated and "with a continued line" in generated
     assert "A second bullet" in generated
-    assert "#list(" in generated
-    assert "#align(center + horizon)[" in generated
+    assert 'bullet:"•"' in generated
+    assert "PptxTextFrame(" in generated
+    assert 'anchor:"center"' in generated
     typst = shutil.which("typst")
     if typst:
         subprocess.run(

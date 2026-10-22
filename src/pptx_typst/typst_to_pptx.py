@@ -120,6 +120,23 @@ def simple_color(s,default=(0,0,0)):
     return default
 
 
+def apply_autofit(body_pr, record):
+    """Restore supported DrawingML auto-fit metadata without scaling run sizes."""
+    mode=txt_decode(record.get('autofit-mode','"none"'))
+    for child in list(body_pr):
+        if child.tag.split('}')[-1] in ('normAutofit','spAutoFit','noAutofit'):
+            body_pr.remove(child)
+    if mode=='shrink':
+        node=OxmlElement('a:normAutofit')
+        node.set('fontScale',str(round(length(record.get('font-scale'),1.0)*100000)))
+        node.set('lnSpcReduction',str(round(length(record.get('line-spacing-reduction'),0.0)*100000)))
+        body_pr.append(node)
+    elif mode=='shape_grows':
+        body_pr.append(OxmlElement('a:spAutoFit'))
+    elif mode=='no_autofit':
+        body_pr.append(OxmlElement('a:noAutofit'))
+
+
 def simple_color_alpha(s):
     """Return Typst's RGB color and optional alpha from #RRGGBBAA syntax."""
     match=re.search(r'#([\da-fA-F]{8})',s or '')
@@ -270,6 +287,52 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
 
 
 def add_text(slide,child,x,y,rot,audit,slide_num):
+    frame_match=re.search(r'(?<![\w-])#?PptxTextFrame\s*\(',child)
+    if frame_match:
+        raw,end=balanced(child,frame_match.end()-1)
+        frame=kwargs(raw)
+        width=length(frame.get('width'));height=length(frame.get('height'))
+        if width<=0 or height<=0:return True
+        shape=slide.shapes.add_textbox(Pt(x),Pt(y),Pt(width),Pt(height))
+        tf=shape.text_frame;tf.clear();tf.word_wrap=True
+        apply_autofit(shape._element.txBody.bodyPr,frame)
+        for key,attr in (('margin-left','margin_left'),('margin-right','margin_right'),
+                         ('margin-top','margin_top'),('margin-bottom','margin_bottom')):
+            setattr(tf,attr,Pt(length(frame.get(key))))
+        tf.vertical_anchor={'center':MSO_ANCHOR.MIDDLE,'bottom':MSO_ANCHOR.BOTTOM}.get(
+            txt_decode(frame.get('anchor','"top"')),MSO_ANCHOR.TOP)
+        background=frame.get('background')
+        if background and background!='none':
+            shape.fill.solid();shape.fill.fore_color.rgb=RGBColor(*simple_color(background))
+        paragraphs=(find_macro_records(raw,'PptxParagraph') or
+                    find_macro_records(raw,'PptxPlaceholderParagraph'))
+        if not paragraphs:
+            paragraphs=[{'text':'""'}]
+        for index,record in enumerate(paragraphs):
+            para=tf.paragraphs[0] if index==0 else tf.add_paragraph()
+            para.level=int(length(record.get('level'),0))
+            apply_paragraph_properties(para,record,allow_inherited=True)
+            run_records=find_macro_records(record.get('runs','()'),'PptxPlaceholderRun')
+            if run_records:
+                for item in run_records:
+                    run_text=txt_decode(item.get('text','""'))
+                    if run_text=='\n':
+                        para._p.append(OxmlElement('a:br'))
+                        continue
+                    run=para.add_run();run.text=run_text
+                    if item.get('font'):run.font.name=txt_decode(item['font'])
+                    if item.get('size'):run.font.size=Pt(length(item['size']))
+                    if item.get('fill'):run.font.color.rgb=RGBColor(*simple_color(item['fill']))
+                    if item.get('weight'):run.font.bold=txt_decode(item['weight'])=='bold'
+                    if item.get('italic') is not None:run.font.italic=item['italic'].strip().lower()=='true'
+            else:
+                run=para.add_run();run.text=txt_decode(record.get('text','""'))
+        if abs(rot)>0.001:shape.rotation=rot%360
+        content=''.join(txt_decode(p.get('text','""')) for p in paragraphs)
+        audit['text_boxes']+=1;audit['text_content'].append(content)
+        audit['items'].append({'slide':slide_num,'type':'text','x':round(x,2),'y':round(y,2),
+                               'w':round(width,2),'h':round(height,2),'rotation':round(rot,2),'chars':len(content)})
+        return True
     runs=text_runs(child)
     if not runs:return False
     b=re.search(r'box\(\s*width\s*:\s*('+NUM+r')pt\s*,\s*height\s*:\s*('+NUM+r')pt',child)
@@ -485,6 +548,114 @@ def find_macro_records(expression, kind):
     return records
 
 
+def apply_paragraph_properties(paragraph, record, *, allow_inherited=False, target_ppr=None):
+    """Write represented paragraph properties back as DrawingML attributes."""
+    ppr=target_ppr if target_ppr is not None else paragraph._p.get_or_add_pPr()
+    level=int(length(record.get('level'),0))
+    if level and paragraph is not None and target_ppr is None and paragraph._p.getparent() is not None:
+        ppr.set('lvl',str(level))
+    def allowed(key):
+        if record.get(key) is None:return False
+        source=txt_decode(record.get(key+'-source','"direct"'))
+        return allow_inherited or source in ('direct','shape')
+    alignment=record.get('align')
+    if alignment and allowed('align'):
+        ppr.set('algn',{'left':'l','center':'ctr','right':'r','justify':'just'}.get(txt_decode(alignment),'l'))
+    for name,prefix in (('lnSpc','line'),('spcBef','before'),('spcAft','after')):
+        kind=record.get(prefix+'-kind');value=record.get(prefix+'-value')
+        source=record.get(prefix+'-source')
+        if kind is None or value is None or (not allow_inherited and txt_decode(source or '') not in ('direct','shape')):
+            continue
+        kind=txt_decode(kind);value=length(value)
+        spacing=OxmlElement('a:'+name)
+        node=OxmlElement('a:spcPct' if kind=='percent' else 'a:spcPts')
+        node.set('val',str(round(value*1000 if kind=='percent' else value*100)))
+        spacing.append(node)
+        for old in ppr.xpath('./*[local-name()="'+name+'"]'):ppr.remove(old)
+        ppr.append(spacing)
+    for key,attr in (('margin-left','marL'),('indent','indent')):
+        if record.get(key) is not None and allowed(key):
+            ppr.set(attr,str(round(length(record[key])*12700)))
+    bullet_kind=txt_decode(record.get('bullet-kind','""'))
+    bullet=record.get('bullet')
+    if bullet_kind and bullet_kind!='none' and bullet and allowed('bullet'):
+        if bullet_kind=='number':
+            node=OxmlElement('a:buAutoNum')
+            if record.get('bullet-type'):node.set('type',txt_decode(record['bullet-type']))
+            if record.get('bullet-start'):node.set('startAt',str(int(length(record['bullet-start']))))
+        else:
+            node=OxmlElement('a:buChar');node.set('char',txt_decode(bullet))
+        for old in ppr.xpath('./*[local-name()="buNone" or local-name()="buChar" or local-name()="buAutoNum" or local-name()="buBlip"]'):
+            ppr.remove(old)
+        ppr.append(node)
+    elif bullet_kind=='none' and allowed('bullet'):
+        for old in ppr.xpath('./*[local-name()="buNone" or local-name()="buChar" or local-name()="buAutoNum" or local-name()="buBlip"]'):
+            ppr.remove(old)
+        ppr.append(OxmlElement('a:buNone'))
+    if record.get('bullet-font') is not None and allowed('bullet-font'):
+        for old in ppr.xpath('./*[local-name()="buFont"]'):ppr.remove(old)
+        family=txt_decode(record['bullet-font'])
+        if isinstance(family,str) and family.startswith('('):
+            try:
+                choices=ast.literal_eval(family)
+                if isinstance(choices,(tuple,list)) and choices:family=choices[0]
+            except (ValueError,SyntaxError):pass
+        font=OxmlElement('a:buFont');font.set('typeface',str(family));ppr.append(font)
+    size_kind=txt_decode(record.get('bullet-size-kind','""'))
+    if record.get('bullet-size-value') is not None and allowed('bullet-size') and size_kind in ('percent','points'):
+        for old in ppr.xpath('./*[local-name()="buSzPct" or local-name()="buSzPts"]'):ppr.remove(old)
+        size=OxmlElement('a:buSzPct' if size_kind=='percent' else 'a:buSzPts')
+        value=length(record['bullet-size-value'])
+        size.set('val' if size_kind=='percent' else 'sz',
+                 str(round(value*1000 if size_kind=='percent' else value*100)))
+        ppr.append(size)
+    if record.get('bullet-fill') is not None and allowed('bullet-fill'):
+        for old in ppr.xpath('./*[local-name()="buClr"]'):ppr.remove(old)
+        color=OxmlElement('a:buClr');rgb=OxmlElement('a:srgbClr')
+        rgb.set('val','%02X%02X%02X'%simple_color(record['bullet-fill']))
+        color.append(rgb);ppr.append(color)
+
+
+def apply_inherited_placeholder_paragraph_style(owner_slide, idx, record, origin):
+    """Keep inherited paragraph properties on their layout/master placeholder."""
+    peer=next((item for item in owner_slide.shapes.placeholders
+               if item.placeholder_format.idx==idx),None)
+    if peer is None:return
+    tx_body=peer._element.txBody
+    lst=tx_body.find(qn('a:lstStyle'))
+    if lst is None:
+        lst=OxmlElement('a:lstStyle');tx_body.insert(1,lst)
+    level=max(1,int(length(record.get('level'),0))+1)
+    tag=qn(f'a:lvl{level}pPr')
+    ppr=lst.find(tag)
+    if ppr is None:
+        ppr=OxmlElement(f'a:lvl{level}pPr');lst.append(ppr)
+    inherited={}
+    for key,source_key in (('align','align-source'),('line','line-source'),
+                           ('before','before-source'),('after','after-source'),
+                           ('margin-left','margin-left-source'),('indent','indent-source'),
+                           ('bullet','bullet-source'),('bullet-font','bullet-font-source'),
+                           ('bullet-size','bullet-size-source'),('bullet-fill','bullet-fill-source')):
+        source=txt_decode(record.get(source_key,'""'))
+        belongs=source==origin or (origin=='master' and source=='master_style')
+        if not belongs:continue
+        inherited[source_key]='"direct"'
+        fields=({'align':('align',),'line':('line-kind','line-value'),
+                 'before':('before-kind','before-value'),'after':('after-kind','after-value'),
+                 'margin-left':('margin-left',),'indent':('indent',),'bullet':('bullet',),
+                 'bullet-font':('bullet-font',),
+                 'bullet-size':('bullet-size-kind','bullet-size-value'),
+                 'bullet-fill':('bullet-fill',)}[key])
+        for field in fields:
+            if field in record:inherited[field]=record[field]
+        if key=='bullet':
+            for field in ('bullet-kind','bullet-type','bullet-start'):
+                if field in record:inherited[field]=record[field]
+    if inherited:
+        inherited['level']=str(level-1)
+        apply_paragraph_properties(None,inherited,allow_inherited=True,target_ppr=ppr)
+
+
 PLACEHOLDER_TYPES={'title':'title','centered-title':'ctrTitle','body':'body'}
 
 def placeholder_type(record):
@@ -512,7 +683,8 @@ def merged_placeholder(slots, parent_slots, instance=None):
     parent=next((item for item in parent_slots if txt_decode(item.get('id','""'))==slot_id),None)
     result={}
     for key in ('x','y','width','height','rotation','font','size','fill','background','weight','align','bullet',
-                'anchor','margin-left','margin-right','margin-top','margin-bottom'):
+                'anchor','margin-left','margin-right','margin-top','margin-bottom',
+                'autofit-mode','font-scale','line-spacing-reduction'):
         value=instance.get(key)
         if value is None and own is not None:value=own.get(key)
         if value is None and parent is not None:value=parent.get(key)
@@ -541,6 +713,7 @@ def add_native_placeholder(slide, record, resolved, *, keep_geometry=False, mark
     shape._element.nvSpPr.nvPr.append(ph)
     tf=shape.text_frame;tf.clear()
     body_pr=shape._element.txBody.bodyPr
+    apply_autofit(body_pr,record)
     for attr in ('lIns','rIns','tIns','bIns','anchor','wrap'):
         body_pr.attrib.pop(attr,None)
     text=placeholder_text(record)
@@ -550,17 +723,15 @@ def add_native_placeholder(slide, record, resolved, *, keep_geometry=False, mark
     for para_index,(part,paragraph_record) in enumerate(paragraph_values):
         para=tf.paragraphs[0] if para_index==0 else tf.add_paragraph()
         para.level=int(length(paragraph_record.get('level'),0))
-        if paragraph_record.get('align'):
-            alignment=txt_decode(paragraph_record['align'])
-            if alignment in ('left','center','right'):
-                para.alignment={'left':PP_ALIGN.LEFT,'center':PP_ALIGN.CENTER,'right':PP_ALIGN.RIGHT}[alignment]
-        if paragraph_record.get('bullet'):
-            ppr=para._p.get_or_add_pPr()
-            bullet=OxmlElement('a:buChar');bullet.set('char',txt_decode(paragraph_record['bullet']));ppr.append(bullet)
+        apply_paragraph_properties(para,paragraph_record,allow_inherited=False)
         run_records=find_macro_records(paragraph_record.get('runs','()'),'PptxPlaceholderRun')
         if run_records:
             for run_record in run_records:
-                run=para.add_run();run.text=txt_decode(run_record.get('text','""'))
+                run_text=txt_decode(run_record.get('text','""'))
+                if run_text=='\n':
+                    para._p.append(OxmlElement('a:br'))
+                    continue
+                run=para.add_run();run.text=run_text
                 if run_record.get('fill'):run.font.color.rgb=RGBColor(*simple_color(run_record['fill']))
                 if run_record.get('font'):run.font.name=txt_decode(run_record['font'])
                 if run_record.get('size'):run.font.size=Pt(length(run_record['size']))
@@ -691,6 +862,7 @@ def convert(main,output):
                         if (path:=background_asset(expr,base,audit,f'layout:{name}')) is not None}
     slide_assignments={}
     slide_visibility={}
+    inherited_placeholder_styles={'layout':{},'master':{}}
     for n,(raw,_,_) in enumerate(slide_calls,1):
         head,body=parse_root(raw)
         w=length(head.get('width'),sw);h=length(head.get('height'),sh)
@@ -712,6 +884,18 @@ def convert(main,output):
                 slide,item,resolved,keep_geometry=local_geometry,
                 marker='PptxTypst placeholder '+txt_decode(item.get('id','""')),
             )
+            master_name=layout_records.get(layout_name,('', '', False, ''))[0]
+            for paragraph_record in find_macro_records(item.get('paragraphs','()'),'PptxPlaceholderParagraph'):
+                idx=int(length(item.get('idx'),0))
+                sources={txt_decode(paragraph_record.get(key,'""'))
+                         for key in ('line-source','before-source','after-source','align-source',
+                                     'margin-left-source','indent-source','bullet-source',
+                                     'bullet-font-source','bullet-size-source','bullet-fill-source')
+                         if paragraph_record.get(key) is not None}
+                if 'layout' in sources:
+                    inherited_placeholder_styles['layout'].setdefault((layout_name,idx),[]).append(paragraph_record)
+                if sources.intersection({'master','master_style'}):
+                    inherited_placeholder_styles['master'].setdefault((master_name,idx),[]).append(paragraph_record)
             audit['items'].append({'slide':n,'type':'placeholder','placeholder_type':placeholder_type(item),
                                    'idx':int(length(item.get('idx'),0)),'id':txt_decode(item.get('id','""')),
                                    'inherited_from_layout':local is not None,'inherited_from_master':local is None and parent is not None,
@@ -737,6 +921,9 @@ def convert(main,output):
         for item in master_placeholders.get(name,[]):
             resolved,_,_=merged_placeholder([],[],item)
             add_native_placeholder(stage,item,resolved,keep_geometry=any(k in item for k in ('x','y','width','height','rotation')))
+        for (master_name,idx),records in inherited_placeholder_styles['master'].items():
+            if master_name==name:
+                for record in records:apply_inherited_placeholder_paragraph_style(stage,idx,record,'master')
         master_object_counts[name]=len(stage.shapes)
         clear_theme_shadows(stage)
     layout_visibility={};layout_fills={}
@@ -748,6 +935,9 @@ def convert(main,output):
         for item in layout_placeholders.get(name,[]):
             resolved,_,_=merged_placeholder(layout_placeholders.get(name,[]),master_placeholders.get(master_name,[]),item)
             add_native_placeholder(stage,item,resolved,keep_geometry=any(k in item for k in ('x','y','width','height','rotation')))
+        for (layout_name,idx),records in inherited_placeholder_styles['layout'].items():
+            if layout_name==name:
+                for record in records:apply_inherited_placeholder_paragraph_style(stage,idx,record,'layout')
         layout_object_counts[name]=len(stage.shapes)
         clear_theme_shadows(stage)
     for name,fill in master_fills.items():

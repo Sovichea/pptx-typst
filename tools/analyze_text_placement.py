@@ -15,7 +15,9 @@ import numpy as np
 from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
-from pptx_typst.text_diagnostics import assign_pdf_blocks_to_shapes, match_text_blocks_spatial
+from pptx_typst.text_diagnostics import (
+    align_pdf_pages_to_slides, assign_pdf_blocks_to_shapes, match_text_blocks_spatial,
+)
 
 try:
     from .run_text_fidelity_benchmark import (
@@ -197,6 +199,7 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
     output_positions = {key: value for key, value in output_positions.items() if value is not None}
     common = source_positions.keys() & output_positions.keys()
     displacements, baseline_deltas, bbox_deltas, line_spacing_deltas = [], [], [], []
+    comparable_line_objects = line_count_mismatch_objects = 0
     source_overflows, typst_overflows = [], []
     samples = []
     for shape_id in sorted(common):
@@ -207,11 +210,16 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
         displacements.append(distance)
         baseline_deltas.append(abs(source["baseline"][1] - output["baseline"][1]))
         bbox_deltas.append(float(np.mean(np.abs(np.array(source["bbox"]) - np.array(output["bbox"])))) )
-        if len(source["baselines"]) == len(output["baselines"]) and len(source["baselines"]) > 1:
+        line_pitch_comparable=(len(source["baselines"]) == len(output["baselines"])
+                               and len(source["baselines"]) > 1)
+        if line_pitch_comparable:
+            comparable_line_objects+=1
             line_spacing_deltas.extend(abs(
                 (source["baselines"][i] - source["baselines"][i - 1])
                 - (output["baselines"][i] - output["baselines"][i - 1])
             ) for i in range(1, len(source["baselines"])))
+        elif len(source["baselines"]) != len(output["baselines"]):
+            line_count_mismatch_objects+=1
         shape = source_shapes[shape_id]
         x, y, width, height, angle = (float(shape["geometry"][key]) for key in ("x", "y", "w", "h", "rot"))
         cx, cy = x + width / 2, y + height / 2
@@ -239,6 +247,10 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
                         "typst_overflow_pt": round(output_overflow, 2),
                         "source_line_count": len(source["baselines"]),
                         "typst_line_count": len(output["baselines"]),
+                        "line_count_delta": len(output["baselines"])-len(source["baselines"]),
+                        "line_pitch_comparable": line_pitch_comparable,
+                        "source_baselines_pt": source["baselines"],
+                        "typst_baselines_pt": output["baselines"],
                         "source_mean_baseline_pitch_pt": float(np.mean(src_pitch)) if len(src_pitch) else None,
                         "typst_mean_baseline_pitch_pt": float(np.mean(out_pitch)) if len(out_pitch) else None})
     return {
@@ -252,10 +264,20 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
         "unassigned_typst_pdf_spans": output_unmatched,
         "mean_first_glyph_displacement_pt": float(np.mean(displacements)) if displacements else None,
         "median_first_glyph_displacement_pt": float(np.median(displacements)) if displacements else None,
+        "first_paragraph_start_proxy": {
+            "matched_text_objects": len(displacements),
+            "mean_displacement_pt": float(np.mean(displacements)) if displacements else None,
+            "median_displacement_pt": float(np.median(displacements)) if displacements else None,
+            "within_12pt_share": float(np.mean(np.array(displacements) <= 12)) if displacements else None,
+            "interpretation": "first visible glyph assigned to each source text object; not every paragraph start",
+        },
         "within_12pt_share": float(np.mean(np.array(displacements) <= 12)) if displacements else None,
         "mean_first_glyph_baseline_delta_pt": float(np.mean(baseline_deltas)) if baseline_deltas else None,
         "mean_text_bbox_edge_delta_pt": float(np.mean(bbox_deltas)) if bbox_deltas else None,
         "mean_line_spacing_delta_pt_when_line_count_matches": float(np.mean(line_spacing_deltas)) if line_spacing_deltas else None,
+        "line_pitch_compared_objects": comparable_line_objects,
+        "line_count_mismatch_objects": line_count_mismatch_objects,
+        "line_pitch_intervals_compared": len(line_spacing_deltas),
         "objects_overflowing_frame_by_more_than_2pt": {
             "powerpoint": int(sum(value > 2 for value in source_overflows)),
             "typst": int(sum(value > 2 for value in typst_overflows)),
@@ -269,12 +291,15 @@ def object_linked_render_metrics(source_blocks, output_blocks, source_shapes, ou
         "_baseline_deltas": baseline_deltas,
         "_bbox_deltas": bbox_deltas,
         "_line_spacing_deltas": line_spacing_deltas,
+        "_line_pitch_compared_objects": comparable_line_objects,
+        "_line_count_mismatch_objects": line_count_mismatch_objects,
         "_source_overflows": source_overflows,
         "_typst_overflows": typst_overflows,
     }
 
 
-def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_shapes, output_placements):
+def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_shapes,
+                           output_placements, source_page_to_slide):
     old_errors, spatial_matches = [], []
     source_blocks_total = output_blocks_total = 0
     ambiguous_source = ambiguous_output = unmatched_source = unmatched_output = 0
@@ -285,16 +310,19 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
     object_baselines = []
     object_bboxes = []
     object_line_spacing = []
+    object_line_pitch_compared = object_line_count_mismatch = 0
     object_source_overflows = []
     object_typst_overflows = []
     object_ambiguous_source = object_ambiguous_output = 0
     object_unassigned_source = object_unassigned_output = 0
     object_missing_source = object_missing_output = 0
     object_matched_count = object_source_count = object_output_count = 0
-    for page_index in sorted(supported_text_slides):
-        if page_index >= min(len(source_pdf), len(typst_pdf)):
+    for source_page_index, slide_index in sorted(source_page_to_slide.items()):
+        if slide_index not in supported_text_slides:
             continue
-        source_page, output_page = source_pdf[page_index], typst_pdf[page_index]
+        if source_page_index >= len(source_pdf) or slide_index >= len(typst_pdf):
+            continue
+        source_page, output_page = source_pdf[source_page_index], typst_pdf[slide_index]
         source_blocks, output_blocks = pdf_text_blocks(source_page), pdf_text_blocks(output_page)
         source_blocks_total += len(source_blocks)
         output_blocks_total += len(output_blocks)
@@ -321,9 +349,9 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
         )
         errors = [match["distance"] for match in matches]
         source_objects = {str(shape_id): item for (slide_no, shape_id), item in source_shapes.items()
-                          if slide_no == page_index + 1}
+                          if slide_no == slide_index + 1}
         output_objects = {}
-        for item in output_placements.get(page_index + 1, []):
+        for item in output_placements.get(slide_index + 1, []):
             source_shape = source_objects.get(str(item["source_shape_id"]))
             # Compare each source object only with its converter object. Extra
             # text placements (for example inherited placeholders) are counted
@@ -340,6 +368,8 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
         object_baselines.extend(object_result.pop("_baseline_deltas"))
         object_bboxes.extend(object_result.pop("_bbox_deltas"))
         object_line_spacing.extend(object_result.pop("_line_spacing_deltas"))
+        object_line_pitch_compared += object_result.pop("_line_pitch_compared_objects")
+        object_line_count_mismatch += object_result.pop("_line_count_mismatch_objects")
         object_source_overflows.extend(object_result.pop("_source_overflows"))
         object_typst_overflows.extend(object_result.pop("_typst_overflows"))
         object_ambiguous_source += object_result["ambiguous_source_pdf_spans"]
@@ -352,9 +382,11 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
         object_source_count += object_result["source_shape_count"]
         object_output_count += object_result["typst_shape_count"]
         for private_key in ("_displacements", "_baseline_deltas", "_bbox_deltas", "_line_spacing_deltas",
+                            "_line_pitch_compared_objects", "_line_count_mismatch_objects",
                             "_source_overflows", "_typst_overflows"):
             object_result.pop(private_key, None)
-        slides.append({"slide": page_index + 1, "source_blocks": len(source_blocks),
+        slides.append({"slide": slide_index + 1, "source_pdf_page": source_page_index + 1,
+                       "typst_pdf_page": slide_index + 1, "source_blocks": len(source_blocks),
                        "output_blocks": len(output_blocks), "spatial_matches": len(matches),
                        "mean_start_displacement_pt": float(np.mean(errors)) if errors else None,
                        "object_linked_position": object_result})
@@ -412,10 +444,20 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
             "unassigned_typst_pdf_spans": object_unassigned_output,
             "mean_first_glyph_displacement_pt": float(np.mean(object_displacements)) if object_displacements else None,
             "median_first_glyph_displacement_pt": float(np.median(object_displacements)) if object_displacements else None,
+            "first_paragraph_start_proxy": {
+                "matched_text_objects": len(object_displacements),
+                "mean_displacement_pt": float(np.mean(object_displacements)) if object_displacements else None,
+                "median_displacement_pt": float(np.median(object_displacements)) if object_displacements else None,
+                "within_12pt_share": float(np.mean(np.array(object_displacements) <= 12)) if object_displacements else None,
+                "interpretation": "first visible glyph assigned to each source text object; not every paragraph start",
+            },
             "within_12pt_share": float(np.mean(np.array(object_displacements) <= 12)) if object_displacements else None,
             "mean_first_glyph_baseline_delta_pt": float(np.mean(object_baselines)) if object_baselines else None,
             "mean_text_bbox_edge_delta_pt": float(np.mean(object_bboxes)) if object_bboxes else None,
             "mean_line_spacing_delta_pt_when_line_count_matches": float(np.mean(object_line_spacing)) if object_line_spacing else None,
+            "line_pitch_compared_objects": object_line_pitch_compared,
+            "line_count_mismatch_objects": object_line_count_mismatch,
+            "line_pitch_intervals_compared": len(object_line_spacing),
             "objects_overflowing_frame_by_more_than_2pt": {
                 "powerpoint": int(sum(value > 2 for value in object_source_overflows)),
                 "typst": int(sum(value > 2 for value in object_typst_overflows)),
@@ -431,9 +473,9 @@ def collect_render_metrics(source_pdf, typst_pdf, supported_text_slides, source_
     }
 
 
-def visual_pair(source_pdf, typst_pdf, page_index, output_path, title):
-    source = page_image(source_pdf[page_index], 1.2)
-    converted = page_image(typst_pdf[page_index], 1.2)
+def visual_pair(source_pdf, typst_pdf, source_page_index, typst_page_index, output_path, title):
+    source = page_image(source_pdf[source_page_index], 1.2)
+    converted = page_image(typst_pdf[typst_page_index], 1.2)
     if converted.size != source.size:
         converted = converted.resize(source.size, Image.Resampling.LANCZOS)
     width, height = source.size
@@ -484,26 +526,48 @@ def analyze_one(app, source: Path, output_dir: Path, installed_fonts, text_layou
         import pymupdf as fitz
         source_pdf, typst_pdf = fitz.open(temp / "powerpoint.pdf"), fitz.open(temp / "typst.pdf")
         try:
+            hidden_slides = {
+                index for index, slide in enumerate(deck.slides)
+                if slide._element.get("show", "1").casefold() in ("0", "false")
+            }
+            page_map, alignment_error = align_pdf_pages_to_slides(
+                len(deck.slides), hidden_slides, len(source_pdf), len(typst_pdf)
+            )
             source_shapes = source_text_shapes(deck)
             output_placements = {
                 slide["slide"]: [item for item in slide["placements"] if item.get("type") == "text"]
                 for slide in manifest["slides"]
             }
-            rendered = collect_render_metrics(source_pdf, typst_pdf, supported_text,
-                                              source_shapes, output_placements)
-            matches = rendered.pop("_matches")
-            eligible = [slide for slide in rendered["slides"]
-                        if slide["object_linked_position"]["objects_with_glyphs_in_both_pdfs"]]
-            if eligible:
-                selected = next((slide for slide in eligible if slide["slide"] == comparison_slide), None)
-                if selected is None:
-                    selected = max(eligible, key=lambda item: (
-                        item["object_linked_position"]["mean_first_glyph_displacement_pt"] or 0
-                    ))
-                visual_path = output_dir / f"{key}_slide_{selected['slide']:03d}.png"
-                visual_pair(source_pdf, typst_pdf, selected["slide"] - 1, visual_path, source.stem)
-                rendered["comparison_image"] = visual_path.name
-                rendered["comparison_slide"] = selected["slide"]
+            rendered = (collect_render_metrics(source_pdf, typst_pdf, supported_text,
+                                               source_shapes, output_placements, page_map)
+                        if page_map is not None else None)
+            page_details = {
+                "page_correspondence": "source-order" if page_map is not None else "invalid_comparison",
+                "page_alignment_error": alignment_error,
+                "hidden_source_slides": sorted(index + 1 for index in hidden_slides),
+                "visible_source_slides": len(deck.slides) - len(hidden_slides),
+                "source_pdf_pages": len(source_pdf),
+                "typst_pdf_pages": len(typst_pdf),
+            }
+            if rendered is not None:
+                rendered.update(page_details)
+            else:
+                rendered = {**page_details, "comparison_excluded": True}
+            if rendered is not None and "_matches" in rendered:
+                rendered.pop("_matches")
+                eligible = [slide for slide in rendered["slides"]
+                            if slide["object_linked_position"]["objects_with_glyphs_in_both_pdfs"]]
+                if eligible:
+                    selected = next((slide for slide in eligible if slide["slide"] == comparison_slide), None)
+                    if selected is None:
+                        selected = max(eligible, key=lambda item: (
+                            item["object_linked_position"]["mean_first_glyph_displacement_pt"] or 0
+                        ))
+                    visual_path = output_dir / f"{key}_slide_{selected['slide']:03d}.png"
+                    visual_pair(source_pdf, typst_pdf, selected["source_pdf_page"] - 1,
+                                selected["typst_pdf_page"] - 1, visual_path, source.stem)
+                    rendered["comparison_image"] = visual_path.name
+                    rendered["comparison_slide"] = selected["slide"]
             record = {
                 "source": str(source.relative_to(ROOT)) if source.is_relative_to(ROOT) else source.name,
                 "source_text_slides": len(text_source),
@@ -525,7 +589,7 @@ def main():
     parser.add_argument("inputs", nargs="+", type=Path, help="representative PPTX files")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "benchmarks/text_fidelity/diagnostics")
     parser.add_argument("--text-layout", choices=("anchors", "anchors-spacing"), default="anchors-spacing",
-                        help="paragraph separation mode to measure (anchors-spacing is the converter default)")
+                        help="legacy vertical-anchor selector; paragraph spacing uses the shared model")
     parser.add_argument("--comparison-slide", type=int,
                         help="prefer this slide for the visual comparison when it has matched text")
     args = parser.parse_args()
@@ -550,9 +614,13 @@ def main():
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(target)
     for item in results:
+        rendered = item["rendered"]
+        if "historical_text_only_greedy_match" not in rendered:
+            print(item["source"], "comparison excluded:", rendered["page_alignment_error"])
+            continue
         print(item["source"], "structural max pt", item["structural"]["geometry_abs_delta_pt"],
-              "rendered", item["rendered"]["historical_text_only_greedy_match"],
-              item["rendered"]["spatially_constrained_match"])
+              "rendered", rendered["historical_text_only_greedy_match"],
+              rendered["spatially_constrained_match"])
 
 
 if __name__ == "__main__":

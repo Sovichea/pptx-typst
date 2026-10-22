@@ -18,12 +18,13 @@ from collections import Counter,defaultdict
 import argparse
 from .pptx_geometry import shape_paths, preset_path
 from .pptx_mask import mask_image
+from .paragraph_layout import resolve_paragraph_style, typst_leading, typst_spacing
 
 cli=argparse.ArgumentParser(description="Convert PPTX to structured Typst with shared master/layout declarations and original media assets")
 cli.add_argument("input_pptx",type=Path,help="source PowerPoint document")
 cli.add_argument("--output",type=Path,default=Path("./typst-output"),help="Typst project output directory")
 cli.add_argument("--template",type=Path,default=Path(__file__).with_name("template.typ"),help="Typst template defining Root, Place, and related layout helpers")
-cli.add_argument("--text-layout",choices=["v3","anchors","spacing","anchors-spacing"],default="anchors-spacing",help="vertical text anchor fidelity. Default uses a small paragraph advance; anchors retains the legacy full-line gap")
+cli.add_argument("--text-layout",choices=["v3","anchors","spacing","anchors-spacing"],default="anchors-spacing",help="legacy compatibility selector for vertical anchoring; paragraph spacing uses the shared paragraph model")
 cli.add_argument("--text-features", choices=["legacy","inherit","structure","all"], default="all", help="Text inheritance/bullets/tabs features (default: all)")
 cli.add_argument("--group-mode",choices=["safe","nested","flatten"],default="safe",help="Emit editable nested GroupContent containers or v5 flattened placements")
 cli.add_argument("--clip-mode",choices=["component","legacy"],default="legacy",help="Rectangular picture crop representation")
@@ -167,26 +168,44 @@ def effective_run_style(sh,pa,run):
         italic=next((el.get('i') in ('1','true') for el in ([rp]+defaults) if el is not None and el.get('i') is not None),False)
     return font,sz,c,('bold' if bold else 'regular'),bool(italic)
 
-def paragraph_style_sources(sh,pa):
-    """Paragraph properties from direct formatting through master defaults."""
+def paragraph_style_source_records(sh,pa):
+    """Return DrawingML paragraph nodes in inheritance priority order."""
     lvl=min(9,max(1,pa.level+1))
     result=[]
-    def add(nodes):
-        if nodes and nodes[0] not in result:result.append(nodes[0])
-    add(pa._p.xpath('./a:pPr'))
-    add(sh._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
+    def add(source,nodes):
+        for node in nodes or []:
+            if all(node is not current for _,current in result):
+                result.append((source,node))
+    add('direct',pa._p.xpath('./a:pPr'))
+    add('shape',sh._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
+    add('shape',sh._element.xpath('./p:txBody/a:lstStyle/a:defPPr'))
     if sh.is_placeholder and CURRENT_SLIDE is not None:
-        try:
-            ph=layout_placeholder(sh)
-            if ph:add(ph._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
-        except Exception:pass
-    if sh.is_placeholder and CURRENT_SLIDE is not None:
-        master=CURRENT_SLIDE.slide_layout.slide_master
-        is_title=(sh.is_placeholder and 'TITLE' in str(sh.placeholder_format.type).upper())
+        idx=sh.placeholder_format.idx
+        layout=CURRENT_SLIDE.slide_layout
+        master=layout.slide_master
+        for origin,owner in (('layout',layout),('master',master)):
+            peer=next((item for item in owner.placeholders if item.placeholder_format.idx==idx),None)
+            if peer is not None and peer is not sh:
+                # Placeholder-local paragraph properties precede its level list
+                # style. This matters when only one paragraph property is set.
+                peer_paragraphs=peer._element.xpath('./p:txBody/a:p/a:pPr')
+                add(origin,peer_paragraphs[:1])
+                add(origin,peer._element.xpath(f'./p:txBody/a:lstStyle/a:lvl{lvl}pPr'))
+                add(origin,peer._element.xpath('./p:txBody/a:lstStyle/a:defPPr'))
+        is_title='TITLE' in str(sh.placeholder_format.type).upper()
         contexts=['titleStyle'] if is_title else ['bodyStyle','otherStyle']
         for context in contexts:
-            add(master._element.xpath(f'./p:txStyles/p:{context}/a:lvl{lvl}pPr'))
+            add('master_style',master._element.xpath(f'./p:txStyles/p:{context}/a:lvl{lvl}pPr'))
+            add('master_style',master._element.xpath(f'./p:txStyles/p:{context}/a:defPPr'))
+    elif CURRENT_SLIDE is not None:
+        master=CURRENT_SLIDE.slide_layout.slide_master
+        add('master_style',master._element.xpath(f'./p:txStyles/p:otherStyle/a:lvl{lvl}pPr'))
+        add('master_style',master._element.xpath('./p:txStyles/p:otherStyle/a:defPPr'))
     return result
+
+def paragraph_style_sources(sh,pa):
+    """Compatibility view of paragraph properties ordered by precedence."""
+    return [node for _,node in paragraph_style_source_records(sh,pa)]
 
 def paragraph_indent(sh,pa):
     """Resolve DrawingML margin and hanging indent, expressed in points."""
@@ -208,12 +227,14 @@ def normalized_bullet_glyph(glyph, ppr):
     return glyph
 
 def bullet_spec(sh,pa,fontsize):
-    sources=paragraph_style_sources(sh,pa)
+    source_records=paragraph_style_source_records(sh,pa)
+    sources=[node for _,node in source_records]
     node=None;owner=None
-    for ppr in sources:
+    owner_source=None
+    for source,ppr in source_records:
         found=ppr.xpath('./*[local-name()="buNone" or local-name()="buChar" or local-name()="buAutoNum" or local-name()="buBlip"]')
         if found:
-            node=found[0];owner=ppr;break
+            node=found[0];owner=ppr;owner_source=source;break
     if node is None:return None
     tag=etree.QName(node).localname
     if tag=='buNone':return None
@@ -224,19 +245,25 @@ def bullet_spec(sh,pa,fontsize):
     elif tag=='buAutoNum':spec={'kind':'number','type':node.get('type','arabicPeriod'),'start':int(node.get('startAt','1'))}
     else:return None
     spec['fontsize']=fontsize
-    for ppr in sources:
+    spec['source']=owner_source
+    for source,ppr in source_records:
         fonts=ppr.xpath('./*[local-name()="buFont"]')
         if fonts and fonts[0].get('typeface'):
-            spec['font']=expand_theme_font(fonts[0].get('typeface'));break
+            spec['font']=expand_theme_font(fonts[0].get('typeface'))
+            spec['font_source']=source;break
     if owner is not None:
         pct=owner.xpath('./*[local-name()="buSzPct"]')
         pts=owner.xpath('./*[local-name()="buSzPts"]')
         if pts and pts[0].get('sz'):
             spec['fontsize']=int(pts[0].get('sz'))/100;spec['absolute_size']=True
+            spec['size_kind']='points';spec['size_value']=spec['fontsize'];spec['size_source']=owner_source
         elif pct and pct[0].get('val'):
-            spec['fontsize']=fontsize*int(pct[0].get('val'))/100000
-        colors=owner.xpath('./*[local-name()="buClr"]/*[local-name()="solidFill"]/*[local-name()="srgbClr" or local-name()="schemeClr" or local-name()="sysClr" or local-name()="prstClr"]')
+            spec['size_kind']='percent';spec['size_value']=int(pct[0].get('val'))/1000
+            spec['size_source']=owner_source
+            spec['fontsize']=fontsize*spec['size_value']/100
+        colors=owner.xpath('./*[local-name()="buClr"]/*[local-name()="srgbClr" or local-name()="schemeClr" or local-name()="sysClr" or local-name()="prstClr"] | ./*[local-name()="buClr"]/*[local-name()="solidFill"]/*[local-name()="srgbClr" or local-name()="schemeClr" or local-name()="sysClr" or local-name()="prstClr"]')
         spec['color']=resolve_color_node(colors[0]) if colors else None
+        if colors:spec['color_source']=owner_source
     return spec
 
 def number_glyph(n,kind):
@@ -672,156 +699,145 @@ def text_autofit(sh):
     if bb.xpath('./a:noAutofit'):return ('no_autofit',1.0,0.0)
     return ('none',1.0,0.0)
 
-def content_for_text(sh, ew, eh, sx, sy):
- tf=sh.text_frame
- autofit_mode,shrink,spacing_reduction=text_autofit(sh)
- paragraphs=[]
- bb=sh._element.xpath('./p:txBody/a:bodyPr')
- anchor=bb[0].get('anchor','t') if bb else 't'
- valign={'ctr':'center + horizon','b':'bottom','t':'top'}.get(anchor,'top')
- if args.text_layout not in ('anchors','anchors-spacing'):valign='top'
- bullet_counters={}
- for pa in tf.paragraphs:
-  rr=[];max_size=0;cell_runs=[];has_tabs=False
-  bullet_text_font=None;bullet_text_color=None;bullet_text_weight='regular'
-  inherit=inherited_run_style(sh,pa)
-  feature_on=args.text_features in ('inherit','all')
-  for run in pa.runs:
-   if not run.text:continue
-   if feature_on:
-    font,fontsize,c,wt,it=effective_run_style(sh,pa,run)
-   else:
-    font=font_mapping(run.font.name)
-    fontsize=(run.font.size.pt if run.font.size else 20)
-    c=color_of(run) or (color_in(inherit,'./a:solidFill') if inherit is not None else None) or shape_text_color(sh)
-    inherited_bold=inherit is not None and inherit.get('b') in ('1','true')
-    wt='bold' if (run.font.bold or (run.font.bold is None and inherited_bold)) else weight_mapping(run)
-    it=False
-   fontsize*=shrink
-   max_size=max(max_size,fontsize)
-   if bullet_text_font is None:
-    bullet_text_font=font;bullet_text_color=c;bullet_text_weight=wt
-   fragments=run.text.replace('\v','\n').split('\n')
-   for j,frag in enumerate(fragments):
-    pieces=frag.split('\t') if args.text_features in ('structure','all') else [frag]
-    for k,piece in enumerate(pieces):
-     if piece:
-      style=f'#text(font: {typst_font_fallback(font)}, size: {fontsize:.2f}pt, weight: "{wt}", fill: rgb("{c}"), '+('style: "italic", ' if it else '')+f'{stylize(piece)})'
-      rr.append(style)
-     if k<len(pieces)-1:
-      rr.append('@@TAB@@');has_tabs=True
-    if j<len(fragments)-1:rr.append('#linebreak()')
-  spec=bullet_spec(sh,pa,max_size or 20) if args.text_features in ('structure','all') else None
-  glyph=None
-  if spec:
-   if spec['kind']=='number':
-    seqkey=(pa.level,spec['type'])
-    current=bullet_counters.get(seqkey,spec['start']-1)+1
-    bullet_counters[seqkey]=current
-    glyph=number_glyph(current,spec['type'])
-   else:glyph=spec['glyph']
-  elif rr and pa._p.xpath('./a:pPr/a:buAutoNum') and args.text_features not in ('structure','all'):
-   # Preserve the v4 fallback for legacy and inheritance-only tests.
-   current=bullet_counters.get('legacy',0)+1;bullet_counters['legacy']=current
-   glyph=str(current)+'.'
-  # A PowerPoint tab is a horizontal positioning operation. Explicit tabs
-  # become fixed cells whose widths are computed from a:tabLst positions.
-  # We do not merge / rasterize the text into images.
-  if has_tabs and args.text_features in ('structure','all'):
-   cells=['']
-   for frag in rr:
-    if frag=='@@TAB@@':cells.append('')
-    else:cells[-1]+=frag
-   tabs=pptx_tabs(pa)
-   tabstep=body_tab_size(sh,pa)
-   stops=[]
-   for index in range(len(cells)-1):
-    pos=tabs[index][0] if index<len(tabs) else tabstep*(index+1)
-    if stops and pos<=stops[-1]:pos=stops[-1]+tabstep
-    stops.append(pos)
-   boundaries=[0]+stops+[max(0,ew-10)]
-   widths=[max(1,boundaries[i+1]-boundaries[i]) for i in range(len(cells))]
-   # Avoid wrapping every word in narrow tab cells when a stop extends past box.
-   widths[-1]=max(10,widths[-1])
-   cols=','.join(f'{x:.2f}pt' for x in widths)
-   rrtext='#grid(columns:('+cols+'),column-gutter:0pt,row-gutter:0pt,'+','.join('['+c+']' for c in cells)+')'
-  else:rrtext=''.join(' ' if t=='@@TAB@@' else t for t in rr)
-  if glyph and rrtext:
-   bullet_font=max(1,(spec['fontsize'] if spec else max_size)*(shrink if spec and spec.get('absolute_size') else 1))
-   bullet_family=spec.get('font') or bullet_text_font or CURRENT_FONTS.get('minor','Arial')
-   bullet_color=spec.get('color') or bullet_text_color or shape_text_color(sh)
-   glyphtext=f'#text(font:{typst_font_fallback(bullet_family)},size:{bullet_font:.2f}pt,weight:"{bullet_text_weight}",fill:rgb("{bullet_color}"),{stylize(glyph)})'
-   if args.text_features in ('structure','all'):
-    left,indent=paragraph_indent(sh,pa)
-    if abs(indent)<.001:
-     gap=max(10,bullet_font*1.4)
-     bullet_x=left-gap;text_x=left
-    elif indent<0:
-     bullet_x=left+indent;text_x=left;gap=-indent
+def _paragraph_run_expressions(sh,pa,shrink=1.0):
+    """Return shared Typst run records in DrawingML source order."""
+    expressions=[]
+    run_iter=iter(pa.runs)
+    max_size=0.0
+    first_style=None
+    for child in pa._p:
+        tag=etree.QName(child).localname
+        if tag=='br':
+            expressions.append('PptxPlaceholderRun(text:"\\n")')
+            continue
+        if tag not in ('r','fld'):
+            continue
+        run=next(run_iter,None)
+        if run is None or not run.text:
+            continue
+        font,size,fill,weight,italic=effective_run_style(sh,pa,run)
+        max_size=max(max_size,size*shrink)
+        if first_style is None:
+            first_style=(font,size,fill,weight)
+        fields=[f'text:{stylize(run.text.replace(chr(11), chr(10)))}',
+                f'font:{stylize(font)}',f'size:{size:.3f}pt',
+                f'fill:rgb("{fill}")',f'weight:{stylize(weight)}',
+                f'italic:{str(bool(italic)).lower()}']
+        expressions.append('PptxPlaceholderRun('+', '.join(fields)+')')
+    return expressions,max_size,first_style
+
+
+def paragraph_record_expression(sh,pa,*,shrink=1.0,spacing_reduction=0.0,bullet_counters=None,record_name='PptxParagraph'):
+    """Serialize one paragraph with source spacing semantics and resolved origin."""
+    bullet_counters=bullet_counters if bullet_counters is not None else {}
+    runs,max_size,first_style=_paragraph_run_expressions(sh,pa,shrink)
+    if max_size<=0:
+        max_size=20.0*shrink
+    style=resolve_paragraph_style(paragraph_style_source_records(sh,pa),pa.level)
+    spec=bullet_spec(sh,pa,max_size) if args.text_features in ('structure','all') else None
+    if spec:
+        if spec['kind']=='number':
+            key=(pa.level,spec['type'])
+            number=bullet_counters.get(key,spec['start']-1)+1
+            bullet_counters[key]=number
+            marker=number_glyph(number,spec['type'])
+        elif spec['kind']=='char':
+            marker=spec['glyph']
+        else:
+            marker='•'
     else:
-     bullet_x=left;text_x=left+indent;gap=indent
-    # Typst's native list item keeps wrapped lines aligned with the text start.
-    rrtext='#list(marker:['+glyphtext+'],indent:'+f'{bullet_x:.2f}pt,body-indent:{gap:.2f}pt,tight:true,spacing:0pt'+',['+rrtext+'])'
-   else:rrtext=glyphtext+stylize(' ')[1:-1]+rrtext
-  line_value=pa.line_spacing
-  if isinstance(line_value,float):
-   # python-pptx represents proportional DrawingML line spacing as a multiplier.
-   line_size=round(max_size*line_value,2) if max_size>0 else None
-  elif line_value:
-   line_size=round(float(line_value)/EMU,2)
-  else:
-   # PowerPoint also inherits line spacing from paragraph and master styles.
-   line_size=None
-   for source in paragraph_style_sources(sh,pa):
-    line_nodes=source.xpath('./*[local-name()="lnSpc"]')
-    if not line_nodes:continue
-    pct=line_nodes[0].xpath('./*[local-name()="spcPct"]/@val')
-    pts=line_nodes[0].xpath('./*[local-name()="spcPts"]/@val')
-    if pct and max_size>0:line_size=round(max_size*int(pct[0])/100000,2)
-    elif pts:line_size=round(int(pts[0])/100,2)
-    if line_size is not None:break
-  if line_size is not None and max_size>0:
-   # PowerPoint's single spacing is a baseline pitch, while Typst leading is
-   # the gap between font line boxes. The latter depends on the chosen font;
-   # use a measured floor for single spacing and subtract the fallback font's
-   # natural line pitch when preserving larger authored spacing values.
-   leading=max(max_size*.52,line_size-max_size*.67)
-  else:leading=max(1.,max_size*.52)
-  leading=max(0.,leading*(1-spacing_reduction))
-  before=round(float(pa.space_before)/EMU,2) if pa.space_before else 0
-  after=round(float(pa.space_after)/EMU,2) if pa.space_after else 0
-  before*=shrink;after*=shrink
-  paragraphs.append((p_align(pa),max_size,leading,before,after,rrtext,line_size))
- ml=round(float(tf.margin_left or 0)/EMU,3)
- mr=round(float(tf.margin_right or 0)/EMU,3)
- mt=round(float(tf.margin_top or 0)/EMU,3)
- mb=round(float(tf.margin_bottom or 0)/EMU,3)
- result=['box(width: '+f'{ew:.2f}pt'+', height: '+f'{eh:.2f}pt'+', clip: false)[']
- result.append(f'  #pad(left:{ml:.3f}pt,right:{mr:.3f}pt,top:{mt:.3f}pt,bottom:{mb:.3f}pt)[')
- if valign != 'top':result.append(f'  #align({valign})[')
- result.append('  #set par(spacing: 0pt)')
- for i,(align,size,leading,before,after,frags,line_size) in enumerate(paragraphs):
-  if before>0:result.append(f'  #v({before:.2f}pt)')
-  if not frags:
-   result.append(f'  #v({(line_size or 22.0):.2f}pt)')
-   continue
-  result.append(f'  #align({align})[\n    #set par(leading: {leading:.2f}pt, spacing: 0pt)\n    {frags}\n  ]')
-  if i<len(paragraphs)-1:
-   paragraph_pitch=max(0.0,(line_size or size*1.3))
-   if args.text_layout=='spacing':pass
-   elif args.text_layout=='anchors-spacing':
-    # A full baseline pitch per paragraph accumulated 66pt of overflow in the
-    # sample; no advance let separate Typst align blocks overlap.
-    result.append(f'  #v({paragraph_pitch*.20:.2f}pt)')
-   else:result.append(f'  #v({paragraph_pitch:.2f}pt)')
-  if after>0:result.append(f'  #v({after:.2f}pt)')
- if valign != 'top':result.append(']')
- result.append(']');result.append(']')
- rendered='\n'.join(result)
- # For common body sizes, PowerPoint's default font ascent places visible ink
- # lower than Typst's fallback font. Match that measured top offset.
- if 20<=max_size<=28:rendered='move(dy:7.20pt, '+rendered+')'
- return rendered
+        marker=None
+    record=style.effective_record()
+    leading=typst_leading(style,max_size,spacing_reduction)
+    before=typst_spacing(style.space_before,max_size)
+    after=typst_spacing(style.space_after,max_size)
+    fields=[f'level:{pa.level}']
+    if not runs:
+        fields.insert(0,f'text:{stylize(pa.text.replace(chr(11), chr(10)))}')
+    if marker is not None:
+        fields.append(f'bullet:{stylize(marker)}')
+        bullet_font=(spec.get('font') if spec else None) or (first_style[0] if first_style else CURRENT_FONTS.get('minor','Arial'))
+        bullet_fill=(spec.get('color') if spec else None) or (first_style[2] if first_style else shape_text_color(sh))
+        bullet_weight=first_style[3] if first_style else 'regular'
+        bullet_size=spec.get('fontsize',max_size) if spec else max_size
+        if spec and spec.get('absolute_size'):bullet_size*=shrink
+        fields.extend((f'bullet-font:{typst_font_fallback(bullet_font)}',
+                       f'bullet-size:{bullet_size:.3f}pt',
+                       f'bullet-fill:rgb("{bullet_fill}")',
+                       f'bullet-weight:{stylize(bullet_weight)}'))
+        if spec:
+            for key,value in (('bullet-font-source',spec.get('font_source')),
+                              ('bullet-size-kind',spec.get('size_kind')),
+                              ('bullet-size-value',spec.get('size_value')),
+                              ('bullet-size-source',spec.get('size_source')),
+                              ('bullet-fill-source',spec.get('color_source'))):
+                if value is not None:
+                    fields.append(f'{key}:{stylize(str(value))}' if key.endswith('kind') or key.endswith('source')
+                                  else f'{key}:{float(value):.4f}')
+    bullet_style=record.get('bullet') or {}
+    if bullet_style:
+        fields.append(f'bullet-kind:{stylize(bullet_style.get("kind","char"))}')
+        if bullet_style.get('type'):
+            fields.append(f'bullet-type:{stylize(bullet_style["type"])}')
+        if bullet_style.get('start') is not None:
+            fields.append(f'bullet-start:{int(bullet_style["start"])}')
+        if record.get('bullet_source'):
+            fields.append(f'bullet-source:{stylize(record["bullet_source"])}')
+    align=record.get('align')
+    if align:fields.append(f'align:{stylize(align)}')
+    for key in ('align_source','margin_left_source','indent_source'):
+        value=record.get(key)
+        if value:fields.append(f'{key.replace("_","-")}:{stylize(value)}')
+    for key,value in (('line-kind',record['line_kind']),('line-value',record['line_value']),
+                      ('line-source',record['line_source']),('leading',leading),
+                      ('before-kind',record['before_kind']),('before-value',record['before_value']),
+                      ('before-source',record['before_source']),('before',before),
+                      ('after-kind',record['after_kind']),('after-value',record['after_value']),
+                      ('after-source',record['after_source']),('after',after),
+                      ('margin-left',record['margin_left']),('indent',record['indent'])):
+        if value is None:continue
+        if key.endswith('kind') or key.endswith('source'):
+            fields.append(f'{key}:{stylize(str(value))}')
+        elif key in ('line-value','before-value','after-value'):
+            fields.append(f'{key}:{float(value):.4f}')
+        else:
+            fields.append(f'{key}:{float(value):.4f}pt')
+    if runs:
+        fields.append('runs:('+', '.join(runs)+( ',' if len(runs)==1 else '')+')')
+    return record_name+'('+', '.join(fields)+')',first_style,max_size,style
+
+
+def content_for_text(sh, ew, eh, sx, sy):
+    """Build ordinary text with the same paragraph model used by placeholders."""
+    autofit_mode,shrink,spacing_reduction=text_autofit(sh)
+    paragraphs=[]
+    first_style=None
+    bullet_counters={}
+    for pa in sh.text_frame.paragraphs:
+        expression,run_style,_,_=paragraph_record_expression(
+            sh,pa,shrink=shrink,spacing_reduction=spacing_reduction,bullet_counters=bullet_counters)
+        paragraphs.append(expression)
+        if first_style is None and run_style is not None:first_style=run_style
+    if first_style is None:first_style=(CURRENT_FONTS.get('minor','Arial'),20*shrink,shape_text_color(sh),'regular')
+    font,size,fill,weight=first_style
+    body=sh._element.xpath('./p:txBody/a:bodyPr')
+    attrs=body[0] if body else None
+    anchor={'ctr':'center','b':'bottom'}.get(attrs.get('anchor','t') if attrs is not None else 't','top')
+    if args.text_layout not in ('anchors','anchors-spacing'):
+        anchor='top'
+    margins=(('margin-left',round(float(sh.text_frame.margin_left or 0)/EMU,3)),
+             ('margin-right',round(float(sh.text_frame.margin_right or 0)/EMU,3)),
+             ('margin-top',round(float(sh.text_frame.margin_top or 0)/EMU,3)),
+             ('margin-bottom',round(float(sh.text_frame.margin_bottom or 0)/EMU,3)))
+    fields=[f'width:{ew:.3f}pt',f'height:{eh:.3f}pt',
+            'paragraphs:('+', '.join(paragraphs)+( ',' if len(paragraphs)==1 else '')+')',
+            f'font:{typst_font_fallback(font)}',f'size:{size:.3f}pt',
+            f'fill:rgb("{fill}")',f'weight:{stylize(weight)}',f'anchor:{stylize(anchor)}',
+            f'autofit-mode:{stylize(autofit_mode)}',f'font-scale:{shrink:.5f}',
+            f'line-spacing-reduction:{spacing_reduction:.5f}']
+    fields.extend(f'{key}:{value:.3f}pt' for key,value in margins)
+    return 'PptxTextFrame('+',\n  '.join(fields)+')'
+
 
 def table_style_color(scheme,transform=None):
     transform=transform or ''
@@ -1496,11 +1512,11 @@ def group_world_bounds(shapes, parent):
 
 lines=['// Source-faithful PPTX conversion with original shared media and editable text.',
        '// Source slide format, theme-resolved colors and image backgrounds.',
-       '#import "template.typ": Root, PptxMaster, PptxLayout, PptxSlide, PptxPlaceholderSlot, PptxPlaceholder, PptxPlaceholderParagraph, PptxPlaceholderRun, PptxLine, Place, GroupContent, ClipContent',
+       '#import "template.typ": Root, PptxMaster, PptxLayout, PptxSlide, PptxPlaceholderSlot, PptxPlaceholder, PptxParagraph, PptxTextFrame, PptxPlaceholderParagraph, PptxPlaceholderRun, PptxLine, Place, GroupContent, ClipContent',
        f'#let ppt-format=(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt)',
        f'#set page(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,margin:0pt,fill:white)',
        '#set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)',
-       '#set par(leading:4pt,spacing:0pt)', '']
+       '']
 
 preamble=lines[:]
 slide_sources=[]
@@ -1576,50 +1592,26 @@ for slide_no,slide in enumerate(prs.slides,1):
             if direct:
                 fields.update(direct)
             fields.update(placeholder_style_fields(shape))
+            autofit_mode,font_scale,line_reduction=text_autofit(shape)
+            fields.update({'autofit-mode':autofit_mode,'font-scale':font_scale,
+                           'line-spacing-reduction':line_reduction})
             args_out=[]
             for key,value in fields.items():
-                if key in ('id','type','font','weight','align','anchor','bullet'):value=stylize(str(value))
+                if key in ('id','type','font','weight','align','anchor','bullet','autofit-mode'):value=stylize(str(value))
                 elif key in ('fill','background'):pass
                 elif key=='idx':value=str(value)
                 elif key=='rotation':value=f'{float(value):.3f}deg'
+                elif key in ('font-scale','line-spacing-reduction'):value=f'{float(value):.5f}'
                 else:value=f'{float(value):.3f}pt'
                 args_out.append(f'{key}:{value}')
             paragraph_exprs=[]
+            bullet_counters={}
             for paragraph in shape.text_frame.paragraphs:
-                paragraph_fields=[f'text:{stylize(paragraph.text)}',f'level:{paragraph.level}']
-                direct_ppr=paragraph._p.xpath('./a:pPr')
-                if direct_ppr:
-                    bullets=direct_ppr[0].xpath('./a:buChar')
-                    if bullets and bullets[0].get('char'):
-                        glyph=normalized_bullet_glyph(bullets[0].get("char"),direct_ppr[0])
-                        paragraph_fields.append(f'bullet:{stylize(glyph)}')
-                    alignment=direct_ppr[0].get('algn')
-                    if alignment:
-                        paragraph_fields.append(f'align:{stylize({"l":"left","ctr":"center","r":"right","just":"justify"}.get(alignment,"left"))}')
-                run_exprs=[]
-                source_runs=iter(paragraph.runs)
-                for paragraph_child in paragraph._p:
-                    child_kind=etree.QName(paragraph_child).localname
-                    if child_kind=='br':
-                        run_exprs.append('PptxPlaceholderRun(text:"\\n")')
-                        continue
-                    if child_kind not in ('r','fld'):continue
-                    run=next(source_runs,None)
-                    if run is None or not run.text:continue
-                    rpr=run._r.rPr
-                    run_fields=[f'text:{stylize(run.text)}']
-                    if rpr is not None:
-                        latin=rpr.xpath('./a:latin/@typeface')
-                        if latin:run_fields.append(f'font:{stylize(expand_theme_font(latin[0]))}')
-                        if rpr.get('sz'):run_fields.append(f'size:{float(rpr.get("sz"))/100:.3f}pt')
-                        if rpr.get('b') is not None:run_fields.append(f'weight:{stylize("bold" if rpr.get("b") in ("1","true") else "regular")}')
-                        if rpr.get('i') is not None:run_fields.append(f'italic:{"true" if rpr.get("i") in ("1","true") else "false"}')
-                        run_colors=rpr.xpath('./a:solidFill/a:srgbClr | ./a:solidFill/a:schemeClr | ./a:solidFill/a:sysClr | ./a:solidFill/a:prstClr')
-                        if run_colors:run_fields.append(f'fill:{typst_color_expr(run_colors[0])}')
-                    run_exprs.append('PptxPlaceholderRun('+', '.join(run_fields)+')')
-                if run_exprs:
-                    paragraph_fields.append('runs:('+', '.join(run_exprs)+( ',' if len(run_exprs)==1 else '')+')')
-                paragraph_exprs.append('PptxPlaceholderParagraph('+', '.join(paragraph_fields)+')')
+                expression,_,_,_=paragraph_record_expression(
+                    shape,paragraph,shrink=font_scale,spacing_reduction=line_reduction,
+                    bullet_counters=bullet_counters,
+                    record_name='PptxPlaceholderParagraph')
+                paragraph_exprs.append(expression)
             paragraph_tuple = '(' + ', '.join(paragraph_exprs) + (',' if len(paragraph_exprs) == 1 else '') + ')'
             args_out.extend([f'text:{stylize(shape.text)}',f'paragraphs:{paragraph_tuple}'])
             slide_placeholder_exprs.append('PptxPlaceholder('+', '.join(args_out)+')')
