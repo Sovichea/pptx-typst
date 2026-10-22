@@ -28,30 +28,33 @@
 #let PptxPlaceholderSlot(
   id: "", type: "body", idx: 0,
   x: none, y: none, width: none, height: none, rotation: none,
-  font: none, size: none, fill: none, weight: none, align: none,
+  font: none, size: none, fill: none, background: none, weight: none, align: none,
   bullet: none,
   anchor: none, margin-left: none, margin-right: none,
   margin-top: none, margin-bottom: none,
 ) = (
   id: id, type: type, idx: idx, x: x, y: y, width: width, height: height,
-  rotation: rotation, font: font, size: size, fill: fill, weight: weight,
+  rotation: rotation, font: font, size: size, fill: fill, background: background, weight: weight,
   align: align, anchor: anchor, margin-left: margin-left,
   margin-right: margin-right, margin-top: margin-top, margin-bottom: margin-bottom,
   bullet: bullet,
 )
-#let PptxPlaceholderParagraph(text: "", level: 0, bullet: none, align: none) = (
-  text: text, level: level, bullet: bullet, align: align,
+#let PptxPlaceholderRun(text: "", font: none, size: none, fill: none, weight: none, italic: none) = (
+  text: text, font: font, size: size, fill: fill, weight: weight, italic: italic,
+)
+#let PptxPlaceholderParagraph(text: "", level: 0, bullet: none, align: none, runs: ()) = (
+  text: text, level: level, bullet: bullet, align: align, runs: runs,
 )
 #let PptxPlaceholder(
   id: "", type: "body", idx: 0, text: "", content: none, paragraphs: (),
   x: none, y: none, width: none, height: none, rotation: none,
-  font: none, size: none, fill: none, weight: none, align: none,
+  font: none, size: none, fill: none, background: none, weight: none, align: none,
   bullet: none, anchor: none,
   margin-left: none, margin-right: none, margin-top: none, margin-bottom: none,
 ) = (
   id: id, type: type, idx: idx, text: text, content: content, paragraphs: paragraphs,
   x: x, y: y, width: width, height: height, rotation: rotation,
-  font: font, size: size, fill: fill, weight: weight, align: align, bullet: bullet,
+  font: font, size: size, fill: fill, background: background, weight: weight, align: align, bullet: bullet,
   anchor: anchor, margin-left: margin-left, margin-right: margin-right,
   margin-top: margin-top, margin-bottom: margin-bottom,
 )
@@ -101,14 +104,28 @@
         instance.text.split("\n").map(text => (text: text, level: 0, bullet: none, align: none))
       }
       let paragraph-content = paragraphs.map(paragraph => {
+        let runs = paragraph.at("runs", default: ())
         let marker = if paragraph.bullet == none { value("bullet") } else { paragraph.bullet }
         let bullet = if marker == none { [] } else { [#text(marker, weight: "bold") #h(0.4em)] }
         let indentation = paragraph.level * 1em
         let paragraph-align = if paragraph.align == "center" { center } else if paragraph.align == "right" { right } else { alignment }
-        [#h(indentation)#align(paragraph-align)[#bullet#paragraph.text]#linebreak()]
+        let run-content = if runs.len() == 0 { paragraph.text } else {
+          runs.map(run => {
+            let pieces = run.text.split("\n")
+            pieces.map(piece => {
+              let styled = if run.italic == true { text(style: "italic")[#piece] } else { piece }
+              let styled = if run.weight == none { styled } else { text(weight: run.weight)[#styled] }
+              let styled = if run.fill == none { styled } else { text(fill: run.fill)[#styled] }
+              let styled = if run.size == none { styled } else { text(size: run.size)[#styled] }
+              let styled = if run.font == none { styled } else { text(font: run.font)[#styled] }
+              styled
+            }).join(linebreak())
+          }).join()
+        }
+        [#h(indentation)#align(paragraph-align)[#bullet#run-content]#linebreak()]
       }).join()
       let body = if instance.content == none { paragraph-content } else { instance.content }
-      let text-layer = box(width: w, height: box-height)[
+      let text-layer = box(width: w, height: box-height, fill: value("background"))[
         #pad(left: left-inset, right: right-inset, top: top-inset, bottom: bottom-inset)[
           #text(font: font, size: size, fill: color, weight: weight)[
             #align(alignment + vertical)[#body]

@@ -200,6 +200,13 @@ def paragraph_indent(sh,pa):
         return 0.0
     return value('marL'),value('indent')
 
+def normalized_bullet_glyph(glyph, ppr):
+    """Map legacy font-encoded bullet codepoints to portable Unicode glyphs."""
+    fonts=ppr.xpath('./*[local-name()="buFont"]/@typeface') if ppr is not None else []
+    if glyph and ord(glyph[0])==0x00A7 and fonts and fonts[0].lower()=="wingdings":
+        return chr(0x25AA)
+    return glyph
+
 def bullet_spec(sh,pa,fontsize):
     sources=paragraph_style_sources(sh,pa)
     node=None;owner=None
@@ -210,8 +217,10 @@ def bullet_spec(sh,pa,fontsize):
     if node is None:return None
     tag=etree.QName(node).localname
     if tag=='buNone':return None
-    if tag=='buBlip':spec={'kind':'unsupported','glyph':'•'}
-    elif tag=='buChar':spec={'kind':'char','glyph':node.get('char','•')}
+    if tag=='buBlip':spec={'kind':'unsupported','glyph':chr(0x2022)}
+    elif tag=='buChar':
+        glyph=normalized_bullet_glyph(node.get('char',chr(0x2022)),owner)
+        spec={'kind':'char','glyph':glyph}
     elif tag=='buAutoNum':spec={'kind':'number','type':node.get('type','arabicPeriod'),'start':int(node.get('startAt','1'))}
     else:return None
     spec['fontsize']=fontsize
@@ -288,7 +297,7 @@ def resolve_color_node(node, default=None, color_map=None):
     return color
 
 def color_in(parent, prefix, default=None, color_map=None):
-    el=parent.xpath(prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
+    el=xpath_ns(parent,prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
     return resolve_color_node(el[0],default,color_map) if el else default
 
 def color_opacity(node):
@@ -304,7 +313,7 @@ def color_opacity(node):
     return max(0.0,min(1.0,opacity))
 
 def color_opacity_in(parent, prefix):
-    nodes=parent.xpath(prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
+    nodes=xpath_ns(parent,prefix+'/a:srgbClr | '+prefix+'/a:schemeClr | '+prefix+'/a:sysClr | '+prefix+'/a:prstClr')
     return color_opacity(nodes[0]) if nodes else 1.0
 
 def typst_color_expr(node, default='#FFFFFF'):
@@ -504,10 +513,21 @@ def placeholder_style_fields(shape, include_inherited=False):
     tx=shape._element.xpath('./p:txBody')
     if not tx:return fields
     ppr=tx[0].xpath('./a:p/a:pPr')
-    alignment=ppr[0].get('algn') if ppr else None
-    if alignment is None:
-        levels=tx[0].xpath('./a:lstStyle/a:lvl1pPr')
-        alignment=levels[0].get('algn') if levels else None
+    levels=tx[0].xpath('./a:lstStyle/a:lvl1pPr')
+    align_sources=ppr+levels
+    if include_inherited and getattr(shape,'is_placeholder',False) and CURRENT_SLIDE is not None:
+        idx=shape.placeholder_format.idx
+        for owner in (CURRENT_SLIDE.slide_layout,CURRENT_SLIDE.slide_layout.slide_master):
+            peer=next((item for item in owner.placeholders
+                       if item.placeholder_format.idx==idx),None)
+            if peer is not None and peer is not shape:
+                align_sources.extend(peer._element.xpath('./p:txBody/a:p/a:pPr | ./p:txBody/a:lstStyle/a:lvl1pPr'))
+        if not align_sources:
+            kind=placeholder_kind(shape)
+            context='titleStyle' if kind in ('title','centered-title') else 'bodyStyle'
+            master=CURRENT_SLIDE.slide_layout.slide_master
+            align_sources.extend(master._element.xpath(f'./p:txStyles/p:{context}/a:lvl1pPr'))
+    alignment=next((node.get('algn') for node in align_sources if node.get('algn')),None)
     if alignment:
         fields['align']={'l':'left','ctr':'center','r':'right','just':'justify'}.get(alignment)
     body=tx[0].xpath('./a:bodyPr')
@@ -517,12 +537,14 @@ def placeholder_style_fields(shape, include_inherited=False):
             if body[0].get(attr) is not None:fields[key]=float(body[0].get(attr))/EMU
         if body[0].get('anchor'):
             fields['anchor']={'t':'top','ctr':'center','b':'bottom'}.get(body[0].get('anchor'))
+    background=shape_background_expr(shape)
+    if background is not None:
+        fields['background']=background
     def font_defaults(owner):
         tx_body=owner._element.xpath('./p:txBody')
         if not tx_body:return []
         return (tx_body[0].xpath('./a:lstStyle/a:lvl1pPr/a:defRPr')+
                 tx_body[0].xpath('./a:p/a:pPr/a:defRPr')+
-                tx_body[0].xpath('./a:p/a:r/a:rPr')+
                 tx_body[0].xpath('./a:p/a:endParaRPr'))
 
     local_style_sources=font_defaults(shape)
@@ -559,7 +581,7 @@ def placeholder_style_fields(shape, include_inherited=False):
     bullets=(tx[0].xpath('./a:lstStyle/a:lvl1pPr/a:buChar')+
              tx[0].xpath('./a:p/a:pPr/a:buChar'))
     if bullets and bullets[0].get('char'):
-        fields['bullet']=bullets[0].get('char')
+        fields['bullet']=normalized_bullet_glyph(bullets[0].get('char'),bullets[0].getparent())
     return fields
 
 def placeholder_slot_expression(shape):
@@ -573,7 +595,7 @@ def placeholder_slot_expression(shape):
     for key,value in fields.items():
         if key in ('id','type','font','weight','align','anchor','bullet'):
             rendered=stylize(str(value))
-        elif key=='fill':rendered=value
+        elif key in ('fill','background'):rendered=value
         elif key=='idx':rendered=str(value)
         elif key=='rotation':rendered=f'{float(value):.3f}deg'
         else:rendered=f'{float(value):.3f}pt'
@@ -882,6 +904,15 @@ def table_cell_typst(sh, row_idx, col_idx, cell, table_style, banded):
     stroke='('+', '.join(edges)+')'
     return f'table.cell(fill:{fill},stroke:{stroke},inset:(x:{margin_x:.3f}pt,y:{margin_y:.3f}pt),align:{align})[{body}]'
 
+def normalize_table_row_heights(frame_height, row_heights):
+    """Fit source row proportions to the PPTX table frame when OOXML is stale."""
+    heights=list(row_heights)
+    total=sum(heights)
+    if frame_height>0 and total>0 and abs(frame_height-total)>1.0:
+        return [height*frame_height/total for height in heights]
+    return heights
+
+
 def typst_table(sh):
     tbl=sh._element.xpath('.//a:tbl')[0]
     tblpr=tbl.xpath('./a:tblPr')[0]
@@ -893,6 +924,8 @@ def typst_table(sh):
         if found:table_style=found[0]
     widths=[c.width/EMU for c in sh.table.columns]
     heights=[r.height/EMU for r in sh.table.rows]
+    frame_height=float(sh.height)/EMU
+    heights=normalize_table_row_heights(frame_height,heights)
     column_expr='('+', '.join(f'{w:.3f}pt' for w in widths)+')'
     row_expr='('+', '.join(f'{h:.3f}pt' for h in heights)+')'
     banded=tblpr.get('bandRow') in ('1','true') or sh.table.horz_banding
@@ -1079,6 +1112,56 @@ def original_asset_has_alpha(path):
             TRANSPARENCY_CACHE[path]=False
     return TRANSPARENCY_CACHE[path]
 
+
+def shape_fill_element(shape):
+    """Resolve a shape's direct fill or its theme fill-style reference."""
+    direct = shape._element.xpath(
+        './p:spPr/a:solidFill | ./p:spPr/a:gradFill | ./p:spPr/a:blipFill | ./p:spPr/a:noFill'
+    )
+    if direct:
+        return direct[0]
+    fill_ref = shape._element.xpath('./p:style/a:fillRef')
+    if not fill_ref:
+        return None
+    try:
+        index = int(fill_ref[0].get('idx', '0')) - 1
+    except (TypeError, ValueError):
+        return None
+    if index < 0 or CURRENT_SLIDE is None:
+        return None
+    theme_part = owner_theme_part(CURRENT_SLIDE)
+    if theme_part is None:
+        return None
+    theme = etree.fromstring(theme_part.blob)
+    styles = theme.xpath('./a:themeElements/a:fmtScheme/a:fillStyleLst/*', namespaces={
+        'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'})
+    if index >= len(styles):
+        return None
+    resolved = deepcopy(styles[index])
+    ref_colors = fill_ref[0].xpath('./a:srgbClr | ./a:schemeClr | ./a:sysClr | ./a:prstClr', namespaces={
+        'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'})
+    if ref_colors:
+        for placeholder in resolved.xpath('.//a:schemeClr[@val="phClr"]', namespaces={
+                'a': 'http://schemas.openxmlformats.org/drawingml/2006/main'}):
+            replacement = deepcopy(ref_colors[0])
+            for transform in placeholder:
+                replacement.append(deepcopy(transform))
+            placeholder.getparent().replace(placeholder, replacement)
+    return resolved
+
+
+def shape_background_expr(shape):
+    """Convert a resolved simple placeholder fill to a Typst paint expression."""
+    fill = shape_fill_element(shape)
+    if fill is None or etree.QName(fill).localname == 'noFill':
+        return None
+    if etree.QName(fill).localname == 'solidFill':
+        color = fill.xpath('./*[local-name()="srgbClr" or local-name()="schemeClr" or local-name()="sysClr" or local-name()="prstClr"]')
+        return typst_color_expr(color[0]) if color else None
+    if etree.QName(fill).localname == 'gradFill':
+        return gradient_expr(fill, CURRENT_MAP)
+    return None
+
 def typst_img(path, placement, source_crop=None, fillrect=None):
     w,h=placement['w'],placement['h']
     no_op = (source_crop is None and fillrect is None)
@@ -1114,25 +1197,27 @@ def vector_svg(sh):
     """
     e=sh._element
     ln=e.xpath('./p:spPr/a:ln')
-    solid=e.xpath('./p:spPr/a:solidFill/a:srgbClr | ./p:spPr/a:solidFill/a:schemeClr | ./p:spPr/a:solidFill/a:sysClr')
-    if not (ln or solid or e.xpath('./p:spPr/a:gradFill')):return None
+    fill_element=shape_fill_element(sh)
+    solid=(fill_element.xpath('./*[local-name()="srgbClr" or local-name()="schemeClr" or local-name()="sysClr" or local-name()="prstClr"]')
+           if fill_element is not None and etree.QName(fill_element).localname=='solidFill' else [])
+    if not (ln or solid or (fill_element is not None and etree.QName(fill_element).localname=='gradFill')):return None
     w0=max(.1,sh.width/EMU);h0=max(.1,sh.height/EMU)
     width=float(w0);height=float(h0)
     rgb='none'
     if solid:rgb=resolve_color_node(solid[0],'none')
     fill_opacity=color_opacity(solid[0]) if solid else 1.0
-    native_grad=e.xpath('./p:spPr/a:gradFill')
+    native_grad=[fill_element] if fill_element is not None and etree.QName(fill_element).localname=='gradFill' else []
     defs=''
     if native_grad:
         gf=native_grad[0]; stops=[]
-        for gs in gf.xpath('./a:gsLst/a:gs'):
+        for gs in xpath_ns(gf,'./a:gsLst/a:gs'):
             color=(color_in(gs,'./a:srgbClr') or color_in(gs,'./a:schemeClr') or
                    color_in(gs,'./a:sysClr') or '#000000')
-            alpha_node=gs.xpath('./a:srgbClr/a:alpha | ./a:schemeClr/a:alpha | ./a:sysClr/a:alpha')
+            alpha_node=xpath_ns(gs,'./a:srgbClr/a:alpha | ./a:schemeClr/a:alpha | ./a:sysClr/a:alpha')
             opacity=float(alpha_node[0].get('val','100000'))/100000 if alpha_node else 1
             offset=float(gs.get('pos','0'))/1000
             stops.append(f'<stop offset="{offset:.2f}%" stop-color="{color}" stop-opacity="{opacity:.5f}"/>')
-        linear=gf.xpath('./a:lin')
+        linear=xpath_ns(gf,'./a:lin')
         if linear:
             # In OOXML, angle is clockwise relative to a left-to-right vector.
             a=math.radians(float(linear[0].get('ang','0'))/60000)
@@ -1411,7 +1496,7 @@ def group_world_bounds(shapes, parent):
 
 lines=['// Source-faithful PPTX conversion with original shared media and editable text.',
        '// Source slide format, theme-resolved colors and image backgrounds.',
-       '#import "template.typ": Root, PptxMaster, PptxLayout, PptxSlide, PptxPlaceholderSlot, PptxPlaceholder, PptxPlaceholderParagraph, Place, GroupContent, ClipContent',
+       '#import "template.typ": Root, PptxMaster, PptxLayout, PptxSlide, PptxPlaceholderSlot, PptxPlaceholder, PptxPlaceholderParagraph, PptxPlaceholderRun, PptxLine, Place, GroupContent, ClipContent',
        f'#let ppt-format=(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt)',
        f'#set page(width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,margin:0pt,fill:white)',
        '#set text(font:("Arial","Libertinus Serif"),size:20pt,fill:black)',
@@ -1494,7 +1579,7 @@ for slide_no,slide in enumerate(prs.slides,1):
             args_out=[]
             for key,value in fields.items():
                 if key in ('id','type','font','weight','align','anchor','bullet'):value=stylize(str(value))
-                elif key=='fill':pass
+                elif key in ('fill','background'):pass
                 elif key=='idx':value=str(value)
                 elif key=='rotation':value=f'{float(value):.3f}deg'
                 else:value=f'{float(value):.3f}pt'
@@ -1506,10 +1591,34 @@ for slide_no,slide in enumerate(prs.slides,1):
                 if direct_ppr:
                     bullets=direct_ppr[0].xpath('./a:buChar')
                     if bullets and bullets[0].get('char'):
-                        paragraph_fields.append(f'bullet:{stylize(bullets[0].get("char"))}')
+                        glyph=normalized_bullet_glyph(bullets[0].get("char"),direct_ppr[0])
+                        paragraph_fields.append(f'bullet:{stylize(glyph)}')
                     alignment=direct_ppr[0].get('algn')
                     if alignment:
                         paragraph_fields.append(f'align:{stylize({"l":"left","ctr":"center","r":"right","just":"justify"}.get(alignment,"left"))}')
+                run_exprs=[]
+                source_runs=iter(paragraph.runs)
+                for paragraph_child in paragraph._p:
+                    child_kind=etree.QName(paragraph_child).localname
+                    if child_kind=='br':
+                        run_exprs.append('PptxPlaceholderRun(text:"\\n")')
+                        continue
+                    if child_kind not in ('r','fld'):continue
+                    run=next(source_runs,None)
+                    if run is None or not run.text:continue
+                    rpr=run._r.rPr
+                    run_fields=[f'text:{stylize(run.text)}']
+                    if rpr is not None:
+                        latin=rpr.xpath('./a:latin/@typeface')
+                        if latin:run_fields.append(f'font:{stylize(expand_theme_font(latin[0]))}')
+                        if rpr.get('sz'):run_fields.append(f'size:{float(rpr.get("sz"))/100:.3f}pt')
+                        if rpr.get('b') is not None:run_fields.append(f'weight:{stylize("bold" if rpr.get("b") in ("1","true") else "regular")}')
+                        if rpr.get('i') is not None:run_fields.append(f'italic:{"true" if rpr.get("i") in ("1","true") else "false"}')
+                        run_colors=rpr.xpath('./a:solidFill/a:srgbClr | ./a:solidFill/a:schemeClr | ./a:solidFill/a:sysClr | ./a:solidFill/a:prstClr')
+                        if run_colors:run_fields.append(f'fill:{typst_color_expr(run_colors[0])}')
+                    run_exprs.append('PptxPlaceholderRun('+', '.join(run_fields)+')')
+                if run_exprs:
+                    paragraph_fields.append('runs:('+', '.join(run_exprs)+( ',' if len(run_exprs)==1 else '')+')')
                 paragraph_exprs.append('PptxPlaceholderParagraph('+', '.join(paragraph_fields)+')')
             paragraph_tuple = '(' + ', '.join(paragraph_exprs) + (',' if len(paragraph_exprs) == 1 else '') + ')'
             args_out.extend([f'text:{stylize(shape.text)}',f'paragraphs:{paragraph_tuple}'])
@@ -1691,6 +1800,27 @@ for slide_no,slide in enumerate(prs.slides,1):
                 media_contents[sha]['placements'].append({'owner':sm.get('owner','slide'),'owner_id':sm.get('id',slide_no),'slide':slide_no if sm.get('owner','slide')=='slide' else None,'shape':sh.name,'crop':authored_crop,'fillrect':authored_fillrect,'alpha':alpha,'geometry':shape_kind})
                 obj.update(type='image',source=rel,render_source=rendered_rel,geometry=shape_kind,crop=authored_crop,fillrect=authored_fillrect,render_crop=crop,render_fillrect=fillrect,alpha=alpha,mask_applied=(rendered_rel!=rel and rendered_rel.startswith('assets/media/clip_')))
                 counts['geometry_'+shape_kind]+=1
+            elif sh.shape_type==MSO_SHAPE_TYPE.LINE or sh._element.xpath('./p:spPr/a:prstGeom[@prst="straightConnector1"]'):
+                ln=sh._element.xpath('./p:spPr/a:ln')
+                if ln:
+                    color=color_in(ln[0],'./a:solidFill','#000000')
+                    width=max(.1,float(ln[0].get('w','12700'))/EMU)
+                    start_y=pl['h'] if pl['flip_y'] else 0.0
+                    end_y=0.0 if pl['flip_y'] else pl['h']
+                    core=(f'PptxLine(start:(0pt,{start_y:.3f}pt), '
+                          f'end:({pl["w"]:.3f}pt,{end_y:.3f}pt), '
+                          f'stroke:{width:.3f}pt + rgb("{color}"))')
+                    lines.append(f'{indent}// Native editable PowerPoint connector: {typst_comment(sh.name)}')
+                    lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent))
+                    obj.update(type='line',stroke=color,stroke_width_pt=width)
+                    ends=ln[0].xpath('./a:headEnd[@type!="none"] | ./a:tailEnd[@type!="none"]')
+                    if ends:
+                        obj['warning']='Arrowhead style is not represented by the Typst line subset.'
+                        counts['unsupported_line_markers']+=1
+                    counts['line_shapes']+=1
+                else:
+                    obj.update(type='unsupported',warning='Connector has no resolvable line style.')
+                    counts['unsupported_placements']+=1
             elif istext:
                 # A PowerPoint text-bearing shape also paints its own fill and
                 # stroke before the text. v3 dropped that shape completely,

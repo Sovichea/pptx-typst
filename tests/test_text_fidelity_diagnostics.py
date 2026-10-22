@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from pptx_typst.text_diagnostics import assign_pdf_blocks_to_shapes, match_text_blocks_spatial, select_low_text_slides
+from pptx_typst.text_diagnostics import (
+    align_pdf_pages_to_slides,
+    assign_pdf_blocks_to_shapes,
+    match_text_blocks_spatial,
+    select_low_text_slides,
+)
 
 
 def block(text: str, x: float, y: float) -> dict:
@@ -18,6 +23,27 @@ def test_low_text_slide_selection_ignores_unscored_slides_and_returns_worst_firs
     selected = select_low_text_slides(slides, count=2)
 
     assert [item["slide"] for item in selected] == [2, 4]
+
+
+def test_pdf_pages_align_to_visible_source_slides_when_hidden_slides_are_omitted() -> None:
+    mapping, error = align_pdf_pages_to_slides(8, {1, 6}, 6, 8)
+
+    assert mapping == {0: 0, 1: 2, 2: 3, 3: 4, 4: 5, 5: 7}
+    assert error is None
+
+
+def test_pdf_page_alignment_rejects_unexplained_page_count_differences() -> None:
+    mapping, error = align_pdf_pages_to_slides(8, {1}, 6, 8)
+
+    assert mapping is None
+    assert "6 pages for 7 visible" in error
+
+
+def test_pdf_page_alignment_rejects_missing_typst_pages() -> None:
+    mapping, error = align_pdf_pages_to_slides(8, {1, 6}, 6, 7)
+
+    assert mapping is None
+    assert "7 pages for 8 source slides" in error
 
 
 def test_spatial_match_disambiguates_repeated_labels_by_location() -> None:

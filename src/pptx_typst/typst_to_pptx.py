@@ -324,7 +324,18 @@ def add_native(slide,child,x,y,rot,audit,slide_num):
                 obj.line.color.rgb=RGBColor(*simple_color(stroke,(0,0,0)))
                 obj.line.width=Pt(max(.1,length(stroke,.8)))
         else:
-            obj=slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT,Pt(x),Pt(y),Pt(x+w),Pt(y+h))
+            def point_pair(value, fallback):
+                nums=re.findall(NUM,value or '')
+                return (float(nums[0]),float(nums[1])) if len(nums)>=2 else fallback
+            start=point_pair(a.get('start'),(0.0,0.0))
+            end=point_pair(a.get('end'),(w,h))
+            obj=slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT,
+                Pt(x+start[0]),Pt(y+start[1]),Pt(x+end[0]),Pt(y+end[1]))
+            stroke=a.get('stroke','none')
+            if stroke=='none':obj.line.fill.background()
+            else:
+                obj.line.color.rgb=RGBColor(*simple_color(stroke,(0,0,0)))
+                obj.line.width=Pt(max(.1,length(stroke,.8)))
         if rot:obj.rotation=rot%360
         audit['native_shapes']+=1
         audit['items'].append({'slide':slide_num,'type':ty,'x':x,'y':y,'w':w,'h':h})
@@ -500,7 +511,7 @@ def merged_placeholder(slots, parent_slots, instance=None):
     own=next((item for item in slots if txt_decode(item.get('id','""'))==slot_id),None)
     parent=next((item for item in parent_slots if txt_decode(item.get('id','""'))==slot_id),None)
     result={}
-    for key in ('x','y','width','height','rotation','font','size','fill','weight','align','bullet',
+    for key in ('x','y','width','height','rotation','font','size','fill','background','weight','align','bullet',
                 'anchor','margin-left','margin-right','margin-top','margin-bottom'):
         value=instance.get(key)
         if value is None and own is not None:value=own.get(key)
@@ -519,6 +530,9 @@ def add_native_placeholder(slide, record, resolved, *, keep_geometry=False, mark
     if w<=0 or h<=0:
         raise RuntimeError(f'Placeholder {txt_decode(record.get("id", "\"?\""))!r} has no resolvable layout geometry')
     shape=slide.shapes.add_textbox(Pt(x),Pt(y),Pt(w),Pt(h))
+    if record.get('background'):
+        shape.fill.solid()
+        shape.fill.fore_color.rgb=RGBColor(*simple_color(record['background']))
     kind=placeholder_type(record)
     idx=int(length(record.get('idx'),0))
     shape.name=marker or f'PptxTypst {kind} placeholder {idx}'
@@ -543,13 +557,23 @@ def add_native_placeholder(slide, record, resolved, *, keep_geometry=False, mark
         if paragraph_record.get('bullet'):
             ppr=para._p.get_or_add_pPr()
             bullet=OxmlElement('a:buChar');bullet.set('char',txt_decode(paragraph_record['bullet']));ppr.append(bullet)
-        run=para.add_run();run.text=part
-        if any(k in record for k in ('font','size','fill','weight')):
-            if record.get('fill'):
-                run.font.color.rgb=RGBColor(*simple_color(record['fill']))
-            if record.get('font'):run.font.name=txt_decode(record['font'])
-            if record.get('size'):run.font.size=Pt(length(record['size']))
-            if record.get('weight'):run.font.bold=txt_decode(record['weight'])=='bold'
+        run_records=find_macro_records(paragraph_record.get('runs','()'),'PptxPlaceholderRun')
+        if run_records:
+            for run_record in run_records:
+                run=para.add_run();run.text=txt_decode(run_record.get('text','""'))
+                if run_record.get('fill'):run.font.color.rgb=RGBColor(*simple_color(run_record['fill']))
+                if run_record.get('font'):run.font.name=txt_decode(run_record['font'])
+                if run_record.get('size'):run.font.size=Pt(length(run_record['size']))
+                if run_record.get('weight'):run.font.bold=txt_decode(run_record['weight'])=='bold'
+                if run_record.get('italic') is not None:run.font.italic=run_record['italic'].strip().lower()=='true'
+        else:
+            run=para.add_run();run.text=part
+            if any(k in record for k in ('font','size','fill','weight')):
+                if record.get('fill'):
+                    run.font.color.rgb=RGBColor(*simple_color(record['fill']))
+                if record.get('font'):run.font.name=txt_decode(record['font'])
+                if record.get('size'):run.font.size=Pt(length(record['size']))
+                if record.get('weight'):run.font.bold=txt_decode(record['weight'])=='bold'
     for key,attr in (('margin-left','margin_left'),('margin-right','margin_right'),
                      ('margin-top','margin_top'),('margin-bottom','margin_bottom')):
         if key in record:setattr(tf,attr,Pt(length(record[key])))

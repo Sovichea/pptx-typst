@@ -10,6 +10,26 @@ import re
 WORD_RE = re.compile(r"[\w]+", re.UNICODE)
 
 
+def align_pdf_pages_to_slides(total_slides, hidden_slide_indices, source_pdf_pages, typst_pdf_pages):
+    """Map visible PowerPoint PDF pages to Typst pages by source slide order.
+
+    PowerPoint's default PDF export omits hidden slides. The converter retains
+    every source slide in Typst, including hidden slides, so source PDF page
+    indices map to the corresponding original slide indices.
+    """
+    hidden = set(hidden_slide_indices)
+    if any(index < 0 or index >= total_slides for index in hidden):
+        return None, "hidden slide index is outside the source presentation"
+    visible_slides = [index for index in range(total_slides) if index not in hidden]
+    if source_pdf_pages != len(visible_slides):
+        return None, (f"PowerPoint exported {source_pdf_pages} pages for "
+                      f"{len(visible_slides)} visible source slides")
+    if typst_pdf_pages != total_slides:
+        return None, (f"Typst rendered {typst_pdf_pages} pages for "
+                      f"{total_slides} source slides")
+    return {pdf_index: slide_index for pdf_index, slide_index in enumerate(visible_slides)}, None
+
+
 def select_low_text_slides(slide_scores, count=3):
     """Choose the lowest-scoring font-supported slides for visual review."""
     scored = [item for item in slide_scores if item.get("text_fidelity_score") is not None]

@@ -1,6 +1,8 @@
 # Low text-fidelity slide comparisons
 
-Each image places the PowerPoint render on the left and Typst on the right. Up to three font-supported slides with the lowest per-slide text score are selected for each successfully rendered deck.
+Each image places the PowerPoint render on the left and Typst on the right. Up to three font-supported slides with the lowest per-slide text score are selected for each successfully rendered deck. PowerPoint PDF pages are mapped to original visible slides by order after excluding hidden slides; Typst retains all source slides.
+
+Selected shape, table, placeholder, and bullet regressions appear in [before/after comparison sheets](../visual_regressions/selected_before_after.png) and the [visual fidelity regression review](../../../docs/visual-fidelity-regression-review.md).
 
 ## 20th SIG-NOC Meeting: What does the NIS2 Directive mean for the network operations and NOC?
 
@@ -334,7 +336,7 @@ Selected slides: 2 (0.160);17 (0.160);4 (0.225)
 
 ## RRIDs are Research Object Identifiers; a practical use case (mainly for biology)
 
-Selected slides: 5 (0.000);7 (0.000);17 (0.000)
+Selected slides: 7 (0.027);4 (0.236);8 (0.302)
 
 ![PowerPoint and Typst slide comparison for RRIDs are Research Object Identifiers; a practical use case (mainly for biology)](074_S03E03-Anita_Bandrowski_-_IEEE_RO_Slides_2018.png)
 
@@ -352,7 +354,7 @@ Selected slides: 3 (0.347);4 (0.352);2 (0.362)
 
 ## Slides 'From Open and Citizen Science to Activism: Roles of Academic Staff' - Workshop 2
 
-Selected slides: 13 (0.078);17 (0.135);19 (0.169)
+Selected slides: 13 (0.078);9 (0.236);19 (0.262)
 
 ![PowerPoint and Typst slide comparison for Slides 'From Open and Citizen Science to Activism: Roles of Academic Staff' - Workshop 2](077_Slides_Katerina_Zourou_workshop_August_2022.png)
 
@@ -430,7 +432,7 @@ Selected slides: 10 (0.045);6 (0.222);8 (0.235)
 
 ## Virtual Layer-fMRI Dinner #1
 
-Selected slides: 7 (0.009);8 (0.047);5 (0.103)
+Selected slides: 5 (0.103);12 (0.241);11 (0.446)
 
 ![PowerPoint and Typst slide comparison for Virtual Layer-fMRI Dinner #1](096_3_Renzo_Huber_Whatever_works.png)
 

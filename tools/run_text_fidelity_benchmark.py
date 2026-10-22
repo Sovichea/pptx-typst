@@ -24,7 +24,11 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
-from pptx_typst.text_diagnostics import match_text_blocks_spatial, select_low_text_slides
+from pptx_typst.text_diagnostics import (
+    align_pdf_pages_to_slides,
+    match_text_blocks_spatial,
+    select_low_text_slides,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -168,8 +172,12 @@ def pptx_stats(path: Path, installed_fonts: set[str]):
     font_chars = sum(fonts.values())
     installed_chars = sum(count for name, count in fonts.items()
                           if name.casefold() in installed_fonts)
+    hidden_slide_indices = [index for index, slide in enumerate(deck.slides)
+                            if slide._element.get("show", "1").casefold() in ("0", "false")]
     return deck, {
         "slides_source": len(deck.slides),
+        "slides_hidden_source": len(hidden_slide_indices),
+        "slides_visible_source": len(deck.slides) - len(hidden_slide_indices),
         "text_shapes_source": len(text_shapes),
         "text_runs_source": runs,
         "source_run_characters": characters,
@@ -246,11 +254,12 @@ def save_comparison_sheet(source_pdf, typst_pdf, slide_scores, destination, coun
     panels = []
     panel_width = panel_height = 0
     for item in selected:
-        index = item["slide"] - 1
-        if index >= len(source_pdf) or index >= len(typst_pdf):
+        source_index = item["source_pdf_page"]
+        typst_index = item["typst_pdf_page"]
+        if source_index >= len(source_pdf) or typst_index >= len(typst_pdf):
             continue
-        source_image = page_image(source_pdf[index], scale)
-        typst_image = page_image(typst_pdf[index], scale)
+        source_image = page_image(source_pdf[source_index], scale)
+        typst_image = page_image(typst_pdf[typst_index], scale)
         if typst_image.size != source_image.size:
             typst_image = typst_image.resize(source_image.size, Image.Resampling.LANCZOS)
         panel_width, panel_height = source_image.size
@@ -369,7 +378,7 @@ def match_text_blocks(source_blocks, output_blocks):
     return pairs
 
 
-def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides):
+def slide_fidelity(source_pdf, typst_pdf, source_page_to_slide, supported_slides, supported_text_slides):
     """Return text-masked layout plus font-gated text and full-slide scores."""
     scale = 1.25
     layout_scores = []
@@ -380,9 +389,8 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slide
     position_errors = []
     slide_text_scores = []
     wrap_matches = wrap_equal = 0
-    pages = min(len(source_pdf), len(typst_pdf))
-    for page_index in range(pages):
-        source_page, output_page = source_pdf[page_index], typst_pdf[page_index]
+    for page_index, slide_index in source_page_to_slide.items():
+        source_page, output_page = source_pdf[page_index], typst_pdf[slide_index]
         source_blocks, output_blocks = pdf_text_blocks(source_page), pdf_text_blocks(output_page)
         source_image, typst_image = page_image(source_page, scale), page_image(output_page, scale)
         if typst_image.size != source_image.size:
@@ -418,12 +426,12 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slide
             layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
 
         # Full-slide layout uses every slide whose resolved fonts are supported.
-        if page_index in supported_slides and edge_score is not None:
+        if slide_index in supported_slides and edge_score is not None:
             supported_layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
 
         # Text metrics require actual source text and support for all its fonts.
         # Slides with no detected source font must not become eligible by default.
-        if page_index not in supported_text_slides:
+        if slide_index not in supported_text_slides:
             continue
 
         # Text ink is compared from rendered text span regions. Position is measured separately.
@@ -448,7 +456,9 @@ def slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slide
         if slide_text_score is not None:
             text_scores.append(slide_text_score)
         slide_text_scores.append({
-            "slide": page_index + 1,
+            "slide": slide_index + 1,
+            "source_pdf_page": page_index,
+            "typst_pdf_page": slide_index,
             "text_fidelity_score": slide_text_score,
             "text_ink_f1": ink,
             "text_start_position_score": slide_position_score,
@@ -541,7 +551,10 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                 unsupported_fonts.update(missing)
             else:
                 supported_slides.add(slide_index)
-        text_source_slides = {index for index, families in enumerate(slide_fonts) if families}
+        hidden_slide_indices = {index for index, slide in enumerate(deck.slides)
+                                if slide._element.get("show", "1").casefold() in ("0", "false")}
+        visible_slide_indices = set(range(len(deck.slides))) - hidden_slide_indices
+        text_source_slides = {index for index, families in enumerate(slide_fonts) if families} & visible_slide_indices
         supported_text_slides = text_source_slides & supported_slides
         record["text_source_slide_count"] = len(text_source_slides)
         record["text_font_supported_slide_count"] = len(text_source_slides & supported_slides)
@@ -582,43 +595,74 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
             stage = "powerpoint_render"
             export_powerpoint_pdf(app, source, original_pdf_path)
             stage = "pdf_metrics"
-            source_pdf, source_text, source_sizes, source_page_sizes = pdf_text_and_sizes(
-                original_pdf_path, supported_text_slides
-            )
+            source_pdf, source_text_all, source_sizes_all, source_page_sizes = pdf_text_and_sizes(original_pdf_path)
             try:
-                typst_pdf, converted_text, converted_sizes, converted_page_sizes = pdf_text_and_sizes(
-                    converted_pdf_path, supported_text_slides
+                typst_pdf, converted_text_all, converted_sizes_all, converted_page_sizes = pdf_text_and_sizes(converted_pdf_path)
+                page_map, page_alignment_error = align_pdf_pages_to_slides(
+                    len(deck.slides), hidden_slide_indices, len(source_pdf), len(typst_pdf)
                 )
-                record.update(overlap_metrics(source_text, converted_text))
+                record["slides_hidden_source"] = len(hidden_slide_indices)
+                record["slides_visible_source"] = len(deck.slides) - len(hidden_slide_indices)
+                record["page_correspondence"] = "verified" if page_map is not None else "invalid_comparison"
+                record["page_alignment_error"] = page_alignment_error or ""
+                record["alignment_eligible"] = page_map is not None
                 record["pages_source_pdf"] = len(source_pdf)
                 record["pages_typst_pdf"] = len(typst_pdf)
-                record["source_pdf_mean_font_pt"] = mean_or_none(source_sizes)
-                record["typst_pdf_mean_font_pt"] = mean_or_none(converted_sizes)
-                record["mean_font_size_abs_delta_pt"] = (
-                    round(abs(record["source_pdf_mean_font_pt"] - record["typst_pdf_mean_font_pt"]), 3)
-                    if record["source_pdf_mean_font_pt"] is not None and record["typst_pdf_mean_font_pt"] is not None
-                    else None
-                )
-                record["slide_size_matches"] = (
-                    len(source_page_sizes) == len(converted_page_sizes)
-                    and all(abs(a - c) < 1 for p, q in zip(source_page_sizes, converted_page_sizes)
-                            for a, c in zip(p, q))
-                )
-                fidelity = slide_fidelity(source_pdf, typst_pdf, supported_slides, supported_text_slides)
-                slide_text_scores = fidelity.pop("slide_text_scores", [])
-                record.update(fidelity)
-                selected = save_comparison_sheet(
-                    source_pdf, typst_pdf, slide_text_scores,
-                    COMPARISON_DIR / f"{source.stem}.png", count=3,
-                )
-                if selected:
-                    record["visual_comparison"] = f"visual_comparisons/{source.stem}.png"
-                    record["comparison_slides"] = ";".join(
-                        f"{item['slide']} ({item['text_fidelity_score']:.3f})" for item in selected
-                    )
-                else:
+                if page_map is None:
                     record["visual_comparison"] = ""
                     record["comparison_slides"] = ""
+                    record["failure_category"] = "invalid_comparison"
+                    record["alignment_eligible"] = False
+                    continue_metrics = False
+                else:
+                    continue_metrics = True
+                if continue_metrics:
+                    source_slide_to_pdf = {slide_index: page_index for page_index, slide_index in page_map.items()}
+                    eligible_source_pages = {source_slide_to_pdf[index] for index in supported_text_slides
+                                             if index in source_slide_to_pdf}
+                    eligible_typst_pages = {index for index in supported_text_slides
+                                             if index in source_slide_to_pdf}
+                    source_text = "\n".join(source_pdf[i].get_text("text", sort=True)
+                                             for i in sorted(eligible_source_pages))
+                    converted_text = "\n".join(typst_pdf[i].get_text("text", sort=True)
+                                                for i in sorted(eligible_typst_pages))
+                    source_sizes = [float(span["size"]) for i in sorted(eligible_source_pages)
+                                    for block in source_pdf[i].get_text("dict").get("blocks", [])
+                                    for line in block.get("lines", []) for span in line.get("spans", [])
+                                    if span.get("text")]
+                    converted_sizes = [float(span["size"]) for i in sorted(eligible_typst_pages)
+                                       for block in typst_pdf[i].get_text("dict").get("blocks", [])
+                                       for line in block.get("lines", []) for span in line.get("spans", [])
+                                       if span.get("text")]
+                if continue_metrics:
+                    record.update(overlap_metrics(source_text, converted_text))
+                    record["source_pdf_mean_font_pt"] = mean_or_none(source_sizes)
+                    record["typst_pdf_mean_font_pt"] = mean_or_none(converted_sizes)
+                    record["mean_font_size_abs_delta_pt"] = (
+                        round(abs(record["source_pdf_mean_font_pt"] - record["typst_pdf_mean_font_pt"]), 3)
+                        if record["source_pdf_mean_font_pt"] is not None and record["typst_pdf_mean_font_pt"] is not None
+                        else None
+                    )
+                    record["slide_size_matches"] = all(
+                        abs(a - c) < 1
+                        for source_index, slide_index in page_map.items()
+                        for a, c in zip(source_page_sizes[source_index], converted_page_sizes[slide_index])
+                    )
+                    fidelity = slide_fidelity(source_pdf, typst_pdf, page_map, supported_slides, supported_text_slides)
+                    slide_text_scores = fidelity.pop("slide_text_scores", [])
+                    record.update(fidelity)
+                    selected = save_comparison_sheet(
+                        source_pdf, typst_pdf, slide_text_scores,
+                        COMPARISON_DIR / f"{source.stem}.png", count=3,
+                    )
+                    if selected:
+                        record["visual_comparison"] = f"visual_comparisons/{source.stem}.png"
+                        record["comparison_slides"] = ";".join(
+                            f"{item['slide']} ({item['text_fidelity_score']:.3f})" for item in selected
+                        )
+                    else:
+                        record["visual_comparison"] = ""
+                        record["comparison_slides"] = ""
             finally:
                 source_pdf.close()
                 source_pdf = None
@@ -649,7 +693,9 @@ def run_powerpoint_batch(entries, start, manifest, installed_fonts):
     app.WindowState = 2
     rows = []
     try:
-        for index, entry in enumerate(entries, start + 1):
+        manifest_indices = {entry["file"]: index + 1 for index, entry in enumerate(manifest["files"])}
+        for entry in entries:
+            index = manifest_indices.get(entry["file"], start + 1)
             source = ROOT / entry["file"]
             print(f"[{index}/{len(manifest['files'])}] {entry['title']}", flush=True)
             row = benchmark_one(app, source, entry, installed_fonts)
@@ -669,6 +715,8 @@ def main():
     parser.add_argument("--limit", type=int, default=100)
     parser.add_argument("--start", type=int, default=0, help="zero-based manifest file index")
     parser.add_argument("--end", type=int, help="exclusive manifest file index")
+    parser.add_argument("--only", action="append", default=[],
+                        help="process a manifest filename or basename (repeatable)")
     parser.add_argument("--report-only", action="store_true", help="recompute aggregate report from existing results.csv")
     args = parser.parse_args()
     if not MANIFEST.is_file():
@@ -682,12 +730,21 @@ def main():
             combined = list(csv.DictReader(stream))
     else:
         entries = [entry for entry in manifest["files"] if not entry.get("download_error")]
-        entries = entries[args.start:args.end if args.end is not None else args.start + args.limit]
+        if args.only:
+            requested = set(args.only)
+            entries = [entry for entry in entries
+                       if Path(entry["file"]).name in requested or entry["file"] in requested]
+            available = {entry["file"] for entry in entries} | {Path(entry["file"]).name for entry in entries}
+            missing = requested - available
+            if missing:
+                raise SystemExit("Benchmark files not found in manifest: " + ", ".join(sorted(missing)))
+        else:
+            entries = entries[args.start:args.end if args.end is not None else args.start + args.limit]
         if not entries:
             raise SystemExit("No benchmark entries selected")
         rows = run_powerpoint_batch(entries, args.start, manifest, installed_fonts)
         existing = []
-        if RESULTS.is_file() and args.start:
+        if RESULTS.is_file() and (args.start or args.only):
             with RESULTS.open(encoding="utf-8-sig", newline="") as stream:
                 existing = list(csv.DictReader(stream))
         if existing:
@@ -698,6 +755,35 @@ def main():
         else:
             combined = rows
     for row in combined:
+        if row.get("status") == "ok":
+            source = ROOT / row.get("file", "")
+            if source.is_file():
+                try:
+                    deck, fresh_stats, _, _ = pptx_stats(source, installed_fonts)
+                    row.update({key: fresh_stats[key] for key in
+                                ("slides_source", "slides_hidden_source", "slides_visible_source")})
+                    hidden = [index for index, slide in enumerate(deck.slides)
+                              if slide._element.get("show", "1").casefold() in ("0", "false")]
+                    page_map, alignment_error = align_pdf_pages_to_slides(
+                        fresh_stats["slides_source"], hidden,
+                        int(row.get("pages_source_pdf") or 0), int(row.get("pages_typst_pdf") or 0),
+                    )
+                    row["page_correspondence"] = "verified" if page_map is not None else "invalid_comparison"
+                    row["page_alignment_error"] = alignment_error or ""
+                    row["alignment_eligible"] = page_map is not None
+                    if page_map is None:
+                        row["failure_category"] = "invalid_comparison"
+                        for key in ("layout_fidelity_score", "layout_fidelity_supported_slides", "text_ink_f1",
+                                    "text_start_position_score", "text_start_position_error_pt", "text_fidelity_score",
+                                    "full_slide_fidelity_score", "text_wrap_line_count_match", "word_recall",
+                                    "word_precision", "source_pdf_words", "text_blocks_position_matched"):
+                            row[key] = ""
+                        row["visual_comparison"] = ""
+                        row["comparison_slides"] = ""
+                except Exception as exc:
+                    row["page_correspondence"] = "invalid_comparison"
+                    row["page_alignment_error"] = f"could not verify slide identity: {exc}"
+                    row["alignment_eligible"] = False
         if args.report_only:
             source = ROOT / row.get("file", "")
             if source.is_file():
@@ -761,7 +847,7 @@ def main():
     index_lines = [
         "# Low text-fidelity slide comparisons",
         "",
-        "Each image places the PowerPoint render on the left and Typst on the right. Up to three font-supported slides with the lowest per-slide text score are selected for each successfully rendered deck.",
+        "Each image places the PowerPoint render on the left and Typst on the right. Up to three font-supported slides with the lowest per-slide text score are selected for each successfully rendered deck. PowerPoint PDF pages are mapped to original visible slides by order after excluding hidden slides; Typst retains all source slides.",
         "",
     ]
     for row in combined:
@@ -782,7 +868,8 @@ def main():
         f"- Corpus: [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K), sampled deterministically; all selected records are CC BY 4.0.",
         f"- Sample size: {len(manifest['files'])} downloaded decks; measurements recorded for {len(combined)}.",
         f"- Successful conversions and renders: {len(succeeded)}; failures: {len(errors)}.",
-        f"- Source slides rendered: {sum(int(row.get('slides_source') or 0) for row in succeeded)}.",
+        f"- Visible source slides rendered: {sum(int(row.get('slides_visible_source') or row.get('slides_source') or 0) for row in succeeded)}.",
+        f"- Page correspondence: {sum(row.get('page_correspondence') == 'verified' for row in succeeded)} verified; {sum(row.get('page_correspondence') == 'invalid_comparison' for row in succeeded)} excluded as ambiguous.",
         f"- Source PDF words: {total_words:,}.",
         f"- Weighted visible-word recall: {weighted_words / total_words:.1%}." if total_words else "- Weighted visible-word recall: n/a.",
         f"- Mean per-deck visible-word recall: {sum(word_recall) / len(word_recall):.1%}; median {sorted(word_recall)[len(word_recall) // 2]:.1%}." if word_recall else "- Per-deck visible-word recall: n/a.",

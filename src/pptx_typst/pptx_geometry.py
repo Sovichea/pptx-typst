@@ -68,6 +68,8 @@ def _preset_path(preset):
         return 'M0,0 H1 V1 H0 Z' if preset=='rect' else 'M.1,0 H.9 Q1,0 1,.1 V.9 Q1,1 .9,1 H.1 Q0,1 0,.9 V.1 Q0,0 .1,0 Z'
     if preset=='ellipse':
         return 'M1,.5 A.5,.5 0 1 1 0,.5 A.5,.5 0 1 1 1,.5 Z'
+    if preset=='flowChartConnector':
+        return 'M1,.5 A.5,.5 0 1 1 0,.5 A.5,.5 0 1 1 1,.5 Z'
     if preset in ('line','straightConnector1'):
         return 'M0,0 L1,1'
     if preset=='arc':return 'M0,.5 A.5,.5 0 0 1 .5,0'
