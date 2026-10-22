@@ -1342,7 +1342,7 @@ def typst_img(path, placement, source_crop=None, fillrect=None):
         core=f'scale(x:100%,y:-100%,origin:center+horizon,reflow:false,{core})'
     return core
 
-def vector_svg(sh):
+def vector_svg(sh, scale_to_world=1.0):
     """Serialize source OOXML freeform geometry/strokes as shared vector artwork.
     Image-filled shapes never enter this function: they retain original media bytes.
     """
@@ -1384,7 +1384,10 @@ def vector_svg(sh):
         stroke=color_in(lin,'./a:solidFill','none')
         stroke_opacity=color_opacity_in(lin,'./a:solidFill')
         if lin.xpath('./a:noFill'):stroke='none'
-        stroke_w=float(lin.get('w','0'))/EMU
+        # SVG is later stretched from child-local dimensions to the resolved
+        # group/world dimensions. Compensate the local stroke and marker sizes
+        # here so that stretch does not inflate them by the group transform.
+        stroke_w=float(lin.get('w','0'))/EMU/max(.001,float(scale_to_world))
         linecap='round' if lin.get('cap')=='rnd' else 'square' if lin.get('cap')=='sq' else 'butt'
         pd=lin.xpath('./a:prstDash')
         if pd and pd[0].get('val') in ('sysDot','dot'):
@@ -2004,7 +2007,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                 # A PowerPoint text-bearing shape also paints its own fill and
                 # stroke before the text. v3 dropped that shape completely,
                 # which made many cards and labels disappear.
-                backing=vector_svg(sh)
+                vector_scale=(pl['w']/max(.1,sh.width/EMU)+pl['h']/max(.1,sh.height/EMU))/2
+                backing=vector_svg(sh,vector_scale)
                 if backing:
                     rel,pad,w0,h0=backing
                     pscale=(pl['w']/w0+pl['h']/h0)/2 if w0*h0 else 1
@@ -2030,7 +2034,8 @@ for slide_no,slide in enumerate(prs.slides,1):
             else:
                 counts['other_placements']+=1
                 obj.update(type='other')
-                vec=vector_svg(sh)
+                vector_scale=(pl['w']/max(.1,sh.width/EMU)+pl['h']/max(.1,sh.height/EMU))/2
+                vec=vector_svg(sh,vector_scale)
                 if vec:
                     rel,pad,w0,h0=vec
                     # Stroke padding also scales with grouped shape transformation.

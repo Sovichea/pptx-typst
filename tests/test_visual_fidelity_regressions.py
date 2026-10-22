@@ -214,3 +214,36 @@ def test_triangle_connector_marker_renders_and_roundtrips(tmp_path: Path) -> Non
     assert head_markers[0].get("type") == "triangle"
     assert head_markers[0].get("w") == "sm"
     assert head_markers[0].get("len") == "lg"
+
+
+def test_group_transform_does_not_inflate_vector_stroke(tmp_path: Path) -> None:
+    source = tmp_path / "grouped-stroke.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    group = slide.shapes.add_group_shape()
+    shape = group.shapes.add_shape(MSO_SHAPE.RECTANGLE, Pt(0), Pt(0), Pt(50), Pt(40))
+    shape.fill.background()
+    shape.line.color.rgb = RGBColor(220, 0, 0)
+    shape.line.width = Pt(2.25)
+
+    # The child artwork is 50 x 40 pt, while the enclosing group maps it to
+    # 500 x 400 pt. Its line should remain 2.25 pt after the SVG is scaled.
+    transform = group._element.grpSpPr.xfrm
+    transform.ext.cx = int(transform.ext.cx) * 10
+    transform.ext.cy = int(transform.ext.cy) * 10
+    deck.save(source)
+
+    convert_forward(source, project)
+    vector_assets = list((project / "assets" / "media").glob("shape_*.svg"))
+    assert len(vector_assets) == 1
+    svg = vector_assets[0].read_text(encoding="utf-8")
+    assert 'stroke="#DC0000"' in svg
+    assert 'stroke-width="0.225"' in svg
+
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "output.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )

@@ -35,6 +35,7 @@ Correcting the five bad page pairings changed the mixed-corpus means from the su
 | 095 / 10 | `text_layout`, `styling`: the first local run's bold property was treated as the style for the whole placeholder; subsequent normal and italic runs lost their local formatting. Soft line breaks were also absent from the run sequence. | Emit explicit run records and break records for native placeholders. Round-trip inspection confirms the first run stays bold, the middle run stays regular, the final run stays italic, and the line break remains editable. |
 | 043 / 10 | `text_layout`: the centered title alignment was inherited from the layout/master style and was not resolved, leaving the Typst title left-aligned. | Resolve inherited paragraph alignment for placeholder slots. The title is centered in the corrected render; the low text score reflected a real inherited-style omission. |
 | 079 / 7 | `text_layout`: residual wrapping and indentation differences remain with available font metrics and different renderers. | No correction made; the comparison does not show a single geometry error that justifies a broader paragraph-layout change in this cycle. |
+| 038 / 4 and 15 | `spurious_object`, `geometry`: grouped custom paths were serialized in child-local coordinates, then stretched to world-space bounds. Their line strokes and arrow markers were stretched by the group factor, turning diagram strokes into huge filled-looking red areas. | Divide the SVG stroke width by the resolved child-to-world scale before placing the SVG at world size. The before/after sheet shows slide 4's projectile path and slide 15's diagram strokes restored without rasterizing the slide. A synthetic 10x grouped-shape test verifies the resulting SVG retains the expected 2.25 pt stroke after placement scaling. |
 
 The cases were categorized by visual inspection and source OOXML, not inferred from the aggregate score. The comparison sheet shows the PowerPoint reference, the `9e9d158` output, and corrected output for the eight inspected slides. Rechecking the current `main` output also confirms that the 014 colored circle/callout, 017 connector geometry, 012 table frame, and 051 title panel are present; the original reports for those examples predate their fixes.
 
@@ -51,11 +52,11 @@ The triangle-marker correction was verified separately with the same PPTX source
 - Forward conversion and Typst compilation succeeded for the eight representative decks (014, 017, 012, 051, 009, 095, 079, and 043).
 - Reverse conversion succeeded for the mixed-format placeholder example (095) and for 051. The 051 slide 50 package check confirms the white fill is on the layout's title placeholder while the slide placeholder has no local fill.
 - Focused automated regressions cover referenced theme fills, table frame/row sizing, Wingdings bullet conversion, editable connector-line round-trip including head and tail triangle markers, and mixed bold/italic placeholder runs including a line break.
-- The 100-deck converter benchmark was not rerun after these focused fixes. The corrected all-corpus scores above only account for the verified page-alignment repair; no aggregate improvement is claimed for the visual fixes.
+- The 100-deck converter benchmark is rerun after the grouped-vector correction; its final aggregate values and paired comparison are recorded in `benchmarks/text_fidelity/summary.md` and `docs/alpha-stabilization-report.md`.
 
 ## Remaining limitations
 
 - Triangle arrowheads are approximated with native Typst polygon shapes and restored to native PowerPoint line markers. Other marker types such as oval or stealth are reported but omitted from Typst rendering.
 - Font substitution changes glyph appearance where source families are unavailable, including the title lettering on 051 slide 50.
 - Some line wrapping and indentation remain renderer-dependent, especially in 079.
-- The 11 existing `Typst rejected media format` failures were outside this milestone and are unchanged.
+- The media compatibility milestone separately resolves the 11 former `Typst rejected media format` failures; current frozen-corpus results are recorded in `benchmarks/text_fidelity/summary.md`.
