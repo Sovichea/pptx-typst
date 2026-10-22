@@ -501,14 +501,22 @@ def typst_comment(value):
     """Collapse controls and line separators so source metadata stays a comment."""
     return re.sub(r'\s+',' ',re.sub(r'[\x00-\x1f\x7f-\x9f\u2028\u2029]+',' ',str(value))).strip()
 
-def typst_place(x,y,child,rotation=0,indent='    '):
+def typst_place(x,y,child,rotation=0,indent='    ',source_key=None):
     """Write a readable multiline Place call while keeping its child editable."""
     lines=[f'{indent}#Place(',f'{indent}  x:{x:.3f}pt,',f'{indent}  y:{y:.3f}pt,',
            f'{indent}  orientation:{rotation:.3f}deg,',f'{indent}  child:']
     lines.extend(f'{indent}    {line}' for line in str(child).splitlines())
     lines[-1]+=','
     lines.append(f'{indent})')
+    if source_key:
+        lines.insert(0, f'{indent}// pptx-object: {source_key}')
     return '\n'.join(lines)
+
+def source_object_key(owner, shape_id):
+    """Stable-in-output identity for a shape in its owning OOXML part."""
+    owner_type=owner.get('owner','slide')
+    owner_id=owner.get('id',owner.get('slide'))
+    return f'{owner_type}:{owner_id}:{shape_id}'
 
 PLACEHOLDER_KINDS={
     'TITLE':'title', 'CENTER_TITLE':'centered-title', 'BODY':'body',
@@ -1830,7 +1838,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                 if asset:
                     lines.append(f'{indent}// SmartArt layout drawing: {typst_comment(sh.name)}')
                     lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],
-                                             f'image("{asset}",width:{pl["w"]:.3f}pt,height:{pl["h"]:.3f}pt,fit:"stretch")',pl['rotation'],indent))
+                                             f'image("{asset}",width:{pl["w"]:.3f}pt,height:{pl["h"]:.3f}pt,fit:"stretch")',pl['rotation'],indent,
+                                             source_object_key(sm,sh.shape_id)))
                     obj.update(type='smartart',source=asset,rendering='materialized vector drawing')
                     counts['smartart_placements']+=1
                     sm['placements'].append(obj)
@@ -1838,7 +1847,8 @@ for slide_no,slide in enumerate(prs.slides,1):
             if getattr(sh,'has_table',False) and not table_has_spans(sh):
                 table=typst_table(sh)
                 lines.append(f'{indent}// Editable PowerPoint table: {typst_comment(sh.name)}')
-                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],table,pl['rotation'],indent))
+                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],table,pl['rotation'],indent,
+                                         source_object_key(sm,sh.shape_id)))
                 obj.update(type='table',rows=len(sh.table.rows),columns=len(sh.table.columns))
                 counts['table_placements']+=1
                 sm['placements'].append(obj)
@@ -1920,7 +1930,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                         obj['clip_warning']='Mask uses adjustable presets, curves, or rotation not yet validated. Original picture kept without a generated mask.'
                 core=typst_img(rendered_rel,pl,crop,fillrect)
                 lines.append(f'{indent}// Source media: {typst_comment(rel)} | shape: {typst_comment(sh.name)} | {typst_comment(shape_kind)}')
-                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent))
+                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent,
+                                         source_object_key(sm,sh.shape_id)))
                 media_contents[sha]['placements'].append({'owner':sm.get('owner','slide'),'owner_id':sm.get('id',slide_no),'slide':slide_no if sm.get('owner','slide')=='slide' else None,'shape':sh.name,'crop':authored_crop,'fillrect':authored_fillrect,'alpha':alpha,'geometry':shape_kind})
                 obj.update(type='image',source=rel,render_source=rendered_rel,geometry=shape_kind,crop=authored_crop,fillrect=authored_fillrect,render_crop=crop,render_fillrect=fillrect,alpha=alpha,mask_applied=(rendered_rel!=rel and rendered_rel.startswith('assets/media/clip_')))
                 counts['geometry_'+shape_kind]+=1
@@ -1935,7 +1946,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                           f'end:({pl["w"]:.3f}pt,{end_y:.3f}pt), '
                           f'stroke:{width:.3f}pt + rgb("{color}"))')
                     lines.append(f'{indent}// Native editable PowerPoint connector: {typst_comment(sh.name)}')
-                    lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent))
+                    lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent,
+                                             source_object_key(sm,sh.shape_id)))
                     obj.update(type='line',stroke=color,stroke_width_pt=width)
                     ends=ln[0].xpath('./a:headEnd[@type!="none"] | ./a:tailEnd[@type!="none"]')
                     if ends:
@@ -1956,7 +1968,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                     extra=pad*pscale
                     lines.append(f'{indent}// Fill and outline behind text shape: {typst_comment(sh.name)}')
                     lines.append(typst_place(pl['x']-extra-origin[0],pl['y']-extra-origin[1],
-                                             f'image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch")',pl['rotation'],indent))
+                                             f'image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch")',pl['rotation'],indent,
+                                             source_object_key(sm,sh.shape_id)))
                     obj['background_shape']=rel
                     counts['text_backing_shapes']+=1
                 counts['text_placements']+=1
@@ -1967,7 +1980,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                 lines.append(f'{indent}// Editable text: {comment}')
                 # Keep the text frame at the source shape origin. Text insets,
                 # paragraph anchors, and point sizes are handled inside its box.
-                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent))
+                lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent,
+                                         source_object_key(sm,sh.shape_id)))
                 obj.update(type='text',text=sh.text[:200],anchor=(sh._element.xpath('./p:txBody/a:bodyPr')[0].get('anchor','t') if sh._element.xpath('./p:txBody/a:bodyPr') else 't'),autofit_mode=text_autofit(sh)[0],font_scale=text_autofit(sh)[1],line_spacing_reduction=text_autofit(sh)[2])
                 counts['autofit_'+text_autofit(sh)[0]]+=1
             else:
@@ -1981,7 +1995,8 @@ for slide_no,slide in enumerate(prs.slides,1):
                     extra=pad*pscale
                     lines.append(f'{indent}// Original editable PowerPoint shape: {typst_comment(sh.name)}')
                     lines.append(typst_place(pl['x']-extra-origin[0],pl['y']-extra-origin[1],
-                                             f'image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch")',pl['rotation'],indent))
+                                             f'image("{rel}",width:{pl["w"]+2*extra:.3f}pt,height:{pl["h"]+2*extra:.3f}pt,fit:"stretch")',pl['rotation'],indent,
+                                             source_object_key(sm,sh.shape_id)))
                     obj['type']='vector_shape';obj['source']=rel;counts['vector_shapes']+=1
                 else:
                     obj['type']='unsupported'

@@ -29,6 +29,7 @@ from pptx_typst.text_diagnostics import (
     match_text_blocks_spatial,
     select_low_text_slides,
 )
+from pptx_typst.typst_source_diagnostics import structural_audit as typst_source_structural_audit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -403,6 +404,7 @@ def slide_fidelity(source_pdf, typst_pdf, source_page_to_slide, supported_slides
     position_scores = []
     position_errors = []
     slide_text_scores = []
+    slide_diagnostics = []
     wrap_matches = wrap_equal = 0
     for page_index, slide_index in source_page_to_slide.items():
         source_page, output_page = source_pdf[page_index], typst_pdf[slide_index]
@@ -438,11 +440,43 @@ def slide_fidelity(source_pdf, typst_pdf, source_page_to_slide, supported_slides
         else:
             foreground_score = 1.0
         if edge_score is not None:
-            layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
+            slide_layout = .7 * edge_score + .2 * foreground_score + .1 * bg_score
+            layout_scores.append(slide_layout)
+        else:
+            slide_layout = None
 
         # Full-slide layout uses every slide whose resolved fonts are supported.
         if slide_index in supported_slides and edge_score is not None:
             supported_layout_scores.append(.7 * edge_score + .2 * foreground_score + .1 * bg_score)
+
+        spatial = match_text_blocks_spatial(source_blocks, output_blocks)
+        position_errors_spatial = [item["distance"] for item in spatial["matches"]]
+        reliable_pitch_errors = []
+        for match in spatial["matches"]:
+            source_lines = match["source"].get("baselines", [])
+            output_lines = match["output"].get("baselines", [])
+            if len(source_lines) == len(output_lines) and len(source_lines) > 1:
+                source_pitch = np.diff(source_lines)
+                output_pitch = np.diff(output_lines)
+                reliable_pitch_errors.extend(np.abs(source_pitch - output_pitch).tolist())
+        slide_diagnostics.append({
+            "slide": slide_index + 1,
+            "source_pdf_page": page_index + 1,
+            "typst_pdf_page": slide_index + 1,
+            "page_correspondence": "verified",
+            "layout_fidelity_score": slide_layout,
+            "text_mask_area_percent": round(float(text_mask.mean()) * 100, 3),
+            "source_text_block_count": len(source_blocks),
+            "typst_text_block_count": len(output_blocks),
+            "spatial_text_matches": len(spatial["matches"]),
+            "ambiguous_source_text_blocks": spatial["ambiguous_source_count"],
+            "ambiguous_typst_text_blocks": spatial["ambiguous_output_count"],
+            "unmatched_source_text_blocks": spatial["unmatched_source_count"],
+            "unmatched_typst_text_blocks": spatial["unmatched_output_count"],
+            "spatial_start_error_mean_pt": mean_or_none(position_errors_spatial),
+            "reliable_line_pitch_error_mean_pt": mean_or_none(reliable_pitch_errors),
+            "line_pitch_pairs": len(reliable_pitch_errors),
+        })
 
         # Text metrics require actual source text and support for all its fonts.
         # Slides with no detected source font must not become eligible by default.
@@ -492,6 +526,7 @@ def slide_fidelity(source_pdf, typst_pdf, source_page_to_slide, supported_slides
             "text_start_position_error_pt": mean_position_error,
             "text_fidelity_score": text,
             "slide_text_scores": slide_text_scores,
+            "slide_diagnostics": slide_diagnostics,
             "full_slide_fidelity_score": full,
             "text_wrap_line_count_match": round(wrap_equal / wrap_matches, 3) if wrap_matches else None,
             "text_blocks_position_matched": wrap_matches}
@@ -596,6 +631,11 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                 raise RuntimeError("converter: " + (converted.stderr or converted.stdout)[-1500:])
             manifest_path = project / "asset_manifest.json"
             converted_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            generated_typst = (project / "main.typ").read_text(encoding="utf-8")
+            structural_audit = typst_source_structural_audit(converted_manifest, generated_typst)
+            record.update({key: value for key, value in structural_audit.items()
+                           if not key.endswith("_keys")})
+            record["_structural_diagnostics"] = structural_audit
             record["text_placements_output"] = converted_manifest.get("counts", {}).get("text_placements", 0)
             record["table_placements_output"] = converted_manifest.get("counts", {}).get("table_placements", 0)
             record["unsupported_objects_output"] = converted_manifest.get("counts", {}).get("unsupported_placements", 0)
@@ -665,6 +705,10 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                     )
                     fidelity = slide_fidelity(source_pdf, typst_pdf, page_map, supported_slides, supported_text_slides)
                     slide_text_scores = fidelity.pop("slide_text_scores", [])
+                    slide_diagnostics = fidelity.pop("slide_diagnostics", [])
+                    for detail in slide_diagnostics:
+                        detail.update({"deck": source.name, "title": entry.get("title", "")})
+                    record["_slide_diagnostics"] = slide_diagnostics
                     record.update(fidelity)
                     selected = save_comparison_sheet(
                         source_pdf, typst_pdf, slide_text_scores,
@@ -852,8 +896,57 @@ def main():
     inherited = [float(row["inherited_font_char_share"]) for row in combined if row.get("inherited_font_char_share") not in (None, "")]
     resolved_total = sum(int(row.get("resolved_font_characters") or 0) for row in combined)
     explicit_installed = sum(int(row.get("installed_font_characters") or 0) for row in combined)
+    slide_detail_records = []
+    structure_detail_records = []
+    updated_decks = {Path(row.get("file", "")).name for row in combined
+                     if row.get("_slide_diagnostics") is not None}
+    for row in combined:
+        slide_detail_records.extend(row.pop("_slide_diagnostics", []) or [])
+        structure = row.pop("_structural_diagnostics", None)
+        if structure:
+            structure_detail_records.append({"record_type": "deck_structure", "deck": Path(row.get("file", "")).name,
+                                             "title": row.get("title", ""), **structure})
+    slide_details_path = BENCH / "slide_diagnostics.jsonl"
+    if not args.report_only:
+        preserved_records = []
+        if slide_details_path.is_file() and (args.start or args.only):
+            for line in slide_details_path.read_text(encoding="utf-8").splitlines():
+                try:
+                    item = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if Path(item.get("deck", "")).name not in updated_decks:
+                    preserved_records.append(item)
+        with slide_details_path.open("w", encoding="utf-8") as stream:
+            for item in [*preserved_records, *structure_detail_records, *slide_detail_records]:
+                stream.write(json.dumps(item, ensure_ascii=False, separators=(",", ":")) + "\n")
+    all_slide_details = list(slide_detail_records)
+    if slide_details_path.is_file():
+        all_slide_details = []
+        for line in slide_details_path.read_text(encoding="utf-8").splitlines():
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if item.get("record_type") != "deck_structure":
+                all_slide_details.append(item)
+    mask_areas = [item["text_mask_area_percent"] for item in all_slide_details
+                  if item.get("text_mask_area_percent") is not None]
+    spatial_matches = sum(int(item.get("spatial_text_matches") or 0) for item in all_slide_details)
+    ambiguous_blocks = sum(int(item.get("ambiguous_source_text_blocks") or 0)
+                           + int(item.get("ambiguous_typst_text_blocks") or 0) for item in all_slide_details)
+    unmatched_blocks = sum(int(item.get("unmatched_source_text_blocks") or 0)
+                           + int(item.get("unmatched_typst_text_blocks") or 0) for item in all_slide_details)
+    source_objects = sum(int(row.get("source_object_placements") or 0) for row in succeeded)
+    emitted_objects = sum(int(row.get("typst_emitted_source_objects") or 0) for row in succeeded)
+    geometry_checked = sum(int(row.get("geometry_checked_ungrouped_placements") or 0) for row in succeeded)
+    position_error_weighted = sum(
+        float(row.get("generated_place_position_mae_pt") or 0)
+        * int(row.get("geometry_checked_ungrouped_placements") or 0)
+        for row in succeeded
+    )
     RESULTS.parent.mkdir(parents=True, exist_ok=True)
-    columns = list(dict.fromkeys(key for row in combined for key in row))
+    columns = list(dict.fromkeys(key for row in combined for key in row if not key.startswith("_")))
     with RESULTS.open("w", encoding="utf-8-sig", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
@@ -898,6 +991,10 @@ def main():
         f"- Mean per-deck absolute PDF font-size difference: {sum(font_delta) / len(font_delta):.2f} pt; median {sorted(font_delta)[len(font_delta) // 2]:.2f} pt." if font_delta else "- PDF font-size difference: n/a.",
         f"- Resolved source font families are locally available for {explicit_installed / resolved_total:.1%} of text characters across the sample; mean per-deck share {sum(known) / len(known):.1%}." if resolved_total else "- Available-font share: n/a.",
         f"- Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): {sum(inherited) / len(inherited):.1%}." if inherited else "- Inherited-font share: n/a.",
+        f"- Mean text-mask area: {sum(mask_areas) / len(mask_areas):.2f}% of rendered pixels; per-slide values are in [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl)." if mask_areas else "- Text-mask area: n/a.",
+        f"- Structural source-object coverage in generated Typst: {emitted_objects:,}/{source_objects:,} source placements have a marker next to an emitted `#Place` call. This verifies emission, not geometry accuracy; missing source-object keys are listed per deck in the JSONL diagnostics." if source_objects else "- Structural source-object coverage: n/a.",
+        f"- Generated `#Place` position check: {geometry_checked:,} ungrouped supported placements; mean absolute x/y error {position_error_weighted / geometry_checked:.3f} pt against source-object bounds." if geometry_checked else "- Generated `#Place` position check: n/a.",
+        f"- Independent spatial text matching: {spatial_matches:,} matched; {ambiguous_blocks:,} ambiguous block incidences and {unmatched_blocks:,} unmatched block incidences are reported separately, not counted as correct placement. See [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl)." if all_slide_details else "- Spatial text matching diagnostics: n/a.",
         "- Layout score compares full-slide edges, foreground colors, and background color after masking extracted text glyph regions in both PDFs. Text itself does not contribute to this score. Layout includes slides with unsupported fonts because their text is masked.",
         "- A slide is eligible for text fidelity only when every resolved source font family used on that slide is present in Typst's installed-font list. Resolved major/minor theme fonts are checked too. Unsupported-font slides are excluded from text, word, font-size, wrap, and full-slide metrics.",
         "- Text fidelity is the mean of a one-pixel-tolerant rendered ink-edge F1 and a text-start position score. Position score falls linearly to zero at a 24 pt displacement.",
@@ -906,7 +1003,7 @@ def main():
         "- Pixel scores use PDF output rendered locally by PowerPoint and Typst. Grouped text spans may be imperfectly extracted from PDFs.",
         "- Word recall compares text extracted from PowerPoint-exported and Typst PDFs. Differences in reading order are ignored; repeated or missing visible words lower the score.",
         "- Font-size difference compares character-weighted average font sizes extracted from the two PDFs. These aggregate metrics are affected by unsupported objects and font substitution.",
-        "- Source attribution, license, DOI and download checksums are in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv). PPTX files are in the ignored local `data/input/` directory.",
+        "- Source attribution, license, DOI and download checksums are in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv); per-slide diagnostics are in [slide_diagnostics.jsonl](slide_diagnostics.jsonl). PPTX files are in the ignored local `data/input/` directory.",
     ]
     if errors:
         summary.extend(["", "## Failure categories", ""])
