@@ -90,6 +90,8 @@ This is an alpha proof of concept. Review conversion reports and visually inspec
 
 Master/layout reuse is implemented for the documented static subset. See the [master/layout support report](docs/master-layout-poc.md) for architecture, results, and current limits.
 
+The v0.1.0 stabilization run converted and rendered all 100 presentations in the frozen benchmark corpus. EMF/WMF fallback behavior, unsupported-object reporting, benchmark methods, and the productization decision are documented in the [stabilization report](docs/alpha-stabilization-report.md). This corpus result is evidence for continued experimental use, not a guarantee for arbitrary decks or every platform.
+
 ## License
 
 Licensed under the [Apache License, Version 2.0](LICENSE).

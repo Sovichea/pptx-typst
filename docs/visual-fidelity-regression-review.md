@@ -18,7 +18,7 @@ The hidden source slide indices are:
 | `091_Towards_NL_PID_roadmap_20230221` | 17 | 18 | 6 |
 | `096_3_Renzo_Huber_Whatever_works` | 8 | 12 | 7–10 |
 
-The benchmark now reads hidden-slide metadata and maps each PowerPoint PDF page to the same visible source slide in Typst by source order. It accepts a deck only when PowerPoint page count equals the number of visible slides and Typst page count equals the source slide count. Any other count is recorded as `invalid_comparison` and excluded. The corrected benchmark has 89/89 verified converted decks and zero ambiguous comparisons; the 11 conversion/render failures remain separate.
+The benchmark now reads hidden-slide metadata and maps each PowerPoint PDF page to the same visible source slide in Typst by source order. It accepts a deck only when PowerPoint page count equals the number of visible slides and Typst page count equals the source slide count. Any other count is recorded as `invalid_comparison` and excluded. In the earlier page-alignment run, 89 successful decks had verified mappings and the 11 conversion/render failures were separate. The final stabilization rerun now has 100/100 verified converted decks and zero ambiguous comparisons.
 
 Correcting the five bad page pairings changed the mixed-corpus means from the supplied baseline: layout fidelity 89.9% → 91.0%, text fidelity 47.1% → 48.0%, full-slide fidelity 69.2% → 70.1%, and mean text-start error 46.14 pt → 38.73 pt. These are measurement corrections, not converter improvements. Other deck measurements were retained. Hidden slides are also excluded from source-text eligibility counts.
 
@@ -49,9 +49,9 @@ The triangle-marker correction was verified separately with the same PPTX source
 
 - `python -m compileall -q src tools tests` — passed.
 - `python -m pytest -q` — 33 passed.
-- Forward conversion and Typst compilation succeeded for the eight representative decks (014, 017, 012, 051, 009, 095, 079, and 043).
+- Forward conversion and Typst compilation succeeded for the eight representative decks (014, 017, 012, 051, 009, 095, 079, and 043); the final frozen benchmark later converted and rendered all 100 decks, including 038.
 - Reverse conversion succeeded for the mixed-format placeholder example (095) and for 051. The 051 slide 50 package check confirms the white fill is on the layout's title placeholder while the slide placeholder has no local fill.
-- Focused automated regressions cover referenced theme fills, table frame/row sizing, Wingdings bullet conversion, editable connector-line round-trip including head and tail triangle markers, and mixed bold/italic placeholder runs including a line break.
+- Focused automated regressions cover referenced theme fills, table frame/row sizing, Wingdings bullet conversion, editable connector-line round-trip including head and tail triangle markers, mixed bold/italic placeholder runs including a line break, and stroke-width compensation under a synthetic 10x group transform.
 - The 100-deck converter benchmark is rerun after the grouped-vector correction; its final aggregate values and paired comparison are recorded in `benchmarks/text_fidelity/summary.md` and `docs/alpha-stabilization-report.md`.
 
 ## Remaining limitations
@@ -59,4 +59,4 @@ The triangle-marker correction was verified separately with the same PPTX source
 - Triangle arrowheads are approximated with native Typst polygon shapes and restored to native PowerPoint line markers. Other marker types such as oval or stealth are reported but omitted from Typst rendering.
 - Font substitution changes glyph appearance where source families are unavailable, including the title lettering on 051 slide 50.
 - Some line wrapping and indentation remain renderer-dependent, especially in 079.
-- The media compatibility milestone separately resolves the 11 former `Typst rejected media format` failures; current frozen-corpus results are recorded in `benchmarks/text_fidelity/summary.md`.
+- Slide 038 still has local geometry and text differences outside the grouped-stroke defect shown here. The correction removes the huge red stroke inflation; it does not reproduce every projectile annotation and axis exactly.

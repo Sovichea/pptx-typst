@@ -36,9 +36,9 @@ The failure originated at Typst compilation, not extraction: the original metafi
 
 ## Validation
 
-The 11 failed benchmark decks were rerun through extraction, Typst generation, and Typst compilation after adding the fallback. **All 11 compiled and rendered.** The remaining 89 decks were not rerun in this focused check; their prior successful rows were retained. A complete corpus rerun is required for the final milestone report.
+The frozen 100-deck corpus was rerun end to end after adding the fallback. **All 100 converted and rendered, including all 11 decks that had previously failed.** Inspection of those 11 packages found EMF media in every deck; `029_madrid_22.pptx` also contains a WMF. The original failure occurred during Typst compilation when a referenced EMF was passed through as though Typst could decode it. The complete run records 100 verified source-slide/PDF-page mappings and zero failed or ambiguous deck comparisons.
 
-The local Windows run used GDI+ because Inkscape was not installed. Every sampled fallback rendered as RGBA PNG. The derivatives ranged from small line-art assets to roughly 34 MB for one complex high-resolution metafile; output size and conversion time are the main tradeoffs. Automated tests cover Inkscape preference, transparent GDI+ fallback behavior, and graceful reporting when converters are absent.
+The final run used Python 3.12.10, python-pptx 1.0.2, Typst 0.15.1, and desktop PowerPoint 16.0 on Windows 11. Inkscape was not installed, so the Windows GDI+ fallback was used. Sampled derivatives rendered with RGBA transparency and ranged from small line art to about 34 MB for one complex high-resolution metafile; output size and conversion time are the main tradeoffs. Automated tests cover Inkscape preference, transparent GDI+ fallback behavior, and graceful reporting when converters are absent.
 
 ## Remaining limitations
 

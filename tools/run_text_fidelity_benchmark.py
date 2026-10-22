@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import re
 import shutil
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -40,6 +41,12 @@ SUMMARY = BENCH / "summary.md"
 COMPARISON_DIR = BENCH / "visual_comparisons"
 EMU_PER_PT = 12700
 WORD_RE = re.compile(r"[\w]+", re.UNICODE)
+
+
+def lower_decile(values):
+    """Return the nearest-rank tenth percentile for a non-empty value set."""
+    ordered = sorted(values)
+    return ordered[max(0, (len(ordered) + 9) // 10 - 1)] if ordered else None
 
 
 def get_typst_font_names():
@@ -939,6 +946,8 @@ def main():
                            + int(item.get("unmatched_typst_text_blocks") or 0) for item in all_slide_details)
     source_objects = sum(int(row.get("source_object_placements") or 0) for row in succeeded)
     emitted_objects = sum(int(row.get("typst_emitted_source_objects") or 0) for row in succeeded)
+    unsupported_objects = sum(int(row.get("unsupported_objects_output") or 0) for row in succeeded)
+    supported_source_objects = max(0, source_objects - unsupported_objects)
     geometry_checked = sum(int(row.get("geometry_checked_ungrouped_placements") or 0) for row in succeeded)
     position_error_weighted = sum(
         float(row.get("generated_place_position_mae_pt") or 0)
@@ -980,19 +989,19 @@ def main():
         f"- Page correspondence: {sum(row.get('page_correspondence') == 'verified' for row in succeeded)} verified; {sum(row.get('page_correspondence') == 'invalid_comparison' for row in succeeded)} excluded as ambiguous.",
         f"- Source PDF words: {total_words:,}.",
         f"- Weighted visible-word recall: {weighted_words / total_words:.1%}." if total_words else "- Weighted visible-word recall: n/a.",
-        f"- Mean per-deck visible-word recall: {sum(word_recall) / len(word_recall):.1%}; median {sorted(word_recall)[len(word_recall) // 2]:.1%}." if word_recall else "- Per-deck visible-word recall: n/a.",
-        f"- Layout fidelity (text glyph pixels masked; all rendered slides): {sum(layout) / len(layout):.1%} mean per deck; {sorted(layout)[len(layout) // 2]:.1%} median." if layout else "- Layout fidelity: n/a.",
+        f"- Mean per-deck visible-word recall: {sum(word_recall) / len(word_recall):.1%}; median {statistics.median(word_recall):.1%}." if word_recall else "- Per-deck visible-word recall: n/a.",
+        f"- Layout fidelity (text glyph pixels masked; all rendered slides): {sum(layout) / len(layout):.1%} mean per deck; {statistics.median(layout):.1%} median; {lower_decile(layout):.1%} 10th percentile." if layout else "- Layout fidelity: n/a.",
         f"- Text metrics include {eligible_text_slides:,} of {source_text_slides:,} source-text slides with all used font families available; {skipped_text_slides:,} slides were skipped for unsupported fonts.",
-        f"- Text fidelity (font-supported slides only): {sum(text_score) / len(text_score):.1%} mean per deck; {sorted(text_score)[len(text_score) // 2]:.1%} median." if text_score else "- Text fidelity: n/a.",
-        f"- Full-slide fidelity (font-supported slides only; equal-weight layout + text): {sum(full_score) / len(full_score):.1%} mean per deck; {sorted(full_score)[len(full_score) // 2]:.1%} median." if full_score else "- Full-slide fidelity: n/a.",
+        f"- Text fidelity (font-supported slides only): {sum(text_score) / len(text_score):.1%} mean per deck; {statistics.median(text_score):.1%} median; {lower_decile(text_score):.1%} 10th percentile." if text_score else "- Text fidelity: n/a.",
+        f"- Full-slide fidelity (font-supported slides only; equal-weight layout + text): {sum(full_score) / len(full_score):.1%} mean per deck; {statistics.median(full_score):.1%} median; {lower_decile(full_score):.1%} 10th percentile." if full_score else "- Full-slide fidelity: n/a.",
         f"- Text ink edge F1: {sum(ink) / len(ink):.1%}; mean start-position accuracy: {sum(position_score) / len(position_score):.1%}; mean start-position error: {sum(position) / len(position):.2f} pt." if ink and position and position_score else "- Text ink and start-position metrics: n/a.",
         f"- Text wrap line-count match (diagnostic only; excluded from scores): {sum(wrap) / len(wrap):.1%}." if wrap else "- Text wrap line-count match: n/a.",
         f"- Low text-fidelity comparison sheets: {sum(bool(row.get('visual_comparison')) for row in combined)} deck(s), in `visual_comparisons/index.md`; each sheet shows up to three font-supported slides with the lowest per-slide text score.",
-        f"- Mean per-deck absolute PDF font-size difference: {sum(font_delta) / len(font_delta):.2f} pt; median {sorted(font_delta)[len(font_delta) // 2]:.2f} pt." if font_delta else "- PDF font-size difference: n/a.",
+        f"- Mean per-deck absolute PDF font-size difference: {sum(font_delta) / len(font_delta):.2f} pt; median {statistics.median(font_delta):.2f} pt." if font_delta else "- PDF font-size difference: n/a.",
         f"- Resolved source font families are locally available for {explicit_installed / resolved_total:.1%} of text characters across the sample; mean per-deck share {sum(known) / len(known):.1%}." if resolved_total else "- Available-font share: n/a.",
         f"- Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): {sum(inherited) / len(inherited):.1%}." if inherited else "- Inherited-font share: n/a.",
         f"- Mean text-mask area: {sum(mask_areas) / len(mask_areas):.2f}% of rendered pixels; per-slide values are in [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl)." if mask_areas else "- Text-mask area: n/a.",
-        f"- Structural source-object coverage in generated Typst: {emitted_objects:,}/{source_objects:,} source placements have a marker next to an emitted `#Place` call. This verifies emission, not geometry accuracy; missing source-object keys are listed per deck in the JSONL diagnostics." if source_objects else "- Structural source-object coverage: n/a.",
+        f"- Structural source-object emission: {emitted_objects:,}/{supported_source_objects:,} supported source placements have a marker next to an emitted `#Place` call ({unsupported_objects:,} unsupported placements are reported separately from {source_objects:,} total). This verifies emission, not geometry accuracy; missing keys are listed per deck in the JSONL diagnostics." if source_objects else "- Structural source-object coverage: n/a.",
         f"- Generated `#Place` position check: {geometry_checked:,} ungrouped supported placements; mean absolute x/y error {position_error_weighted / geometry_checked:.3f} pt against source-object bounds." if geometry_checked else "- Generated `#Place` position check: n/a.",
         f"- Independent spatial text matching: {spatial_matches:,} matched; {ambiguous_blocks:,} ambiguous block incidences and {unmatched_blocks:,} unmatched block incidences are reported separately, not counted as correct placement. See [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl)." if all_slide_details else "- Spatial text matching diagnostics: n/a.",
         "- Layout score compares full-slide edges, foreground colors, and background color after masking extracted text glyph regions in both PDFs. Text itself does not contribute to this score. Layout includes slides with unsupported fonts because their text is masked.",

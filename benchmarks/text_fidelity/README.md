@@ -39,6 +39,6 @@ The original aggregate scores are retained for historical comparison. Their gree
 python tools/analyze_text_placement.py path\to\sample.pptx
 ```
 
-The diagnostic is deliberately run on a small representative sample. The 22 corpus media-format compilation failures remain separate from text-placement measurements.
+The diagnostic is deliberately run on a small representative sample. The stabilization rerun completed all 100 decks and kept media conversion outcomes separate from text-placement measurements. The 11 pre-change compilation failures were all decks with EMF media; one also carried WMF. Their fallback behavior and limits are documented in [`docs/media-compatibility.md`](../../docs/media-compatibility.md).
 
-The PDFs are rendered on this Windows machine with PowerPoint and Typst using its installed fonts. Different PowerPoint versions, Typst versions, operating systems, and font installations can change the pixel-level results.
+The final stabilization run used Windows 11, Python 3.12.10, python-pptx 1.0.2, Typst 0.15.1, and desktop PowerPoint 16.0, with the user-installed fonts recorded locally by the font installer. Different PowerPoint versions, Typst versions, operating systems, and font installations can change pixel-level results. Final aggregate results and lower-tail percentiles are in [`summary.md`](summary.md); the result is a local rendered benchmark, not a cross-platform guarantee.

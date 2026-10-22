@@ -2,22 +2,26 @@
 
 - Corpus: [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K), sampled deterministically; all selected records are CC BY 4.0.
 - Sample size: 100 downloaded decks; measurements recorded for 100.
-- Successful conversions and renders: 89; failures: 11.
-- Visible source slides rendered: 1965.
-- Page correspondence: 89 verified; 0 excluded as ambiguous.
-- Source PDF words: 60,600.
-- Weighted visible-word recall: 95.2%.
-- Mean per-deck visible-word recall: 94.0%; median 97.2%.
-- Layout fidelity (text glyph pixels masked; all rendered slides): 91.0% mean per deck; 93.3% median.
-- Text metrics include 1,242 of 1,895 source-text slides with all used font families available; 653 slides were skipped for unsupported fonts.
-- Text fidelity (font-supported slides only): 48.0% mean per deck; 48.5% median.
-- Full-slide fidelity (font-supported slides only; equal-weight layout + text): 70.1% mean per deck; 69.9% median.
-- Text ink edge F1: 43.4%; mean start-position accuracy: 53.1%; mean start-position error: 38.73 pt.
-- Text wrap line-count match (diagnostic only; excluded from scores): 78.6%.
-- Low text-fidelity comparison sheets: 75 deck(s), in `visual_comparisons/index.md`; each sheet shows up to three font-supported slides with the lowest per-slide text score.
-- Mean per-deck absolute PDF font-size difference: 1.13 pt; median 0.39 pt.
+- Successful conversions and renders: 100; failures: 0.
+- Visible source slides rendered: 2221.
+- Page correspondence: 100 verified; 0 excluded as ambiguous.
+- Source PDF words: 68,009.
+- Weighted visible-word recall: 95.0%.
+- Mean per-deck visible-word recall: 93.8%; median 98.5%.
+- Layout fidelity (text glyph pixels masked; all rendered slides): 92.1% mean per deck; 94.6% median; 82.0% 10th percentile.
+- Text metrics include 1,410 of 2,137 source-text slides with all used font families available; 727 slides were skipped for unsupported fonts.
+- Text fidelity (font-supported slides only): 54.5% mean per deck; 55.9% median; 36.8% 10th percentile.
+- Full-slide fidelity (font-supported slides only; equal-weight layout + text): 74.4% mean per deck; 74.8% median; 63.4% 10th percentile.
+- Text ink edge F1: 49.4%; mean start-position accuracy: 60.4%; mean start-position error: 29.03 pt.
+- Text wrap line-count match (diagnostic only; excluded from scores): 80.4%.
+- Low text-fidelity comparison sheets: 84 deck(s), in `visual_comparisons/index.md`; each sheet shows up to three font-supported slides with the lowest per-slide text score.
+- Mean per-deck absolute PDF font-size difference: 1.82 pt; median 0.77 pt.
 - Resolved source font families are locally available for 83.2% of text characters across the sample; mean per-deck share 82.5%.
 - Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): 64.3%.
+- Mean text-mask area: 20.87% of rendered pixels; per-slide values are in [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl).
+- Structural source-object emission: 13,720/13,720 supported source placements have a marker next to an emitted `#Place` call (522 unsupported placements are reported separately from 14,242 total). This verifies emission, not geometry accuracy; missing keys are listed per deck in the JSONL diagnostics.
+- Generated `#Place` position check: 9,595 ungrouped supported placements; mean absolute x/y error 0.002 pt against source-object bounds.
+- Independent spatial text matching: 9,506 matched; 3 ambiguous block incidences and 6,717 unmatched block incidences are reported separately, not counted as correct placement. See [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl).
 - Layout score compares full-slide edges, foreground colors, and background color after masking extracted text glyph regions in both PDFs. Text itself does not contribute to this score. Layout includes slides with unsupported fonts because their text is masked.
 - A slide is eligible for text fidelity only when every resolved source font family used on that slide is present in Typst's installed-font list. Resolved major/minor theme fonts are checked too. Unsupported-font slides are excluded from text, word, font-size, wrap, and full-slide metrics.
 - Text fidelity is the mean of a one-pixel-tolerant rendered ink-edge F1 and a text-start position score. Position score falls linearly to zero at a 24 pt displacement.
@@ -26,8 +30,4 @@
 - Pixel scores use PDF output rendered locally by PowerPoint and Typst. Grouped text spans may be imperfectly extracted from PDFs.
 - Word recall compares text extracted from PowerPoint-exported and Typst PDFs. Differences in reading order are ignored; repeated or missing visible words lower the score.
 - Font-size difference compares character-weighted average font sizes extracted from the two PDFs. These aggregate metrics are affected by unsupported objects and font substitution.
-- Source attribution, license, DOI and download checksums are in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv). PPTX files are in the ignored local `data/input/` directory.
-
-## Failure categories
-
-- Typst rejected media format: 11 deck(s). Details are in `results.csv`.
+- Source attribution, license, DOI and download checksums are in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv); per-slide diagnostics are in [slide_diagnostics.jsonl](slide_diagnostics.jsonl). PPTX files are in the ignored local `data/input/` directory.
