@@ -399,6 +399,19 @@ def add_native(slide,child,x,y,rot,audit,slide_num):
             else:
                 obj.line.color.rgb=RGBColor(*simple_color(stroke,(0,0,0)))
                 obj.line.width=Pt(max(.1,length(stroke,.8)))
+            line_el=obj._element.spPr.get_or_add_ln()
+            for tag,key,width_key,length_key in (
+                ('headEnd','head-end','head-width','head-length'),
+                ('tailEnd','tail-end','tail-width','tail-length'),
+            ):
+                marker_type=(a.get(key,'none') or 'none').strip('"\'')
+                if marker_type not in ('triangle','arrow','stealth','diamond','oval'):
+                    continue
+                marker=OxmlElement(f'a:{tag}')
+                marker.set('type',marker_type)
+                marker.set('w',(a.get(width_key,'med') or 'med').strip('"\''))
+                marker.set('len',(a.get(length_key,'med') or 'med').strip('"\''))
+                line_el.append(marker)
         if rot:obj.rotation=rot%360
         audit['native_shapes']+=1
         audit['items'].append({'slide':slide_num,'type':ty,'x':x,'y':y,'w':w,'h':h})

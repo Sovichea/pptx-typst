@@ -19,7 +19,26 @@
   ]
 }
 
-#let PptxLine = line
+#let PptxLine(
+  start: (0pt, 0pt), end: (100pt, 0pt), stroke: black,
+  head-end: none, tail-end: none,
+  head-width: "med", tail-width: "med", head-length: "med", tail-length: "med",
+  head-points: none, tail-points: none, marker-fill: black,
+) = {
+  let width = calc.max(start.at(0), end.at(0))
+  let height = calc.max(start.at(1), end.at(1))
+  box(width: width, height: height, {
+    place(top + left, dx: 0pt, dy: 0pt, line(start: start, end: end, stroke: stroke))
+    if head-points != none {
+      place(top + left, dx: 0pt, dy: 0pt,
+        polygon(..head-points, fill: marker-fill, stroke: none))
+    }
+    if tail-points != none {
+      place(top + left, dx: 0pt, dy: 0pt,
+        polygon(..tail-points, fill: marker-fill, stroke: none))
+    }
+  })
+}
 
 #let PptxPlaceholderSlot(
   id: "", type: "body", idx: 0,

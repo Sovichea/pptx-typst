@@ -2,7 +2,7 @@
 
 ## Outcome
 
-**PARTIAL.** The selected design-damaging defects were reproduced and corrected in the supported converter subset. The full test suite passes, and the updated converter renders the representative decks in both directions. PowerPoint line arrowheads, unavailable source fonts, and some renderer-dependent wrapping remain limited.
+**PARTIAL.** The selected design-damaging defects were reproduced and corrected in the supported converter subset. The full test suite passes, and the updated converter renders the representative decks in both directions. Triangle connector markers are preserved as editable vector artwork in Typst and restored as native PowerPoint markers on reverse conversion; other marker styles, unavailable source fonts, and some renderer-dependent wrapping remain limited.
 
 ## Page correspondence
 
@@ -28,7 +28,7 @@ Correcting the five bad page pairings changed the mixed-corpus means from the su
 |---|---|---|
 | 014 / 15 | `missing_object`, `styling`: a circular `flowChartConnector` used a theme `fillRef`; the exporter ignored theme fill styles and the preset geometry was unsupported. | Resolve referenced theme fills and map this fixed preset to a circle. The blue artwork now appears. |
 | 014 / 27 | `missing_object`, `styling`: the orange text-box backing was stored as a theme fill reference, not a direct `spPr` fill. | Route text-shape rendering through the same resolved fill path. The orange callout now renders. |
-| 017 / 13 | `spurious_object`, `geometry`: SVG rendering of ordinary `straightConnector1` lines produced solid red rectangles; removing SVG arrow markers did not remove the defect. | Emit editable Typst `PptxLine` primitives with source endpoints and stroke. The red rectangles are gone and the fine red connectors return. Marker shapes are not yet reproduced; the manifest warns when they are omitted. |
+| 017 / 13 | `spurious_object`, `geometry`: SVG rendering of ordinary `straightConnector1` lines produced solid red rectangles; removing SVG arrow markers did not remove the defect. | Emit editable Typst `PptxLine` primitives with source endpoints and stroke. The red rectangles are gone and fine red connectors return. Supported triangle markers are now generated from their source endpoints and remain editable; unsupported marker styles are reported in the manifest. |
 | 012 / 7 | `table_layout`: OOXML row heights totaled 116.8 pt while the table frame was 268.18 pt, so fixed Typst rows collapsed within the larger source frame. | Scale row heights proportionally to the source frame height when the stored total is stale. The representative table now occupies its source frame and its text no longer overlaps severely. Cell widths, fills, borders, and insets continue through the existing table path. |
 | 051 / 50 | `missing_object`: the white panel belonged to a layout title placeholder. Its fill was not represented in the Typst placeholder slot, and the panel vanished. | Add an inheritable placeholder `background` property. The round-trip PPTX stores the white fill on the layout placeholder; the slide title placeholder has no local fill, preserving inheritance. The title is editable. The original Amatic SC font is unavailable in this render, so the replacement letterforms differ. |
 | 009 / 4 | `text_layout`: the source encoded a square bullet as `§` in Wingdings. Directly rendering that private-font codepoint produced visible section signs. Placeholder serialization also bypassed the existing ordinary-paragraph mapping. | Map the Wingdings codepoint to Unicode `▪` in both ordinary paragraphs and placeholder paragraphs. The square bullets render without section signs, and bullet levels remain editable. |
@@ -36,9 +36,13 @@ Correcting the five bad page pairings changed the mixed-corpus means from the su
 | 043 / 10 | `text_layout`: the centered title alignment was inherited from the layout/master style and was not resolved, leaving the Typst title left-aligned. | Resolve inherited paragraph alignment for placeholder slots. The title is centered in the corrected render; the low text score reflected a real inherited-style omission. |
 | 079 / 7 | `text_layout`: residual wrapping and indentation differences remain with available font metrics and different renderers. | No correction made; the comparison does not show a single geometry error that justifies a broader paragraph-layout change in this cycle. |
 
-The cases were categorized by visual inspection and source OOXML, not inferred from the aggregate score. The comparison sheet shows the PowerPoint reference, the `9e9d158` output, and the corrected output for the eight inspected slides.
+The cases were categorized by visual inspection and source OOXML, not inferred from the aggregate score. The comparison sheet shows the PowerPoint reference, the `9e9d158` output, and corrected output for the eight inspected slides. Rechecking the current `main` output also confirms that the 014 colored circle/callout, 017 connector geometry, 012 table frame, and 051 title panel are present; the original reports for those examples predate their fixes.
 
 ![Selected before-and-after slide comparisons](../benchmarks/text_fidelity/visual_regressions/selected_before_after.png)
+
+The triangle-marker correction was verified separately with the same PPTX source, Typst 0.15.1, and installed fonts. The middle panel is the previous converter at `f14c3fb`; the right panel is the corrected converter. The two red connectors ending at table rows gain triangle tips in the generated Typst while retaining their line geometry and color.
+
+![PowerPoint and Typst connector-marker comparison](../benchmarks/text_fidelity/visual_regressions/arrowheads_before_after.png)
 
 ## Validation
 
@@ -46,12 +50,12 @@ The cases were categorized by visual inspection and source OOXML, not inferred f
 - `python -m pytest -q` — 33 passed.
 - Forward conversion and Typst compilation succeeded for the eight representative decks (014, 017, 012, 051, 009, 095, 079, and 043).
 - Reverse conversion succeeded for the mixed-format placeholder example (095) and for 051. The 051 slide 50 package check confirms the white fill is on the layout's title placeholder while the slide placeholder has no local fill.
-- Focused automated regressions cover referenced theme fills, table frame/row sizing, Wingdings bullet conversion, editable connector-line round-trip, and mixed bold/italic placeholder runs including a line break.
+- Focused automated regressions cover referenced theme fills, table frame/row sizing, Wingdings bullet conversion, editable connector-line round-trip including head and tail triangle markers, and mixed bold/italic placeholder runs including a line break.
 - The 100-deck converter benchmark was not rerun after these focused fixes. The corrected all-corpus scores above only account for the verified page-alignment repair; no aggregate improvement is claimed for the visual fixes.
 
 ## Remaining limitations
 
-- Line markers such as arrowheads are reported but not represented by `PptxLine` yet.
+- Triangle arrowheads are approximated with native Typst polygon shapes and restored to native PowerPoint line markers. Other marker types such as oval or stealth are reported but omitted from Typst rendering.
 - Font substitution changes glyph appearance where source families are unavailable, including the title lettering on 051 slide 50.
 - Some line wrapping and indentation remain renderer-dependent, especially in 079.
 - The 11 existing `Typst rejected media format` failures were outside this milestone and are unchanged.

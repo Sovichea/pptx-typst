@@ -518,6 +518,23 @@ def source_object_key(owner, shape_id):
     owner_id=owner.get('id',owner.get('slide'))
     return f'{owner_type}:{owner_id}:{shape_id}'
 
+def triangle_arrow_points(start, end, at_start, marker_width, marker_length):
+    """Return local triangle vertices with the tip attached to a line endpoint."""
+    dx,dy=end[0]-start[0],end[1]-start[1]
+    magnitude=math.hypot(dx,dy)
+    if magnitude<1e-6:return None
+    ux,uy=dx/magnitude,dy/magnitude
+    if at_start:ux,uy=-ux,-uy
+    tip=start if at_start else end
+    base=(tip[0]-ux*marker_length,tip[1]-uy*marker_length)
+    px,py=-uy,ux
+    half=marker_width/2
+    return (tip,(base[0]+px*half,base[1]+py*half),(base[0]-px*half,base[1]-py*half))
+
+def typst_point_array(points):
+    if not points:return 'none'
+    return '('+', '.join(f'({x:.3f}pt, {y:.3f}pt)' for x,y in points)+')'
+
 PLACEHOLDER_KINDS={
     'TITLE':'title', 'CENTER_TITLE':'centered-title', 'BODY':'body',
 }
@@ -1942,17 +1959,43 @@ for slide_no,slide in enumerate(prs.slides,1):
                     width=max(.1,float(ln[0].get('w','12700'))/EMU)
                     start_y=pl['h'] if pl['flip_y'] else 0.0
                     end_y=0.0 if pl['flip_y'] else pl['h']
+                    start=(0.0,start_y);end=(pl['w'],end_y)
+                    marker_args=[]
+                    supported_markers={}
+                    for tag,side,at_start in (('headEnd','head',True),('tailEnd','tail',False)):
+                        found=ln[0].xpath(f'./a:{tag}[@type!="none"]')
+                        if not found:continue
+                        marker=found[0];marker_type=marker.get('type','triangle')
+                        marker_w=marker.get('w','med');marker_len=marker.get('len','med')
+                        if marker_type=='triangle':
+                            width_pt={'sm':5.0,'med':8.0,'lg':11.0}.get(marker_w,8.0)
+                            length_pt={'sm':6.0,'med':9.0,'lg':12.0}.get(marker_len,9.0)
+                            points=triangle_arrow_points(start,end,at_start,width_pt,length_pt)
+                            if points:
+                                marker_args.extend([f'{side}-end:"triangle"',
+                                                   f'{side}-width:"{marker_w}"',
+                                                   f'{side}-length:"{marker_len}"',
+                                                   f'{side}-points:{typst_point_array(points)}'])
+                                supported_markers[side]=marker_type
+                        else:
+                            obj.setdefault('unsupported_line_markers',[]).append(
+                                {'end':side,'type':marker_type,'width':marker_w,'length':marker_len})
+                    if marker_args:
+                        marker_args.append(f'marker-fill:rgb("{color}")')
+                    suffix=', '+', '.join(marker_args) if marker_args else ''
                     core=(f'PptxLine(start:(0pt,{start_y:.3f}pt), '
                           f'end:({pl["w"]:.3f}pt,{end_y:.3f}pt), '
-                          f'stroke:{width:.3f}pt + rgb("{color}"))')
+                          f'stroke:{width:.3f}pt + rgb("{color}"){suffix})')
                     lines.append(f'{indent}// Native editable PowerPoint connector: {typst_comment(sh.name)}')
                     lines.append(typst_place(pl['x']-origin[0],pl['y']-origin[1],core,pl['rotation'],indent,
                                              source_object_key(sm,sh.shape_id)))
                     obj.update(type='line',stroke=color,stroke_width_pt=width)
-                    ends=ln[0].xpath('./a:headEnd[@type!="none"] | ./a:tailEnd[@type!="none"]')
-                    if ends:
-                        obj['warning']='Arrowhead style is not represented by the Typst line subset.'
-                        counts['unsupported_line_markers']+=1
+                    if supported_markers:
+                        obj['line_markers']=supported_markers
+                        counts['line_markers_supported']+=len(supported_markers)
+                    if obj.get('unsupported_line_markers'):
+                        obj['warning']='One or more connector marker styles are not represented by the Typst line subset.'
+                        counts['unsupported_line_markers']+=len(obj['unsupported_line_markers'])
                     counts['line_shapes']+=1
                 else:
                     obj.update(type='unsupported',warning='Connector has no resolvable line style.')

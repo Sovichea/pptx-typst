@@ -161,3 +161,56 @@ def test_connector_uses_editable_typst_line_and_roundtrips(tmp_path: Path) -> No
              if shape.shape_type == MSO_SHAPE_TYPE.LINE]
     assert len(lines) == 1
     assert lines[0].line.color.rgb == RGBColor(210, 25, 35)
+
+
+def test_triangle_connector_marker_renders_and_roundtrips(tmp_path: Path) -> None:
+    source = tmp_path / "connector-arrow.pptx"
+    project = tmp_path / "typst-project"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    connector = slide.shapes.add_connector(
+        MSO_CONNECTOR.STRAIGHT, Pt(80), Pt(90), Pt(420), Pt(260)
+    )
+    connector.line.color.rgb = RGBColor(210, 25, 35)
+    connector.line.width = Pt(2.25)
+    marker = OxmlElement("a:tailEnd")
+    marker.set("type", "triangle")
+    marker.set("w", "med")
+    marker.set("len", "med")
+    connector._element.spPr.get_or_add_ln().append(marker)
+    start_marker = OxmlElement("a:headEnd")
+    start_marker.set("type", "triangle")
+    start_marker.set("w", "sm")
+    start_marker.set("len", "lg")
+    connector._element.spPr.get_or_add_ln().append(start_marker)
+    deck.save(source)
+
+    convert_forward(source, project)
+    typst_source = (project / "main.typ").read_text(encoding="utf-8")
+    assert 'tail-end:"triangle"' in typst_source
+    assert 'head-end:"triangle"' in typst_source
+    assert "tail-points:" in typst_source
+    assert "head-points:" in typst_source
+    typst = shutil.which("typst")
+    if typst:
+        subprocess.run(
+            [typst, "compile", "main.typ", "output.pdf"], cwd=project,
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+
+    output = tmp_path / "connector-arrow-roundtrip.pptx"
+    typst_to_pptx(project / "main.typ", output)
+    converted = Presentation(output)
+    lines = [shape for shape in converted.slides[0].shapes
+             if shape.shape_type == MSO_SHAPE_TYPE.LINE]
+    assert len(lines) == 1
+    tail_markers = lines[0]._element.spPr.xpath("./a:ln/a:tailEnd")
+    head_markers = lines[0]._element.spPr.xpath("./a:ln/a:headEnd")
+    assert len(tail_markers) == 1
+    assert len(head_markers) == 1
+    assert tail_markers[0].get("type") == "triangle"
+    assert tail_markers[0].get("w") == "med"
+    assert tail_markers[0].get("len") == "med"
+    assert head_markers[0].get("type") == "triangle"
+    assert head_markers[0].get("w") == "sm"
+    assert head_markers[0].get("len") == "lg"
