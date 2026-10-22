@@ -18,6 +18,7 @@ from collections import Counter,defaultdict
 import argparse
 from .pptx_geometry import shape_paths, preset_path
 from .pptx_mask import mask_image
+from .media_compat import convert_metafile
 from .paragraph_layout import resolve_paragraph_style, typst_target_pitch, typst_spacing
 
 cli=argparse.ArgumentParser(description="Convert PPTX to structured Typst with shared master/layout declarations and original media assets")
@@ -1002,7 +1003,7 @@ def table_has_spans(sh):
 
 
 TEXT_FALLBACK='#111111'
-registered={}; media_contents={}; media_uses=defaultdict(list); manifest=[]; counts=Counter(); vector_assets={}; compatible_media={}
+registered={}; media_contents={}; media_uses=defaultdict(list); manifest=[]; counts=Counter(); vector_assets={}; compatible_media={}; media_warnings=[]
 # Export assets on demand, reference by embedded original name and SHA256.
 def register_media(part):
     name=Path(str(part.partname)).name
@@ -1017,22 +1018,88 @@ def register_media(part):
     media_contents[sha]={'path':rel,'source':str(part.partname),'bytes':len(data),'sha256':sha,'placements':[]}
     return rel
 
-def typst_compatible_media(part, original_path):
-    """Return a Typst-readable derivative for supported TIFF image content."""
+def record_compatibility_use(part,original_path,sha,render_path,context):
     ext=Path(str(part.partname)).suffix.lower()
-    if ext not in ('.tif','.tiff'):
-        return original_path
+    if ext not in ('.emf','.wmf'):
+        return
+    derived=next((item for item in media_contents[sha].get('derived_assets',[])
+                  if item['path']==render_path),{})
+    output_format=derived.get('format','compatible image')
+    warning={
+        'issue':'legacy_vector_media_compatibility_fallback',
+        'source_media':original_path,'source_part':str(part.partname),
+        'source_sha256':sha,
+        'fallback':f'Used a {output_format.upper()} render derivative in Typst; the original {ext[1:].upper()} is retained in assets.',
+        'expected_loss':('Raster output loses vector scalability; the original vector media remains available in the project assets.'
+                         if output_format=='png' else
+                         'The imported artwork remains one placed SVG image rather than native Typst shapes.'),
+    }
+    warning.update(context or {})
+    media_warnings.append(warning)
+    counts['media_raster_fallback_placements' if output_format=='png'
+           else 'media_vector_fallback_placements']+=1
+
+def typst_compatible_media(part, original_path, context=None):
+    """Return a Typst-readable media path and optional actionable warning."""
+    ext=Path(str(part.partname)).suffix.lower()
     sha=hashlib.sha256(part.blob).hexdigest()
-    if sha in compatible_media:return compatible_media[sha]
-    from PIL import Image
-    import io
-    name=f'{Path(original_path).stem}_typst.png'
-    rel='assets/media/'+name
-    with Image.open(io.BytesIO(part.blob)) as source:
-        source.convert('RGBA').save(ASSETS/name,optimize=True)
-    compatible_media[sha]=rel
-    media_contents[sha]['render_path']=rel
-    return rel
+    if ext not in ('.tif','.tiff','.emf','.wmf'):
+        return original_path, None
+    conversion_key=(sha,ext,300,4096)
+    if conversion_key in compatible_media:
+        rel,conversion_error=compatible_media[conversion_key]
+    elif ext in ('.tif','.tiff'):
+        try:
+            from PIL import Image
+            import io
+            name=f'{Path(original_path).stem}_typst.png'
+            (ASSETS/name).unlink(missing_ok=True)
+            with Image.open(io.BytesIO(part.blob)) as source:
+                source.convert('RGBA').save(ASSETS/name,optimize=True)
+            rel='assets/media/'+name
+            compatible_media[conversion_key]=(rel,None)
+            media_contents[sha]['render_path']=rel
+            media_contents[sha].setdefault('derived_assets',[]).append({
+                'path':rel,'format':'png','converter':'Pillow','lossy':False,
+                'reason':'Typst does not decode TIFF directly.'})
+            counts['media_compatibility_derivatives']+=1
+            return rel, None
+        except Exception as exc:
+            rel=None
+            conversion_error=f'TIFF to PNG conversion failed: {exc}'
+            compatible_media[conversion_key]=(rel,conversion_error)
+    else:
+        destination_stem=ASSETS/f'{Path(original_path).stem}_typst'
+        converted,conversion_error=convert_metafile(
+            ASSETS/Path(original_path).name,destination_stem,dpi=300,max_edge=4096)
+        if converted:
+            rel='assets/media/'+converted.path.name
+            media_contents[sha]['render_path']=rel
+            record={'path':rel,'format':converted.output_format,'converter':converted.converter,
+                    'lossy':converted.output_format=='png','notes':converted.notes,
+                    'source_sha256':sha}
+            if converted.dpi is not None:
+                record.update(dpi=converted.dpi,max_edge_px=converted.max_edge)
+            media_contents[sha].setdefault('derived_assets',[]).append(record)
+            compatible_media[conversion_key]=(rel,None)
+            counts['media_compatibility_derivatives']+=1
+            record_compatibility_use(part,original_path,sha,rel,context)
+            return rel,None
+        compatible_media[conversion_key]=(None,conversion_error)
+    if rel:
+        record_compatibility_use(part,original_path,sha,rel,context)
+        return rel,None
+    warning={
+        'issue':'unsupported_media_format','source_media':original_path,
+        'source_part':str(part.partname),'source_sha256':sha,
+        'fallback':'omitted from Typst rendering; original media retained in assets and source PPTX',
+        'expected_loss':'This object will not be visible in the Typst output.',
+        'reason':conversion_error,
+    }
+    warning.update(context or {})
+    media_warnings.append(warning)
+    counts['media_conversion_failures']+=1
+    return None,warning
 
 def trans(x,y):return np.array([[1,0,x],[0,1,y],[0,0,1]],float)
 def scale(x,y):return np.array([[x,0,0],[0,y,0],[0,0,1]],float)
@@ -1692,8 +1759,12 @@ for slide_no,slide in enumerate(prs.slides,1):
         bgasset=register_media(image_bg[1])
         bgsha=hashlib.sha256(image_bg[1].blob).hexdigest()
         media_contents[bgsha]['placements'].append({'owner':'slide' if slide_bg else 'inherited-background','owner_id':slide_no,'slide':slide_no,'background':True})
-        lines.append(typst_place(0,0,f'image("{bgasset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'))
-        counts['background_images']+=1
+        bgasset,bg_warning=typst_compatible_media(image_bg[1],bgasset,{
+            'slide':slide_no,'owner':'slide' if slide_bg else 'inherited-background',
+            'issue_location':'slide background'})
+        if bgasset:
+            lines.append(typst_place(0,0,f'image("{bgasset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'))
+            counts['background_images']+=1
     elif bgtype=='color':counts['background_colors']+=1
     elif bgtype=='gradient':counts['background_gradients']+=1
     sm={'slide':slide_no,'layout':layout_id,'master':master_id,'placements':[],'groups':[],
@@ -1784,7 +1855,22 @@ for slide_no,slide in enumerate(prs.slides,1):
                 crop,fillrect,alpha=image_fill_params(sh)
                 authored_crop=({**crop} if crop else None)
                 authored_fillrect=({**fillrect} if fillrect else None)
-                rendered_rel=typst_compatible_media(imgpart,rel)
+                rendered_rel,media_warning=typst_compatible_media(imgpart,rel,{
+                    'slide':slide_no,'shape_id':sh.shape_id,'shape':sh.name,
+                    'owner':sm.get('owner','slide'),'owner_id':sm.get('id',slide_no)})
+                if rendered_rel is None:
+                    media_contents[sha]['placements'].append({
+                        'owner':sm.get('owner','slide'),'owner_id':sm.get('id',slide_no),
+                        'slide':slide_no if sm.get('owner','slide')=='slide' else None,
+                        'shape':sh.name,'crop':authored_crop,'fillrect':authored_fillrect,
+                        'alpha':alpha,'geometry':geometry_kind(sh,effective_shape_geometry(sh)),
+                        'render_warning':media_warning['reason']})
+                    obj.update(type='image',source=rel,render_source=None,crop=authored_crop,
+                               fillrect=authored_fillrect,alpha=alpha,media_warning=media_warning['reason'],
+                               expected_loss=media_warning['expected_loss'])
+                    counts['unsupported_media_placements']+=1
+                    sm['placements'].append(obj)
+                    continue
                 rendered_rel=alpha_variant(imgpart,rendered_rel,alpha)
                 geometry_element=effective_shape_geometry(sh)
                 shape_kind=geometry_kind(sh,geometry_element)
@@ -1919,8 +2005,12 @@ for slide_no,slide in enumerate(prs.slides,1):
             asset=register_media(background[1])
             bgsha=hashlib.sha256(background[1].blob).hexdigest()
             media_contents[bgsha]['placements'].append({'owner':sm['owner'],'owner_id':sm['id'],'background':True})
-            counts['background_images']+=1
-            return 'none',f'image("{asset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'
+            asset,warning=typst_compatible_media(background[1],asset,{
+                'owner':sm['owner'],'owner_id':sm['id'],'issue_location':f'{sm["owner"]} background'})
+            if asset:
+                counts['background_images']+=1
+                return 'none',f'image("{asset}",width:{SLIDE_W:.3f}pt,height:{SLIDE_H:.3f}pt,fit:"stretch")'
+            return 'none','none'
         return 'none','none'
     master_allowed=slide._element.get('showMasterSp','1') not in ('0','false')
     layout_allowed=slide.slide_layout._element.get('showMasterSp','1') not in ('0','false')
@@ -1999,5 +2089,33 @@ for slide_no,slide in enumerate(prs.slides,1):
 master_lines=[line for decl in master_declarations.values() for line in [decl[0],*decl[1]]]
 layout_lines=[line for decl in layout_declarations.values() for line in [decl[0],*decl[1]]]
 (OUT/'main.typ').write_text('\n'.join(preamble+master_lines+layout_lines+slide_sources),encoding='utf8')
-(OUT/'asset_manifest.json').write_text(json.dumps({'source_file':SRC.name,'source_slide_count':len(prs.slides),'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,'layout_mode':args.layout_mode,'counts':dict(counts),'masters':master_manifest,'layouts':layout_manifest,'master_placeholders':master_placeholder_manifest,'layout_placeholders':layout_placeholder_manifest,'placeholder_warnings':placeholder_warnings,'media':media_contents,'slides':manifest},ensure_ascii=False,indent=2),encoding='utf8')
+for owner in [*master_manifest,*layout_manifest,*manifest]:
+    for placement in owner.get('placements',[]):
+        for field,issue in (('warning','unsupported_or_approximate_object'),
+                            ('clip_warning','unsupported_image_mask'),
+                            ('transform_warning','approximate_group_transform')):
+            if placement.get(field):
+                media_warnings.append({
+                    'issue':issue,'slide':owner.get('slide'),
+                    'owner':owner.get('owner','slide'),
+                    'owner_id':owner.get('id',owner.get('slide')),
+                    'shape_id':placement.get('source_shape_id'),
+                    'shape':placement.get('name'),
+                    'fallback':placement.get('rendering','original artwork preserved or omitted as noted'),
+                    'expected_loss':placement.get('expected_loss',placement.get(field)),
+                })
+asset_manifest={'source_file':SRC.name,'source_slide_count':len(prs.slides),
+    'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),
+    'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),
+    'group_mode':args.group_mode,'clip_mode':args.clip_mode,'mask_mode':args.mask_mode,
+    'layout_mode':args.layout_mode,'counts':dict(counts),'masters':master_manifest,
+    'layouts':layout_manifest,'master_placeholders':master_placeholder_manifest,
+    'layout_placeholders':layout_placeholder_manifest,'placeholder_warnings':placeholder_warnings,
+    'media_warnings':media_warnings,'media':media_contents,'slides':manifest}
+(OUT/'asset_manifest.json').write_text(json.dumps(asset_manifest,ensure_ascii=False,indent=2),encoding='utf8')
+(OUT/'conversion_report.json').write_text(json.dumps({
+    'source_file':SRC.name,'slides':len(prs.slides),
+    'status':'completed_with_warnings' if media_warnings else 'completed',
+    'counts':dict(counts),'warnings':media_warnings,
+},ensure_ascii=False,indent=2),encoding='utf8')
 print('Saved',OUT,'assets',len(media_contents),'stats',dict(counts),'sizesMB',sum(v['bytes'] for v in media_contents.values())/1024**2)
