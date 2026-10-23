@@ -22,7 +22,7 @@ Package and starter-workflow checks passed locally. GitHub Actions run [39932560
 | Package name/version | PyPI JSON endpoints for `pptx-typst` and `pptx-typst/0.1.0` returned 404 on the audit date. Recheck immediately before publication. |
 | Archive path scan | No developer-specific absolute Windows paths or private benchmark source locations were found in files in either archive. |
 | Cross-platform CI | GitHub Actions run 39932560441 passed all 12 OS/Python matrix jobs on commit `c6e4b3b`. |
-| Publication actions | No PyPI upload, release tag, or GitHub release was created. |
+| Tag-triggered publishing | `.github/workflows/publish-pypi.yml` tests the tagged source, checks that `vX.Y.Z` matches the package version, builds and validates distributions, then publishes using PyPI Trusted Publishing. No release tag or upload has been created. |
 
 The sdist includes documentation screenshots under `docs/images/`, including the example comparison images. It does not include the full converted example project directories. The wheel contains runtime package files only.
 
@@ -45,8 +45,8 @@ SHA-256 checksums are generated from the final artifacts and reported in the rel
 
 ## Publication procedure
 
-1. Push/finalize the release commit and confirm the full Windows/Linux/macOS × Python 3.10–3.13 CI matrix is green.
-2. Rebuild `dist/`, run `python -m twine check --strict dist/*`, repeat clean installation checks, and regenerate SHA-256 hashes.
+1. Configure a PyPI Trusted Publisher (or pending publisher for the new project) for owner `Sovichea`, repository `pptx-typst`, workflow `publish-pypi.yml`, and GitHub environment `pypi`. See [PyPI's Trusted Publishing setup](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/).
+2. Push the finalized workflow and confirm the regular Windows/Linux/macOS x Python 3.10–3.13 test matrix is green.
 3. Recheck that `pptx-typst` and version `0.1.0` remain unpublished on PyPI.
-4. Publish only after a separate explicit authorization using `python -m twine upload dist/pptx_typst-0.1.0-py3-none-any.whl dist/pptx_typst-0.1.0.tar.gz`.
-5. Create the GitHub release separately after verifying the uploaded artifacts and release notes.
+4. Push the matching version tag, `v0.1.0`. The workflow runs tests, builds and checks both distributions, and publishes them to PyPI only if every prior step succeeds.
+5. Verify the published files on PyPI. Create a GitHub release separately if desired.
