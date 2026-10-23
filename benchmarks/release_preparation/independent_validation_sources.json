@@ -1,0 +1,67 @@
+{
+  "validated_on": "2026-10-23",
+  "source_files_kept_out_of_repository": true,
+  "presentations": [
+    {
+      "title": "OER PPT File (Open Educational Resources)",
+      "author": "Erin Smoak, Aaron Price, Beth Mills",
+      "file": "serc_oer_presentation.pptx",
+      "source_url": "https://serc.carleton.edu/details/files/758191.html",
+      "license": "CC BY-NC-SA 3.0",
+      "slides": 15,
+      "sha256": "8fd6d2389aeed29d176be9ad6dd2c02564ddbdcd5d3666096707da122ffacd85",
+      "visual_comparison_slides": [1, 8, 15]
+    },
+    {
+      "title": "Open Science and Universities: managing the change",
+      "author": "Paul Ayris",
+      "file": "ucla_open_science.pptx",
+      "source_url": "https://discovery.ucl.ac.uk/id/eprint/10052145/",
+      "license": "Creative Commons Attribution (version not specified on record)",
+      "slides": 32,
+      "sha256": "46911b3653ae235f9b8149280d6100c0a475c297a2873e6ebc52d832c18f0b03",
+      "visual_comparison_slides": [1, 17, 32]
+    },
+    {
+      "title": "Open Educational Resources at the University of Cape Town",
+      "author": "Thomas King",
+      "file": "uct_open_educational_resources.pptx",
+      "source_url": "https://open.uct.ac.za/items/d6ac48cb-5016-4d29-bc8b-f623a1bcf17b/full",
+      "license": "CC BY 4.0",
+      "slides": 24,
+      "sha256": "a834b3e66e7a7cc8a27a0f81fd1c1b385a5d711d6fcd7b475a802c0a7b9cc535",
+      "visual_comparison_slides": [1, 13, 24]
+    },
+    {
+      "title": "NonNormalData",
+      "author": "OCBE, University of Oslo",
+      "file": "uio_nonnormal_data.pptx",
+      "source_url": "https://ocbe-uio.github.io/public-slides/Presentations/NonNormalData_hfe/NonNormalData.pptx",
+      "license": "CC BY-SA 4.0",
+      "slides": 36,
+      "sha256": "7c1b3f4215de2436d331ec2b3764d29eca99535ef87f37754dc8c1edf0dcea3b",
+      "visual_comparison_slides": [1, 19, 36]
+    },
+    {
+      "title": "Open Access Presentation Template Slides",
+      "author": "Michelle Wilson",
+      "file": "umd_open_access_template.pptx",
+      "source_url": "https://drum.lib.umd.edu/items/15a200fc-3613-4a71-8b01-f27b2df94bb9",
+      "license": "CC BY-SA 3.0 US",
+      "slides": 41,
+      "sha256": "20e2fba6601134c2215204bc2eea1f7285a9d79f89db393b6ce0f2abd8e7d955",
+      "visual_comparison_slides": [1, 21, 41]
+    },
+    {
+      "title": "Interdisziplinärer Grundkurs 1: Wirtschaftspolitisches Arbeiten mit KI-Unterstützung",
+      "author": "Mark Spektor",
+      "file": "hamburg_ai_course.pptx",
+      "source_url": "https://zenodo.org/records/10630340",
+      "license": "CC BY-SA 4.0",
+      "slides": 21,
+      "sha256": "62e8454ebfbaa5db9e29b6e44907bd1efa23af155fe161989e31df0c2cadd354",
+      "visual_comparison_slides": [],
+      "note": "Typst conversion and compilation passed; PowerPoint PDF export failed on this host."
+    }
+  ]
+}

@@ -884,3 +884,157 @@ def test_image_path_cannot_escape_project_to_prefix_sibling(tmp_path: Path) -> N
     report = convert(main, tmp_path / "blocked.pptx")
     assert report["pictures"] == 0
     assert any(item["kind"] == "missing_media" for item in report["unsupported"])
+
+
+def test_forward_report_classifies_unsupported_chart(tmp_path: Path) -> None:
+    from pptx.chart.data import CategoryChartData
+    from pptx.enum.chart import XL_CHART_TYPE
+
+    source = tmp_path / "unsupported-chart.pptx"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    data = CategoryChartData()
+    data.categories = ["A", "B"]
+    data.add_series("Values", [1, 2])
+    slide.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Pt(40), Pt(40), Pt(240), Pt(160), data)
+    deck.save(source)
+
+    output = tmp_path / "converted"
+    run_forward(source, output)
+    report = json.loads((output / "conversion_report.json").read_text(encoding="utf-8"))
+    warning = next(item for item in report["warnings"] if item["issue"] == "unsupported_object")
+
+    assert warning["outcome"] == "unsupported"
+    assert warning["source_type"] == "chart"
+    assert warning["slide"] == 1
+    assert warning["shape_id"] is not None
+    assert warning["fallback"] == "none"
+    assert "Unsupported chart" in warning["reason"]
+
+
+def test_forward_uses_embedded_ole_fallback_picture(tmp_path: Path) -> None:
+    from copy import deepcopy
+    from lxml import etree
+
+    source = tmp_path / "ole-fallback.pptx"
+    image = tmp_path / "preview.png"
+    write_pixel(image)
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    picture = slide.shapes.add_picture(str(image), Pt(40), Pt(50), width=Pt(160), height=Pt(90))
+    picture_element = deepcopy(picture._element)
+    slide.shapes._spTree.remove(picture._element)
+
+    frame = etree.Element(qn("p:graphicFrame"))
+    nonvisual = etree.SubElement(frame, qn("p:nvGraphicFramePr"))
+    properties = etree.SubElement(nonvisual, qn("p:cNvPr"))
+    properties.set("id", "99")
+    properties.set("name", "Embedded Chart Preview")
+    etree.SubElement(nonvisual, qn("p:cNvGraphicFramePr"))
+    etree.SubElement(nonvisual, qn("p:nvPr"))
+    transform = etree.SubElement(frame, qn("p:xfrm"))
+    offset = etree.SubElement(transform, qn("a:off"))
+    offset.set("x", str(int(Pt(40))))
+    offset.set("y", str(int(Pt(50))))
+    extent = etree.SubElement(transform, qn("a:ext"))
+    extent.set("cx", str(int(Pt(160))))
+    extent.set("cy", str(int(Pt(90))))
+    graphic = etree.SubElement(frame, qn("a:graphic"))
+    data = etree.SubElement(graphic, qn("a:graphicData"))
+    data.set("uri", "http://schemas.openxmlformats.org/presentationml/2006/ole")
+    mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
+    alternate = etree.SubElement(data, f"{{{mc}}}AlternateContent")
+    fallback = etree.SubElement(alternate, f"{{{mc}}}Fallback")
+    ole = etree.SubElement(fallback, qn("p:oleObj"))
+    ole.set("progId", "Package")
+    ole.append(picture_element)
+    slide.shapes._spTree.insert(2, frame)
+    deck.save(source)
+
+    output = tmp_path / "converted"
+    run_forward(source, output)
+    report = json.loads((output / "conversion_report.json").read_text(encoding="utf-8"))
+    manifest = json.loads((output / "asset_manifest.json").read_text(encoding="utf-8"))
+    warning = next(item for item in report["warnings"] if item.get("source_type") == "ole_object")
+    placement = next(item for item in manifest["slides"][0]["placements"] if item.get("source_type") == "ole_object")
+
+    assert warning["outcome"] == "approximated"
+    assert warning["fallback"] == "embedded OLE fallback picture"
+    assert "not editable in Typst" in warning["reason"]
+    assert placement["type"] == "image"
+    assert placement["render_source"].startswith("assets/media/")
+    assert (output / placement["render_source"]).is_file()
+
+
+def test_forward_reports_placeholder_and_later_picture_overlap(tmp_path: Path) -> None:
+    source = tmp_path / "placeholder-layering.pptx"
+    image = tmp_path / "cover.png"
+    write_pixel(image)
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[1])
+    body = slide.placeholders[1]
+    body.text = "Text behind the picture"
+    slide.shapes.add_picture(str(image), body.left, body.top, width=body.width, height=body.height)
+    deck.save(source)
+
+    output = tmp_path / "converted"
+    run_forward(source, output)
+    report = json.loads((output / "conversion_report.json").read_text(encoding="utf-8"))
+    warning = next(item for item in report["warnings"] if item["issue"] == "placeholder_layering_risk")
+
+    assert warning["outcome"] == "approximated"
+    assert warning["source_type"] == "placeholder:object"
+    assert warning["slide"] == 1
+    assert warning["shape_id"] is not None
+    assert warning["overlapping_shape_id"] is not None
+    assert "may appear over a picture" in warning["expected_loss"]
+
+
+def test_layout_validator_reports_source_objects_without_geometry(tmp_path: Path) -> None:
+    source = tmp_path / "unpositioned.pptx"
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    shape = slide.shapes.add_textbox(Pt(10), Pt(10), Pt(120), Pt(30))
+    shape.text_frame.text = "Unpositioned object"
+    shape._element.spPr.remove(shape._element.spPr.xfrm)
+    shape_id = shape.shape_id
+    deck.save(source)
+
+    project = tmp_path / "project"
+    project.mkdir()
+    (project / "asset_manifest.json").write_text(json.dumps({
+        "unique_images": 0,
+        "counts": {"group": 0},
+        "slides": [{
+            "slide": 1,
+            "groups": [],
+            "placements": [{
+                "source_shape_id": shape_id,
+                "type": "unsupported",
+                "z_index": 0,
+                "group_path": [],
+            }],
+        }],
+    }), encoding="utf-8")
+    output = tmp_path / "validation.json"
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "src" / "pptx_typst" / "validate_layout.py"),
+            str(source),
+            str(project),
+            "--out",
+            str(output),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    validation = json.loads(output.read_text(encoding="utf-8"))
+    assert validation["summary"]["source_objects_without_geometry"] == 1
+    assert validation["slides"][0]["issues"] == [{
+        "shape": shape_id,
+        "issue": "source geometry unavailable; position and size cannot be compared",
+    }]

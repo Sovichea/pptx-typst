@@ -713,7 +713,8 @@ def add_native_placeholder(slide, record, resolved, *, keep_geometry=False, mark
     x=length(resolved.get('x'));y=length(resolved.get('y'))
     w=length(resolved.get('width'));h=length(resolved.get('height'))
     if w<=0 or h<=0:
-        raise RuntimeError(f'Placeholder {txt_decode(record.get("id", "\"?\""))!r} has no resolvable layout geometry')
+        placeholder_id = txt_decode(record.get('id', '"?"'))
+        raise RuntimeError(f'Placeholder {placeholder_id!r} has no resolvable layout geometry')
     shape=slide.shapes.add_textbox(Pt(x),Pt(y),Pt(w),Pt(h))
     if record.get('background'):
         shape.fill.solid()

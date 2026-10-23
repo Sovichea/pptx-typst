@@ -5,15 +5,27 @@ on:
   pull_request:
 
 jobs:
-  smoke:
-    runs-on: ubuntu-latest
+  tests:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - uses: typst-community/setup-typst@v5
         with:
           typst-version: 0.15.1
       - run: python -m pip install -e ".[test]"
+      - run: pptx-typst --help
+      - run: pptx-to-typst --help
+      - run: typst-to-pptx --help
+      - run: pptx-typst-validate --help
       - run: pytest -q
+      - if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: python -m pip install build && python -m build

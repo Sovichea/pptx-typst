@@ -121,6 +121,11 @@ def layout_placeholder(sh):
     return next((ph for ph in CURRENT_SLIDE.slide_layout.placeholders
                  if ph.placeholder_format.idx==idx),None)
 
+def source_placeholder_type(shape):
+    if not shape.is_placeholder:
+        return None
+    return str(shape.placeholder_format.type).split(' (', 1)[0].strip().lower().replace(' ', '_')
+
 def text_style_defaults(sh,pa):
     # Run formatting cascades through pPr/defRPr, then lstStyle, then
     # placeholder defaults and finally major/minor theme fonts.
@@ -1054,6 +1059,8 @@ def record_compatibility_use(part,original_path,sha,render_path,context):
         'issue':'legacy_vector_media_compatibility_fallback',
         'source_media':original_path,'source_part':str(part.partname),
         'source_sha256':sha,
+        'outcome':'rasterized' if output_format=='png' else 'approximated',
+        'source_type':ext.lstrip('.'),
         'fallback':f'Used a {output_format.upper()} render derivative in Typst; the original {ext[1:].upper()} is retained in assets.',
         'expected_loss':('Raster output loses vector scalability; the original vector media remains available in the project assets.'
                          if output_format=='png' else
@@ -1117,6 +1124,7 @@ def typst_compatible_media(part, original_path, context=None):
     warning={
         'issue':'unsupported_media_format','source_media':original_path,
         'source_part':str(part.partname),'source_sha256':sha,
+        'outcome':'unsupported','source_type':ext.lstrip('.'),
         'fallback':'omitted from Typst rendering; original media retained in assets and source PPTX',
         'expected_loss':'This object will not be visible in the Typst output.',
         'reason':conversion_error,
@@ -1156,9 +1164,17 @@ def group_child_matrix(sh):
     return trans(x+w/2,y+h/2) @ rot(a) @ scale(-1 if flip_h else 1,-1 if flip_v else 1) @ trans(-w/2,-h/2) @ scale(w/chw if chw else 1,h/chh if chh else 1) @ trans(-chx,-chy)
 
 def image_fill_params(sh):
-    src=sh._element.xpath('./p:spPr/a:blipFill/a:srcRect') or sh._element.xpath('./p:blipFill/a:srcRect')
-    stretch=sh._element.xpath('./p:spPr/a:blipFill/a:stretch/a:fillRect') or sh._element.xpath('./p:blipFill/a:stretch/a:fillRect')
-    blip=sh._element.xpath('./p:spPr/a:blipFill/a:blip') or sh._element.xpath('./p:blipFill/a:blip')
+    fallback_pic=ole_fallback_picture(sh)
+    fallback_fill=fallback_pic[0].xpath('./p:blipFill') if fallback_pic else []
+    src=(sh._element.xpath('./p:spPr/a:blipFill/a:srcRect') or
+         sh._element.xpath('./p:blipFill/a:srcRect') or
+         (fallback_fill[0].xpath('./a:srcRect') if fallback_fill else []))
+    stretch=(sh._element.xpath('./p:spPr/a:blipFill/a:stretch/a:fillRect') or
+             sh._element.xpath('./p:blipFill/a:stretch/a:fillRect') or
+             (fallback_fill[0].xpath('./a:stretch/a:fillRect') if fallback_fill else []))
+    blip=(sh._element.xpath('./p:spPr/a:blipFill/a:blip') or
+          sh._element.xpath('./p:blipFill/a:blip') or
+          (fallback_fill[0].xpath('./a:blip') if fallback_fill else []))
     def vals(el):return {k:float(el.get(k,'0'))/100000 for k in ['l','t','r','b']}
     sr=vals(src[0]) if src else None
     fr=vals(stretch[0]) if stretch else None
@@ -1189,6 +1205,9 @@ def alpha_variant(part, raw_path, alpha):
 
 def image_blip(sh):
     bl=sh._element.xpath('./p:spPr/a:blipFill/a:blip') or sh._element.xpath('./p:blipFill/a:blip')
+    if not bl:
+        fallback_pic=ole_fallback_picture(sh)
+        bl=fallback_pic[0].xpath('./p:blipFill/a:blip') if fallback_pic else []
     if not bl:return None
     from pptx.oxml.ns import qn
     # PowerPoint can store SVG artwork in an Office extension relationship and
@@ -1200,6 +1219,14 @@ def image_blip(sh):
         try:return sh.part.related_part(rid)
         except KeyError:continue
     return None
+
+def ole_fallback_picture(sh):
+    """Return an embedded OLE object's cached fallback picture, when present."""
+    if etree.QName(sh._element).localname != 'graphicFrame':
+        return []
+    return sh._element.xpath(
+        './/*[local-name()=\"Fallback\"]/*[local-name()=\"oleObj\"]/*[local-name()=\"pic\"]'
+    )
 
 def effective_shape_geometry(sh):
     """Resolve geometry inherited by a slide placeholder from its layout peer."""
@@ -1709,7 +1736,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                 candidate_kind=placeholder_kind(candidate)
                 if candidate_kind:
                     declared_slots.add(placeholder_id(candidate_kind,candidate.placeholder_format.idx))
-        for shape in slide.shapes:
+        for source_z_index, shape in enumerate(slide.shapes):
             kind=placeholder_kind(shape)
             if shape.is_placeholder and not kind:
                 placeholder_warnings.append({'owner':'slide','slide':slide_no,'shape_id':shape.shape_id,
@@ -1759,6 +1786,8 @@ for slide_no,slide in enumerate(prs.slides,1):
             slide_placeholder_records.append({
                 'id':slot_id,'type':kind,'idx':idx,'text':shape.text,
                 'source_shape_id':shape.shape_id,'source_name':shape.name,
+                'source_z_index':source_z_index,
+                'geometry_pt':{key:round(float(effective[key]),2) for key in ('x','y','w','h')},
                 'layout_reference':slot_id if slot_id in declared_slots else None,
                 'geometry_override':direct,
                 'unresolved_layout_slot':slot_id not in declared_slots,
@@ -1797,7 +1826,7 @@ for slide_no,slide in enumerate(prs.slides,1):
     elif bgtype=='gradient':counts['background_gradients']+=1
     sm={'slide':slide_no,'layout':layout_id,'master':master_id,'placements':[],'groups':[],
         'placeholders':slide_placeholder_records}
-    def recur(shapes,parent=np.identity(3),group_path=(),origin=(0.,0.),indent='  '):
+    def recur(shapes,parent=np.identity(3),group_path=(),origin=(0.,0.),indent='  ',source_z_order=None):
         for zindex,sh in enumerate(shapes):
             if sh.shape_type==MSO_SHAPE_TYPE.GROUP:
                 counts['group']+=1
@@ -1831,10 +1860,10 @@ for slide_no,slide in enumerate(prs.slides,1):
                                   f'{indent}  child:GroupContent(width:{br-bx:.3f}pt,height:{bb-by:.3f}pt,children:[' ])
                     counts['group_containers']+=1
                     sm['groups'][-1]['render_bounds_pt']=[round(v,4) for v in bounds]
-                    recur(sh.shapes,group_parent,group_path+(gid,),(bx,by),indent+'    ')
+                    recur(sh.shapes,group_parent,group_path+(gid,),(bx,by),indent+'    ',source_z_order)
                     lines.append(f'{indent}  ]))')
                 else:
-                    recur(sh.shapes,group_parent,group_path+(gid,),origin,indent)
+                    recur(sh.shapes,group_parent,group_path+(gid,),origin,indent,source_z_order)
                 continue
             if None in (sh.left,sh.top,sh.width,sh.height):
                 # Some slide-number/date/footer placeholders have no transform
@@ -1847,10 +1876,17 @@ for slide_no,slide in enumerate(prs.slides,1):
                      'type':'unsupported','unsupported_kind':'unpositioned_shape',
                      'text':sh.text[:200] if sh.has_text_frame else '',
                      'warning':'Shape has no resolvable position or size in slide, layout, or master.'}
+                placeholder_type=source_placeholder_type(sh)
+                if placeholder_type:
+                    obj['unsupported_kind']='placeholder:'+placeholder_type
+                    obj['placeholder_type']=placeholder_type
                 sm['placements'].append(obj)
                 continue
             pl=placement_info(sh,parent)
-            obj={'z_index':zindex,'group_path':list(group_path),'source_shape_id':sh.shape_id,'name':sh.name,'x':round(pl['x'],2),'y':round(pl['y'],2),'w':round(pl['w'],2),'h':round(pl['h'],2),'rot':round(pl['rotation'],2),'flip_y':pl['flip_y'],'group_skew':round(pl['skew'],5)}
+            obj={'z_index':zindex,'source_z_index':source_z_order.get(sh.shape_id,zindex) if source_z_order else zindex,'group_path':list(group_path),'source_shape_id':sh.shape_id,'name':sh.name,'x':round(pl['x'],2),'y':round(pl['y'],2),'w':round(pl['w'],2),'h':round(pl['h'],2),'rot':round(pl['rotation'],2),'flip_y':pl['flip_y'],'group_skew':round(pl['skew'],5)}
+            placeholder_type=source_placeholder_type(sh)
+            if placeholder_type:
+                obj['source_type']='placeholder:'+placeholder_type
             # Preserve established fixes from first converter for text boxes known to differ in rendered metrics
             smartart=smartart_drawing(sh)
             if smartart is not None:
@@ -1874,6 +1910,7 @@ for slide_no,slide in enumerate(prs.slides,1):
                 sm['placements'].append(obj)
                 continue
             istext=sh.has_text_frame and bool(sh.text.strip())
+            ole_fallback=ole_fallback_picture(sh)
             imgpart=image_blip(sh)
             if abs(pl['skew'])>0.001:
                 counts['nonorthogonal_group_objects']+=1
@@ -1954,6 +1991,14 @@ for slide_no,slide in enumerate(prs.slides,1):
                                          source_object_key(sm,sh.shape_id)))
                 media_contents[sha]['placements'].append({'owner':sm.get('owner','slide'),'owner_id':sm.get('id',slide_no),'slide':slide_no if sm.get('owner','slide')=='slide' else None,'shape':sh.name,'crop':authored_crop,'fillrect':authored_fillrect,'alpha':alpha,'geometry':shape_kind})
                 obj.update(type='image',source=rel,render_source=rendered_rel,geometry=shape_kind,crop=authored_crop,fillrect=authored_fillrect,render_crop=crop,render_fillrect=fillrect,alpha=alpha,mask_applied=(rendered_rel!=rel and rendered_rel.startswith('assets/media/clip_')))
+                if ole_fallback:
+                    obj.update(
+                        source_type='ole_object',
+                        rendering='embedded OLE fallback picture',
+                        warning='Rendered the embedded OLE preview picture; the embedded object is not editable in Typst.',
+                        expected_loss='The cached picture is preserved visually; embedded spreadsheet or chart data remains only in the original PowerPoint file.',
+                    )
+                    counts['ole_preview_fallbacks']+=1
                 counts['geometry_'+shape_kind]+=1
             elif sh.shape_type==MSO_SHAPE_TYPE.LINE or sh._element.xpath('./p:spPr/a:prstGeom[@prst="straightConnector1"]'):
                 ln=sh._element.xpath('./p:spPr/a:ln')
@@ -2049,8 +2094,12 @@ for slide_no,slide in enumerate(prs.slides,1):
                 else:
                     obj['type']='unsupported'
                     xml=sh._element
-                    kind='chart' if xml.xpath('.//*[local-name()="chart"]') else ('table' if xml.xpath('.//a:tbl') else 'shape')
+                    placeholder_type=source_placeholder_type(sh)
+                    kind=(('placeholder:'+placeholder_type) if placeholder_type else
+                          ('chart' if xml.xpath('.//*[local-name()="chart"]') else ('table' if xml.xpath('.//a:tbl') else 'shape')))
                     obj['unsupported_kind']=kind
+                    if placeholder_type:
+                        obj['placeholder_type']=placeholder_type
                     obj['warning']='Unsupported '+kind+': original preserved in source PPTX, not silently claimed as converted'
                     counts['unsupported_'+kind]+=1
                     counts['unsupported_placements']+=1
@@ -2140,10 +2189,11 @@ for slide_no,slide in enumerate(prs.slides,1):
     # placeholders last so Typst preserves that visible layering.
     native_placeholder_ids={record['source_shape_id'] for record in slide_placeholder_records}
     slide_shapes=[shape for shape in slide.shapes if shape.shape_id not in native_placeholder_ids]
+    source_z_order={shape.shape_id:index for index,shape in enumerate(slide.shapes)}
     slide_shapes.sort(key=lambda shape: bool(
         shape.is_placeholder and shape.has_text_frame and shape.text.strip()
     ))
-    recur(slide_shapes,indent='    ')
+    recur(slide_shapes,indent='    ',source_z_order=source_z_order)
     lines.append('])')
     if slide_no<len(prs.slides):lines.append('#pagebreak()')
     slide_sources.extend(lines)
@@ -2154,19 +2204,101 @@ layout_lines=[line for decl in layout_declarations.values() for line in [decl[0]
 (OUT/'main.typ').write_text('\n'.join(preamble+master_lines+layout_lines+slide_sources),encoding='utf8')
 for owner in [*master_manifest,*layout_manifest,*manifest]:
     for placement in owner.get('placements',[]):
-        for field,issue in (('warning','unsupported_or_approximate_object'),
-                            ('clip_warning','unsupported_image_mask'),
-                            ('transform_warning','approximate_group_transform')):
-            if placement.get(field):
-                media_warnings.append({
-                    'issue':issue,'slide':owner.get('slide'),
-                    'owner':owner.get('owner','slide'),
-                    'owner_id':owner.get('id',owner.get('slide')),
-                    'shape_id':placement.get('source_shape_id'),
-                    'shape':placement.get('name'),
-                    'fallback':placement.get('rendering','original artwork preserved or omitted as noted'),
-                    'expected_loss':placement.get('expected_loss',placement.get(field)),
-                })
+        issue = None
+        reason = None
+        outcome = 'approximated'
+        fallback = placement.get('rendering')
+        source_type = placement.get('source_type') or placement.get('unsupported_kind') or placement.get('type', 'unknown')
+        if placement.get('type') == 'unsupported':
+            issue = 'unsupported_object'
+            outcome = 'unsupported'
+            fallback = 'none'
+            reason = placement.get('warning', 'Object is outside the supported conversion subset.')
+            if 'Connector' in reason:
+                issue = 'unsupported_connector'
+                source_type = 'connector'
+        elif placement.get('media_warning'):
+            issue = 'unsupported_media_format'
+            outcome = 'unsupported'
+            source_type = 'picture'
+            fallback = 'omitted from Typst rendering; original media retained in project assets'
+            reason = placement['media_warning']
+        elif placement.get('clip_warning'):
+            issue = 'unsupported_image_mask'
+            source_type = 'picture'
+            fallback = 'original image rendered without the source mask'
+            reason = placement['clip_warning']
+        elif placement.get('transform_warning'):
+            issue = 'approximate_group_transform'
+            fallback = placement.get('rendering', 'flattened group child placements')
+            reason = placement['transform_warning']
+        elif placement.get('unsupported_line_markers'):
+            issue = 'unsupported_line_marker'
+            source_type = 'connector'
+            fallback = 'line rendered; unsupported marker omitted'
+            reason = placement.get('warning', 'Some connector markers are not represented.')
+        elif placement.get('type') == 'smartart':
+            issue = 'smartart_materialized'
+            source_type = 'smartart'
+            fallback = 'cached vector drawing embedded as one SVG asset'
+            reason = 'SmartArt text and shapes are not independently editable in the Typst output.'
+        elif placement.get('warning'):
+            issue = 'approximate_object'
+            reason = placement['warning']
+        if issue:
+            media_warnings.append({
+                'issue': issue,
+                'outcome': outcome,
+                'source_type': source_type,
+                'slide': owner.get('slide'),
+                'owner': owner.get('owner', 'slide'),
+                'owner_id': owner.get('id', owner.get('slide')),
+                'shape_id': placement.get('source_shape_id'),
+                'shape': placement.get('name'),
+                'geometry_pt': {
+                    key: placement[key] for key in ('x', 'y', 'w', 'h', 'rot')
+                    if key in placement
+                },
+                'has_text': bool(placement.get('text')),
+                'fallback': fallback or 'none',
+                'reason': reason,
+                'expected_loss': placement.get('expected_loss', reason),
+            })
+for slide_record in manifest:
+    placeholders = list(slide_record.get('placeholders', []))
+    placeholders.extend({
+        'type': placement['source_type'].split(':', 1)[1],
+        'source_shape_id': placement.get('source_shape_id'),
+        'source_name': placement.get('name'),
+        'source_z_index': placement.get('source_z_index', -1),
+        'geometry_pt': {key: placement[key] for key in ('x', 'y', 'w', 'h')},
+    } for placement in slide_record.get('placements', [])
+      if placement.get('type') == 'text' and str(placement.get('source_type', '')).startswith('placeholder:'))
+    for placeholder in placeholders:
+        px, py, pw, ph = (placeholder['geometry_pt'][key] for key in ('x', 'y', 'w', 'h'))
+        for placement in slide_record.get('placements', []):
+            if placement.get('type') != 'image' or placement.get('source_z_index', -1) <= placeholder.get('source_z_index', -1):
+                continue
+            ix = max(0.0, min(px + pw, placement.get('x', 0) + placement.get('w', 0)) - max(px, placement.get('x', 0)))
+            iy = max(0.0, min(py + ph, placement.get('y', 0) + placement.get('h', 0)) - max(py, placement.get('y', 0)))
+            if ix <= 0 or iy <= 0:
+                continue
+            overlapping_shape_id = placement.get('source_shape_id')
+            media_warnings.append({
+                'issue': 'placeholder_layering_risk',
+                'outcome': 'approximated',
+                'source_type': 'placeholder:' + placeholder.get('type', 'unknown'),
+                'slide': slide_record.get('slide'),
+                'owner': 'slide',
+                'owner_id': slide_record.get('slide'),
+                'shape_id': placeholder.get('source_shape_id'),
+                'shape': placeholder.get('source_name'),
+                'geometry_pt': placeholder['geometry_pt'],
+                'fallback': 'placeholder text is emitted in a separate layer above ordinary slide content',
+                'reason': f'Later picture shape {overlapping_shape_id} overlaps this placeholder in source z-order; Typst stacking may differ.',
+                'expected_loss': 'Text may appear over a picture that covers it in the PowerPoint rendering.',
+                'overlapping_shape_id': overlapping_shape_id,
+            })
 asset_manifest={'source_file':SRC.name,'source_slide_count':len(prs.slides),
     'slide_dimensions_pt':[SLIDE_W,SLIDE_H],'unique_images':len(media_contents),
     'unique_vectors':len(vector_assets),'alpha_variants':len(ALPHA_CACHE),

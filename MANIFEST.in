@@ -1,4 +1,7 @@
-recursive-include src/pptx_typst *.py *.typ
+recursive-include src/pptx_typst *.py *.typ *.ps1 *.svg
 include README.md
 include SOURCE_VERSIONS.json
+recursive-include docs *.md
 recursive-include docs/images *.png
+include benchmarks/text_fidelity/manifest.json
+recursive-include benchmarks/release_preparation *.json *.md
