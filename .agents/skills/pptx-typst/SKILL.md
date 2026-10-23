@@ -24,7 +24,7 @@ If the task is unrelated to PowerPoint conversion or requires arbitrary Typst pr
 ## Prerequisites
 
 - Check whether `pptx-to-typst`, `typst-to-pptx`, `pptx-typst`, and `typst` are available. Use `--help` to confirm options in the installed version.
-- Python 3.10-3.13 is tested. The project was not published to PyPI at the time this skill was written. Install it from the trusted repository or a verified release archive in a virtual environment; do not assume `pip install pptx-typst` will work.
+- Python 3.10-3.13 is supported. Install the published `pptx-typst` package when available; while the 0.1.0 publication is pending, install from a trusted checkout or verified distribution artifact in a virtual environment.
 - Install the Typst CLI separately when PDF previews or compile verification are needed. The release was tested with Typst 0.15.1; confirm compatibility before relying on a different version.
 - Before a final Typst-to-PowerPoint export, run `pptx-typst-fonts main.typ --report font_report.json`. In a source checkout, use `python tools/check_presentation_fonts.py main.typ --report font_report.json`. Repeat every `--font-path` passed to the Typst compiler; those directories affect Typst only and do not install fonts for Office.
 - Inkscape can convert EMF/WMF into SVG. On Windows, the packaged PowerShell/GDI+ fallback can instead generate transparent PNGs. If neither is available, the original media remains but its rendered object may be omitted. Native Cairo is needed for some SVG masking/raster operations.

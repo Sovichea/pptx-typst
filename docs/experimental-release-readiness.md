@@ -33,7 +33,7 @@ The local release artifacts are built and ready for review:
 | `pptx_typst-0.1.0-py3-none-any.whl` | universal wheel | Built and installed in a clean Python 3.12 environment |
 | `pptx_typst-0.1.0.tar.gz` | source distribution | Built and installed in a clean Python 3.10 environment |
 
-The attached [experimental alpha notes](releases/v0.1.0-alpha.md) provide the short user-facing scope and workflow. The README includes a visual comparison, install/convert/edit/compile commands, feature matrix, platform media requirements, and known limitations.
+The [0.1.0 release notes](releases/v0.1.0.md) provide the user-facing scope and workflow. The final PyPI packaging and publication gate is tracked in the [PyPI release audit](pypi-release-audit.md).
 
 ## Font preflight hardening (2026-10-23)
 
@@ -45,4 +45,4 @@ The command was verified from the editable installation and is included in a reb
 
 The Windows package and ordinary conversion workflow are verified from both distribution formats. The existing 100-deck visual baseline and independent sample demonstrate useful layout preservation and editability, while diagnostics expose material omissions. The remaining gaps are documented experimental limitations rather than failures of installation or the common conversion path.
 
-**Release recommendation: Productize as an experimental GitHub alpha after the cross-platform CI matrix passes.** Keep PyPI publication and the public GitHub release as a separate explicitly authorized action. If any CI matrix cells fail, resolve the failure and update this report before creating release artifacts publicly.
+**Earlier recommendation: Productize as an experimental GitHub alpha after the cross-platform CI matrix passes.** The final PyPI publication decision is in the [PyPI release audit](pypi-release-audit.md). No PyPI upload or public release is performed by this preparation task.

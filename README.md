@@ -1,87 +1,39 @@
 # pptx-typst
 
-`pptx-typst` converts PowerPoint presentations (`.pptx`) to editable Typst source and converts a bounded Typst presentation subset back to PowerPoint.
+`pptx-typst` is a bidirectional presentation conversion tool. It converts PowerPoint (`.pptx`) decks into editable Typst projects and exports a documented, statically resolvable Typst slide subset to editable PowerPoint.
 
-Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, table, layout, and transparency cases. Tables preserve cell text, dimensions, alignment, fills, and common borders; merged cells remain unsupported. SmartArt with a stored PowerPoint drawing cache is included as vector artwork; its text is rendered in the SVG rather than emitted as independently editable Typst text. The converters preserve reusable PowerPoint masters and layouts through explicit `PptxMaster`, `PptxLayout`, and `PptxSlide` declarations. The reverse converter also accepts legacy `#Root` / `#Place` projects, including basic rectangular tables; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
-
-## Converted deck examples
-
-Five editable Typst projects from the 29-deck template set are included below. The source PowerPoint decks were first copied and adjusted to use fonts available on this Windows machine; the source `.pptx` files are not included. `quarterly_marketing_meeting` has been refreshed from the **Outdoor exploration presentation** deck. The separate [`field_forward_milestone9`](examples/field_forward_milestone9/) reference project is preserved and is not part of these five examples.
-
-The comparisons use the same source and generated slide numbers. They show representative results, not a guarantee of pixel-identical rendering; font metrics and some PowerPoint constructs can still differ.
-
-<table>
-  <tr>
-    <td><strong>Quarterly marketing meeting · slide 6</strong><br><a href="docs/images/example-comparisons/quarterly-marketing-meeting.png"><img src="docs/images/example-comparisons/quarterly-marketing-meeting.png" alt="PowerPoint and Typst comparison for the quarterly marketing meeting timeline slide"></a><br><a href="examples/quarterly_marketing_meeting/">Typst project</a></td>
-    <td><strong>Back to school night · slide 12</strong><br><a href="docs/images/example-comparisons/back-to-school-night.png"><img src="docs/images/example-comparisons/back-to-school-night.png" alt="PowerPoint and Typst comparison for a school information table slide"></a><br><a href="examples/back_to_school_night/">Typst project</a></td>
-  </tr>
-  <tr>
-    <td><strong>Classical neutrals marketing · slide 15</strong><br><a href="docs/images/example-comparisons/classical-neutrals-marketing.png"><img src="docs/images/example-comparisons/classical-neutrals-marketing.png" alt="PowerPoint and Typst comparison for a classical neutrals Q and A slide"></a><br><a href="examples/classical_neutrals_marketing/">Typst project</a></td>
-    <td><strong>Japandi linear marketing · slide 1</strong><br><a href="docs/images/example-comparisons/japandi-marketing.png"><img src="docs/images/example-comparisons/japandi-marketing.png" alt="PowerPoint and Typst comparison for a Japandi marketing cover slide"></a><br><a href="examples/japandi_marketing/">Typst project</a></td>
-  </tr>
-  <tr>
-    <td><strong>Blue spheres · slide 7</strong><br><a href="docs/images/example-comparisons/blue-spheres.png"><img src="docs/images/example-comparisons/blue-spheres.png" alt="PowerPoint and Typst comparison for a blue spheres marketing strategies slide"></a><br><a href="examples/blue_spheres/">Typst project</a></td>
-    <td></td>
-  </tr>
-</table>
-
-Each project includes readable `main.typ`, its helper template, shared media, an asset manifest, a conversion report, and a font preflight report. Compile and optionally export one from the repository root:
-
-```console
-typst compile examples/quarterly_marketing_meeting/main.typ quarterly-preview.pdf
-typst-to-pptx examples/quarterly_marketing_meeting/main.typ --output quarterly-roundtrip.pptx
-```
+Version `0.1.0` is the first public product release. It is a working tool for presentations within its documented supported subset; it does not claim to reproduce every PowerPoint or Typst feature. It preserves common text, images, shapes, tables, transparency, and reusable master/layout structure. Review each conversion report and inspect important slides before delivery.
 
 ## Install
 
-Python 3.10–3.13 is supported. Other Python versions have not been validated.
-
-This project has not yet been published to PyPI. From a local clone, install it with:
+Python 3.10 through 3.13 is supported.
 
 ```console
-python -m pip install .
+python -m pip install pptx-typst==0.1.0
 ```
 
-The forward converter can produce Typst source without the Typst compiler. To render the output as PDF, install the [Typst CLI](https://typst.app/) separately. It keeps the PowerPoint text point sizes and text-frame coordinates, resolves inherited text and bullet styles by default, and preserves bullet hanging indents. It tries the requested font followed by Typst's bundled Libertinus Serif. If the requested font is unavailable, fallback glyph metrics can still change wrapping and line appearance.
+The PyPI project name is available, but the 0.1.0 distribution has not been uploaded yet. Until publication, install from a trusted source checkout with `python -m pip install .`.
 
-Core conversion is exercised by CI on Windows, Linux, and macOS. Windows EMF/WMF rendering uses GDI+ through the packaged PowerShell script. Linux and macOS can use Inkscape for those formats; if it is missing, the source media is retained and the conversion report explains that the object will not render in Typst. SVG masking and SVG-to-PowerPoint rendering use CairoSVG and need a native Cairo library. If it is unavailable, forward conversion keeps the unmasked original and reports the loss; reverse conversion reports the SVG object as unsupported while continuing with other objects. The Inkscape-installed rendering path was not available for validation on the Windows release-preparation machine.
+The Python package performs conversion. Install the [Typst CLI](https://typst.app/) separately to compile generated Typst projects to PDF. EMF/WMF conversion uses the packaged Windows PowerShell/GDI+ helper on Windows, or Inkscape when available on Linux and macOS. Without a compatible renderer, the original media is retained and the conversion report warns that the object may not render. Some SVG masking and SVG-to-PowerPoint rasterization paths need Cairo native libraries; affected operations report a fallback or unsupported object when Cairo is unavailable.
 
-## Convert PowerPoint to Typst
+## PowerPoint to Typst
 
 ```console
 pptx-to-typst presentation.pptx --output presentation-typst
-```
-
-This creates `main.typ`, `template.typ`, `asset_manifest.json`, and a shared `assets/media/` directory. Compile the result with:
-
-```console
 typst compile presentation-typst/main.typ presentation.pdf
 ```
 
-Mask and text handling options remain available. Run `pptx-to-typst --help` to see them.
-Use `--layout-mode flat` to keep the legacy output that repeats inherited master/layout artwork inside each slide.
+The generated project contains `main.typ`, `template.typ`, `asset_manifest.json`, `conversion_report.json`, and shared media under `assets/media/`. The forward converter retains original assets and emits supported text, shapes, images, tables, masters, and layouts as editable Typst objects. EMF/WMF may also have a derived rendering asset. Use `pptx-to-typst --help` for layout, masking, and text options.
 
-## Convert Typst to PowerPoint
+## Typst to PowerPoint
 
 ```console
 typst-to-pptx presentation-typst/main.typ --output presentation-roundtrip.pptx
 ```
 
-The converter writes `conversion_report.json` next to the `.pptx` output. It reports constructs outside the supported subset.
-
-Check font availability before delivery:
-
-```console
-pptx-typst-fonts presentation-typst/main.typ --report presentation-typst/font_report.json
-```
-
-Pass the same `--font-path` used for `typst compile` to check custom Typst fonts. A font directory supplied to Typst does not install or embed fonts for PowerPoint. Add `--pptx`, `--typst-pdf`, and `--powerpoint-pdf` to compare source declarations, exported DrawingML, and fonts extracted from actual renders. Platform inventories are best effort; the report uses `unknown` when a check cannot be performed. No coordinates or font declarations are changed by the preflight.
-
-Use `pptx-typst-validate original.pptx presentation-typst` to compare source placement data with the generated Typst project. The report distinguishes unsupported objects from approximations and includes affected slide, source shape ID, source type, fallback, bounds when known, and expected loss.
+The reverse converter handles the documented static Typst subset; it does not evaluate arbitrary Typst programs, dynamic expressions, or user-defined macros. It writes a `conversion_report.json` next to the output. Review warnings for unsupported constructs and editability changes.
 
 ## Start a Typst presentation
-
-Create a starter project with a supported `main.typ` and helper module:
 
 ```console
 pptx-typst init my-deck
@@ -89,15 +41,59 @@ typst compile my-deck/main.typ my-deck/preview.pdf
 typst-to-pptx my-deck/main.typ --output my-deck.pptx
 ```
 
-The initialized deck contains three editable example slides using one shared master and three layouts (cover, story, and insights). Original translucent SVG overlays are installed in `my-deck/assets/` and reused through the hierarchy. Sample copy, quote, and metrics are illustrative placeholders.
+The starter project includes a supported `main.typ`, helper module, original SVG artwork, and three editable slides using one shared master and three layouts. Its copy and metrics are illustrative. To generate only the helper module, run `pptx-typst module --output pptx-typst.typ`.
 
-To generate just the reusable module, run `pptx-typst module --output pptx-typst.typ`. Import it with `#import "pptx-typst.typ": *`. The module provides `PptxMaster` and `PptxLayout` for shared artwork and `PptxSlide` for slide content, plus `PptxPlace`, `PptxGroup`, `PptxClip`, `PptxBox`, `PptxText`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable` helpers.
+The helper module provides `PptxMaster`, `PptxLayout`, and `PptxSlide` for reusable hierarchy, plus static `PptxPlace`, `PptxGroup`, `PptxClip`, `PptxBox`, `PptxText`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable` constructs. Title, centered-title, and body placeholders are supported in the defined subset. See the [placeholder support report](https://github.com/Sovichea/pptx-typst/blob/main/docs/placeholder-support.md) and [master/layout report](https://github.com/Sovichea/pptx-typst/blob/main/docs/master-layout-poc.md).
 
-Define each master and its layouts once, then reference a layout from every `PptxSlide`. Shared objects stay in the corresponding PowerPoint master/layout parts. Title, centered-title, and body placeholders can be declared on those layouts and populated with slide-specific text; see the [placeholder support report](docs/placeholder-support.md) for the API, validation, and limitations. Projects without these declarations continue to use the legacy `Root` / `Place` pattern. The reverse converter recognizes only the statically resolvable supported subset; it does not evaluate arbitrary Typst macros or compile-time code. The [master/layout report](docs/master-layout-poc.md) documents the shared artwork architecture and its validation results.
+## Font preflight and validation
+
+Check requested fonts before final export:
+
+```console
+pptx-typst-fonts my-deck/main.typ --report my-deck/font_report.json
+```
+
+Typst font paths do not install or embed fonts for PowerPoint. The preflight checks Typst and the local Office-facing font inventory separately; unavailable checks are reported as `unknown`. Optional `--pptx`, `--typst-pdf`, and `--powerpoint-pdf` inputs compare requested font names, exported DrawingML, and rendered PDF font names.
+
+Compare source geometry with a generated project:
+
+```console
+pptx-typst-validate presentation.pptx presentation-typst --out presentation-typst/geometry-audit.json
+```
+
+Reports identify unsupported and approximated objects with slide numbers, source shape IDs when available, fallback behavior, and expected fidelity or editability loss. A successful command does not mean every source object was reproduced.
+
+## Supported feature subset
+
+| PowerPoint feature | PowerPoint to Typst | Typst to PowerPoint |
+|---|---|---|
+| Text and title/body placeholders | Editable text with supported paragraph and inheritance properties | Editable text and native supported placeholders |
+| Images and common vector media | Original assets retained; EMF/WMF may use a render derivative | PNG/JPEG and SVG when the required Cairo path is available |
+| Shapes, lines, fills, transparency | Common geometry and styling; complex masks and some shapes may be approximated | Common rectangles, ellipses, lines, and supported static shapes |
+| Tables | Editable text, dimensions, alignment, fills, and common borders; merged cells unsupported | Basic rectangular tables |
+| Masters and layouts | Reusable hierarchy preserved | Native parts for statically resolvable declarations |
+| SmartArt and charts | A stored SmartArt drawing cache may be emitted as a static SVG; charts unsupported | Unsupported |
+| Animation and transitions | Unsupported | Unsupported |
+
+Font substitution can change text metrics, wrapping, and alignment. SmartArt cache artwork and OLE previews are not independently editable. Native chart data, animations, complex group transforms, some masks, and arbitrary Typst programs are outside the supported subset. Conversion reports should be reviewed and important slides visually inspected.
+
+## Examples and validation
+
+These comparisons use the same slide from each input PowerPoint and generated Typst project. They show representative results from the local Windows/PowerPoint benchmark, not pixel-equivalent output.
+
+| Example | PowerPoint and Typst comparison |
+|---|---|
+| [Quarterly marketing meeting](https://github.com/Sovichea/pptx-typst/tree/main/examples/quarterly_marketing_meeting) | [Slide 6 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/quarterly-marketing-meeting.png) ![Quarterly marketing meeting slide 6 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/quarterly-marketing-meeting.png) |
+| [Back to school night](https://github.com/Sovichea/pptx-typst/tree/main/examples/back_to_school_night) | [Slide 12 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/back-to-school-night.png) ![Back to school night slide 12 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/back-to-school-night.png) |
+| [Classical neutrals marketing](https://github.com/Sovichea/pptx-typst/tree/main/examples/classical_neutrals_marketing) | [Slide 15 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/classical-neutrals-marketing.png) ![Classical neutrals marketing slide 15 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/classical-neutrals-marketing.png) |
+| [Japandi linear marketing](https://github.com/Sovichea/pptx-typst/tree/main/examples/japandi_marketing) | [Slide 1 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/japandi-marketing.png) ![Japandi marketing slide 1 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/japandi-marketing.png) |
+| [Blue spheres](https://github.com/Sovichea/pptx-typst/tree/main/examples/blue_spheres) | [Slide 7 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/blue-spheres.png) ![Blue spheres slide 7 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/blue-spheres.png) |
+
+The original [FIELD / FORWARD semantic-layout example](https://github.com/Sovichea/pptx-typst/tree/main/examples/field_forward_milestone9) is also available. The frozen 100-deck benchmark and its methodology are documented in the [stabilization report](https://github.com/Sovichea/pptx-typst/blob/main/docs/alpha-stabilization-report.md); the separate [29-deck measurement report](https://github.com/Sovichea/pptx-typst/tree/main/benchmarks/pptx_template_fidelity) provides benchmark methodology and results. The source PowerPoint files are not included. Licensing for third-party assets in the template-derived examples and screenshots has not been independently confirmed; see the [release audit](https://github.com/Sovichea/pptx-typst/blob/main/docs/pypi-release-audit.md).
 
 ## Python API
 
-The reverse conversion function is available as `pptx_typst.typst_to_pptx`:
+The supported reverse conversion function is available as `pptx_typst.typst_to_pptx`:
 
 ```python
 from pptx_typst import typst_to_pptx
@@ -105,47 +101,18 @@ from pptx_typst import typst_to_pptx
 report = typst_to_pptx("presentation-typst/main.typ", "presentation.pptx")
 ```
 
-## Development build
+## Development
 
 ```console
 python -m pip install -e ".[test]"
-pytest
-python -m pip install --upgrade build
+python -m pytest -q
+python -m pip install --upgrade build twine
 python -m build
+python -m twine check --strict dist/*
 ```
 
-The source distribution and wheel are written to `dist/`. Converted projects under `examples/` stay in the repository; example media assets are excluded from package distributions. The README comparison PNGs are included in the source distribution.
-
-Development-only visual and geometry utilities live under `tools/`.
-
-## Agent skills
-
-Repository-local Agent Skills for converting presentations and designing editable Typst-to-PowerPoint decks are included under [`.agents/skills`](.agents/README.md). The design skill includes static semantic component lowering and component-aware rendered-text QA. Host-agent discovery and supported static IR requirements are described in that guide.
-
-The semantic-layout work, synthetic fixture results, and remaining validation limits are documented in the [Milestone 9 report](docs/milestone-9-semantic-layout.md).
-
-## Project status
-
-This is an alpha proof of concept. Review conversion reports and visually inspect presentations before relying on converted output. The project does not claim pixel-perfect rendering or support for arbitrary Typst source.
-
-Master/layout reuse is implemented for the documented static subset. See the [master/layout support report](docs/master-layout-poc.md) for architecture, results, and current limits.
-
-The v0.1.0 stabilization run converted and rendered all 100 presentations in the frozen benchmark corpus. EMF/WMF fallback behavior, unsupported-object reporting, benchmark methods, and the productization decision are documented in the [stabilization report](docs/alpha-stabilization-report.md). This corpus result is evidence for continued experimental use, not a guarantee for arbitrary decks or every platform.
-
-### Feature support
-
-| PowerPoint feature | Forward to Typst | Typst to PowerPoint |
-|---|---|---|
-| Text boxes and title/body placeholders | Editable text with supported paragraph and inheritance properties | Editable text and native title/body placeholders in the static supported subset |
-| Images and common vector media | Original assets retained; EMF/WMF may use a rendering derivative | PNG/JPEG and SVG when CairoSVG can render it; missing native Cairo is reported per asset |
-| Shapes, lines, fills, and transparency | Common geometry and styling supported; complex masks and some shapes are approximated or omitted | Common rectangles, ellipses, lines, and supported static shapes |
-| Tables | Editable tables with common cell styles; merged cells are unsupported | Basic rectangular tables |
-| Masters and layouts | Shared master/layout hierarchy preserved | Native master/layout parts for statically resolvable declarations |
-| SmartArt and charts | SmartArt drawing cache may be materialized as a single SVG; charts are unsupported | Unsupported |
-| Animation, transitions, and arbitrary Typst | Unsupported | Unsupported |
-
-Unsupported objects and visual fallbacks appear in `conversion_report.json`. Review that report and inspect representative slides before using a converted deck. A source content placeholder that is painted over by a later picture can currently appear above that picture in Typst because native placeholders are emitted as a separate layer; this is a known alpha limitation.
+Open an [issue](https://github.com/Sovichea/pptx-typst/issues) for questions or bug reports.
 
 ## License
 
-Licensed under the [Apache License, Version 2.0](LICENSE).
+The software is licensed under the [Apache License 2.0](https://github.com/Sovichea/pptx-typst/blob/main/LICENSE). Fonts, user-provided decks, and third-party assets retain their own terms; they are not relicensed by this project.

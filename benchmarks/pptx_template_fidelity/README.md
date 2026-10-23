@@ -1,13 +1,13 @@
 # PowerPoint template fidelity benchmark
 
-This benchmark evaluates 29 font-normalized PowerPoint templates with the repository text-fidelity benchmark methodology. Inputs are user-provided copies from `C:\Users\Sovichea\Documents\PPTX-templates`; the originals were not modified. The tracked manifest records hashes for the normalized inputs and source originals.
+This benchmark evaluates 29 font-normalized PowerPoint templates with the repository text-fidelity benchmark methodology. Inputs were user-provided copies; the originals were not modified. The tracked manifest records hashes for the normalized inputs and source originals. The local source directory is intentionally not recorded in the repository.
 
 The normalized PPTX files are intentionally not stored in the repository because the source-template licensing was not audited for redistribution. To reproduce the run on the same PC, use the font-adjusted copies at:
 
 ```powershell
 python tools/run_text_fidelity_benchmark.py `
   --manifest benchmarks/pptx_template_fidelity/manifest.json `
-  --input-dir "C:\Users\Sovichea\Documents\PPTX-templates\pptx-typst-results\font-adjusted" `
+  --input-dir "PATH_TO_FONT_ADJUSTED_PPTX_FILES" `
   --output-dir benchmarks/pptx_template_fidelity
 ```
 
