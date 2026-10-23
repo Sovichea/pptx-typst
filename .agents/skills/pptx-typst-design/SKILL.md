@@ -2,7 +2,8 @@
 name: pptx-typst-design
 description: Design polished, projector-readable, editable presentations with Typst as the intermediate representation and pptx-typst as the PowerPoint export path. Use for new slide decks, branded presentations, executive pitches, research talks, diagrams, dashboards, visual storytelling, redesigns, and slide revisions when the requested deliverable is PPTX plus editable Typst source. Includes presentation narrative, art direction, master/layout architecture, visual QA, and round-trip export checks.
 license: Apache-2.0
-compatibility: Requires the pptx-typst CLI and Typst 0.15.1 or a verified compatible version. PDF render review needs Typst and a PDF viewer or rasterizer; PPTX export is limited to the converter's statically parseable Typst subset.
+metadata:
+  compatibility: Requires the pptx-typst CLI and Typst 0.15.1 or a verified compatible version. PDF render review needs Typst and a PDF viewer or rasterizer; PPTX export is limited to the converter's statically parseable Typst subset.
 ---
 
 # Design PowerPoint presentations through Typst IR
@@ -40,7 +41,8 @@ Use this skill for presentation design and authoring. For importing an existing 
 ### 1. Brief and storyboard
 
 - Derive the **one-sentence thesis**, desired decision/action, audience knowledge, time budget, and key evidence.
-- Write a slide map containing **slide number, claim-title, evidence/visual, layout archetype, and speaker intent**. Aim for a strong opening, logical middle, and memorable closing. Vary rhythm; avoid five consecutive identical grids.
+- When reference decks are supplied, inspect the set before choosing an art direction. Extract its visual signature and separate reusable rules from slide-specific layouts; use [design language from reference decks](references/design-language.md). Do not copy low legibility or repeated-layout habits simply because they appear in a template.
+- Write a slide map containing **slide number, claim-title, information role, evidence/visual, layout archetype, visual anchor, and speaker intent**. Aim for a strong opening, logical middle, and memorable closing. Vary rhythm; avoid five consecutive identical grids.
 - Select an art direction (e.g., editorial, technical, premium, government, scientific) and 2–3 reusable layout families. Consult [design system and narrative](references/design-system.md) and [composition patterns](references/composition-patterns.md).
 - Verify all factual numbers and source assets. If evidence is unavailable, use explicitly labeled placeholders rather than invented statistics.
 
@@ -117,6 +119,7 @@ Include a **brief QA statement**: intended slide count, Typst compile status, PP
 ## Read these targeted references only when needed
 
 - [Design system and narrative](references/design-system.md): art direction, hierarchy, typography, color, readability, content strategy.
+- [Design language from reference decks](references/design-language.md): extract a coherent design signature, choose composition by information role, and adapt visual patterns for Typst IR.
 - [Composition patterns](references/composition-patterns.md): concrete layout recipes for covers, split slides, diagrams, comparisons, metrics, timelines, technical slides, and conclusions.
 - [Typst IR API and feature routing](references/typst-ir-api.md): actual helper aliases, static code examples, editability and exporter constraints.
 - [Semantic components](references/semantic-components.md): static lowering recipes for cards, badges, labels, metrics and diagram nodes.
