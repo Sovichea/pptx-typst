@@ -2,7 +2,24 @@
 
 `pptx-typst` is a bidirectional presentation conversion tool. It converts PowerPoint (`.pptx`) decks into editable Typst projects and exports a documented, statically resolvable Typst slide subset to editable PowerPoint.
 
+It also provides a **file-based presentation IR for AI-agent workflows**. An agent can inspect and revise supported slides in readable Typst source, then export the result to PPTX without driving a live PowerPoint session or issuing a sequence of UI/MCP actions for each edit. This is useful for structured deck revisions, repeatable transformations, and generating slides from data. Supported text and shapes stay editable; conversion reports identify objects that are approximated, image-backed, or unsupported.
+
 Version `0.1.0` is the first public product release. It is a working tool for presentations within its documented supported subset; it does not claim to reproduce every PowerPoint or Typst feature. It preserves common text, images, shapes, tables, transparency, and reusable master/layout structure. Review each conversion report and inspect important slides before delivery.
+
+## Use Typst as an AI-editable presentation IR
+
+`pptx-typst` is more than a format bridge. For supported presentations, it gives an AI agent a structured, text-based project to read, edit, diff, and validate instead of requiring the agent to manipulate OOXML package parts directly or drive a live PowerPoint UI through repeated MCP calls. The conversion commands operate on files, so PowerPoint does not need to be open for import, source edits, or export. This avoids repeated UI/MCP calls for routine object changes; it does not remove the need to render and review the finished slides.
+
+For an existing deck, convert it once, make edits to the generated project, compile a preview, and export the changed source:
+
+```console
+pptx-to-typst source.pptx --output working-deck
+# An agent or script edits working-deck/main.typ and supported assets.
+typst compile working-deck/main.typ working-deck/preview.pdf
+typst-to-pptx working-deck/main.typ --output revised-deck.pptx
+```
+
+The Typst project keeps slide objects, reusable masters/layouts, and asset references visible as source. This makes repeated edits and batch transformations easier to review in version control. Inspect `conversion_report.json` before editing and after export: the IR represents the documented subset, not every OOXML feature. For a new deck, start with `pptx-typst init`; see the [agent workflow guide](https://github.com/Sovichea/pptx-typst/blob/main/docs/agentic-presentation-workflow.md) for recommended patterns and boundaries.
 
 ## Install
 

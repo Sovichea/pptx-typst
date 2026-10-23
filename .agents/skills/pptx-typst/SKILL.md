@@ -16,6 +16,7 @@ compatibility: Requires the pptx-typst Python CLI (Python 3.10-3.13); Typst CLI 
 | Convert existing `.pptx` into editable Typst | **Import** workflow |
 | Edit a previously converted deck | **Edit** workflow; start from the existing generated `main.typ` |
 | Create a new slide deck designed for eventual PPTX export | **Author** workflow with `pptx-typst init` |
+| Let an AI agent apply repeatable deck edits without driving PowerPoint | **File-based IR** workflow; edit supported Typst source and assets, then compile and export |
 | Export a supported Typst deck to `.pptx` | **Reverse** workflow; expect a bounded static subset |
 | Compare fidelity or troubleshoot a failed conversion | **Validate** workflow and reports |
 
@@ -59,6 +60,14 @@ Expect these output files:
 5. Do not delete original images, change image hashes, or replace vector artwork with a low-resolution screenshot merely to pass compilation. When a chart, SmartArt or OLE object is a preview image, retain it as artwork and disclose that the internals are not editable.
 6. Preserve palette, shapes, rotations, crops, alpha, and z-order. Do not change font size, line spacing, wrapping, or slide structure simply to pursue pixel similarity. If text no longer fits after a requested edit, adjust the smallest suitable text frame or explain the constraint.
 7. Compile after meaningful edits, then inspect the altered slides, neighboring slides, and any slides affected by shared layouts.
+
+## Use Typst as an agent-editable presentation IR
+
+For supported content, `pptx-typst` can serve as a text-based presentation IR for AI agents and automation. Import a PPTX once, then let the agent inspect and modify `main.typ` and supported assets as files. This avoids direct mutation of OOXML package parts for routine supported edits and avoids issuing a series of UI/MCP actions against an open PowerPoint application. The CLI import, compile, and export steps are file-based; PowerPoint is not required to be open while they run.
+
+Keep the generated source project and reports together, make edits in a version-controlled branch, and export with `typst-to-pptx`. Use static declarations or generate static Typst source from structured data; do not put arbitrary macros, loops, or dynamic computation in the final IR and expect reverse conversion to evaluate them. Inspect conversion warnings before and after editing, compile and review a PDF, and open or render the final PPTX when PowerPoint-specific behavior matters. This workflow reduces interactive tool calls for routine changes, but does not expand the supported feature set or replace final visual QA.
+
+See the [agentic presentation workflow guide](https://github.com/Sovichea/pptx-typst/blob/main/docs/agentic-presentation-workflow.md) for examples and limits.
 
 > The `pptx-typst-validate` command checks source/manifest placement and image properties for supported ungrouped objects. It does **not** prove the compiled PDF matches PowerPoint pixels, and it does not fully validate nested group transforms. Prefer visual comparison for important presentations.
 

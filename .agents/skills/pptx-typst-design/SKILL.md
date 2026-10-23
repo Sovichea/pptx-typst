@@ -10,6 +10,8 @@ metadata:
 
 **Primary contract:** create a high-quality presentation, not merely a compilable file. Typst is the **source of truth and editable intermediate representation**. Its PDF is the visual proof. The `.pptx` is a separately verified delivery format. A passing Typst compile does not prove that PowerPoint retained the design.
 
+This file-based IR also supports AI-agent workflows: an agent can generate or revise supported slide source and assets, then compile and export through the CLI without driving a live PowerPoint session or making a sequence of UI/MCP calls for ordinary edits. Keep the final source inside the converter's supported static subset, and visually inspect the exported PPTX when PowerPoint fidelity matters.
+
 Use this skill for presentation design and authoring. For importing an existing PowerPoint, preserving its geometry, and editing a converted deck, also consult the sibling `pptx-typst` skill when installed.
 
 ## Non-negotiable principles
@@ -32,6 +34,7 @@ Use this skill for presentation design and authoring. For importing an existing 
 | --- | --- |
 | New high-quality deck to deliver as PPTX | **Typst IR authoring** (this skill), compile PDF, export PPTX, verify |
 | PPTX plus editable source | Same; keep `.typ` and external assets as canonical |
+| Repeatable AI-agent edits without live PowerPoint automation | Edit/generate supported Typst files and assets, then compile, export, and validate |
 | Edit imported PowerPoint | Use `pptx-typst` import/edit workflow; preserve source object IDs and existing hierarchy |
 | PDF-only artistic presentation | Full Typst is allowed, but do not promise subsequent PPTX editability |
 | True native PowerPoint charts, animation, notes, SmartArt or arbitrary editable graphics | Explain current converter boundary; if required, plan a specifically authorized native-PPTX finishing step rather than silently substituting a non-editable picture |
