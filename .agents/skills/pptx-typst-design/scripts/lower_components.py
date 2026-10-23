@@ -84,11 +84,22 @@ def _paragraphs(item: dict) -> tuple[list[str], list[str]]:
         style = _style(paragraph, fallback)
         run = _line_run(text, style)
         after = _pt(paragraph.get("after", 0), "paragraph after")
+        leading = paragraph.get("leading")
+        target_pitch = paragraph.get("target_pitch")
+        spacing = []
+        if leading is not None:
+            spacing.append(f"leading: {_fmt(_pt(leading, 'paragraph leading'))}pt")
+        if target_pitch is not None:
+            spacing.append(f"target-pitch: {_fmt(_pt(target_pitch, 'paragraph target pitch'))}pt")
+        paragraph_fields = [
+            f"  align: {_string(align)}",
+            "  runs: (\n    " + run.replace("\n", "\n    ") + ",\n  )",
+        ]
+        paragraph_fields.extend(f"  {field}" for field in spacing)
+        if after:
+            paragraph_fields.append(f"  after: {_fmt(after)}pt")
         result.append(
-            "PptxParagraph(\n"
-            + f"  align: {_string(align)},\n  runs: (\n    {run.replace(chr(10), chr(10) + '    ')},\n  )"
-            + (f",\n  after: {_fmt(after)}pt" if after else "")
-            + ",\n)"
+            "PptxParagraph(\n" + ",\n".join(paragraph_fields) + ",\n)"
         )
     return result, qa_lines
 

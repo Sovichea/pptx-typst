@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "id": "s6-coop-hub",
+      "slide": 6,
+      "text": "CO-OP",
+      "text_lines": [
+        "CO-OP"
+      ],
+      "container_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "text_frame_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 48.31,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s6-shared-hub-label",
+      "slide": 6,
+      "text": "SHARED HUB",
+      "text_lines": [
+        "SHARED HUB"
+      ],
+      "container_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "text_frame_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 89.91,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s6-software-node",
+      "slide": 6,
+      "text": "SOFTWARE",
+      "text_lines": [
+        "SOFTWARE"
+      ],
+      "container_bounds_pt": [
+        674.0,
+        100.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        674.0,
+        100.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s6-service-node",
+      "slide": 6,
+      "text": "SERVICE",
+      "text_lines": [
+        "SERVICE"
+      ],
+      "container_bounds_pt": [
+        818.0,
+        181.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        818.0,
+        181.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s6-tools-node",
+      "slide": 6,
+      "text": "TOOLS",
+      "text_lines": [
+        "TOOLS"
+      ],
+      "container_bounds_pt": [
+        811.0,
+        360.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        811.0,
+        360.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s6-field-b-node",
+      "slide": 6,
+      "text": "FIELD B",
+      "text_lines": [
+        "FIELD B"
+      ],
+      "container_bounds_pt": [
+        559.0,
+        372.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        559.0,
+        372.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s6-field-a-node",
+      "slide": 6,
+      "text": "FIELD A",
+      "text_lines": [
+        "FIELD A"
+      ],
+      "container_bounds_pt": [
+        528.0,
+        200.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        528.0,
+        200.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    }
+  ]
+}

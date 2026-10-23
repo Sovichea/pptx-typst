@@ -1,0 +1,1058 @@
+{
+  "reference_pdf": "reference\\before\\Field_Forward_Corrected_Typst_Preview.pdf",
+  "components": [
+    {
+      "id": "s4-observe-card",
+      "slide": 4,
+      "text": "",
+      "text_lines": [
+        "OBSERVE",
+        "Sensors and devices capture field conditions."
+      ],
+      "container_bounds_pt": [
+        52.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 14.0,
+        "top": 82.0,
+        "bottom": 10.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        68.0,
+        353.97,
+        273.527,
+        441.233
+      ]
+    },
+    {
+      "id": "s4-observe-badge",
+      "slide": 4,
+      "text": "01",
+      "text_lines": [
+        "01"
+      ],
+      "container_bounds_pt": [
+        67.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "text_frame_bounds_pt": [
+        67.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        77.734,
+        303.48,
+        104.254,
+        332.52
+      ]
+    },
+    {
+      "id": "s4-interpret-card",
+      "slide": 4,
+      "text": "",
+      "text_lines": [
+        "INTERPRET",
+        "Software turns raw readings into decisions."
+      ],
+      "container_bounds_pt": [
+        350.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "text_frame_bounds_pt": [
+        350.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 14.0,
+        "top": 82.0,
+        "bottom": 10.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        366.0,
+        353.97,
+        567.553,
+        441.233
+      ]
+    },
+    {
+      "id": "s4-interpret-badge",
+      "slide": 4,
+      "text": "02",
+      "text_lines": [
+        "02"
+      ],
+      "container_bounds_pt": [
+        365.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "text_frame_bounds_pt": [
+        365.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        373.35,
+        303.48,
+        404.646,
+        332.52
+      ]
+    },
+    {
+      "id": "s4-act-card",
+      "slide": 4,
+      "text": "",
+      "text_lines": [
+        "ACT",
+        "People and machines complete the task."
+      ],
+      "container_bounds_pt": [
+        648.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "text_frame_bounds_pt": [
+        648.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 14.0,
+        "top": 82.0,
+        "bottom": 10.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        664.0,
+        353.97,
+        851.301,
+        441.233
+      ]
+    },
+    {
+      "id": "s4-act-badge",
+      "slide": 4,
+      "text": "03",
+      "text_lines": [
+        "03"
+      ],
+      "container_bounds_pt": [
+        663.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "text_frame_bounds_pt": [
+        663.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        671.162,
+        303.48,
+        702.842,
+        332.52
+      ]
+    },
+    {
+      "id": "s5-field-operations-header",
+      "slide": 5,
+      "text": "FIELD OPERATIONS",
+      "text_lines": [
+        "FIELD OPERATIONS"
+      ],
+      "container_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "text_frame_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "padding_pt": {
+        "left": 40.0,
+        "right": 36.0,
+        "top": 9.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        474.0,
+        133.141,
+        625.618,
+        152.5
+      ]
+    },
+    {
+      "id": "s5-live-status",
+      "slide": 5,
+      "text": "LIVE",
+      "text_lines": [
+        "LIVE"
+      ],
+      "container_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "text_frame_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 36.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "right",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        829.799,
+        141.74,
+        856.199,
+        156.26
+      ]
+    },
+    {
+      "id": "s5-soil-moisture-label",
+      "slide": 5,
+      "text": "Soil moisture",
+      "text_lines": [
+        "Soil moisture"
+      ],
+      "container_bounds_pt": [
+        437.0,
+        186.0,
+        282.0,
+        253.0
+      ],
+      "text_frame_bounds_pt": [
+        437.0,
+        186.0,
+        282.0,
+        253.0
+      ],
+      "padding_pt": {
+        "left": 13.0,
+        "right": 17.0,
+        "top": 14.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        450.0,
+        195.899,
+        558.317,
+        216.469
+      ]
+    },
+    {
+      "id": "s5-irrigation-label",
+      "slide": 5,
+      "text": "IRRIGATION",
+      "text_lines": [
+        "IRRIGATION"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 16.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        748.0,
+        199.105,
+        816.807,
+        213.625
+      ]
+    },
+    {
+      "id": "s5-review-status",
+      "slide": 5,
+      "text": "Review",
+      "text_lines": [
+        "Review"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 43.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        748.0,
+        223.693,
+        825.573,
+        250.312
+      ]
+    },
+    {
+      "id": "s5-greenhouse-label",
+      "slide": 5,
+      "text": "GREENHOUSE",
+      "text_lines": [
+        "GREENHOUSE"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 15.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        748.0,
+        327.105,
+        830.74,
+        341.625
+      ]
+    },
+    {
+      "id": "s5-stable-status",
+      "slide": 5,
+      "text": "Stable",
+      "text_lines": [
+        "Stable"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 43.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        748.0,
+        352.693,
+        816.285,
+        379.312
+      ]
+    },
+    {
+      "id": "s5-illustrative-data-note",
+      "slide": 5,
+      "text": "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA",
+      "text_lines": [
+        "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA"
+      ],
+      "container_bounds_pt": [
+        418.0,
+        112.0,
+        490.0,
+        359.0
+      ],
+      "text_frame_bounds_pt": [
+        418.0,
+        112.0,
+        490.0,
+        359.0
+      ],
+      "padding_pt": {
+        "left": 33.0,
+        "right": 202.0,
+        "top": 334.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        451.0,
+        443.588,
+        659.483,
+        455.688
+      ]
+    },
+    {
+      "id": "s6-coop-hub",
+      "slide": 6,
+      "text": "CO-OP",
+      "text_lines": [
+        "CO-OP"
+      ],
+      "container_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "text_frame_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 48.31,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        688.837,
+        254.561,
+        781.181,
+        288.439
+      ]
+    },
+    {
+      "id": "s6-shared-hub-label",
+      "slide": 6,
+      "text": "SHARED HUB",
+      "text_lines": [
+        "SHARED HUB"
+      ],
+      "container_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "text_frame_bounds_pt": [
+        666.0,
+        213.0,
+        138.0,
+        138.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 89.91,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        689.415,
+        299.53,
+        780.597,
+        316.47
+      ]
+    },
+    {
+      "id": "s6-software-node",
+      "slide": 6,
+      "text": "SOFTWARE",
+      "text_lines": [
+        "SOFTWARE"
+      ],
+      "container_bounds_pt": [
+        674.0,
+        100.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        674.0,
+        100.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        696.234,
+        115.135,
+        769.778,
+        130.865
+      ]
+    },
+    {
+      "id": "s6-service-node",
+      "slide": 6,
+      "text": "SERVICE",
+      "text_lines": [
+        "SERVICE"
+      ],
+      "container_bounds_pt": [
+        818.0,
+        181.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        818.0,
+        181.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        849.219,
+        196.135,
+        904.788,
+        211.865
+      ]
+    },
+    {
+      "id": "s6-tools-node",
+      "slide": 6,
+      "text": "TOOLS",
+      "text_lines": [
+        "TOOLS"
+      ],
+      "container_bounds_pt": [
+        811.0,
+        360.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        811.0,
+        360.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        847.92,
+        375.135,
+        892.084,
+        390.865
+      ]
+    },
+    {
+      "id": "s6-field-b-node",
+      "slide": 6,
+      "text": "FIELD B",
+      "text_lines": [
+        "FIELD B"
+      ],
+      "container_bounds_pt": [
+        559.0,
+        372.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        559.0,
+        372.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        594.203,
+        387.135,
+        641.796,
+        402.865
+      ]
+    },
+    {
+      "id": "s6-field-a-node",
+      "slide": 6,
+      "text": "FIELD A",
+      "text_lines": [
+        "FIELD A"
+      ],
+      "container_bounds_pt": [
+        528.0,
+        200.5,
+        118.0,
+        45.0
+      ],
+      "text_frame_bounds_pt": [
+        528.0,
+        200.5,
+        118.0,
+        45.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        562.65,
+        215.135,
+        611.348,
+        230.865
+      ]
+    },
+    {
+      "id": "s7-software-first-card",
+      "slide": 7,
+      "text": "01",
+      "text_lines": [
+        "01"
+      ],
+      "container_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 12.0,
+        "top": 32.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter Display",
+      "reference_glyph_bounds_pt": [
+        70.0,
+        297.628,
+        114.72,
+        349.656
+      ]
+    },
+    {
+      "id": "s7-software-first-title",
+      "slide": 7,
+      "text": "SOFTWARE FIRST",
+      "text_lines": [
+        "SOFTWARE FIRST"
+      ],
+      "container_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 90.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        70.0,
+        361.417,
+        235.944,
+        384.406
+      ]
+    },
+    {
+      "id": "s7-software-first-caption",
+      "slide": 7,
+      "text": "Visibility and workflows",
+      "text_lines": [
+        "Visibility and workflows"
+      ],
+      "container_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 157.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        70.0,
+        428.658,
+        270.808,
+        450.438
+      ]
+    },
+    {
+      "id": "s7-automation-next-card",
+      "slide": 7,
+      "text": "02",
+      "text_lines": [
+        "02"
+      ],
+      "container_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 12.0,
+        "top": 32.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter Display",
+      "reference_glyph_bounds_pt": [
+        364.0,
+        297.628,
+        417.707,
+        349.656
+      ]
+    },
+    {
+      "id": "s7-automation-next-title",
+      "slide": 7,
+      "text": "AUTOMATION NEXT",
+      "text_lines": [
+        "AUTOMATION NEXT"
+      ],
+      "container_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 90.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        364.0,
+        361.417,
+        552.258,
+        384.406
+      ]
+    },
+    {
+      "id": "s7-automation-next-caption",
+      "slide": 7,
+      "text": "Sensors and controls",
+      "text_lines": [
+        "Sensors and controls"
+      ],
+      "container_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 157.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        364.0,
+        428.658,
+        543.881,
+        450.438
+      ]
+    },
+    {
+      "id": "s7-robotics-card",
+      "slide": 7,
+      "text": "03",
+      "text_lines": [
+        "03"
+      ],
+      "container_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 12.0,
+        "top": 32.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter Display",
+      "reference_glyph_bounds_pt": [
+        658.0,
+        297.628,
+        712.61,
+        349.656
+      ]
+    },
+    {
+      "id": "s7-robotics-title",
+      "slide": 7,
+      "text": "ROBOTICS WHEN READY",
+      "text_lines": [
+        "ROBOTICS WHEN READY"
+      ],
+      "container_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 90.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        658.0,
+        361.417,
+        890.205,
+        384.406
+      ]
+    },
+    {
+      "id": "s7-robotics-caption",
+      "slide": 7,
+      "text": "Autonomous operations",
+      "text_lines": [
+        "Autonomous operations"
+      ],
+      "container_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 157.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter",
+      "reference_glyph_bounds_pt": [
+        658.0,
+        428.658,
+        861.152,
+        450.438
+      ]
+    }
+  ]
+}

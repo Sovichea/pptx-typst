@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "id": "s5-field-operations-header",
+      "slide": 5,
+      "text": "FIELD OPERATIONS",
+      "text_lines": [
+        "FIELD OPERATIONS"
+      ],
+      "container_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "text_frame_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "padding_pt": {
+        "left": 40.0,
+        "right": 36.0,
+        "top": 9.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-live-status",
+      "slide": 5,
+      "text": "LIVE",
+      "text_lines": [
+        "LIVE"
+      ],
+      "container_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "text_frame_bounds_pt": [
+        434.0,
+        128.0,
+        458.0,
+        43.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 36.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "right",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-soil-moisture-label",
+      "slide": 5,
+      "text": "Soil moisture",
+      "text_lines": [
+        "Soil moisture"
+      ],
+      "container_bounds_pt": [
+        437.0,
+        186.0,
+        282.0,
+        253.0
+      ],
+      "text_frame_bounds_pt": [
+        437.0,
+        186.0,
+        282.0,
+        253.0
+      ],
+      "padding_pt": {
+        "left": 13.0,
+        "right": 17.0,
+        "top": 14.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-irrigation-label",
+      "slide": 5,
+      "text": "IRRIGATION",
+      "text_lines": [
+        "IRRIGATION"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 16.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-review-status",
+      "slide": 5,
+      "text": "Review",
+      "text_lines": [
+        "Review"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        186.0,
+        157.0,
+        117.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 43.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-greenhouse-label",
+      "slide": 5,
+      "text": "GREENHOUSE",
+      "text_lines": [
+        "GREENHOUSE"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 15.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-stable-status",
+      "slide": 5,
+      "text": "Stable",
+      "text_lines": [
+        "Stable"
+      ],
+      "container_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "text_frame_bounds_pt": [
+        732.0,
+        315.0,
+        157.0,
+        124.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 8.0,
+        "top": 43.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s5-illustrative-data-note",
+      "slide": 5,
+      "text": "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA",
+      "text_lines": [
+        "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA"
+      ],
+      "container_bounds_pt": [
+        418.0,
+        112.0,
+        490.0,
+        359.0
+      ],
+      "text_frame_bounds_pt": [
+        418.0,
+        112.0,
+        490.0,
+        359.0
+      ],
+      "padding_pt": {
+        "left": 33.0,
+        "right": 202.0,
+        "top": 334.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    }
+  ]
+}

@@ -1,0 +1,6268 @@
+{
+  "timestamp_utc": "2026-10-23T06:40:19.501395+00:00",
+  "purpose": "visual QA triage, not a fidelity guarantee",
+  "preview": {
+    "file": "examples\\field_forward_milestone9\\preview.pdf",
+    "pages": 8,
+    "page_sizes_pt": [
+      [
+        960.0,
+        540.0
+      ]
+    ],
+    "slides": [
+      {
+        "page": 1,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 4,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 2,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 10,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 3,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 6,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 4,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 13,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 5,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 11,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 6,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 11,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 7,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 13,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      },
+      {
+        "page": 8,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 4,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      }
+    ]
+  },
+  "pptx": {
+    "file": "examples\\field_forward_milestone9\\exports\\field_forward_milestone9.pptx",
+    "slides": 8,
+    "size_pt": [
+      960.0,
+      540.0
+    ],
+    "shapes": [
+      {
+        "slide": 1,
+        "counts": {
+          "text_frames": 19,
+          "total": 19
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 2,
+        "counts": {
+          "text_frames": 23,
+          "total": 24
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 3,
+        "counts": {
+          "text_frames": 50,
+          "total": 51
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 4,
+        "counts": {
+          "text_frames": 22,
+          "total": 25
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 5,
+        "counts": {
+          "text_frames": 36,
+          "total": 37
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 6,
+        "counts": {
+          "text_frames": 23,
+          "total": 29
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 7,
+        "counts": {
+          "text_frames": 23,
+          "total": 24
+        },
+        "out_of_canvas_shapes": []
+      },
+      {
+        "slide": 8,
+        "counts": {
+          "text_frames": 17,
+          "total": 17
+        },
+        "out_of_canvas_shapes": []
+      }
+    ]
+  },
+  "conversion_report": {
+    "file": "examples\\field_forward_milestone9\\exports\\conversion_report.json",
+    "status": null,
+    "warnings": 0,
+    "issue_counts": {},
+    "warnings_by_slide": {},
+    "potentially_material_warnings": []
+  },
+  "roundtrip_comparison": {
+    "file": "examples\\field_forward_milestone9\\exports\\field_forward_milestone9-powerpoint.pdf",
+    "pages": 8,
+    "compared_pages": 8,
+    "mean_normalized_mae": 0.03352,
+    "per_page": [
+      {
+        "page": 1,
+        "normalized_mae": 0.04423
+      },
+      {
+        "page": 2,
+        "normalized_mae": 0.03396
+      },
+      {
+        "page": 3,
+        "normalized_mae": 0.02723
+      },
+      {
+        "page": 4,
+        "normalized_mae": 0.03259
+      },
+      {
+        "page": 5,
+        "normalized_mae": 0.02501
+      },
+      {
+        "page": 6,
+        "normalized_mae": 0.03668
+      },
+      {
+        "page": 7,
+        "normalized_mae": 0.03251
+      },
+      {
+        "page": 8,
+        "normalized_mae": 0.03594
+      }
+    ],
+    "note": "Coarse raster comparison only; font and renderer differences affect values. Visual and native-editability inspection remain necessary."
+  },
+  "component_alignment": {
+    "authoring_pdf": {
+      "file": "examples\\field_forward_milestone9\\preview.pdf",
+      "components": [
+        {
+          "id": "s4-observe-card",
+          "slide": 4,
+          "container_bounds_pt": [
+            52.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "reference_glyph_bounds_pt": [
+            68.0,
+            353.97,
+            273.527,
+            441.233
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "OBSERVE",
+            "Sensors and devices capture field conditions."
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold",
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.01,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 2,
+          "rendered_line_count": 3,
+          "glyph_bounds_pt": [
+            68.0,
+            353.97,
+            273.53,
+            441.23
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 6.03,
+          "overflow": false
+        },
+        {
+          "id": "s4-observe-badge",
+          "slide": 4,
+          "container_bounds_pt": [
+            67.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "text_frame_bounds_pt": [
+            67.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "reference_glyph_bounds_pt": [
+            77.734,
+            303.48,
+            104.254,
+            332.52
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "01"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            77.73,
+            303.48,
+            104.25,
+            332.52
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s4-interpret-card",
+          "slide": 4,
+          "container_bounds_pt": [
+            350.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "text_frame_bounds_pt": [
+            350.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "reference_glyph_bounds_pt": [
+            366.0,
+            353.97,
+            567.553,
+            441.233
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "INTERPRET",
+            "Software turns raw readings into decisions."
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold",
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.01,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 2,
+          "rendered_line_count": 3,
+          "glyph_bounds_pt": [
+            366.0,
+            353.97,
+            567.55,
+            441.23
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 6.03,
+          "overflow": false
+        },
+        {
+          "id": "s4-interpret-badge",
+          "slide": 4,
+          "container_bounds_pt": [
+            365.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "text_frame_bounds_pt": [
+            365.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "reference_glyph_bounds_pt": [
+            373.35,
+            303.48,
+            404.646,
+            332.52
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "02"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            373.35,
+            303.48,
+            404.65,
+            332.52
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s4-act-card",
+          "slide": 4,
+          "container_bounds_pt": [
+            648.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "text_frame_bounds_pt": [
+            648.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "reference_glyph_bounds_pt": [
+            664.0,
+            353.97,
+            851.301,
+            441.233
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "ACT",
+            "People and machines complete the task."
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold",
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.01,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 2,
+          "rendered_line_count": 3,
+          "glyph_bounds_pt": [
+            664.0,
+            353.97,
+            851.3,
+            441.23
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 6.03,
+          "overflow": false
+        },
+        {
+          "id": "s4-act-badge",
+          "slide": 4,
+          "container_bounds_pt": [
+            663.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "text_frame_bounds_pt": [
+            663.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "reference_glyph_bounds_pt": [
+            671.162,
+            303.48,
+            702.842,
+            332.52
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "03"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            671.16,
+            303.48,
+            702.84,
+            332.52
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s5-field-operations-header",
+          "slide": 5,
+          "container_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "text_frame_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "reference_glyph_bounds_pt": [
+            474.0,
+            133.141,
+            625.618,
+            152.5
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "FIELD OPERATIONS"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            474.0,
+            133.14,
+            625.62,
+            152.5
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 3.86,
+          "overflow": false
+        },
+        {
+          "id": "s5-live-status",
+          "slide": 5,
+          "container_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "text_frame_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "reference_glyph_bounds_pt": [
+            829.799,
+            141.74,
+            856.199,
+            156.26
+          ],
+          "horizontal": "right",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "LIVE"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.5,
+          "reference_anchor_error_pt": [
+            0.2,
+            0.5
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            829.6,
+            142.24,
+            856.0,
+            156.76
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s5-soil-moisture-label",
+          "slide": 5,
+          "container_bounds_pt": [
+            437.0,
+            186.0,
+            282.0,
+            253.0
+          ],
+          "text_frame_bounds_pt": [
+            437.0,
+            186.0,
+            282.0,
+            253.0
+          ],
+          "reference_glyph_bounds_pt": [
+            450.0,
+            195.899,
+            558.317,
+            216.469
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Soil moisture"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            450.0,
+            195.9,
+            558.32,
+            216.47
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.1,
+          "overflow": false
+        },
+        {
+          "id": "s5-irrigation-label",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            199.105,
+            816.807,
+            213.625
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "IRRIGATION"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.0,
+            199.11,
+            816.81,
+            213.62
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 2.89,
+          "overflow": false
+        },
+        {
+          "id": "s5-review-status",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            223.693,
+            825.573,
+            250.312
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Review"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.0,
+            223.69,
+            825.57,
+            250.31
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 5.31,
+          "overflow": false
+        },
+        {
+          "id": "s5-greenhouse-label",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            327.105,
+            830.74,
+            341.625
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "GREENHOUSE"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.0,
+            327.11,
+            830.74,
+            341.62
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 2.89,
+          "overflow": false
+        },
+        {
+          "id": "s5-stable-status",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            352.693,
+            816.285,
+            379.312
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Stable"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.0,
+            352.69,
+            816.29,
+            379.31
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 5.31,
+          "overflow": false
+        },
+        {
+          "id": "s5-illustrative-data-note",
+          "slide": 5,
+          "container_bounds_pt": [
+            418.0,
+            112.0,
+            490.0,
+            359.0
+          ],
+          "text_frame_bounds_pt": [
+            418.0,
+            112.0,
+            490.0,
+            359.0
+          ],
+          "reference_glyph_bounds_pt": [
+            451.0,
+            443.588,
+            659.483,
+            455.688
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold",
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 5.67,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            451.0,
+            443.59,
+            665.15,
+            455.69
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 2.41,
+          "overflow": false
+        },
+        {
+          "id": "s6-coop-hub",
+          "slide": 6,
+          "container_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "text_frame_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "reference_glyph_bounds_pt": [
+            688.837,
+            254.561,
+            781.181,
+            288.439
+          ],
+          "horizontal": "center",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "CO-OP"
+          ],
+          "resolved_pdf_fonts": [
+            "InterDisplay-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            688.84,
+            254.56,
+            781.18,
+            288.43
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 6.75,
+          "overflow": false
+        },
+        {
+          "id": "s6-shared-hub-label",
+          "slide": 6,
+          "container_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "text_frame_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "reference_glyph_bounds_pt": [
+            689.415,
+            299.53,
+            780.597,
+            316.47
+          ],
+          "horizontal": "center",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SHARED HUB"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            689.41,
+            299.53,
+            780.6,
+            316.47
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 3.38,
+          "overflow": false
+        },
+        {
+          "id": "s6-software-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            674.0,
+            100.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            674.0,
+            100.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            696.234,
+            115.135,
+            769.778,
+            130.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SOFTWARE"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            696.23,
+            115.14,
+            769.78,
+            130.86
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s6-service-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            818.0,
+            181.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            818.0,
+            181.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            849.219,
+            196.135,
+            904.788,
+            211.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SERVICE"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            849.22,
+            196.14,
+            904.79,
+            211.86
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s6-tools-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            811.0,
+            360.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            811.0,
+            360.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            847.92,
+            375.135,
+            892.084,
+            390.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "TOOLS"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            847.92,
+            375.14,
+            892.08,
+            390.86
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s6-field-b-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            559.0,
+            372.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            559.0,
+            372.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            594.203,
+            387.135,
+            641.796,
+            402.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "FIELD B"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            594.2,
+            387.14,
+            641.8,
+            402.86
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s6-field-a-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            528.0,
+            200.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            528.0,
+            200.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            562.65,
+            215.135,
+            611.348,
+            230.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "FIELD A"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            562.65,
+            215.14,
+            611.35,
+            230.86
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.0,
+          "overflow": false
+        },
+        {
+          "id": "s7-software-first-card",
+          "slide": 7,
+          "container_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            70.0,
+            297.628,
+            114.72,
+            349.656
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter Display",
+          "expected_text_lines": [
+            "01"
+          ],
+          "resolved_pdf_fonts": [
+            "InterDisplay-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            70.0,
+            297.63,
+            114.72,
+            349.66
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 10.37,
+          "overflow": false
+        },
+        {
+          "id": "s7-software-first-title",
+          "slide": 7,
+          "container_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            70.0,
+            361.417,
+            235.944,
+            384.406
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SOFTWARE FIRST"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.14,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            70.0,
+            361.42,
+            236.08,
+            384.41
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.58,
+          "overflow": false
+        },
+        {
+          "id": "s7-software-first-caption",
+          "slide": 7,
+          "container_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            70.0,
+            428.658,
+            270.808,
+            450.438
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Visibility and workflows"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            70.0,
+            428.66,
+            270.81,
+            450.44
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.34,
+          "overflow": false
+        },
+        {
+          "id": "s7-automation-next-card",
+          "slide": 7,
+          "container_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            364.0,
+            297.628,
+            417.707,
+            349.656
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter Display",
+          "expected_text_lines": [
+            "02"
+          ],
+          "resolved_pdf_fonts": [
+            "InterDisplay-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            364.0,
+            297.63,
+            417.71,
+            349.66
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 10.37,
+          "overflow": false
+        },
+        {
+          "id": "s7-automation-next-title",
+          "slide": 7,
+          "container_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            364.0,
+            361.417,
+            552.258,
+            384.406
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "AUTOMATION NEXT"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            364.0,
+            361.42,
+            552.26,
+            384.41
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.58,
+          "overflow": false
+        },
+        {
+          "id": "s7-automation-next-caption",
+          "slide": 7,
+          "container_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            364.0,
+            428.658,
+            543.881,
+            450.438
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Sensors and controls"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            364.0,
+            428.66,
+            543.88,
+            450.44
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.34,
+          "overflow": false
+        },
+        {
+          "id": "s7-robotics-card",
+          "slide": 7,
+          "container_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            658.0,
+            297.628,
+            712.61,
+            349.656
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter Display",
+          "expected_text_lines": [
+            "03"
+          ],
+          "resolved_pdf_fonts": [
+            "InterDisplay-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            658.0,
+            297.63,
+            712.61,
+            349.66
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 10.37,
+          "overflow": false
+        },
+        {
+          "id": "s7-robotics-title",
+          "slide": 7,
+          "container_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            658.0,
+            361.417,
+            890.205,
+            384.406
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "ROBOTICS WHEN READY"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Bold"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            658.0,
+            361.42,
+            890.2,
+            384.41
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.58,
+          "overflow": false
+        },
+        {
+          "id": "s7-robotics-caption",
+          "slide": 7,
+          "container_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            658.0,
+            428.658,
+            861.152,
+            450.438
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Autonomous operations"
+          ],
+          "resolved_pdf_fonts": [
+            "Inter-Regular"
+          ],
+          "font_status": "match",
+          "reference_edge_error_pt": 0.0,
+          "reference_anchor_error_pt": [
+            0.0,
+            0.0
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            658.0,
+            428.66,
+            861.15,
+            450.44
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 4.34,
+          "overflow": false
+        }
+      ],
+      "matched": 30,
+      "unavailable": 0,
+      "passed": 30,
+      "tolerances_pt": {
+        "horizontal": 2.0,
+        "vertical": 3.0
+      }
+    },
+    "roundtrip_pdf": {
+      "file": "examples\\field_forward_milestone9\\exports\\field_forward_milestone9-powerpoint.pdf",
+      "components": [
+        {
+          "id": "s4-observe-card",
+          "slide": 4,
+          "container_bounds_pt": [
+            52.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "reference_glyph_bounds_pt": [
+            68.0,
+            353.97,
+            273.527,
+            441.233
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "OBSERVE",
+            "Sensors and devices capture field conditions."
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri",
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 27.96,
+          "reference_anchor_error_pt": [
+            0.02,
+            11.38
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 2,
+          "rendered_line_count": 3,
+          "glyph_bounds_pt": [
+            68.02,
+            365.35,
+            245.57,
+            433.48
+          ],
+          "horizontal_alignment_error_pt": 0.02,
+          "vertical_alignment_error_pt": 5.35,
+          "overflow": false
+        },
+        {
+          "id": "s4-observe-badge",
+          "slide": 4,
+          "container_bounds_pt": [
+            67.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "text_frame_bounds_pt": [
+            67.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "reference_glyph_bounds_pt": [
+            77.734,
+            303.48,
+            104.254,
+            332.52
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "01"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 5.23,
+          "reference_anchor_error_pt": [
+            1.14,
+            2.71
+          ],
+          "status": "pass",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            77.69,
+            308.71,
+            102.02,
+            332.71
+          ],
+          "horizontal_alignment_error_pt": 1.14,
+          "vertical_alignment_error_pt": 2.71,
+          "overflow": false
+        },
+        {
+          "id": "s4-interpret-card",
+          "slide": 4,
+          "container_bounds_pt": [
+            350.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "text_frame_bounds_pt": [
+            350.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "reference_glyph_bounds_pt": [
+            366.0,
+            353.97,
+            567.553,
+            441.233
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "INTERPRET",
+            "Software turns raw readings into decisions."
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri",
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 29.98,
+          "reference_anchor_error_pt": [
+            0.05,
+            11.38
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 2,
+          "rendered_line_count": 3,
+          "glyph_bounds_pt": [
+            366.05,
+            365.35,
+            537.57,
+            433.48
+          ],
+          "horizontal_alignment_error_pt": 0.05,
+          "vertical_alignment_error_pt": 5.35,
+          "overflow": false
+        },
+        {
+          "id": "s4-interpret-badge",
+          "slide": 4,
+          "container_bounds_pt": [
+            365.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "text_frame_bounds_pt": [
+            365.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "reference_glyph_bounds_pt": [
+            373.35,
+            303.48,
+            404.646,
+            332.52
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "02"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 6.99,
+          "reference_anchor_error_pt": [
+            3.51,
+            2.71
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            373.32,
+            308.71,
+            397.66,
+            332.71
+          ],
+          "horizontal_alignment_error_pt": 3.51,
+          "vertical_alignment_error_pt": 2.71,
+          "overflow": false
+        },
+        {
+          "id": "s4-act-card",
+          "slide": 4,
+          "container_bounds_pt": [
+            648.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "text_frame_bounds_pt": [
+            648.0,
+            278.0,
+            260.0,
+            183.0
+          ],
+          "reference_glyph_bounds_pt": [
+            664.0,
+            353.97,
+            851.301,
+            441.233
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "ACT",
+            "People and machines complete the task."
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri",
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 27.52,
+          "reference_anchor_error_pt": [
+            0.08,
+            11.38
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 2,
+          "rendered_line_count": 3,
+          "glyph_bounds_pt": [
+            664.08,
+            365.35,
+            823.78,
+            433.48
+          ],
+          "horizontal_alignment_error_pt": 0.08,
+          "vertical_alignment_error_pt": 5.35,
+          "overflow": false
+        },
+        {
+          "id": "s4-act-badge",
+          "slide": 4,
+          "container_bounds_pt": [
+            663.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "text_frame_bounds_pt": [
+            663.0,
+            294.0,
+            48.0,
+            48.0
+          ],
+          "reference_glyph_bounds_pt": [
+            671.162,
+            303.48,
+            702.842,
+            332.52
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "03"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 7.25,
+          "reference_anchor_error_pt": [
+            3.57,
+            2.71
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            671.26,
+            308.71,
+            695.6,
+            332.71
+          ],
+          "horizontal_alignment_error_pt": 3.57,
+          "vertical_alignment_error_pt": 2.71,
+          "overflow": false
+        },
+        {
+          "id": "s5-field-operations-header",
+          "slide": 5,
+          "container_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "text_frame_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "reference_glyph_bounds_pt": [
+            474.0,
+            133.141,
+            625.618,
+            152.5
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "FIELD OPERATIONS"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 25.02,
+          "reference_anchor_error_pt": [
+            0.07,
+            7.29
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            474.07,
+            140.43,
+            600.6,
+            156.39
+          ],
+          "horizontal_alignment_error_pt": 0.07,
+          "vertical_alignment_error_pt": 3.43,
+          "overflow": false
+        },
+        {
+          "id": "s5-live-status",
+          "slide": 5,
+          "container_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "text_frame_bounds_pt": [
+            434.0,
+            128.0,
+            458.0,
+            43.0
+          ],
+          "reference_glyph_bounds_pt": [
+            829.799,
+            141.74,
+            856.199,
+            156.26
+          ],
+          "horizontal": "right",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "LIVE"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 5.18,
+          "reference_anchor_error_pt": [
+            5.18,
+            1.83
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            829.75,
+            144.82,
+            851.02,
+            156.85
+          ],
+          "horizontal_alignment_error_pt": 4.98,
+          "vertical_alignment_error_pt": 1.33,
+          "overflow": false
+        },
+        {
+          "id": "s5-soil-moisture-label",
+          "slide": 5,
+          "container_bounds_pt": [
+            437.0,
+            186.0,
+            282.0,
+            253.0
+          ],
+          "text_frame_bounds_pt": [
+            437.0,
+            186.0,
+            282.0,
+            253.0
+          ],
+          "reference_glyph_bounds_pt": [
+            450.0,
+            195.899,
+            558.317,
+            216.469
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Soil moisture"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 15.11,
+          "reference_anchor_error_pt": [
+            0.05,
+            7.68
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            450.05,
+            203.58,
+            543.21,
+            220.62
+          ],
+          "horizontal_alignment_error_pt": 0.05,
+          "vertical_alignment_error_pt": 3.58,
+          "overflow": false
+        },
+        {
+          "id": "s5-irrigation-label",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            199.105,
+            816.807,
+            213.625
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "IRRIGATION"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 8.59,
+          "reference_anchor_error_pt": [
+            0.1,
+            5.43
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.1,
+            204.53,
+            808.22,
+            216.56
+          ],
+          "horizontal_alignment_error_pt": 0.1,
+          "vertical_alignment_error_pt": 2.53,
+          "overflow": false
+        },
+        {
+          "id": "s5-review-status",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            186.0,
+            157.0,
+            117.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            223.693,
+            825.573,
+            250.312
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Review"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 10.87,
+          "reference_anchor_error_pt": [
+            0.1,
+            10.02
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.1,
+            233.71,
+            814.7,
+            255.67
+          ],
+          "horizontal_alignment_error_pt": 0.1,
+          "vertical_alignment_error_pt": 4.71,
+          "overflow": false
+        },
+        {
+          "id": "s5-greenhouse-label",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            327.105,
+            830.74,
+            341.625
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "GREENHOUSE"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 13.57,
+          "reference_anchor_error_pt": [
+            0.1,
+            5.48
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.1,
+            332.59,
+            817.17,
+            344.59
+          ],
+          "horizontal_alignment_error_pt": 0.1,
+          "vertical_alignment_error_pt": 2.59,
+          "overflow": false
+        },
+        {
+          "id": "s5-stable-status",
+          "slide": 5,
+          "container_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "text_frame_bounds_pt": [
+            732.0,
+            315.0,
+            157.0,
+            124.0
+          ],
+          "reference_glyph_bounds_pt": [
+            748.0,
+            352.693,
+            816.285,
+            379.312
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Stable"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 11.09,
+          "reference_anchor_error_pt": [
+            0.1,
+            10.04
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            748.1,
+            362.73,
+            805.2,
+            384.69
+          ],
+          "horizontal_alignment_error_pt": 0.1,
+          "vertical_alignment_error_pt": 4.73,
+          "overflow": false
+        },
+        {
+          "id": "s5-illustrative-data-note",
+          "slide": 5,
+          "container_bounds_pt": [
+            418.0,
+            112.0,
+            490.0,
+            359.0
+          ],
+          "text_frame_bounds_pt": [
+            418.0,
+            112.0,
+            490.0,
+            359.0
+          ],
+          "reference_glyph_bounds_pt": [
+            451.0,
+            443.588,
+            659.483,
+            455.688
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri",
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 30.93,
+          "reference_anchor_error_pt": [
+            0.06,
+            4.63
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            451.06,
+            448.22,
+            628.56,
+            458.18
+          ],
+          "horizontal_alignment_error_pt": 0.06,
+          "vertical_alignment_error_pt": 2.22,
+          "overflow": false
+        },
+        {
+          "id": "s6-coop-hub",
+          "slide": 6,
+          "container_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "text_frame_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "reference_glyph_bounds_pt": [
+            688.837,
+            254.561,
+            781.181,
+            288.439
+          ],
+          "horizontal": "center",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "CO-OP"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 11.97,
+          "reference_anchor_error_pt": [
+            0.09,
+            11.97
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            697.18,
+            266.53,
+            773.03,
+            294.52
+          ],
+          "horizontal_alignment_error_pt": 0.1,
+          "vertical_alignment_error_pt": 5.22,
+          "overflow": false
+        },
+        {
+          "id": "s6-shared-hub-label",
+          "slide": 6,
+          "container_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "text_frame_bounds_pt": [
+            666.0,
+            213.0,
+            138.0,
+            138.0
+          ],
+          "reference_glyph_bounds_pt": [
+            689.415,
+            299.53,
+            780.597,
+            316.47
+          ],
+          "horizontal": "center",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SHARED HUB"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 14.53,
+          "reference_anchor_error_pt": [
+            7.28,
+            6.36
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            689.38,
+            305.89,
+            766.07,
+            319.93
+          ],
+          "horizontal_alignment_error_pt": 7.28,
+          "vertical_alignment_error_pt": 2.98,
+          "overflow": false
+        },
+        {
+          "id": "s6-software-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            674.0,
+            100.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            674.0,
+            100.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            696.234,
+            115.135,
+            769.778,
+            130.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SOFTWARE"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 12.9,
+          "reference_anchor_error_pt": [
+            6.36,
+            1.46
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            696.41,
+            117.98,
+            756.88,
+            130.94
+          ],
+          "horizontal_alignment_error_pt": 6.35,
+          "vertical_alignment_error_pt": 1.46,
+          "overflow": false
+        },
+        {
+          "id": "s6-service-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            818.0,
+            181.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            818.0,
+            181.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            849.219,
+            196.135,
+            904.788,
+            211.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SERVICE"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 11.43,
+          "reference_anchor_error_pt": [
+            5.67,
+            1.49
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            849.31,
+            199.01,
+            893.36,
+            211.97
+          ],
+          "horizontal_alignment_error_pt": 5.66,
+          "vertical_alignment_error_pt": 1.49,
+          "overflow": false
+        },
+        {
+          "id": "s6-tools-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            811.0,
+            360.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            811.0,
+            360.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            847.92,
+            375.135,
+            892.084,
+            390.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "TOOLS"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 8.47,
+          "reference_anchor_error_pt": [
+            4.17,
+            1.53
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            848.06,
+            378.05,
+            883.61,
+            391.01
+          ],
+          "horizontal_alignment_error_pt": 4.17,
+          "vertical_alignment_error_pt": 1.53,
+          "overflow": false
+        },
+        {
+          "id": "s6-field-b-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            559.0,
+            372.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            559.0,
+            372.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            594.203,
+            387.135,
+            641.796,
+            402.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "FIELD B"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 7.98,
+          "reference_anchor_error_pt": [
+            3.97,
+            1.53
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            594.24,
+            390.05,
+            633.82,
+            403.01
+          ],
+          "horizontal_alignment_error_pt": 3.97,
+          "vertical_alignment_error_pt": 1.53,
+          "overflow": false
+        },
+        {
+          "id": "s6-field-a-node",
+          "slide": 6,
+          "container_bounds_pt": [
+            528.0,
+            200.5,
+            118.0,
+            45.0
+          ],
+          "text_frame_bounds_pt": [
+            528.0,
+            200.5,
+            118.0,
+            45.0
+          ],
+          "reference_glyph_bounds_pt": [
+            562.65,
+            215.135,
+            611.348,
+            230.865
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "FIELD A"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 8.55,
+          "reference_anchor_error_pt": [
+            4.29,
+            1.5
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            562.63,
+            218.02,
+            602.79,
+            230.98
+          ],
+          "horizontal_alignment_error_pt": 4.29,
+          "vertical_alignment_error_pt": 1.5,
+          "overflow": false
+        },
+        {
+          "id": "s7-software-first-card",
+          "slide": 7,
+          "container_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            70.0,
+            297.628,
+            114.72,
+            349.656
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter Display",
+          "expected_text_lines": [
+            "01"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 18.39,
+          "reference_anchor_error_pt": [
+            0.01,
+            18.39
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            70.01,
+            316.02,
+            113.52,
+            359.01
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 8.02,
+          "overflow": false
+        },
+        {
+          "id": "s7-software-first-title",
+          "slide": 7,
+          "container_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            70.0,
+            361.417,
+            235.944,
+            384.406
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "SOFTWARE FIRST"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 30.39,
+          "reference_anchor_error_pt": [
+            0.01,
+            8.67
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            70.01,
+            370.09,
+            205.55,
+            389.05
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 4.09,
+          "overflow": false
+        },
+        {
+          "id": "s7-software-first-caption",
+          "slide": 7,
+          "container_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            52.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            70.0,
+            428.658,
+            270.808,
+            450.438
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Visibility and workflows"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 27.71,
+          "reference_anchor_error_pt": [
+            0.01,
+            8.2
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            70.01,
+            436.86,
+            243.1,
+            454.86
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 3.86,
+          "overflow": false
+        },
+        {
+          "id": "s7-automation-next-card",
+          "slide": 7,
+          "container_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            364.0,
+            297.628,
+            417.707,
+            349.656
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter Display",
+          "expected_text_lines": [
+            "02"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 18.39,
+          "reference_anchor_error_pt": [
+            0.06,
+            18.39
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            364.06,
+            316.02,
+            407.57,
+            359.01
+          ],
+          "horizontal_alignment_error_pt": 0.06,
+          "vertical_alignment_error_pt": 8.02,
+          "overflow": false
+        },
+        {
+          "id": "s7-automation-next-title",
+          "slide": 7,
+          "container_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            364.0,
+            361.417,
+            552.258,
+            384.406
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "AUTOMATION NEXT"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 28.44,
+          "reference_anchor_error_pt": [
+            0.06,
+            8.67
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            364.06,
+            370.09,
+            523.82,
+            389.05
+          ],
+          "horizontal_alignment_error_pt": 0.06,
+          "vertical_alignment_error_pt": 4.09,
+          "overflow": false
+        },
+        {
+          "id": "s7-automation-next-caption",
+          "slide": 7,
+          "container_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            346.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            364.0,
+            428.658,
+            543.881,
+            450.438
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Sensors and controls"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 28.12,
+          "reference_anchor_error_pt": [
+            0.06,
+            8.2
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            364.06,
+            436.86,
+            515.76,
+            454.86
+          ],
+          "horizontal_alignment_error_pt": 0.06,
+          "vertical_alignment_error_pt": 3.86,
+          "overflow": false
+        },
+        {
+          "id": "s7-robotics-card",
+          "slide": 7,
+          "container_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            658.0,
+            297.628,
+            712.61,
+            349.656
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter Display",
+          "expected_text_lines": [
+            "03"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 18.39,
+          "reference_anchor_error_pt": [
+            0.08,
+            18.39
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            658.08,
+            316.02,
+            701.59,
+            359.01
+          ],
+          "horizontal_alignment_error_pt": 0.08,
+          "vertical_alignment_error_pt": 8.02,
+          "overflow": false
+        },
+        {
+          "id": "s7-robotics-title",
+          "slide": 7,
+          "container_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            658.0,
+            361.417,
+            890.205,
+            384.406
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "ROBOTICS WHEN READY"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri-Bold"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 39.06,
+          "reference_anchor_error_pt": [
+            0.08,
+            8.67
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            658.08,
+            370.09,
+            851.15,
+            389.05
+          ],
+          "horizontal_alignment_error_pt": 0.08,
+          "vertical_alignment_error_pt": 4.09,
+          "overflow": false
+        },
+        {
+          "id": "s7-robotics-caption",
+          "slide": 7,
+          "container_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "text_frame_bounds_pt": [
+            640.0,
+            276.0,
+            267.0,
+            193.0
+          ],
+          "reference_glyph_bounds_pt": [
+            658.0,
+            428.658,
+            861.152,
+            450.438
+          ],
+          "horizontal": "left",
+          "vertical": "top",
+          "expected_font": "Inter",
+          "expected_text_lines": [
+            "Autonomous operations"
+          ],
+          "resolved_pdf_fonts": [
+            "Calibri"
+          ],
+          "font_status": "mismatch_or_unavailable",
+          "reference_edge_error_pt": 25.38,
+          "reference_anchor_error_pt": [
+            0.08,
+            8.2
+          ],
+          "status": "misaligned_or_overflow",
+          "expected_paragraph_count": 1,
+          "rendered_line_count": 1,
+          "glyph_bounds_pt": [
+            658.08,
+            436.86,
+            835.78,
+            454.86
+          ],
+          "horizontal_alignment_error_pt": 0.08,
+          "vertical_alignment_error_pt": 3.86,
+          "overflow": false
+        }
+      ],
+      "matched": 30,
+      "unavailable": 0,
+      "passed": 1,
+      "tolerances_pt": {
+        "horizontal": 2.0,
+        "vertical": 3.0
+      }
+    },
+    "comparison": {
+      "renderer": "Microsoft PowerPoint",
+      "components": [
+        {
+          "id": "s4-observe-card",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s4-observe-card",
+            "slide": 4,
+            "container_bounds_pt": [
+              52.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "reference_glyph_bounds_pt": [
+              68.0,
+              353.97,
+              273.527,
+              441.233
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "OBSERVE",
+              "Sensors and devices capture field conditions."
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold",
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.01,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 2,
+            "rendered_line_count": 3,
+            "glyph_bounds_pt": [
+              68.0,
+              353.97,
+              273.53,
+              441.23
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 6.03,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s4-observe-card",
+            "slide": 4,
+            "container_bounds_pt": [
+              52.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "reference_glyph_bounds_pt": [
+              68.0,
+              353.97,
+              273.527,
+              441.233
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "OBSERVE",
+              "Sensors and devices capture field conditions."
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri",
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 27.96,
+            "reference_anchor_error_pt": [
+              0.02,
+              11.38
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 2,
+            "rendered_line_count": 3,
+            "glyph_bounds_pt": [
+              68.02,
+              365.35,
+              245.57,
+              433.48
+            ],
+            "horizontal_alignment_error_pt": 0.02,
+            "vertical_alignment_error_pt": 5.35,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s4-observe-badge",
+          "classification": "pass",
+          "authoring": {
+            "id": "s4-observe-badge",
+            "slide": 4,
+            "container_bounds_pt": [
+              67.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "text_frame_bounds_pt": [
+              67.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "reference_glyph_bounds_pt": [
+              77.734,
+              303.48,
+              104.254,
+              332.52
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "01"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              77.73,
+              303.48,
+              104.25,
+              332.52
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s4-observe-badge",
+            "slide": 4,
+            "container_bounds_pt": [
+              67.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "text_frame_bounds_pt": [
+              67.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "reference_glyph_bounds_pt": [
+              77.734,
+              303.48,
+              104.254,
+              332.52
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "01"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 5.23,
+            "reference_anchor_error_pt": [
+              1.14,
+              2.71
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              77.69,
+              308.71,
+              102.02,
+              332.71
+            ],
+            "horizontal_alignment_error_pt": 1.14,
+            "vertical_alignment_error_pt": 2.71,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s4-interpret-card",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s4-interpret-card",
+            "slide": 4,
+            "container_bounds_pt": [
+              350.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "text_frame_bounds_pt": [
+              350.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "reference_glyph_bounds_pt": [
+              366.0,
+              353.97,
+              567.553,
+              441.233
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "INTERPRET",
+              "Software turns raw readings into decisions."
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold",
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.01,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 2,
+            "rendered_line_count": 3,
+            "glyph_bounds_pt": [
+              366.0,
+              353.97,
+              567.55,
+              441.23
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 6.03,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s4-interpret-card",
+            "slide": 4,
+            "container_bounds_pt": [
+              350.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "text_frame_bounds_pt": [
+              350.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "reference_glyph_bounds_pt": [
+              366.0,
+              353.97,
+              567.553,
+              441.233
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "INTERPRET",
+              "Software turns raw readings into decisions."
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri",
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 29.98,
+            "reference_anchor_error_pt": [
+              0.05,
+              11.38
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 2,
+            "rendered_line_count": 3,
+            "glyph_bounds_pt": [
+              366.05,
+              365.35,
+              537.57,
+              433.48
+            ],
+            "horizontal_alignment_error_pt": 0.05,
+            "vertical_alignment_error_pt": 5.35,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s4-interpret-badge",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s4-interpret-badge",
+            "slide": 4,
+            "container_bounds_pt": [
+              365.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "text_frame_bounds_pt": [
+              365.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "reference_glyph_bounds_pt": [
+              373.35,
+              303.48,
+              404.646,
+              332.52
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "02"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              373.35,
+              303.48,
+              404.65,
+              332.52
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s4-interpret-badge",
+            "slide": 4,
+            "container_bounds_pt": [
+              365.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "text_frame_bounds_pt": [
+              365.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "reference_glyph_bounds_pt": [
+              373.35,
+              303.48,
+              404.646,
+              332.52
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "02"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 6.99,
+            "reference_anchor_error_pt": [
+              3.51,
+              2.71
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              373.32,
+              308.71,
+              397.66,
+              332.71
+            ],
+            "horizontal_alignment_error_pt": 3.51,
+            "vertical_alignment_error_pt": 2.71,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s4-act-card",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s4-act-card",
+            "slide": 4,
+            "container_bounds_pt": [
+              648.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "text_frame_bounds_pt": [
+              648.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "reference_glyph_bounds_pt": [
+              664.0,
+              353.97,
+              851.301,
+              441.233
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "ACT",
+              "People and machines complete the task."
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold",
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.01,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 2,
+            "rendered_line_count": 3,
+            "glyph_bounds_pt": [
+              664.0,
+              353.97,
+              851.3,
+              441.23
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 6.03,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s4-act-card",
+            "slide": 4,
+            "container_bounds_pt": [
+              648.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "text_frame_bounds_pt": [
+              648.0,
+              278.0,
+              260.0,
+              183.0
+            ],
+            "reference_glyph_bounds_pt": [
+              664.0,
+              353.97,
+              851.301,
+              441.233
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "ACT",
+              "People and machines complete the task."
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri",
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 27.52,
+            "reference_anchor_error_pt": [
+              0.08,
+              11.38
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 2,
+            "rendered_line_count": 3,
+            "glyph_bounds_pt": [
+              664.08,
+              365.35,
+              823.78,
+              433.48
+            ],
+            "horizontal_alignment_error_pt": 0.08,
+            "vertical_alignment_error_pt": 5.35,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s4-act-badge",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s4-act-badge",
+            "slide": 4,
+            "container_bounds_pt": [
+              663.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "text_frame_bounds_pt": [
+              663.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "reference_glyph_bounds_pt": [
+              671.162,
+              303.48,
+              702.842,
+              332.52
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "03"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              671.16,
+              303.48,
+              702.84,
+              332.52
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s4-act-badge",
+            "slide": 4,
+            "container_bounds_pt": [
+              663.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "text_frame_bounds_pt": [
+              663.0,
+              294.0,
+              48.0,
+              48.0
+            ],
+            "reference_glyph_bounds_pt": [
+              671.162,
+              303.48,
+              702.842,
+              332.52
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "03"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 7.25,
+            "reference_anchor_error_pt": [
+              3.57,
+              2.71
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              671.26,
+              308.71,
+              695.6,
+              332.71
+            ],
+            "horizontal_alignment_error_pt": 3.57,
+            "vertical_alignment_error_pt": 2.71,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-field-operations-header",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-field-operations-header",
+            "slide": 5,
+            "container_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "text_frame_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "reference_glyph_bounds_pt": [
+              474.0,
+              133.141,
+              625.618,
+              152.5
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "FIELD OPERATIONS"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              474.0,
+              133.14,
+              625.62,
+              152.5
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 3.86,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-field-operations-header",
+            "slide": 5,
+            "container_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "text_frame_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "reference_glyph_bounds_pt": [
+              474.0,
+              133.141,
+              625.618,
+              152.5
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "FIELD OPERATIONS"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 25.02,
+            "reference_anchor_error_pt": [
+              0.07,
+              7.29
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              474.07,
+              140.43,
+              600.6,
+              156.39
+            ],
+            "horizontal_alignment_error_pt": 0.07,
+            "vertical_alignment_error_pt": 3.43,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-live-status",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-live-status",
+            "slide": 5,
+            "container_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "text_frame_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "reference_glyph_bounds_pt": [
+              829.799,
+              141.74,
+              856.199,
+              156.26
+            ],
+            "horizontal": "right",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "LIVE"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.5,
+            "reference_anchor_error_pt": [
+              0.2,
+              0.5
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              829.6,
+              142.24,
+              856.0,
+              156.76
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-live-status",
+            "slide": 5,
+            "container_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "text_frame_bounds_pt": [
+              434.0,
+              128.0,
+              458.0,
+              43.0
+            ],
+            "reference_glyph_bounds_pt": [
+              829.799,
+              141.74,
+              856.199,
+              156.26
+            ],
+            "horizontal": "right",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "LIVE"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 5.18,
+            "reference_anchor_error_pt": [
+              5.18,
+              1.83
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              829.75,
+              144.82,
+              851.02,
+              156.85
+            ],
+            "horizontal_alignment_error_pt": 4.98,
+            "vertical_alignment_error_pt": 1.33,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-soil-moisture-label",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-soil-moisture-label",
+            "slide": 5,
+            "container_bounds_pt": [
+              437.0,
+              186.0,
+              282.0,
+              253.0
+            ],
+            "text_frame_bounds_pt": [
+              437.0,
+              186.0,
+              282.0,
+              253.0
+            ],
+            "reference_glyph_bounds_pt": [
+              450.0,
+              195.899,
+              558.317,
+              216.469
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Soil moisture"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              450.0,
+              195.9,
+              558.32,
+              216.47
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.1,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-soil-moisture-label",
+            "slide": 5,
+            "container_bounds_pt": [
+              437.0,
+              186.0,
+              282.0,
+              253.0
+            ],
+            "text_frame_bounds_pt": [
+              437.0,
+              186.0,
+              282.0,
+              253.0
+            ],
+            "reference_glyph_bounds_pt": [
+              450.0,
+              195.899,
+              558.317,
+              216.469
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Soil moisture"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 15.11,
+            "reference_anchor_error_pt": [
+              0.05,
+              7.68
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              450.05,
+              203.58,
+              543.21,
+              220.62
+            ],
+            "horizontal_alignment_error_pt": 0.05,
+            "vertical_alignment_error_pt": 3.58,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-irrigation-label",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-irrigation-label",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              199.105,
+              816.807,
+              213.625
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "IRRIGATION"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.0,
+              199.11,
+              816.81,
+              213.62
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 2.89,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-irrigation-label",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              199.105,
+              816.807,
+              213.625
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "IRRIGATION"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 8.59,
+            "reference_anchor_error_pt": [
+              0.1,
+              5.43
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.1,
+              204.53,
+              808.22,
+              216.56
+            ],
+            "horizontal_alignment_error_pt": 0.1,
+            "vertical_alignment_error_pt": 2.53,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-review-status",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-review-status",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              223.693,
+              825.573,
+              250.312
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Review"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.0,
+              223.69,
+              825.57,
+              250.31
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 5.31,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-review-status",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              186.0,
+              157.0,
+              117.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              223.693,
+              825.573,
+              250.312
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Review"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 10.87,
+            "reference_anchor_error_pt": [
+              0.1,
+              10.02
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.1,
+              233.71,
+              814.7,
+              255.67
+            ],
+            "horizontal_alignment_error_pt": 0.1,
+            "vertical_alignment_error_pt": 4.71,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-greenhouse-label",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-greenhouse-label",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              327.105,
+              830.74,
+              341.625
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "GREENHOUSE"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.0,
+              327.11,
+              830.74,
+              341.62
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 2.89,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-greenhouse-label",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              327.105,
+              830.74,
+              341.625
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "GREENHOUSE"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 13.57,
+            "reference_anchor_error_pt": [
+              0.1,
+              5.48
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.1,
+              332.59,
+              817.17,
+              344.59
+            ],
+            "horizontal_alignment_error_pt": 0.1,
+            "vertical_alignment_error_pt": 2.59,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-stable-status",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-stable-status",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              352.693,
+              816.285,
+              379.312
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Stable"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.0,
+              352.69,
+              816.29,
+              379.31
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 5.31,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-stable-status",
+            "slide": 5,
+            "container_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "text_frame_bounds_pt": [
+              732.0,
+              315.0,
+              157.0,
+              124.0
+            ],
+            "reference_glyph_bounds_pt": [
+              748.0,
+              352.693,
+              816.285,
+              379.312
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Stable"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 11.09,
+            "reference_anchor_error_pt": [
+              0.1,
+              10.04
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              748.1,
+              362.73,
+              805.2,
+              384.69
+            ],
+            "horizontal_alignment_error_pt": 0.1,
+            "vertical_alignment_error_pt": 4.73,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s5-illustrative-data-note",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s5-illustrative-data-note",
+            "slide": 5,
+            "container_bounds_pt": [
+              418.0,
+              112.0,
+              490.0,
+              359.0
+            ],
+            "text_frame_bounds_pt": [
+              418.0,
+              112.0,
+              490.0,
+              359.0
+            ],
+            "reference_glyph_bounds_pt": [
+              451.0,
+              443.588,
+              659.483,
+              455.688
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold",
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 5.67,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              451.0,
+              443.59,
+              665.15,
+              455.69
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 2.41,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s5-illustrative-data-note",
+            "slide": 5,
+            "container_bounds_pt": [
+              418.0,
+              112.0,
+              490.0,
+              359.0
+            ],
+            "text_frame_bounds_pt": [
+              418.0,
+              112.0,
+              490.0,
+              359.0
+            ],
+            "reference_glyph_bounds_pt": [
+              451.0,
+              443.588,
+              659.483,
+              455.688
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "ILLUSTRATIVE INTERFACE  /  NOT LIVE DATA"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri",
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 30.93,
+            "reference_anchor_error_pt": [
+              0.06,
+              4.63
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              451.06,
+              448.22,
+              628.56,
+              458.18
+            ],
+            "horizontal_alignment_error_pt": 0.06,
+            "vertical_alignment_error_pt": 2.22,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-coop-hub",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-coop-hub",
+            "slide": 6,
+            "container_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "text_frame_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "reference_glyph_bounds_pt": [
+              688.837,
+              254.561,
+              781.181,
+              288.439
+            ],
+            "horizontal": "center",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "CO-OP"
+            ],
+            "resolved_pdf_fonts": [
+              "InterDisplay-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              688.84,
+              254.56,
+              781.18,
+              288.43
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 6.75,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-coop-hub",
+            "slide": 6,
+            "container_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "text_frame_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "reference_glyph_bounds_pt": [
+              688.837,
+              254.561,
+              781.181,
+              288.439
+            ],
+            "horizontal": "center",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "CO-OP"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 11.97,
+            "reference_anchor_error_pt": [
+              0.09,
+              11.97
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              697.18,
+              266.53,
+              773.03,
+              294.52
+            ],
+            "horizontal_alignment_error_pt": 0.1,
+            "vertical_alignment_error_pt": 5.22,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-shared-hub-label",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-shared-hub-label",
+            "slide": 6,
+            "container_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "text_frame_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "reference_glyph_bounds_pt": [
+              689.415,
+              299.53,
+              780.597,
+              316.47
+            ],
+            "horizontal": "center",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SHARED HUB"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              689.41,
+              299.53,
+              780.6,
+              316.47
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 3.38,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-shared-hub-label",
+            "slide": 6,
+            "container_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "text_frame_bounds_pt": [
+              666.0,
+              213.0,
+              138.0,
+              138.0
+            ],
+            "reference_glyph_bounds_pt": [
+              689.415,
+              299.53,
+              780.597,
+              316.47
+            ],
+            "horizontal": "center",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SHARED HUB"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 14.53,
+            "reference_anchor_error_pt": [
+              7.28,
+              6.36
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              689.38,
+              305.89,
+              766.07,
+              319.93
+            ],
+            "horizontal_alignment_error_pt": 7.28,
+            "vertical_alignment_error_pt": 2.98,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-software-node",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-software-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              674.0,
+              100.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              674.0,
+              100.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              696.234,
+              115.135,
+              769.778,
+              130.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SOFTWARE"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              696.23,
+              115.14,
+              769.78,
+              130.86
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-software-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              674.0,
+              100.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              674.0,
+              100.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              696.234,
+              115.135,
+              769.778,
+              130.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SOFTWARE"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 12.9,
+            "reference_anchor_error_pt": [
+              6.36,
+              1.46
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              696.41,
+              117.98,
+              756.88,
+              130.94
+            ],
+            "horizontal_alignment_error_pt": 6.35,
+            "vertical_alignment_error_pt": 1.46,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-service-node",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-service-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              818.0,
+              181.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              818.0,
+              181.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              849.219,
+              196.135,
+              904.788,
+              211.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SERVICE"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              849.22,
+              196.14,
+              904.79,
+              211.86
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-service-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              818.0,
+              181.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              818.0,
+              181.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              849.219,
+              196.135,
+              904.788,
+              211.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SERVICE"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 11.43,
+            "reference_anchor_error_pt": [
+              5.67,
+              1.49
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              849.31,
+              199.01,
+              893.36,
+              211.97
+            ],
+            "horizontal_alignment_error_pt": 5.66,
+            "vertical_alignment_error_pt": 1.49,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-tools-node",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-tools-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              811.0,
+              360.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              811.0,
+              360.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              847.92,
+              375.135,
+              892.084,
+              390.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "TOOLS"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              847.92,
+              375.14,
+              892.08,
+              390.86
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-tools-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              811.0,
+              360.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              811.0,
+              360.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              847.92,
+              375.135,
+              892.084,
+              390.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "TOOLS"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 8.47,
+            "reference_anchor_error_pt": [
+              4.17,
+              1.53
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              848.06,
+              378.05,
+              883.61,
+              391.01
+            ],
+            "horizontal_alignment_error_pt": 4.17,
+            "vertical_alignment_error_pt": 1.53,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-field-b-node",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-field-b-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              559.0,
+              372.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              559.0,
+              372.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              594.203,
+              387.135,
+              641.796,
+              402.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "FIELD B"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              594.2,
+              387.14,
+              641.8,
+              402.86
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-field-b-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              559.0,
+              372.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              559.0,
+              372.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              594.203,
+              387.135,
+              641.796,
+              402.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "FIELD B"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 7.98,
+            "reference_anchor_error_pt": [
+              3.97,
+              1.53
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              594.24,
+              390.05,
+              633.82,
+              403.01
+            ],
+            "horizontal_alignment_error_pt": 3.97,
+            "vertical_alignment_error_pt": 1.53,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s6-field-a-node",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s6-field-a-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              528.0,
+              200.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              528.0,
+              200.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              562.65,
+              215.135,
+              611.348,
+              230.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "FIELD A"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              562.65,
+              215.14,
+              611.35,
+              230.86
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.0,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s6-field-a-node",
+            "slide": 6,
+            "container_bounds_pt": [
+              528.0,
+              200.5,
+              118.0,
+              45.0
+            ],
+            "text_frame_bounds_pt": [
+              528.0,
+              200.5,
+              118.0,
+              45.0
+            ],
+            "reference_glyph_bounds_pt": [
+              562.65,
+              215.135,
+              611.348,
+              230.865
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "FIELD A"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 8.55,
+            "reference_anchor_error_pt": [
+              4.29,
+              1.5
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              562.63,
+              218.02,
+              602.79,
+              230.98
+            ],
+            "horizontal_alignment_error_pt": 4.29,
+            "vertical_alignment_error_pt": 1.5,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-software-first-card",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-software-first-card",
+            "slide": 7,
+            "container_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              70.0,
+              297.628,
+              114.72,
+              349.656
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter Display",
+            "expected_text_lines": [
+              "01"
+            ],
+            "resolved_pdf_fonts": [
+              "InterDisplay-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              70.0,
+              297.63,
+              114.72,
+              349.66
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 10.37,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-software-first-card",
+            "slide": 7,
+            "container_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              70.0,
+              297.628,
+              114.72,
+              349.656
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter Display",
+            "expected_text_lines": [
+              "01"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 18.39,
+            "reference_anchor_error_pt": [
+              0.01,
+              18.39
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              70.01,
+              316.02,
+              113.52,
+              359.01
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 8.02,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-software-first-title",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-software-first-title",
+            "slide": 7,
+            "container_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              70.0,
+              361.417,
+              235.944,
+              384.406
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SOFTWARE FIRST"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.14,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              70.0,
+              361.42,
+              236.08,
+              384.41
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.58,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-software-first-title",
+            "slide": 7,
+            "container_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              70.0,
+              361.417,
+              235.944,
+              384.406
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "SOFTWARE FIRST"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 30.39,
+            "reference_anchor_error_pt": [
+              0.01,
+              8.67
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              70.01,
+              370.09,
+              205.55,
+              389.05
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 4.09,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-software-first-caption",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-software-first-caption",
+            "slide": 7,
+            "container_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              70.0,
+              428.658,
+              270.808,
+              450.438
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Visibility and workflows"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              70.0,
+              428.66,
+              270.81,
+              450.44
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.34,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-software-first-caption",
+            "slide": 7,
+            "container_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              52.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              70.0,
+              428.658,
+              270.808,
+              450.438
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Visibility and workflows"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 27.71,
+            "reference_anchor_error_pt": [
+              0.01,
+              8.2
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              70.01,
+              436.86,
+              243.1,
+              454.86
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 3.86,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-automation-next-card",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-automation-next-card",
+            "slide": 7,
+            "container_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              364.0,
+              297.628,
+              417.707,
+              349.656
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter Display",
+            "expected_text_lines": [
+              "02"
+            ],
+            "resolved_pdf_fonts": [
+              "InterDisplay-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              364.0,
+              297.63,
+              417.71,
+              349.66
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 10.37,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-automation-next-card",
+            "slide": 7,
+            "container_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              364.0,
+              297.628,
+              417.707,
+              349.656
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter Display",
+            "expected_text_lines": [
+              "02"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 18.39,
+            "reference_anchor_error_pt": [
+              0.06,
+              18.39
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              364.06,
+              316.02,
+              407.57,
+              359.01
+            ],
+            "horizontal_alignment_error_pt": 0.06,
+            "vertical_alignment_error_pt": 8.02,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-automation-next-title",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-automation-next-title",
+            "slide": 7,
+            "container_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              364.0,
+              361.417,
+              552.258,
+              384.406
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "AUTOMATION NEXT"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              364.0,
+              361.42,
+              552.26,
+              384.41
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.58,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-automation-next-title",
+            "slide": 7,
+            "container_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              364.0,
+              361.417,
+              552.258,
+              384.406
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "AUTOMATION NEXT"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 28.44,
+            "reference_anchor_error_pt": [
+              0.06,
+              8.67
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              364.06,
+              370.09,
+              523.82,
+              389.05
+            ],
+            "horizontal_alignment_error_pt": 0.06,
+            "vertical_alignment_error_pt": 4.09,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-automation-next-caption",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-automation-next-caption",
+            "slide": 7,
+            "container_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              364.0,
+              428.658,
+              543.881,
+              450.438
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Sensors and controls"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              364.0,
+              428.66,
+              543.88,
+              450.44
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.34,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-automation-next-caption",
+            "slide": 7,
+            "container_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              346.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              364.0,
+              428.658,
+              543.881,
+              450.438
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Sensors and controls"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 28.12,
+            "reference_anchor_error_pt": [
+              0.06,
+              8.2
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              364.06,
+              436.86,
+              515.76,
+              454.86
+            ],
+            "horizontal_alignment_error_pt": 0.06,
+            "vertical_alignment_error_pt": 3.86,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-robotics-card",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-robotics-card",
+            "slide": 7,
+            "container_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              658.0,
+              297.628,
+              712.61,
+              349.656
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter Display",
+            "expected_text_lines": [
+              "03"
+            ],
+            "resolved_pdf_fonts": [
+              "InterDisplay-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              658.0,
+              297.63,
+              712.61,
+              349.66
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 10.37,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-robotics-card",
+            "slide": 7,
+            "container_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              658.0,
+              297.628,
+              712.61,
+              349.656
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter Display",
+            "expected_text_lines": [
+              "03"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 18.39,
+            "reference_anchor_error_pt": [
+              0.08,
+              18.39
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              658.08,
+              316.02,
+              701.59,
+              359.01
+            ],
+            "horizontal_alignment_error_pt": 0.08,
+            "vertical_alignment_error_pt": 8.02,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-robotics-title",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-robotics-title",
+            "slide": 7,
+            "container_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              658.0,
+              361.417,
+              890.205,
+              384.406
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "ROBOTICS WHEN READY"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Bold"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              658.0,
+              361.42,
+              890.2,
+              384.41
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.58,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-robotics-title",
+            "slide": 7,
+            "container_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              658.0,
+              361.417,
+              890.205,
+              384.406
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "ROBOTICS WHEN READY"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri-Bold"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 39.06,
+            "reference_anchor_error_pt": [
+              0.08,
+              8.67
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              658.08,
+              370.09,
+              851.15,
+              389.05
+            ],
+            "horizontal_alignment_error_pt": 0.08,
+            "vertical_alignment_error_pt": 4.09,
+            "overflow": false
+          }
+        },
+        {
+          "id": "s7-robotics-caption",
+          "classification": "font_substitution_or_rendering_difference",
+          "authoring": {
+            "id": "s7-robotics-caption",
+            "slide": 7,
+            "container_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              658.0,
+              428.658,
+              861.152,
+              450.438
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Autonomous operations"
+            ],
+            "resolved_pdf_fonts": [
+              "Inter-Regular"
+            ],
+            "font_status": "match",
+            "reference_edge_error_pt": 0.0,
+            "reference_anchor_error_pt": [
+              0.0,
+              0.0
+            ],
+            "status": "pass",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              658.0,
+              428.66,
+              861.15,
+              450.44
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 4.34,
+            "overflow": false
+          },
+          "conversion": {
+            "id": "s7-robotics-caption",
+            "slide": 7,
+            "container_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "text_frame_bounds_pt": [
+              640.0,
+              276.0,
+              267.0,
+              193.0
+            ],
+            "reference_glyph_bounds_pt": [
+              658.0,
+              428.658,
+              861.152,
+              450.438
+            ],
+            "horizontal": "left",
+            "vertical": "top",
+            "expected_font": "Inter",
+            "expected_text_lines": [
+              "Autonomous operations"
+            ],
+            "resolved_pdf_fonts": [
+              "Calibri"
+            ],
+            "font_status": "mismatch_or_unavailable",
+            "reference_edge_error_pt": 25.38,
+            "reference_anchor_error_pt": [
+              0.08,
+              8.2
+            ],
+            "status": "misaligned_or_overflow",
+            "expected_paragraph_count": 1,
+            "rendered_line_count": 1,
+            "glyph_bounds_pt": [
+              658.08,
+              436.86,
+              835.78,
+              454.86
+            ],
+            "horizontal_alignment_error_pt": 0.08,
+            "vertical_alignment_error_pt": 3.86,
+            "overflow": false
+          }
+        }
+      ],
+      "counts": {
+        "font_substitution_or_rendering_difference": 29,
+        "pass": 1
+      },
+      "note": "Each unique, unwrapped paragraph label is searched inside its declared frame. Font names are recorded when PDF extraction exposes them. A non-PowerPoint backend is reported as a conversion-or-renderer difference, not proof of a converter defect."
+    }
+  },
+  "gate_issues": []
+}

@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "id": "s4-observe-card",
+      "slide": 4,
+      "text": "",
+      "text_lines": [
+        "OBSERVE",
+        "Sensors and devices capture field conditions."
+      ],
+      "container_bounds_pt": [
+        52.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 14.0,
+        "top": 82.0,
+        "bottom": 10.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s4-observe-badge",
+      "slide": 4,
+      "text": "01",
+      "text_lines": [
+        "01"
+      ],
+      "container_bounds_pt": [
+        67.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "text_frame_bounds_pt": [
+        67.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s4-interpret-card",
+      "slide": 4,
+      "text": "",
+      "text_lines": [
+        "INTERPRET",
+        "Software turns raw readings into decisions."
+      ],
+      "container_bounds_pt": [
+        350.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "text_frame_bounds_pt": [
+        350.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 14.0,
+        "top": 82.0,
+        "bottom": 10.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s4-interpret-badge",
+      "slide": 4,
+      "text": "02",
+      "text_lines": [
+        "02"
+      ],
+      "container_bounds_pt": [
+        365.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "text_frame_bounds_pt": [
+        365.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    },
+    {
+      "id": "s4-act-card",
+      "slide": 4,
+      "text": "",
+      "text_lines": [
+        "ACT",
+        "People and machines complete the task."
+      ],
+      "container_bounds_pt": [
+        648.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "text_frame_bounds_pt": [
+        648.0,
+        278.0,
+        260.0,
+        183.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 14.0,
+        "top": 82.0,
+        "bottom": 10.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s4-act-badge",
+      "slide": 4,
+      "text": "03",
+      "text_lines": [
+        "03"
+      ],
+      "container_bounds_pt": [
+        663.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "text_frame_bounds_pt": [
+        663.0,
+        294.0,
+        48.0,
+        48.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Inter"
+    }
+  ]
+}

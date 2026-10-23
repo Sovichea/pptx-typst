@@ -39,6 +39,19 @@ def test_semantic_component_lowering_emits_shared_static_bounds() -> None:
     assert manifest["components"][0]["text_frame_bounds_pt"] == [24.0, 32.0, 240.0, 120.0]
 
 
+def test_semantic_component_preserves_paragraph_spacing_semantics() -> None:
+    lowerer = _load("lower_components", SKILL / "scripts" / "lower_components.py")
+    code, _ = lowerer.lower({"components": [{
+        "id": "spaced", "slide": 1, "kind": "label", "x": 0, "y": 0,
+        "width": 240, "height": 120, "paragraphs": [
+            {"text": "Heading", "size": 20, "after": 8},
+            {"text": "Body", "size": 12, "target_pitch": 15},
+        ],
+    }]})
+    assert "after: 8pt" in code
+    assert "target-pitch: 15pt" in code
+
+
 def test_semantic_row_and_stack_lower_to_literal_positions() -> None:
     lowerer = _load("lower_components", SKILL / "scripts" / "lower_components.py")
     code, _ = lowerer.lower({"components": [{
@@ -115,3 +128,50 @@ def test_component_qa_reports_missing_matches_as_unavailable(tmp_path: Path) -> 
     }], 2, 3)["components"][0]
     assert row["status"] == "unavailable"
     assert row["reason"] == "text_not_found"
+
+
+def test_component_qa_groups_wrapped_paragraph_lines(tmp_path: Path) -> None:
+    fitz = pytest.importorskip("fitz")
+    inspector = _load("inspect_deck", SKILL / "scripts" / "inspect_deck.py")
+    document = fitz.open()
+    page = document.new_page(width=200, height=120)
+    page.insert_textbox(fitz.Rect(10, 10, 120, 100), "This is a deliberately wrapped paragraph", fontsize=12)
+    path = tmp_path / "wrapped.pdf"
+    document.save(path)
+    document.close()
+
+    row = inspector._component_measurements(path, [{
+        "id": "wrapped", "slide": 1, "text": "This is a deliberately wrapped paragraph",
+        "text_lines": ["This is a deliberately wrapped paragraph"],
+        "text_frame_bounds_pt": [10, 10, 110, 90], "container_bounds_pt": [10, 10, 110, 90],
+        "padding_pt": {"left": 0, "top": 0}, "horizontal": "left", "vertical": "top",
+    }], 2, 3)["components"][0]
+    assert row["status"] == "pass"
+    assert row["expected_paragraph_count"] == 1
+    assert row["rendered_line_count"] == 2
+
+
+def test_component_qa_uses_reference_ink_bounds_for_top_anchored_text(tmp_path: Path) -> None:
+    fitz = pytest.importorskip("fitz")
+    inspector = _load("inspect_deck", SKILL / "scripts" / "inspect_deck.py")
+    document = fitz.open()
+    page = document.new_page(width=200, height=120)
+    page.insert_text((30, 30), "INK", fontsize=12)
+    path = tmp_path / "top-anchored.pdf"
+    expected = page.search_for("INK")[0]
+    document.save(path)
+    document.close()
+
+    row = inspector._component_measurements(path, [{
+        "id": "top-ink", "slide": 1, "text": "INK", "text_lines": ["INK"],
+        "container_bounds_pt": [20, 10, 100, 60], "text_frame_bounds_pt": [20, 10, 100, 60],
+        "padding_pt": {"left": 10, "top": 0}, "horizontal": "left", "vertical": "top",
+        # A font build may change the right ink edge while preserving the left/top
+        # anchor. QA should report that shape difference without calling it drift.
+        "reference_glyph_bounds_pt": [round(expected.x0, 3), round(expected.y0, 3),
+                                      round(expected.x1 + 5, 3), round(expected.y1, 3)],
+    }], 2, 3)["components"][0]
+    assert row["status"] == "pass"
+    assert row["vertical_alignment_error_pt"] > 3
+    assert row["reference_edge_error_pt"] == 5
+    assert row["reference_anchor_error_pt"] == [0, 0]

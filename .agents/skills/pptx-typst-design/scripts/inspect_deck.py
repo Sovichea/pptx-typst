@@ -188,6 +188,7 @@ def _component_measurements(pdf_path: Path, components: list[dict], max_x: float
             record = {"id": component.get("id"), "slide": component.get("slide"),
                       "container_bounds_pt": component.get("container_bounds_pt"),
                       "text_frame_bounds_pt": component.get("text_frame_bounds_pt"),
+                      "reference_glyph_bounds_pt": component.get("reference_glyph_bounds_pt"),
                       "horizontal": component.get("horizontal", "center"),
                       "vertical": component.get("vertical", "center"),
                       "expected_font": component.get("font"),
@@ -225,16 +226,32 @@ def _component_measurements(pdf_path: Path, components: list[dict], max_x: float
             page = document[page_number - 1]
             matches = []
             match_error = None
+            rendered_line_count = 0
             for line in text_lines:
                 found = [fitz.Rect(rect) for rect in page.search_for(line)
                          if fitz.Rect(rect).intersects(frame)]
-                if len(found) != 1:
-                    match_error = "text_not_found" if not found else "ambiguous_text_match"
+                if not found:
+                    match_error = "text_not_found"
                     break
-                matches.extend(found)
+                found.sort(key=lambda rect: (round(rect.y0, 1), rect.x0))
+                rendered_line_count += len(found)
+                if len(found) > 1:
+                    heights = sorted(rect.height for rect in found)
+                    median_height = heights[len(heights) // 2]
+                    min_line_advance = max(1.5, median_height * 0.35)
+                    max_line_advance = max(3.0, median_height * 1.75)
+                    advances = [next_rect.y0 - rect.y0 for rect, next_rect in zip(found, found[1:])]
+                    if any(advance < min_line_advance or advance > max_line_advance for advance in advances):
+                        match_error = "ambiguous_text_match"
+                        break
+                matches.append(fitz.Rect(found[0]))
+                for rect in found[1:]:
+                    matches[-1] |= rect
             if match_error:
                 record.update({"status": "unavailable", "reason": match_error,
-                               "expected_line_count": len(text_lines), "matched_line_count": len(matches)})
+                               "expected_paragraph_count": len(text_lines),
+                               "matched_paragraph_count": len(matches),
+                               "rendered_line_count": rendered_line_count})
                 results.append(record)
                 continue
             glyphs = matches[0]
@@ -280,8 +297,38 @@ def _component_measurements(pdf_path: Path, components: list[dict], max_x: float
             tolerance = 1.0
             overflow = (glyphs.x0 < frame.x0 - tolerance or glyphs.y0 < frame.y0 - tolerance
                         or glyphs.x1 > frame.x1 + tolerance or glyphs.y1 > frame.y1 + tolerance)
-            passed = x_error <= max_x and y_error <= max_y and not overflow
+            reference_bounds = component.get("reference_glyph_bounds_pt")
+            reference_error = None
+            reference_anchor_errors = None
+            if isinstance(reference_bounds, list) and len(reference_bounds) == 4:
+                try:
+                    expected = fitz.Rect(*(float(value) for value in reference_bounds))
+                    edge_errors = [abs(actual - reference) for actual, reference in zip(glyphs, expected)]
+                    reference_error = max(edge_errors)
+                    record["reference_edge_error_pt"] = round(reference_error, 2)
+                    actual_x = (glyphs.x0 if horizontal == "left" else
+                                (glyphs.x0 + glyphs.x1) / 2 if horizontal == "center" else glyphs.x1)
+                    expected_x = (expected.x0 if horizontal == "left" else
+                                  (expected.x0 + expected.x1) / 2 if horizontal == "center" else expected.x1)
+                    actual_y = (glyphs.y0 if vertical == "top" else
+                                (glyphs.y0 + glyphs.y1) / 2 if vertical == "center" else glyphs.y1)
+                    expected_y = (expected.y0 if vertical == "top" else
+                                  (expected.y0 + expected.y1) / 2 if vertical == "center" else expected.y1)
+                    reference_anchor_errors = (abs(actual_x - expected_x), abs(actual_y - expected_y))
+                    record["reference_anchor_error_pt"] = [round(value, 2) for value in reference_anchor_errors]
+                except (TypeError, ValueError):
+                    reference_bounds = None
+            if reference_bounds is not None and reference_anchor_errors is not None:
+                # Compare the intended anchor rather than glyph width/height. Different
+                # but family-compatible font builds can change the far edge without
+                # moving a left/right/top/bottom anchored label.
+                passed = (reference_anchor_errors[0] <= max_x
+                          and reference_anchor_errors[1] <= max_y and not overflow)
+            else:
+                passed = x_error <= max_x and y_error <= max_y and not overflow
             record.update({"status": "pass" if passed else "misaligned_or_overflow",
+                           "expected_paragraph_count": len(text_lines),
+                           "rendered_line_count": rendered_line_count,
                            "glyph_bounds_pt": [round(v, 2) for v in glyphs],
                            "horizontal_alignment_error_pt": round(x_error, 2),
                            "vertical_alignment_error_pt": round(y_error, 2),

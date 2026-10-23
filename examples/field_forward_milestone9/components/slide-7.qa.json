@@ -1,0 +1,266 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "id": "s7-software-first-card",
+      "slide": 7,
+      "text": "01",
+      "text_lines": [
+        "01"
+      ],
+      "container_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 12.0,
+        "top": 32.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter Display"
+    },
+    {
+      "id": "s7-software-first-title",
+      "slide": 7,
+      "text": "SOFTWARE FIRST",
+      "text_lines": [
+        "SOFTWARE FIRST"
+      ],
+      "container_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 90.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s7-software-first-caption",
+      "slide": 7,
+      "text": "Visibility and workflows",
+      "text_lines": [
+        "Visibility and workflows"
+      ],
+      "container_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        52.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 157.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s7-automation-next-card",
+      "slide": 7,
+      "text": "02",
+      "text_lines": [
+        "02"
+      ],
+      "container_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 12.0,
+        "top": 32.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter Display"
+    },
+    {
+      "id": "s7-automation-next-title",
+      "slide": 7,
+      "text": "AUTOMATION NEXT",
+      "text_lines": [
+        "AUTOMATION NEXT"
+      ],
+      "container_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 90.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s7-automation-next-caption",
+      "slide": 7,
+      "text": "Sensors and controls",
+      "text_lines": [
+        "Sensors and controls"
+      ],
+      "container_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        346.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 157.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s7-robotics-card",
+      "slide": 7,
+      "text": "03",
+      "text_lines": [
+        "03"
+      ],
+      "container_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 12.0,
+        "top": 32.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter Display"
+    },
+    {
+      "id": "s7-robotics-title",
+      "slide": 7,
+      "text": "ROBOTICS WHEN READY",
+      "text_lines": [
+        "ROBOTICS WHEN READY"
+      ],
+      "container_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 90.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    },
+    {
+      "id": "s7-robotics-caption",
+      "slide": 7,
+      "text": "Autonomous operations",
+      "text_lines": [
+        "Autonomous operations"
+      ],
+      "container_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "text_frame_bounds_pt": [
+        640.0,
+        276.0,
+        267.0,
+        193.0
+      ],
+      "padding_pt": {
+        "left": 18.0,
+        "right": 8.0,
+        "top": 157.0,
+        "bottom": 0.0
+      },
+      "horizontal": "left",
+      "vertical": "top",
+      "font": "Inter"
+    }
+  ]
+}
