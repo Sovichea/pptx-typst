@@ -65,7 +65,23 @@ python .agents/skills/pptx-typst-design/scripts/inspect_deck.py \
   --out deck/qa-components
 ```
 
-The inspector searches each declared single-line label inside its text-frame bounds and compares measured glyph bounds with intended horizontal/vertical alignment and padding. It reports unavailable or ambiguous matches instead of scoring them. A source-PDF failure is classified as an authoring error. A source pass followed by a PowerPoint-rendered failure is classified as a converter error; with another renderer it is reported as a conversion-or-renderer difference. Glyph extraction does not reveal all clipping or layering, so visual inspection remains required.
+Run the font preflight before delivery and include its JSON in visual QA. Pass the source and font report to the inspector so it can compare requested families, explicit PPTX run declarations, and font names extracted from both PDFs:
+
+```sh
+pptx-typst-fonts deck/main.typ --font-path deck/fonts \
+  --pptx deck/export/deck.pptx --typst-pdf deck/preview.pdf \
+  --powerpoint-pdf deck/export/rendered-from-powerpoint.pdf \
+  --report deck/qa/font-report.json
+python scripts/inspect_deck.py --pdf deck/preview.pdf \
+  --roundtrip-pdf deck/export/rendered-from-powerpoint.pdf \
+  --roundtrip-renderer "PowerPoint" --typst-source deck/main.typ \
+  --font-report deck/qa/font-report.json --components deck/components.qa.json \
+  --out deck/qa-components
+```
+
+The inspector searches each declared label inside its text-frame bounds and compares measured glyph bounds with intended horizontal/vertical alignment and padding. It reports unavailable or ambiguous matches instead of scoring them. A source-PDF failure is an authoring error. When the output alignment differs, PDF font names can identify a detected substitution; matching family names still allow for different font builds and metrics. A possible geometry error is not ruled out by a font warning: verify OOXML text-frame bounds and render evidence before assigning a cause. Missing font metadata remains unverified, not a confirmed substitution. Glyph extraction does not reveal all clipping or layering, so visual inspection remains required.
+
+The preflight inventories fonts available to the Typst compiler separately from fonts visible to the local Office environment. Pass the same `--font-path` used during compilation. A custom Typst font directory does not install or embed fonts in PowerPoint. On Windows, Office availability is inferred from the installed-font registry when PowerPoint is detected; other platforms use best-effort system inventories or report `unknown`. Tell recipients how to install the intended fonts from their licensed source when needed. Never change text coordinates solely to compensate for a substituted font.
 
 ### Pass 5: Delivery sanity
 

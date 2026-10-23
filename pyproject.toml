@@ -41,6 +41,7 @@ pptx-typst = "pptx_typst.cli:main"
 pptx-to-typst = "pptx_typst.cli:pptx_to_typst"
 typst-to-pptx = "pptx_typst.cli:typst_to_pptx"
 pptx-typst-validate = "pptx_typst.cli:validate_layout"
+pptx-typst-fonts = "pptx_typst.font_diagnostics:main"
 
 [project.optional-dependencies]
 test = ["pytest>=8.2"]

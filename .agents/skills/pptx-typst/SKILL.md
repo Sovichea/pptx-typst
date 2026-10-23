@@ -26,6 +26,7 @@ If the task is unrelated to PowerPoint conversion or requires arbitrary Typst pr
 - Check whether `pptx-to-typst`, `typst-to-pptx`, `pptx-typst`, and `typst` are available. Use `--help` to confirm options in the installed version.
 - Python 3.10-3.13 is tested. The project was not published to PyPI at the time this skill was written. Install it from the trusted repository or a verified release archive in a virtual environment; do not assume `pip install pptx-typst` will work.
 - Install the Typst CLI separately when PDF previews or compile verification are needed. The release was tested with Typst 0.15.1; confirm compatibility before relying on a different version.
+- Before a final Typst-to-PowerPoint export, run `pptx-typst-fonts main.typ --report font_report.json`. In a source checkout, use `python tools/check_presentation_fonts.py main.typ --report font_report.json`. Repeat every `--font-path` passed to the Typst compiler; those directories affect Typst only and do not install fonts for Office.
 - Inkscape can convert EMF/WMF into SVG. On Windows, the packaged PowerShell/GDI+ fallback can instead generate transparent PNGs. If neither is available, the original media remains but its rendered object may be omitted. Native Cairo is needed for some SVG masking/raster operations.
 - Avoid changing system-wide dependencies or overwriting user files without authorization.
 
@@ -83,6 +84,7 @@ typst-to-pptx "new-deck/main.typ" --output "exports/new-deck.pptx"
 
 - Reverse conversion **recognizes only the documented static subset** of Typst declarations, not arbitrary Typst. It also supports the legacy `Root`/`Place` structure in limited cases.
 - Read `exports/conversion_report.json` after export. It reports unsupported constructs, loss of editable structure, media problems, and other bounded-subset limitations.
+- Review the font report separately from geometry diagnostics. It distinguishes Typst compiler availability from the local PowerPoint/system font inventory and marks unsupported checks as `unknown`; it never installs or substitutes fonts. Pass `--pptx`, `--typst-pdf`, and `--powerpoint-pdf` to the checker when available to compare requested families, DrawingML declarations, and PDF-reported families.
 - Put reverse output in a separate directory so its `conversion_report.json` does not overwrite an import report.
 - Open/render the `.pptx` in PowerPoint or a compatible viewer when available. Inspect placeholders, masters, images, and tables; do not assume a successfully written `.pptx` looks identical to the Typst PDF.
 
@@ -105,6 +107,7 @@ Common issues and appropriate responses:
 | EMF/WMF not rendered | Check optional Inkscape / Windows GDI+ availability; inspect fallback warning and derivative; do not claim source vector is now editable |
 | SVG masking or reverse rasterization fails | Check native Cairo; use documented fallback and report visual loss |
 | Text rewraps or changes shape | Check installed source fonts, inheritance, frame dimensions, and text warnings; avoid arbitrary global font calibration |
+| PowerPoint text shifts while Typst is aligned | Check `font_report.json` and extracted PDF font families. A detected substitution can change text metrics; do not change positions or sizes to compensate. Link the licensed font source and ask recipients to install the family through their OS font manager (Windows Fonts settings, macOS Font Book, or their Linux distribution/user-font configuration), then reopen and render the deck; otherwise deliberately revise the design font and rerun both renders. |
 | Placeholder appears above an image | Inspect `placeholder_layering_risk` and source z-order; treat as a known limitation, not proof of successful reproduction |
 | Missing chart or SmartArt | Check whether a cached preview was materialized; retain its visual form and disclose non-editability; native charts remain unsupported |
 | Grouped shapes, gradients, masks, or arrowheads differ | Confirm supported subset and run a focused visual comparison before altering modes or converting to images |

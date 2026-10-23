@@ -109,8 +109,12 @@ def test_component_qa_distinguishes_authoring_and_conversion_differences(tmp_pat
     shifted.close()
     converted = inspector._component_measurements(rendered_path, [component], 2, 3)
     assert converted["components"][0]["status"] == "misaligned_or_overflow"
-    assert inspector._compare_component_measurements(authoring, converted, "LibreOffice")["components"][0]["classification"] == "conversion_or_renderer_difference"
-    assert inspector._compare_component_measurements(authoring, converted, "PowerPoint")["components"][0]["classification"] == "converter_error"
+    comparison = inspector._compare_component_measurements(authoring, converted, "LibreOffice")["components"][0]
+    assert comparison["classification"] == "font_state_unverified_or_ambiguous"
+    assert "possible converter geometry error" in comparison["geometry_assessment"]
+    powerpoint_result = inspector._compare_component_measurements(authoring, converted, "PowerPoint")["components"][0]
+    assert powerpoint_result["classification"] == "font_state_unverified_or_ambiguous"
+    assert "possible converter geometry error" in powerpoint_result["geometry_assessment"]
 
 
 def test_component_qa_reports_missing_matches_as_unavailable(tmp_path: Path) -> None:
@@ -175,3 +179,35 @@ def test_component_qa_uses_reference_ink_bounds_for_top_anchored_text(tmp_path: 
     assert row["vertical_alignment_error_pt"] > 3
     assert row["reference_edge_error_pt"] == 5
     assert row["reference_anchor_error_pt"] == [0, 0]
+
+
+def test_component_qa_classifies_detected_font_substitution(tmp_path: Path) -> None:
+    fitz = pytest.importorskip("fitz")
+    inspector = _load("inspect_deck", SKILL / "scripts" / "inspect_deck.py")
+    source = fitz.open()
+    page = source.new_page(width=200, height=120)
+    page.insert_text((30, 30), "LABEL", fontsize=12, fontname="helv")
+    source_path = tmp_path / "source-label.pdf"
+    source.save(source_path)
+    bounds = page.search_for("LABEL")[0]
+    source.close()
+    component = {
+        "id": "font-label", "slide": 1, "text": "LABEL", "text_lines": ["LABEL"],
+        "font": "Inter", "container_bounds_pt": [0, 0, 150, 70],
+        "text_frame_bounds_pt": [0, 0, 150, 70],
+        "padding_pt": {"left": bounds.x0, "top": bounds.y0},
+        "reference_glyph_bounds_pt": [bounds.x0, bounds.y0, bounds.x1, bounds.y1],
+        "horizontal": "left", "vertical": "top",
+    }
+    authored = inspector._component_measurements(source_path, [component], 2, 3)
+
+    output = fitz.open()
+    output_page = output.new_page(width=200, height=120)
+    output_page.insert_text((34, 30), "LABEL", fontsize=12, fontname="cour")
+    output_path = tmp_path / "output-label.pdf"
+    output.save(output_path)
+    output.close()
+    converted = inspector._component_measurements(output_path, [component], 2, 3)
+    comparison = inspector._compare_component_measurements(authored, converted, "PowerPoint")["components"][0]
+    assert comparison["classification"] == "detected_font_substitution"
+    assert "compare text-frame geometry" in comparison["geometry_assessment"]

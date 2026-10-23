@@ -47,6 +47,14 @@ typst-to-pptx presentation-typst/main.typ --output presentation-roundtrip.pptx
 
 The converter writes `conversion_report.json` next to the `.pptx` output. It reports constructs outside the supported subset.
 
+Check font availability before delivery:
+
+```console
+pptx-typst-fonts presentation-typst/main.typ --report presentation-typst/font_report.json
+```
+
+Pass the same `--font-path` used for `typst compile` to check custom Typst fonts. A font directory supplied to Typst does not install or embed fonts for PowerPoint. Add `--pptx`, `--typst-pdf`, and `--powerpoint-pdf` to compare source declarations, exported DrawingML, and fonts extracted from actual renders. Platform inventories are best effort; the report uses `unknown` when a check cannot be performed. No coordinates or font declarations are changed by the preflight.
+
 Use `pptx-typst-validate original.pptx presentation-typst` to compare source placement data with the generated Typst project. The report distinguishes unsupported objects from approximations and includes affected slide, source shape ID, source type, fallback, bounds when known, and expected loss.
 
 ## Start a Typst presentation

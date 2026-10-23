@@ -35,6 +35,12 @@ The local release artifacts are built and ready for review:
 
 The attached [experimental alpha notes](releases/v0.1.0-alpha.md) provide the short user-facing scope and workflow. The README includes a visual comparison, install/convert/edit/compile commands, feature matrix, platform media requirements, and known limitations.
 
+## Font preflight hardening (2026-10-23)
+
+The `pptx-typst-fonts` command now extracts literal font families from the supported static Typst constructs and reports Typst compiler availability separately from the local Office-facing system inventory. It can also compare declarations in exported PPTX runs with font names extracted from Typst and PowerPoint PDFs. A PowerPoint PDF substitution is stronger evidence than the inventory proxy; unavailable or non-inspectable environments remain `unknown`. The check does not install fonts, alter font declarations, or change text geometry.
+
+The command was verified from the editable installation and is included in a rebuilt wheel and source distribution. The full test suite passes with the added deterministic font-diagnostic tests. On this Windows host, Inter and Inter Display appear in both the Typst font inventory and installed-font registry, and the PPTX XML retains both requested families. A fresh Microsoft PowerPoint render nevertheless reports Calibri and Calibri Bold. Component QA on slides 4–7 remains at 29 detected-substitution/rendering differences and 1 pass, with the same maximum measured text-anchor difference of 18.39 pt and no overflow. No coordinate workaround was applied. Linux/macOS desktop PowerPoint inventories remain best-effort or unknown; platform-specific Office rendering was not tested.
+
 ## Readiness decision
 
 The Windows package and ordinary conversion workflow are verified from both distribution formats. The existing 100-deck visual baseline and independent sample demonstrate useful layout preservation and editability, while diagnostics expose material omissions. The remaining gaps are documented experimental limitations rather than failures of installation or the common conversion path.

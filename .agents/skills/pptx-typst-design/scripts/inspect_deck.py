@@ -21,6 +21,22 @@ from pathlib import Path
 import re
 import sys
 
+_REPO_SRC = Path(__file__).resolve().parents[4] / "src"
+if _REPO_SRC.is_dir():
+    sys.path.insert(0, str(_REPO_SRC))
+
+try:
+    from pptx_typst.font_diagnostics import (
+        classify_rendered_font,
+        compare_font_evidence,
+        extract_typst_font_usages,
+        inspect_pdf_fonts,
+        inspect_pptx_run_fonts,
+    )
+except ImportError:
+    classify_rendered_font = compare_font_evidence = None
+    extract_typst_font_usages = inspect_pdf_fonts = inspect_pptx_run_fonts = None
+
 try:
     import fitz
     from PIL import Image, ImageChops, ImageDraw, ImageStat
@@ -270,8 +286,8 @@ def _component_measurements(pdf_path: Path, components: list[dict], max_x: float
             expected_font = str(record.get("expected_font") or "").casefold()
             if expected_font:
                 record["resolved_pdf_fonts"] = sorted(resolved_fonts)
-                record["font_status"] = ("match" if any(expected_font in font.casefold() for font in resolved_fonts)
-                                         else "mismatch_or_unavailable")
+                record["font_status"] = (classify_rendered_font(expected_font, sorted(resolved_fonts))
+                                         if classify_rendered_font else "unverified_or_ambiguous")
             horizontal = record["horizontal"]
             vertical = record["vertical"]
             if horizontal == "center":
@@ -350,6 +366,7 @@ def _compare_component_measurements(source: dict, rendered: dict | None, rendere
     comparisons = []
     for authored in source["components"]:
         converted = converted_by_id.get(authored.get("id"))
+        geometry_assessment = "font state or alignment evidence unavailable"
         if authored["status"] == "unavailable":
             classification = "authoring_measurement_unavailable"
         elif authored["status"] != "pass":
@@ -357,17 +374,27 @@ def _compare_component_measurements(source: dict, rendered: dict | None, rendere
         elif converted is None or converted["status"] == "unavailable":
             classification = "conversion_measurement_unavailable"
         elif converted["status"] != "pass":
-            font_changed = (authored.get("font_status") == "mismatch_or_unavailable"
-                            or converted.get("font_status") == "mismatch_or_unavailable"
-                            or authored.get("resolved_pdf_fonts") != converted.get("resolved_pdf_fonts"))
-            if font_changed:
-                classification = "font_substitution_or_rendering_difference"
+            source_fonts = authored.get("resolved_pdf_fonts", [])
+            output_fonts = converted.get("resolved_pdf_fonts", [])
+            font_changed = bool(source_fonts and output_fonts and any(
+                not any(classify_rendered_font(left, [right]) == "family_match_metrics_may_differ"
+                        for right in output_fonts)
+                for left in source_fonts)) if classify_rendered_font else False
+            if font_changed or converted.get("font_status") in (
+                    "detected_substitution", "missing_requested_font_and_detected_substitute"):
+                classification = "detected_font_substitution"
+                geometry_assessment = "alignment difference may be font-related; compare text-frame geometry before assigning cause"
+            elif converted.get("font_status") == "family_match_metrics_may_differ":
+                classification = "font_metrics_differ_despite_family_match"
+                geometry_assessment = "possible converter geometry error remains; PDF family names alone cannot distinguish it from font-metric or renderer differences"
             else:
-                classification = ("converter_error" if renderer.lower() in ("powerpoint", "microsoft powerpoint")
-                                  else "conversion_or_renderer_difference")
+                classification = "font_state_unverified_or_ambiguous"
+                geometry_assessment = "possible converter geometry error; font evidence is insufficient to attribute the difference"
         else:
             classification = "pass"
+            geometry_assessment = "no measured alignment error"
         comparisons.append({"id": authored.get("id"), "classification": classification,
+                            "geometry_assessment": geometry_assessment,
                             "authoring": authored, "conversion": converted})
     return {"renderer": renderer, "components": comparisons,
             "counts": dict(Counter(row["classification"] for row in comparisons)),
@@ -382,6 +409,8 @@ def main() -> int:
     parser.add_argument("--report", type=Path, help="Optional conversion_report.json")
     parser.add_argument("--roundtrip-pdf", type=Path, help="PPTX rendered by PowerPoint or another viewer to PDF")
     parser.add_argument("--components", type=Path, help="JSON manifest emitted by lower_components.py")
+    parser.add_argument("--typst-source", type=Path, help="Optional static Typst source for font declaration comparison")
+    parser.add_argument("--font-report", type=Path, help="Optional font preflight JSON from check_presentation_fonts.py")
     parser.add_argument("--roundtrip-renderer", default="unspecified", help="Backend used for --roundtrip-pdf, e.g. PowerPoint or LibreOffice")
     parser.add_argument("--max-horizontal-error", type=float, default=2.0, help="Allowed component label alignment error in pt")
     parser.add_argument("--max-vertical-error", type=float, default=3.0, help="Allowed component label alignment error in pt")
@@ -392,7 +421,7 @@ def main() -> int:
     args=parser.parse_args()
     if args.width < 200 or args.columns < 1:
         parser.error("--width must be at least 200 and --columns must be positive")
-    for required in [args.pdf,args.pptx,args.report,args.roundtrip_pdf,args.components]:
+    for required in [args.pdf,args.pptx,args.report,args.roundtrip_pdf,args.components,args.typst_source,args.font_report]:
         if required is not None and not required.exists():
             parser.error(f"File not found: {required}")
     args.out.mkdir(parents=True,exist_ok=True)
@@ -407,6 +436,11 @@ def main() -> int:
             issues.append(f"PPTX has {result['pptx']['slides']} slides, preview PDF has {result['preview']['pages']}")
     if args.report:
         result["conversion_report"]=_inspect_conversion_report(args.report)
+    if args.font_report:
+        try:
+            result["font_preflight"] = json.loads(args.font_report.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as exc:
+            parser.error(f"Invalid --font-report JSON: {exc}")
     if args.roundtrip_pdf:
         result["roundtrip_comparison"]=_compare_pdfs(args.pdf,args.roundtrip_pdf,args.out,args.width)
         if result["roundtrip_comparison"]["pages"] != result["preview"]["pages"]:
@@ -428,6 +462,23 @@ def main() -> int:
             "authoring_pdf": authored,
             "roundtrip_pdf": converted,
             "comparison": _compare_component_measurements(authored, converted, args.roundtrip_renderer),
+        }
+    if args.typst_source:
+        if extract_typst_font_usages is None:
+            parser.error("Font diagnostics are unavailable; install pptx-typst or run from its source checkout")
+        source_inventory = extract_typst_font_usages(
+            args.typst_source.read_text(encoding="utf-8"), str(args.typst_source))
+        pptx_fonts = inspect_pptx_run_fonts(args.pptx) if args.pptx else None
+        typst_pdf_fonts = inspect_pdf_fonts(args.pdf)
+        powerpoint_pdf_fonts = inspect_pdf_fonts(args.roundtrip_pdf) if args.roundtrip_pdf else None
+        result["font_rendering"] = {
+            "source": source_inventory,
+            "pptx_declared_runs": pptx_fonts,
+            "typst_pdf": typst_pdf_fonts,
+            "powerpoint_pdf": powerpoint_pdf_fonts,
+            "comparison": compare_font_evidence(source_inventory, pptx_fonts,
+                                                typst_pdf_fonts, powerpoint_pdf_fonts),
+            "interpretation": "A matching PDF family does not prove identical metrics. A displacement with matching family names remains a possible geometry error or renderer/font-metric difference.",
         }
     result["gate_issues"]=issues
     report=args.out/"qa.json"

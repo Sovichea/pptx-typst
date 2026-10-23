@@ -1,0 +1,1356 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T07:32:13.591388+00:00",
+  "interpretation": "Availability is based on font inventories. When a render PDF is supplied, its extracted font names provide separate evidence and may show substitution despite an available inventory entry.",
+  "source": "examples\\field_forward_milestone9\\main.typ",
+  "platform": "win32",
+  "families": [
+    {
+      "family": "Inter",
+      "usages": [
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 23,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 26,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 36,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 39,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 42,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 51,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 54,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 57,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 63,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 71,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 74,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 82,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 85,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 93,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 96,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 100,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 103,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 112,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 115,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 118,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 127,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 169,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 172,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 176,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 179,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 188,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 191,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 194,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 200,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 207,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 224,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 237,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 256,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 273,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 291,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 308,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 321,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 340,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 357,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 375,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 392,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 405,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 424,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 441,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 459,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 462,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 471,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 474,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 477,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 487,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 494,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 511,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 525,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 542,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 559,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 576,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 590,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 607,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 621,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 638,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 652,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 669,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 683,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 700,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 726,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 743,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 757,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 760,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 769,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 772,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 775,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 784,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 797,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 829,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 846,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 864,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 881,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 899,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 916,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 934,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 951,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 969,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 986,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1004,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1021,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1035,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1038,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1047,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1050,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1053,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1059,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1098,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1115,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1130,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1147,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1197,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1214,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1229,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1246,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1296,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1313,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1328,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1345,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1362,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1365,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1383,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1393,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1396,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1399,
+          "construct": "PptxText",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Inter",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Inter",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "detected_in_powerpoint_pdf"
+      }
+    },
+    {
+      "family": "Inter Display",
+      "usages": [
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 29,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 32,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 60,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 68,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 79,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 90,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 121,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 124,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 197,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 480,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 483,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 778,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 781,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 814,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1056,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1066,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1083,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1165,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1182,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1264,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1281,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1386,
+          "construct": "PptxText",
+          "field": "font"
+        },
+        {
+          "file": "examples\\field_forward_milestone9\\main.typ",
+          "line": 1389,
+          "construct": "PptxText",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Inter Display",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Inter Display",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "detected_in_powerpoint_pdf"
+      }
+    }
+  ],
+  "typst_environment": {
+    "status": "checked",
+    "command": [
+      "typst",
+      "fonts",
+      "--font-path",
+      "examples\\field_forward_milestone9\\fonts"
+    ],
+    "family_count": 353,
+    "font_paths": [
+      "C:\\Users\\Sovichea\\Documents\\git\\pptx-typst\\examples\\field_forward_milestone9\\fonts"
+    ]
+  },
+  "powerpoint_environment": {
+    "status": "checked",
+    "method": "windows_font_registry",
+    "powerpoint_detected": true,
+    "note": "Windows installed-font registry is used as an Office-visibility proxy; PowerPoint was not automated."
+  },
+  "dynamic_font_expressions": [],
+  "unresolved_font_owners": [],
+  "checks_not_performed": [],
+  "pptx": {
+    "file": "examples\\field_forward_milestone9\\exports\\field_forward_milestone9.pptx",
+    "status": "checked",
+    "explicit_run_families": [
+      {
+        "family": "Inter",
+        "occurrences": [
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide8.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide8.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide8.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide8.xml",
+            "property": "rPr"
+          }
+        ]
+      },
+      {
+        "family": "Inter Display",
+        "occurrences": [
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide1.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide2.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide3.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide4.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide5.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide6.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide7.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide8.xml",
+            "property": "rPr"
+          },
+          {
+            "part": "ppt/slides/slide8.xml",
+            "property": "rPr"
+          }
+        ]
+      }
+    ],
+    "note": "Only explicit DrawingML run/default-run font declarations are listed; inherited theme fonts may not appear here."
+  },
+  "typst_pdf": {
+    "file": "examples\\field_forward_milestone9\\preview.pdf",
+    "status": "checked",
+    "resolved_families": [
+      {
+        "family": "Inter-Bold",
+        "text_span_count": 51
+      },
+      {
+        "family": "Inter-Regular",
+        "text_span_count": 42
+      },
+      {
+        "family": "InterDisplay-Bold",
+        "text_span_count": 20
+      }
+    ],
+    "reason": null
+  },
+  "powerpoint_pdf": {
+    "file": "examples\\field_forward_milestone9\\exports\\field_forward_milestone9-powerpoint-font-preflight.pdf",
+    "status": "checked",
+    "resolved_families": [
+      {
+        "family": "Calibri",
+        "text_span_count": 42
+      },
+      {
+        "family": "Calibri-Bold",
+        "text_span_count": 71
+      }
+    ],
+    "reason": null
+  },
+  "render_comparison": {
+    "families": [
+      {
+        "family": "Inter",
+        "pptx_declared_run_match": true,
+        "pptx_matching_families": [
+          "Inter"
+        ],
+        "typst_pdf_matching_families": [
+          "Inter-Bold",
+          "Inter-Regular"
+        ],
+        "powerpoint_pdf_matching_families": [],
+        "powerpoint_render_classification": "detected_substitution",
+        "typst_vs_powerpoint": "different_or_substituted_family"
+      },
+      {
+        "family": "Inter Display",
+        "pptx_declared_run_match": true,
+        "pptx_matching_families": [
+          "Inter Display"
+        ],
+        "typst_pdf_matching_families": [
+          "InterDisplay-Bold"
+        ],
+        "powerpoint_pdf_matching_families": [],
+        "powerpoint_render_classification": "detected_substitution",
+        "typst_vs_powerpoint": "different_or_substituted_family"
+      }
+    ],
+    "note": "PDF font names are evidence from searchable text spans, not proof of exact font metrics or geometry."
+  }
+}
