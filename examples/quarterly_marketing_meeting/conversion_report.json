@@ -1,0 +1,64 @@
+{
+  "source_file": "Outdoor exploration presentation.pptx",
+  "slides": 13,
+  "status": "completed_with_warnings",
+  "counts": {
+    "background_colors": 13,
+    "inherited_master_layers": 1,
+    "media_placements": 32,
+    "geometry_rect": 29,
+    "other_placements": 37,
+    "vector_shapes": 37,
+    "clipped_images": 3,
+    "masked_complex": 3,
+    "geometry_complex": 3,
+    "text_placements": 18,
+    "autofit_shrink": 10,
+    "autofit_none": 8,
+    "smartart_placements": 1,
+    "table_placements": 2
+  },
+  "warnings": [
+    {
+      "issue": "smartart_materialized",
+      "outcome": "approximated",
+      "source_type": "smartart",
+      "slide": 6,
+      "owner": "slide",
+      "owner_id": 6,
+      "shape_id": 17,
+      "shape": "Content Placeholder 16",
+      "geometry_pt": {
+        "x": 448.5,
+        "y": 164.88,
+        "w": 445.75,
+        "h": 308.12,
+        "rot": 0.0
+      },
+      "has_text": false,
+      "fallback": "cached vector drawing embedded as one SVG asset",
+      "reason": "SmartArt text and shapes are not independently editable in the Typst output.",
+      "expected_loss": "SmartArt text and shapes are not independently editable in the Typst output."
+    },
+    {
+      "issue": "placeholder_layering_risk",
+      "outcome": "approximated",
+      "source_type": "placeholder:title",
+      "slide": 3,
+      "owner": "slide",
+      "owner_id": 3,
+      "shape_id": 2,
+      "shape": "Title 1",
+      "geometry_pt": {
+        "x": 43.87,
+        "y": 159.63,
+        "w": 474.71,
+        "h": 320.02
+      },
+      "fallback": "placeholder text is emitted in a separate layer above ordinary slide content",
+      "reason": "Later picture shape 30 overlaps this placeholder in source z-order; Typst stacking may differ.",
+      "expected_loss": "Text may appear over a picture that covers it in the PowerPoint rendering.",
+      "overlapping_shape_id": 30
+    }
+  ]
+}

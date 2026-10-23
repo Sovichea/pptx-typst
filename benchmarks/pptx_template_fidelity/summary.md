@@ -1,0 +1,33 @@
+# PPTX to Typst fidelity benchmark
+
+- Corpus: User-provided PowerPoint desktop template collection (font-adjusted copies)
+- Sample size: 29 presentations; measurements recorded for 29.
+- Successful conversions and renders: 29; failures: 0.
+- Visible source slides rendered: 291.
+- Page correspondence: 29 verified; 0 excluded as ambiguous.
+- Source PDF words: 7,844.
+- Weighted visible-word recall: 92.0%.
+- Mean per-deck visible-word recall: 93.9%; median 99.0%.
+- Layout fidelity (text glyph pixels masked; all rendered slides): 88.7% mean per deck; 91.8% median; 73.3% 10th percentile.
+- Text metrics include 291 of 291 source-text slides with all used font families available; 0 slides were skipped for unsupported fonts.
+- Text fidelity (font-supported slides only): 44.1% mean per deck; 43.9% median; 33.4% 10th percentile.
+- Full-slide fidelity (font-supported slides only; equal-weight layout + text): 66.4% mean per deck; 66.7% median; 57.8% 10th percentile.
+- Text ink edge F1: 38.1%; mean start-position accuracy: 50.2%; mean start-position error: 26.86 pt.
+- Text wrap line-count match (diagnostic only; excluded from scores): 68.9%.
+- Low text-fidelity comparison sheets: 29 deck(s), in `visual_comparisons/index.md`; each sheet shows up to three font-supported slides with the lowest per-slide text score.
+- Mean per-deck absolute PDF font-size difference: 2.28 pt; median 1.13 pt.
+- Resolved source font families are locally available for 100.0% of text characters across the sample; mean per-deck share 100.0%.
+- Mean share of text run characters without a direct run-level font name (resolved through inherited styles/theme): 94.4%.
+- Mean text-mask area: 14.12% of rendered pixels; per-slide values are in [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl).
+- Structural source-object emission: 1,262/1,262 supported source placements have a marker next to an emitted `#Place` call (11 unsupported placements are reported separately from 1,273 total). This verifies emission, not geometry accuracy; missing keys are listed per deck in the JSONL diagnostics.
+- Generated `#Place` position check: 800 ungrouped supported placements; mean absolute x/y error 0.001 pt against source-object bounds.
+- Independent spatial text matching: 1,258 matched; 0 ambiguous block incidences and 421 unmatched block incidences are reported separately, not counted as correct placement. See [`slide_diagnostics.jsonl`](slide_diagnostics.jsonl).
+- Layout score compares full-slide edges, foreground colors, and background color after masking extracted text glyph regions in both PDFs. Text itself does not contribute to this score. Layout includes slides with unsupported fonts because their text is masked.
+- A slide is eligible for text fidelity only when every resolved source font family used on that slide is present in Typst's installed-font list. Resolved major/minor theme fonts are checked too. Unsupported-font slides are excluded from text, word, font-size, wrap, and full-slide metrics.
+- Text fidelity is the mean of a one-pixel-tolerant rendered ink-edge F1 and a text-start position score. Position score falls linearly to zero at a 24 pt displacement.
+- Wrap line-count match is recorded as a diagnostic and is excluded from text and full-slide scores because the renderers wrap differently.
+- Full-slide score is the equal-weight mean of layout and text fidelity on font-supported slides. If a supported slide has no extractable text, its full-slide score equals its layout score. Word recall and font-size difference remain supplemental diagnostics and use only font-supported slides.
+- Pixel scores use PDF output rendered locally by PowerPoint and Typst. Grouped text spans may be imperfectly extracted from PDFs.
+- Word recall compares text extracted from PowerPoint-exported and Typst PDFs. Differences in reading order are ignored; repeated or missing visible words lower the score.
+- Font-size difference compares character-weighted average font sizes extracted from the two PDFs. These aggregate metrics are affected by unsupported objects and font substitution.
+- Source attribution, license, and input checksums are recorded in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv); per-slide diagnostics are in [slide_diagnostics.jsonl](slide_diagnostics.jsonl). Input PPTX files are read from the supplied input directory.

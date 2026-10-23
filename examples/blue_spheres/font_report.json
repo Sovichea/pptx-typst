@@ -1,0 +1,672 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T08:36:20.746783+00:00",
+  "interpretation": "Availability is based on font inventories. When a render PDF is supplied, its extracted font names provide separate evidence and may show substitution despite an available inventory entry.",
+  "source": "examples\\blue_spheres\\main.typ",
+  "platform": "win32",
+  "families": [
+    {
+      "family": "Arial",
+      "usages": [
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 6,
+          "construct": "set text default",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Arial",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Arial Narrow Bold",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Calibri",
+      "usages": [
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 21,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 77,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 88,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 126,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 137,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 175,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 195,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 242,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 253,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 264,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 275,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 331,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 350,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 360,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 362,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 386,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 396,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 398,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 398,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 398,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 398,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 398,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 419,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 445,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 455,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 457,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 481,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 491,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 493,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 493,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 493,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 493,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 514,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 540,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 550,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 552,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 576,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 595,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 597,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 597,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 597,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 618,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 644,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 654,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 656,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 656,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 656,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 677,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 703,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 713,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 715,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 715,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 736,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 738,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 738,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 759,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 785,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 823,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 825,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 825,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 825,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 825,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 846,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 872,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 914,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 940,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 953,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 963,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 965,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 965,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 965,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 986,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 988,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 988,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 988,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 988,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1009,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1035,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1045,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1047,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1047,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1047,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\blue_spheres\\main.typ",
+          "line": 1047,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Calibri",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Calibri",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    }
+  ],
+  "typst_environment": {
+    "status": "checked",
+    "command": [
+      "typst",
+      "fonts"
+    ],
+    "family_count": 353,
+    "font_paths": []
+  },
+  "powerpoint_environment": {
+    "status": "checked",
+    "method": "windows_font_registry",
+    "powerpoint_detected": true,
+    "note": "Windows installed-font registry is used as an Office-visibility proxy; PowerPoint was not automated."
+  },
+  "dynamic_font_expressions": [],
+  "unresolved_font_owners": [
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 350,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 386,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 445,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 481,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 540,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 576,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 644,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 703,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 785,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 872,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 940,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 953,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\blue_spheres\\main.typ",
+      "line": 1035,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    }
+  ],
+  "checks_not_performed": [
+    "Some text constructs omit a literal family and may inherit it from a master, layout, Typst default, or helper default; review unresolved_font_owners."
+  ]
+}

@@ -1,0 +1,4082 @@
+{
+  "source_file": "Classical neutrals marketing presentation.pptx",
+  "source_slide_count": 15,
+  "slide_dimensions_pt": [
+    960.0,
+    540.0
+  ],
+  "unique_images": 10,
+  "unique_vectors": 0,
+  "alpha_variants": 10,
+  "group_mode": "safe",
+  "clip_mode": "legacy",
+  "mask_mode": "legacy",
+  "layout_mode": "structured",
+  "counts": {
+    "background_colors": 15,
+    "inherited_master_layers": 1,
+    "group": 19,
+    "group_containers": 14,
+    "line_shapes": 56,
+    "media_placements": 10,
+    "clipped_images": 3,
+    "masked_polygon": 3,
+    "geometry_polygon": 3,
+    "text_placements": 10,
+    "autofit_none": 7,
+    "geometry_rect": 7,
+    "autofit_shrink": 3,
+    "table_placements": 1
+  },
+  "masters": [
+    {
+      "owner": "master",
+      "id": "Master01",
+      "part": "/ppt/slideMasters/slideMaster1.xml",
+      "placements": [],
+      "groups": []
+    }
+  ],
+  "layouts": [
+    {
+      "owner": "layout",
+      "id": "Layout01",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout3.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g1_13"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 0.18,
+          "y": 340.45,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g1_13"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": 0.06,
+          "y": 358.6,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 17,
+          "name": "Straight Connector 16",
+          "x": 616.0,
+          "y": 358.6,
+          "w": 0.0,
+          "h": 181.4,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g1_4"
+          ],
+          "source_shape_id": 5,
+          "name": "Straight Connector 4",
+          "x": 0.24,
+          "y": 38.3,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g1_4"
+          ],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 0.12,
+          "y": 56.45,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g1_13",
+          "parent": null,
+          "name": "Group 12",
+          "source_shape_id": 13,
+          "transform": {
+            "off_x": 0.06,
+            "off_y": 340.4496,
+            "ext_w": 959.88,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              -0.06
+            ],
+            [
+              0.0,
+              1.0,
+              302.15007874
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.06,
+            340.4496,
+            959.94,
+            358.5958
+          ]
+        },
+        {
+          "id": "g1_4",
+          "parent": null,
+          "name": "Group 3",
+          "source_shape_id": 4,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 38.2995,
+            "ext_w": 959.88,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            38.2995,
+            960.0,
+            56.4457
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout02",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout15.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g2_19"
+          ],
+          "source_shape_id": 20,
+          "name": "Straight Connector 19",
+          "x": 0.24,
+          "y": 411.86,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g2_19"
+          ],
+          "source_shape_id": 21,
+          "name": "Straight Connector 20",
+          "x": 0.12,
+          "y": 430.01,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g2_6"
+          ],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 0.24,
+          "y": 108.61,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g2_6"
+          ],
+          "source_shape_id": 9,
+          "name": "Straight Connector 8",
+          "x": 0.12,
+          "y": 126.75,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 319.26,
+          "y": -0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g2_19",
+          "parent": null,
+          "name": "Group 18",
+          "source_shape_id": 19,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 411.865,
+            "ext_w": 959.88,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              373.56543307
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            411.865,
+            960.0,
+            430.0112
+          ]
+        },
+        {
+          "id": "g2_6",
+          "parent": null,
+          "name": "Group 5",
+          "source_shape_id": 6,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 108.6057,
+            "ext_w": 959.88,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              70.30614173
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            108.6057,
+            960.0,
+            126.7519
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout03",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout42.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g3_3"
+          ],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 0.24,
+          "y": 335.67,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g3_3"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 0.12,
+          "y": 353.82,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g3_3"
+          ],
+          "source_shape_id": 16,
+          "name": "Straight Connector 15",
+          "x": 318.96,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 335.19,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g3_3",
+          "parent": null,
+          "name": "Group 2",
+          "source_shape_id": 3,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 0.0,
+            "ext_w": 959.88,
+            "ext_h": 353.8205,
+            "child_off_x": 0.12,
+            "child_off_y": 0.0,
+            "child_ext_w": 959.88,
+            "child_ext_h": 353.8205,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            0.0,
+            960.0,
+            353.8205
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout04",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout18.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g4_9"
+          ],
+          "source_shape_id": 21,
+          "name": "Straight Connector 20",
+          "x": 0.24,
+          "y": 181.54,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g4_9"
+          ],
+          "source_shape_id": 22,
+          "name": "Straight Connector 21",
+          "x": 0.12,
+          "y": 199.69,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g4_9"
+          ],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 0.18,
+          "y": 483.45,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [
+            "g4_9"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": 0.06,
+          "y": 501.6,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [
+            "g4_9"
+          ],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 318.96,
+          "y": -0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g4_9",
+          "parent": null,
+          "name": "Group 8",
+          "source_shape_id": 9,
+          "transform": {
+            "off_x": 0.06,
+            "off_y": -0.0001,
+            "ext_w": 959.94,
+            "ext_h": 540.0001,
+            "child_off_x": 0.06,
+            "child_off_y": -0.0001,
+            "child_ext_w": 959.94,
+            "child_ext_h": 540.0001,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout05",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout11.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g5_19"
+          ],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": 0.12,
+          "y": 48.97,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g5_19"
+          ],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 0.18,
+          "y": 491.03,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g5_19",
+            "g5_14"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": 372.85,
+          "y": 270.41,
+          "w": 442.74,
+          "h": 0.0,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g5_19",
+            "g5_14"
+          ],
+          "source_shape_id": 16,
+          "name": "Straight Connector 15",
+          "x": 391.33,
+          "y": 270.47,
+          "w": 442.74,
+          "h": 0.0,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g5_19",
+          "parent": null,
+          "name": "Group 18",
+          "source_shape_id": 19,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 48.9718,
+            "ext_w": 959.82,
+            "ext_h": 442.8692,
+            "child_off_x": 0.12,
+            "child_off_y": 53.5268,
+            "child_ext_w": 959.82,
+            "child_ext_h": 442.8692,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -4.55496063
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            48.9718,
+            959.94,
+            491.0283
+          ]
+        },
+        {
+          "id": "g5_14",
+          "parent": "g5_19",
+          "name": "Group 13",
+          "source_shape_id": 14,
+          "transform": {
+            "off_x": 382.0636,
+            "off_y": 265.7592,
+            "ext_w": 442.8,
+            "ext_h": 18.4735,
+            "child_off_x": 0.12,
+            "child_off_y": 36.7343,
+            "child_ext_w": 959.8803,
+            "child_ext_h": 18.4735,
+            "rotation_degrees": 270.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              -0.0,
+              1.0,
+              557.49255906
+            ],
+            [
+              -0.46130751,
+              -0.0,
+              496.45130178
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            372.8546,
+            270.4133,
+            834.0727,
+            270.4687
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout06",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout55.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g6_3"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": -69.18,
+          "y": 269.75,
+          "w": 539.93,
+          "h": 0.0,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g6_3"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": -87.33,
+          "y": 269.68,
+          "w": 539.93,
+          "h": 0.0,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g6_3"
+          ],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 200.78,
+          "y": 176.38,
+          "w": 759.97,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g6_3",
+          "parent": null,
+          "name": "Group 2",
+          "source_shape_id": 3,
+          "transform": {
+            "off_x": 182.6383,
+            "off_y": -0.2869,
+            "ext_w": 778.1195,
+            "ext_h": 540.0,
+            "child_off_x": 182.6383,
+            "child_off_y": -0.2869,
+            "child_ext_w": 778.1195,
+            "child_ext_h": 540.0,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout07",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout49.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g7_3"
+          ],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": -185.86,
+          "y": 270.03,
+          "w": 539.93,
+          "h": 0.0,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g7_3"
+          ],
+          "source_shape_id": 11,
+          "name": "Straight Connector 10",
+          "x": -203.86,
+          "y": 269.97,
+          "w": 539.93,
+          "h": 0.0,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g7_3"
+          ],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 624.87,
+          "y": 270.03,
+          "w": 539.93,
+          "h": 0.0,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [
+            "g7_3"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 606.87,
+          "y": 269.97,
+          "w": 539.93,
+          "h": 0.0,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g7_3",
+          "parent": null,
+          "name": "Group 2",
+          "source_shape_id": 3,
+          "transform": {
+            "off_x": 66.1043,
+            "off_y": -0.0003,
+            "ext_w": 828.7345,
+            "ext_h": 540.0003,
+            "child_off_x": 66.1043,
+            "child_off_y": -0.0003,
+            "child_ext_w": 828.7345,
+            "child_ext_h": 540.0003,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout08",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout13.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g8_5"
+          ],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": 0.12,
+          "y": 48.97,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g8_5"
+          ],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 0.18,
+          "y": 491.03,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g8_5",
+            "g8_14"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": 125.34,
+          "y": 270.41,
+          "w": 442.74,
+          "h": 0.0,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g8_5",
+            "g8_14"
+          ],
+          "source_shape_id": 16,
+          "name": "Straight Connector 15",
+          "x": 143.48,
+          "y": 270.47,
+          "w": 442.74,
+          "h": 0.0,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g8_5",
+          "parent": null,
+          "name": "Group 4",
+          "source_shape_id": 5,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 48.9718,
+            "ext_w": 959.82,
+            "ext_h": 442.8689,
+            "child_off_x": 0.12,
+            "child_off_y": 48.9718,
+            "child_ext_w": 959.82,
+            "child_ext_h": 442.8689,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            48.9718,
+            959.94,
+            491.0283
+          ]
+        },
+        {
+          "id": "g8_14",
+          "parent": "g8_5",
+          "name": "Group 13",
+          "source_shape_id": 14,
+          "transform": {
+            "off_x": 134.3829,
+            "off_y": 261.3676,
+            "ext_w": 442.8,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 270.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              -0.0,
+              1.0,
+              308.41027559
+            ],
+            [
+              -0.46130766,
+              -0.0,
+              491.89602621
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            125.3375,
+            270.413,
+            586.2283,
+            270.4683
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout09",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout41.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g9_3"
+          ],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 0.24,
+          "y": 109.14,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g9_3"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 0.12,
+          "y": 127.28,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g9_3"
+          ],
+          "source_shape_id": 16,
+          "name": "Straight Connector 15",
+          "x": 639.46,
+          "y": 411.46,
+          "w": 320.54,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [
+            "g9_3"
+          ],
+          "source_shape_id": 17,
+          "name": "Straight Connector 16",
+          "x": 639.42,
+          "y": 429.61,
+          "w": 320.54,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [
+            "g9_3"
+          ],
+          "source_shape_id": 19,
+          "name": "Straight Connector 18",
+          "x": 639.87,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g9_3",
+          "parent": null,
+          "name": "Group 2",
+          "source_shape_id": 3,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 0.0,
+            "ext_w": 959.88,
+            "ext_h": 540.0,
+            "child_off_x": 0.12,
+            "child_off_y": 0.0,
+            "child_ext_w": 959.88,
+            "child_ext_h": 540.0,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            0.0,
+            960.0,
+            540.0
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout10",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout17.xml",
+      "placements": [],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout11",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout12.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g11_3"
+          ],
+          "source_shape_id": 4,
+          "name": "Straight Connector 3",
+          "x": 0.24,
+          "y": 30.96,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g11_3"
+          ],
+          "source_shape_id": 5,
+          "name": "Straight Connector 4",
+          "x": 0.12,
+          "y": 49.11,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g11_6"
+          ],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 0.18,
+          "y": 277.69,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g11_6"
+          ],
+          "source_shape_id": 17,
+          "name": "Straight Connector 16",
+          "x": 0.06,
+          "y": 295.84,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g11_3",
+          "parent": null,
+          "name": "Group 2",
+          "source_shape_id": 3,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 30.96,
+            "ext_w": 959.88,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -7.33952756
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            30.96,
+            960.0,
+            49.1062
+          ]
+        },
+        {
+          "id": "g11_6",
+          "parent": null,
+          "name": "Group 5",
+          "source_shape_id": 6,
+          "transform": {
+            "off_x": 0.06,
+            "off_y": 277.6941,
+            "ext_w": 959.88,
+            "ext_h": 18.1462,
+            "child_off_x": 0.12,
+            "child_off_y": 38.2995,
+            "child_ext_w": 959.88,
+            "child_ext_h": 18.1462,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              -0.06
+            ],
+            [
+              0.0,
+              1.0,
+              239.39456693
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.06,
+            277.6941,
+            959.94,
+            295.8403
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout12",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout51.xml",
+      "placements": [],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout13",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout47.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g13_9"
+          ],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 0.18,
+          "y": 455.88,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g13_9"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 0.06,
+          "y": 474.03,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g13_9"
+          ],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 0.24,
+          "y": 161.4,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [
+            "g13_9"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": 0.12,
+          "y": 179.54,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [
+            "g13_9"
+          ],
+          "source_shape_id": 20,
+          "name": "Straight Connector 19",
+          "x": 319.89,
+          "y": -0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g13_9",
+          "parent": null,
+          "name": "Group 8",
+          "source_shape_id": 9,
+          "transform": {
+            "off_x": 0.06,
+            "off_y": -0.0001,
+            "ext_w": 959.94,
+            "ext_h": 540.0001,
+            "child_off_x": 0.06,
+            "child_off_y": -0.0001,
+            "child_ext_w": 959.94,
+            "child_ext_h": 540.0001,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout14",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout63.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g14_14"
+          ],
+          "source_shape_id": 9,
+          "name": "Straight Connector 8",
+          "x": 0.24,
+          "y": 108.61,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g14_14"
+          ],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": 0.12,
+          "y": 126.75,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [
+            "g14_14"
+          ],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 0.24,
+          "y": 411.86,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [
+            "g14_14"
+          ],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 0.12,
+          "y": 430.01,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [
+            "g14_14"
+          ],
+          "source_shape_id": 21,
+          "name": "Straight Connector 20",
+          "x": 180.89,
+          "y": -0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g14_14",
+          "parent": null,
+          "name": "Group 13",
+          "source_shape_id": 14,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": -0.0001,
+            "ext_w": 959.88,
+            "ext_h": 540.0001,
+            "child_off_x": 0.12,
+            "child_off_y": -0.0001,
+            "child_ext_w": 959.88,
+            "child_ext_h": 540.0001,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout15",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout6.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g15_6"
+          ],
+          "source_shape_id": 19,
+          "name": "Straight Connector 18",
+          "x": 0.12,
+          "y": 48.97,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g15_6"
+          ],
+          "source_shape_id": 16,
+          "name": "Straight Connector 15",
+          "x": 0.18,
+          "y": 491.03,
+          "w": 959.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g15_6",
+            "g15_13"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 249.3,
+          "y": 270.41,
+          "w": 442.74,
+          "h": 0.0,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g15_6",
+            "g15_13"
+          ],
+          "source_shape_id": 15,
+          "name": "Straight Connector 14",
+          "x": 267.45,
+          "y": 270.47,
+          "w": 442.74,
+          "h": 0.0,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.25
+        }
+      ],
+      "groups": [
+        {
+          "id": "g15_6",
+          "parent": null,
+          "name": "Group 5",
+          "source_shape_id": 6,
+          "transform": {
+            "off_x": 0.12,
+            "off_y": 48.9718,
+            "ext_w": 959.82,
+            "ext_h": 442.8694,
+            "child_off_x": 0.12,
+            "child_off_y": 53.5268,
+            "child_ext_w": 959.82,
+            "child_ext_h": 442.8694,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              -4.55496063
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            0.12,
+            48.9718,
+            959.94,
+            491.0283
+          ]
+        },
+        {
+          "id": "g15_13",
+          "parent": "g15_6",
+          "name": "Group 12",
+          "source_shape_id": 13,
+          "transform": {
+            "off_x": 258.3504,
+            "off_y": 265.9225,
+            "ext_w": 442.8,
+            "ext_h": 18.1473,
+            "child_off_x": 0.1194,
+            "child_off_y": -86.8161,
+            "child_ext_w": 959.8806,
+            "child_ext_h": 18.1473,
+            "rotation_degrees": 270.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              -0.0,
+              1.0,
+              557.49279528
+            ],
+            [
+              -0.4613074,
+              -0.0,
+              496.45128373
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            249.3044,
+            270.4135,
+            710.1964,
+            270.4689
+          ]
+        }
+      ]
+    }
+  ],
+  "master_placeholders": [
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 48.24,
+      "y": 43.2,
+      "width": 838.864409448819,
+      "height": 89.15417322834645,
+      "rotation": 0.0,
+      "align": "left",
+      "margin-left": 7.2,
+      "margin-right": 7.2,
+      "margin-top": 3.6,
+      "margin-bottom": 3.6,
+      "anchor": "top",
+      "font": "Felix Titling"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "id": "body-1",
+      "type": "body",
+      "idx": 1,
+      "x": 48.23992125984252,
+      "y": 135.08125984251967,
+      "width": 838.8644881889763,
+      "height": 361.71874015748034,
+      "rotation": 0.0,
+      "align": "left",
+      "margin-left": 7.2,
+      "margin-right": 7.2,
+      "margin-top": 3.6,
+      "margin-bottom": 3.6,
+      "font": "Goudy Old Style"
+    }
+  ],
+  "layout_placeholders": [
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "master": "Master01",
+      "id": "centered-title-0",
+      "type": "centered-title",
+      "idx": 0,
+      "x": 93.11677165354331,
+      "y": 77.52456692913385,
+      "width": 594.5755118110236,
+      "height": 241.84614173228346,
+      "rotation": 0.0,
+      "align": "left",
+      "anchor": "center",
+      "font": "Felix Titling",
+      "size": 60.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 44.43070866141732,
+      "y": 170.15330708661418,
+      "width": 230.4,
+      "height": 197.61913385826773,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 35.13527559055118,
+      "y": 46.57984251968504,
+      "width": 248.68944881889763,
+      "height": 241.64669291338583,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 374.4,
+      "y": 37.701574803149605,
+      "width": 526.0129133858268,
+      "height": 120.1455905511811,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "master": "Master01",
+      "id": "centered-title-0",
+      "type": "centered-title",
+      "idx": 0,
+      "x": 51.76236220472441,
+      "y": 158.00110236220473,
+      "width": 475.5892125984252,
+      "height": 223.99787401574804,
+      "rotation": 0.0,
+      "align": "left",
+      "anchor": "center",
+      "font": "Felix Titling",
+      "size": 60.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 241.76771653543307,
+      "y": 43.2,
+      "width": 661.1348031496063,
+      "height": 108.0,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "body-13",
+      "type": "body",
+      "idx": 13,
+      "x": 235.21251968503938,
+      "y": 201.6,
+      "width": 316.8,
+      "height": 288.0,
+      "rotation": 0.0,
+      "font": "Goudy Old Style"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "body-14",
+      "type": "body",
+      "idx": 14,
+      "x": 586.1028346456693,
+      "y": 201.6,
+      "width": 316.8,
+      "height": 288.0,
+      "rotation": 0.0,
+      "font": "Goudy Old Style"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 48.24,
+      "y": -89.28,
+      "width": 838.8,
+      "height": 89.28,
+      "rotation": 0.0,
+      "align": "left",
+      "font": "Felix Titling"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "master": "Master01",
+      "id": "centered-title-0",
+      "type": "centered-title",
+      "idx": 0,
+      "x": 417.6,
+      "y": 158.00110236220473,
+      "width": 475.5892125984252,
+      "height": 223.99787401574804,
+      "rotation": 0.0,
+      "align": "left",
+      "anchor": "center",
+      "font": "Felix Titling",
+      "size": 60.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 72.15307086614173,
+      "y": 144.0,
+      "width": 495.4750393700787,
+      "height": 120.24,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 48.24,
+      "y": 8.76535433070866,
+      "width": 838.864409448819,
+      "height": 89.15417322834645,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "master": "Master01",
+      "id": "centered-title-0",
+      "type": "centered-title",
+      "idx": 0,
+      "x": 51.76236220472441,
+      "y": 321.3676377952756,
+      "width": 845.1867716535434,
+      "height": 162.18661417322835,
+      "rotation": 0.0,
+      "align": "left",
+      "anchor": "bottom",
+      "font": "Felix Titling",
+      "size": 60.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 282.0,
+      "y": 402.3823622047244,
+      "width": 396.0,
+      "height": 43.2,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Goudy Old Style",
+      "size": 18.0,
+      "fill": "rgb(\"#000000\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 372.5483464566929,
+      "y": 229.16070866141732,
+      "width": 542.5750393700787,
+      "height": 178.89645669291338,
+      "rotation": 0.0,
+      "anchor": "center",
+      "font": "Goudy Old Style",
+      "size": 28.0,
+      "weight": "regular",
+      "fill": "rgb(\"#000000\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout14",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 225.70181102362204,
+      "y": 140.84094488188975,
+      "width": 663.8399212598425,
+      "height": 145.04094488188977,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Felix Titling",
+      "size": 44.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout15",
+      "master": "Master01",
+      "id": "centered-title-0",
+      "type": "centered-title",
+      "idx": 0,
+      "x": 58.93834645669291,
+      "y": 122.76,
+      "width": 352.8,
+      "height": 294.48,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Felix Titling",
+      "size": 60.0
+    }
+  ],
+  "placeholder_warnings": [
+    {
+      "owner": "slide",
+      "slide": 1,
+      "shape_id": 7,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 1,
+      "shape_id": 4,
+      "placeholder_type": "SUBTITLE (4)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 1,
+      "shape_id": 2,
+      "placeholder_type": "DATE (16)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 30,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 3,
+      "placeholder_type": "SUBTITLE (4)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 7,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 2,
+      "shape_id": 12,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 2,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 12,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 3,
+      "shape_id": 4,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 3,
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 4,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 18,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 19,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 20,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 5,
+      "shape_id": 5,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 18,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 6,
+      "shape_id": 18,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 13,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 17,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 18,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 7,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 8,
+      "shape_id": 7,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 18,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 9,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 5,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 4,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 7,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 8,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 10,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 11,
+      "shape_id": 7,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 12,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 9,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 14,
+      "shape_id": 9,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 14,
+      "shape_id": 4,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout14",
+      "shape_id": 3,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout14",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout14",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout14",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout14",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 15,
+      "shape_id": 5,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout15",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    }
+  ],
+  "media_warnings": [],
+  "media": {
+    "c46b1042958bb1930ea92a44302514576356329341b22227dae2b689a5c22e99": {
+      "path": "assets/media/image33_c46b104295.png",
+      "source": "/ppt/media/image33.png",
+      "bytes": 246326,
+      "sha256": "c46b1042958bb1930ea92a44302514576356329341b22227dae2b689a5c22e99",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 1,
+          "slide": 1,
+          "shape": "Picture Placeholder 6",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.25,
+          "geometry": "polygon"
+        }
+      ]
+    },
+    "3bce28cb998a3f496fc2e737b40040018ae44a1b8a3bf2c6c3428aa59c4212c3": {
+      "path": "assets/media/image34_3bce28cb99.png",
+      "source": "/ppt/media/image34.png",
+      "bytes": 1179438,
+      "sha256": "3bce28cb998a3f496fc2e737b40040018ae44a1b8a3bf2c6c3428aa59c4212c3",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 2,
+          "slide": 2,
+          "shape": "Picture Placeholder 11",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00019,
+            "r": 0.0,
+            "b": 0.00019
+          },
+          "fillrect": null,
+          "alpha": 0.25,
+          "geometry": "polygon"
+        }
+      ]
+    },
+    "98a3aee8b5c0f1acecaf13f44ab4f3b24459599b6bf00eeae1e18fb4b7adc3d1": {
+      "path": "assets/media/image35_98a3aee8b5.png",
+      "source": "/ppt/media/image35.png",
+      "bytes": 229168,
+      "sha256": "98a3aee8b5c0f1acecaf13f44ab4f3b24459599b6bf00eeae1e18fb4b7adc3d1",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 3,
+          "slide": 3,
+          "shape": "Picture Placeholder 8",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.6,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "24d2ef9a1a25e7914684c021900c6ff394b3c68003b2f1929b1c7b74f17517a7": {
+      "path": "assets/media/image36_24d2ef9a1a.png",
+      "source": "/ppt/media/image36.png",
+      "bytes": 605658,
+      "sha256": "24d2ef9a1a25e7914684c021900c6ff394b3c68003b2f1929b1c7b74f17517a7",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 5,
+          "slide": 5,
+          "shape": "Picture Placeholder 4",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.25,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "d81ab2241a3d626cc58390979480611c235942be4c3f9dcf90d8dfc56f3c1a83": {
+      "path": "assets/media/image37_d81ab2241a.png",
+      "source": "/ppt/media/image37.png",
+      "bytes": 112981,
+      "sha256": "d81ab2241a3d626cc58390979480611c235942be4c3f9dcf90d8dfc56f3c1a83",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 6,
+          "slide": 6,
+          "shape": "Picture Placeholder 17",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.25,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "17e23e4dce101aa18e796dbd8ab4f2b1a6caf4de7a77a0947d935c6e574a32a5": {
+      "path": "assets/media/image38_17e23e4dce.png",
+      "source": "/ppt/media/image38.png",
+      "bytes": 281559,
+      "sha256": "17e23e4dce101aa18e796dbd8ab4f2b1a6caf4de7a77a0947d935c6e574a32a5",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 8,
+          "slide": 8,
+          "shape": "Picture Placeholder 6",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.35,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "ba3439e4b8bcff3f98140f6c57c26c13d133ec75f02c23145e8daecb5f7f899b": {
+      "path": "assets/media/image39_ba3439e4b8.png",
+      "source": "/ppt/media/image39.png",
+      "bytes": 370398,
+      "sha256": "ba3439e4b8bcff3f98140f6c57c26c13d133ec75f02c23145e8daecb5f7f899b",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 9,
+          "slide": 9,
+          "shape": "Picture Placeholder 8",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.35,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "d578109af29aa4929c6ca4b9069438da2d02a751e9416198029c7dc90278ebae": {
+      "path": "assets/media/image40_d578109af2.jpeg",
+      "source": "/ppt/media/image40.jpeg",
+      "bytes": 96662,
+      "sha256": "d578109af29aa4929c6ca4b9069438da2d02a751e9416198029c7dc90278ebae",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 11,
+          "slide": 11,
+          "shape": "Picture Placeholder 6",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.25,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "656bb7c7baf0be7d0feea87b7f0a177d143dcfd24b4e51f1ea0d61b5ec7999c2": {
+      "path": "assets/media/image41_656bb7c7ba.png",
+      "source": "/ppt/media/image41.png",
+      "bytes": 612154,
+      "sha256": "656bb7c7baf0be7d0feea87b7f0a177d143dcfd24b4e51f1ea0d61b5ec7999c2",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 14,
+          "slide": 14,
+          "shape": "Picture Placeholder 8",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00103,
+            "r": 0.0,
+            "b": 0.00103
+          },
+          "fillrect": null,
+          "alpha": 0.35,
+          "geometry": "polygon"
+        }
+      ]
+    },
+    "eddaac5e7770291e571c888e915f71e358c16270f07f72f498fc45fa1adf0dd8": {
+      "path": "assets/media/image42_eddaac5e77.png",
+      "source": "/ppt/media/image42.png",
+      "bytes": 365508,
+      "sha256": "eddaac5e7770291e571c888e915f71e358c16270f07f72f498fc45fa1adf0dd8",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 15,
+          "slide": 15,
+          "shape": "Picture Placeholder 4",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 0.25,
+          "geometry": "rect"
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "layout": "Layout01",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Picture Placeholder 6",
+          "x": 0.0,
+          "y": 360.0,
+          "w": 960.0,
+          "h": 180.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image33_c46b104295.png",
+          "render_source": "assets/media/clip_71edbebdb344c356.png",
+          "geometry": "polygon",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.25,
+          "mask_applied": true
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Subtitle 3",
+          "x": 93.12,
+          "y": 375.71,
+          "w": 468.0,
+          "h": 93.6,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:subtitle",
+          "type": "text",
+          "text": "Presented by Ellis Turner",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 2,
+          "name": "Date Placeholder 1",
+          "x": 722.2,
+          "y": 426.56,
+          "w": 129.6,
+          "h": 45.36,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:date",
+          "type": "text",
+          "text": "10/23/2026",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "Growth marketing strategy",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 93.12,
+            "y": 77.52,
+            "w": 594.58,
+            "h": 241.85
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": {
+            "x": 93.11677165354331,
+            "y": 77.52456692913385,
+            "width": 594.5755118110236,
+            "height": 241.84614173228346,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "layout": "Layout02",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Picture Placeholder 11",
+          "x": 320.01,
+          "y": -0.0,
+          "w": 639.99,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image34_3bce28cb99.png",
+          "render_source": "assets/media/clip_34271e3cfae0983c.png",
+          "geometry": "polygon",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00019,
+            "r": 0.0,
+            "b": 0.00019
+          },
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.25,
+          "mask_applied": true
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 372.48,
+          "y": 169.96,
+          "w": 534.31,
+          "h": 198.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Overview\nMarket analysis\nCampaign success\nMetrics & KPIs\nQ & A",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "agenda",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 44.43,
+            "y": 170.15,
+            "w": 230.4,
+            "h": 197.62
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 44.43070866141732,
+            "y": 170.15330708661418,
+            "width": 230.4,
+            "height": 197.61913385826773,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "layout": "Layout03",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Picture Placeholder 8",
+          "x": 0.0,
+          "y": 354.69,
+          "w": 960.0,
+          "h": 185.31,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image35_98a3aee8b5.png",
+          "render_source": "assets/media/image35_98a3aee8b5_alpha6000.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.6,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Content Placeholder 3",
+          "x": 374.05,
+          "y": 46.58,
+          "w": 530.87,
+          "h": 241.65,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "This presentation is focused on our growth marketing strategy. We'll cover key areas such as market analysis, campaign success, metrics & KPIs, and more.",
+          "anchor": "ctr",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Overview",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 35.14,
+            "y": 46.58,
+            "w": 248.69,
+            "h": 241.65
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 35.13527559055118,
+            "y": 46.57984251968504,
+            "width": 248.68944881889763,
+            "height": 241.64669291338583,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "layout": "Layout04",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 374.4,
+          "y": 256.99,
+          "w": 526.01,
+          "h": 193.68,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "We aim to align our efforts and drive success through effective marketing strategies.  This involves a comprehensive approach where every team member collaborates to achieve our growth objectives. By ",
+          "anchor": "t",
+          "autofit_mode": "shrink",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Our goal",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 374.4,
+            "y": 37.7,
+            "w": 526.01,
+            "h": 120.15
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 374.4,
+            "y": 37.701574803149605,
+            "width": 526.0129133858268,
+            "height": 120.1455905511811,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "layout": "Layout05",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Picture Placeholder 4",
+          "x": 613.94,
+          "y": 49.91,
+          "w": 346.06,
+          "h": 440.19,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image36_24d2ef9a1a.png",
+          "render_source": "assets/media/image36_24d2ef9a1a_alpha2500.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.25,
+          "mask_applied": false
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "Navigating the landscape",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 51.76,
+            "y": 158.0,
+            "w": 475.59,
+            "h": 224.0
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": {
+            "x": 51.76236220472441,
+            "y": 158.00110236220473,
+            "width": 475.5892125984252,
+            "height": 223.99787401574804,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "layout": "Layout06",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 18,
+          "name": "Picture Placeholder 17",
+          "x": 0.0,
+          "y": 0.0,
+          "w": 182.12,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image37_d81ab2241a.png",
+          "render_source": "assets/media/image37_d81ab2241a_alpha2500.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.25,
+          "mask_applied": false
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Consumer expectations",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 241.77,
+            "y": 43.2,
+            "w": 661.13,
+            "h": 108.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 241.76771653543307,
+            "y": 43.2,
+            "width": 661.1348031496063,
+            "height": 108.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        },
+        {
+          "id": "body-13",
+          "type": "body",
+          "idx": 13,
+          "text": "Seamless omnichannel experience: Consumers expect a seamless experience across all touchpoints, whether they are interacting with a brand online, in-store, or through a mobile app. \nTransparency and trust: Consumers expect brands to be transparent about their practices, values, and product information. \n",
+          "source_shape_id": 10,
+          "source_name": "Text Placeholder 9",
+          "source_z_index": 2,
+          "geometry_pt": {
+            "x": 235.21,
+            "y": 201.6,
+            "w": 316.8,
+            "h": 288.0
+          },
+          "layout_reference": "body-13",
+          "geometry_override": {
+            "x": 235.21251968503938,
+            "y": 201.6,
+            "width": 316.8,
+            "height": 288.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        },
+        {
+          "id": "body-14",
+          "type": "body",
+          "idx": 14,
+          "text": "Personalization: Consumers today expect brands to offer personalized experiences tailored to their individual preferences and behaviors.\nSustainability: Modern consumers are increasingly concerned about environmental impact and sustainability.  ",
+          "source_shape_id": 12,
+          "source_name": "Text Placeholder 11",
+          "source_z_index": 3,
+          "geometry_pt": {
+            "x": 586.1,
+            "y": 201.6,
+            "w": 316.8,
+            "h": 288.0
+          },
+          "layout_reference": "body-14",
+          "geometry_override": {
+            "x": 586.1028346456693,
+            "y": 201.6,
+            "width": 316.8,
+            "height": 288.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "layout": "Layout07",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 154.56,
+          "y": 106.92,
+          "w": 650.88,
+          "h": 326.16,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Successful brands evolve with their audience, not despite them.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Quote",
+          "source_shape_id": 5,
+          "source_name": "Title 4",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 48.24,
+            "y": -89.28,
+            "w": 838.8,
+            "h": 89.28
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 8,
+      "layout": "Layout08",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Picture Placeholder 6",
+          "x": 0.0,
+          "y": 49.91,
+          "w": 346.06,
+          "h": 440.19,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image38_17e23e4dce.png",
+          "render_source": "assets/media/image38_17e23e4dce_alpha3500.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.35,
+          "mask_applied": false
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "Who is our target audience?",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 417.6,
+            "y": 158.0,
+            "w": 475.59,
+            "h": 224.0
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": {
+            "x": 417.6,
+            "y": 158.00110236220473,
+            "width": 475.5892125984252,
+            "height": 223.99787401574804,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "layout": "Layout09",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Picture Placeholder 8",
+          "x": 640.32,
+          "y": 127.2,
+          "w": 319.68,
+          "h": 284.01,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image39_ba3439e4b8.png",
+          "render_source": "assets/media/image39_ba3439e4b8_alpha3500.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.35,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 68.88,
+          "y": 273.6,
+          "w": 502.68,
+          "h": 216.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Key demographics\nUnderstanding key demographics is crucial for tailoring successful marketing strategies. \u000b\u000bChallenges & needs\nOur target audience faces several challenges and needs that our marketing",
+          "anchor": "t",
+          "autofit_mode": "shrink",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Our customers",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 72.15,
+            "y": 144.0,
+            "w": 495.48,
+            "h": 120.24
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 72.15307086614173,
+            "y": 144.0,
+            "width": 495.4750393700787,
+            "height": 120.24,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "layout": "Layout10",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Content Placeholder 6",
+          "x": 48.25,
+          "y": 135.13,
+          "w": 863.75,
+          "h": 288.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "table",
+          "rows": 5,
+          "columns": 3
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Marketing strategy",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 48.24,
+            "y": 8.77,
+            "w": 838.86,
+            "h": 89.15
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 48.24,
+            "y": 8.76535433070866,
+            "width": 838.864409448819,
+            "height": 89.15417322834645,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 11,
+      "layout": "Layout11",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Picture Placeholder 6",
+          "x": -0.0,
+          "y": 49.74,
+          "w": 960.0,
+          "h": 227.05,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image40_d578109af2.jpeg",
+          "render_source": "assets/media/image40_d578109af2_alpha2500.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.25,
+          "mask_applied": false
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "Marketing mix: \u000bThe 4 Ps",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 51.76,
+            "y": 321.37,
+            "w": 845.19,
+            "h": 162.19
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": {
+            "x": 51.76236220472441,
+            "y": 321.3676377952756,
+            "width": 845.1867716535434,
+            "height": 162.18661417322835,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 12,
+      "layout": "Layout12",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 117.84,
+          "y": 100.7,
+          "w": 724.32,
+          "h": 288.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "“Our latest campaign drove a 35% increase in engagement, proving that strategic storytelling resonates.”",
+          "anchor": "t",
+          "autofit_mode": "shrink",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Ana Bowman, Director of Marketing",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 282.0,
+            "y": 402.38,
+            "w": 396.0,
+            "h": 43.2
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 282.0,
+            "y": 402.3823622047244,
+            "width": 396.0,
+            "height": 43.2,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 13,
+      "layout": "Layout13",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Content Placeholder 8",
+          "x": 40.54,
+          "y": 229.16,
+          "w": 226.68,
+          "h": 178.9,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "28%",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "increase in conversion rates through recent marketing efforts",
+          "source_shape_id": 6,
+          "source_name": "Title 5",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 372.55,
+            "y": 229.16,
+            "w": 542.58,
+            "h": 178.9
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 372.5483464566929,
+            "y": 229.16070866141732,
+            "width": 542.5750393700787,
+            "height": 178.89645669291338,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 14,
+      "layout": "Layout14",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Picture Placeholder 8",
+          "x": 181.77,
+          "y": 0.0,
+          "w": 778.23,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image41_656bb7c7ba.png",
+          "render_source": "assets/media/clip_9ae42018ac376ec6.png",
+          "geometry": "polygon",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00103,
+            "r": 0.0,
+            "b": 0.00103
+          },
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.35,
+          "mask_applied": true
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Content Placeholder 3",
+          "x": 225.71,
+          "y": 297.96,
+          "w": 663.83,
+          "h": 100.76,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "By staying data-driven and adaptable, our marketing strategy continues to support growth and long-term success.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Marketing that\u000bdrives results",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 1,
+          "geometry_pt": {
+            "x": 225.7,
+            "y": 140.84,
+            "w": 663.84,
+            "h": 145.04
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 225.70181102362204,
+            "y": 140.84094488188975,
+            "width": 663.8399212598425,
+            "height": 145.04094488188977,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 15,
+      "layout": "Layout15",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Picture Placeholder 4",
+          "x": 488.82,
+          "y": 49.4,
+          "w": 471.18,
+          "h": 440.64,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image42_eddaac5e77.png",
+          "render_source": "assets/media/image42_eddaac5e77_alpha2500.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 0.25,
+          "mask_applied": false
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "Q&A",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 58.94,
+            "y": 122.76,
+            "w": 352.8,
+            "h": 294.48
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": {
+            "x": 58.93834645669291,
+            "y": 122.76,
+            "width": 352.8,
+            "height": 294.48,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    }
+  ]
+}

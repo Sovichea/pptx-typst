@@ -1,0 +1,645 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T08:37:05.914801+00:00",
+  "interpretation": "Availability is based on font inventories. When a render PDF is supplied, its extracted font names provide separate evidence and may show substitution despite an available inventory entry.",
+  "source": "examples\\classical_neutrals_marketing\\main.typ",
+  "platform": "win32",
+  "families": [
+    {
+      "family": "Arial",
+      "usages": [
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 6,
+          "construct": "set text default",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Arial",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Arial Narrow",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Felix Titling",
+      "usages": [
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 69,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 128,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 163,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 210,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 260,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 289,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 327,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 377,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 430,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 432,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 531,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 578,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 636,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 704,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 749,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 794,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 830,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 852,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 876,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 886,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 888,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 912,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 934,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 979,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1015,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1015,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1015,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1047,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1049,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1083,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1085,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1109,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1109,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1109,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1154,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Felix Titling",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Felix Titling",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Goudy Old Style",
+      "usages": [
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 260,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 260,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 482,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 484,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 655,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 657,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 678,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 723,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 725,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 725,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 725,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 725,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 725,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 768,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 770,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 804,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 806,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 853,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 853,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 853,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 853,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 854,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 854,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 854,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 854,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 953,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 955,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 955,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 955,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 955,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 955,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 955,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1037,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1073,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1128,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\classical_neutrals_marketing\\main.typ",
+          "line": 1130,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Goudy Old Style",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Goudy Old Style Bold",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    }
+  ],
+  "typst_environment": {
+    "status": "checked",
+    "command": [
+      "typst",
+      "fonts"
+    ],
+    "family_count": 353,
+    "font_paths": []
+  },
+  "powerpoint_environment": {
+    "status": "checked",
+    "method": "windows_font_registry",
+    "powerpoint_detected": true,
+    "note": "Windows installed-font registry is used as an Office-visibility proxy; PowerPoint was not automated."
+  },
+  "dynamic_font_expressions": [],
+  "unresolved_font_owners": [
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 636,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 704,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 749,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 794,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 830,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 852,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 853,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 854,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 876,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 912,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 934,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 979,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 1015,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 1037,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 1073,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 1109,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\classical_neutrals_marketing\\main.typ",
+      "line": 1154,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    }
+  ],
+  "checks_not_performed": [
+    "Some text constructs omit a literal family and may inherit it from a master, layout, Typst default, or helper default; review unresolved_font_owners."
+  ]
+}

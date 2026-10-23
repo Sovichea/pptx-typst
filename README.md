@@ -4,11 +4,33 @@
 
 Version 0.1.0 packages the existing proof of concept. The forward converter supports common text, image, shape, table, layout, and transparency cases. Tables preserve cell text, dimensions, alignment, fills, and common borders; merged cells remain unsupported. SmartArt with a stored PowerPoint drawing cache is included as vector artwork; its text is rendered in the SVG rather than emitted as independently editable Typst text. The converters preserve reusable PowerPoint masters and layouts through explicit `PptxMaster`, `PptxLayout`, and `PptxSlide` declarations. The reverse converter also accepts legacy `#Root` / `#Place` projects, including basic rectangular tables; it does not interpret arbitrary Typst. Font metrics, line wrapping, charts, complex masks, and grouped editability can differ from the source.
 
-## Example
+## Converted deck examples
 
-The comparison below shows slide 5 rendered from the original PowerPoint and from the generated Typst project. The artwork and palette carry across, while text styling and placement remain approximate.
+Five editable Typst projects from the 29-deck template set are included below. The source PowerPoint decks were first copied and adjusted to use fonts available on this Windows machine; the source `.pptx` files are not included. `quarterly_marketing_meeting` has been refreshed from the **Outdoor exploration presentation** deck. The separate [`field_forward_milestone9`](examples/field_forward_milestone9/) reference project is preserved and is not part of these five examples.
 
-![Original PowerPoint slide and its Typst conversion, side by side](docs/images/market-expansion-comparison.png)
+The comparisons use the same source and generated slide numbers. They show representative results, not a guarantee of pixel-identical rendering; font metrics and some PowerPoint constructs can still differ.
+
+<table>
+  <tr>
+    <td><strong>Quarterly marketing meeting · slide 6</strong><br><a href="docs/images/example-comparisons/quarterly-marketing-meeting.png"><img src="docs/images/example-comparisons/quarterly-marketing-meeting.png" alt="PowerPoint and Typst comparison for the quarterly marketing meeting timeline slide"></a><br><a href="examples/quarterly_marketing_meeting/">Typst project</a></td>
+    <td><strong>Back to school night · slide 12</strong><br><a href="docs/images/example-comparisons/back-to-school-night.png"><img src="docs/images/example-comparisons/back-to-school-night.png" alt="PowerPoint and Typst comparison for a school information table slide"></a><br><a href="examples/back_to_school_night/">Typst project</a></td>
+  </tr>
+  <tr>
+    <td><strong>Classical neutrals marketing · slide 15</strong><br><a href="docs/images/example-comparisons/classical-neutrals-marketing.png"><img src="docs/images/example-comparisons/classical-neutrals-marketing.png" alt="PowerPoint and Typst comparison for a classical neutrals Q and A slide"></a><br><a href="examples/classical_neutrals_marketing/">Typst project</a></td>
+    <td><strong>Japandi linear marketing · slide 1</strong><br><a href="docs/images/example-comparisons/japandi-marketing.png"><img src="docs/images/example-comparisons/japandi-marketing.png" alt="PowerPoint and Typst comparison for a Japandi marketing cover slide"></a><br><a href="examples/japandi_marketing/">Typst project</a></td>
+  </tr>
+  <tr>
+    <td><strong>Blue spheres · slide 7</strong><br><a href="docs/images/example-comparisons/blue-spheres.png"><img src="docs/images/example-comparisons/blue-spheres.png" alt="PowerPoint and Typst comparison for a blue spheres marketing strategies slide"></a><br><a href="examples/blue_spheres/">Typst project</a></td>
+    <td></td>
+  </tr>
+</table>
+
+Each project includes readable `main.typ`, its helper template, shared media, an asset manifest, a conversion report, and a font preflight report. Compile and optionally export one from the repository root:
+
+```console
+typst compile examples/quarterly_marketing_meeting/main.typ quarterly-preview.pdf
+typst-to-pptx examples/quarterly_marketing_meeting/main.typ --output quarterly-roundtrip.pptx
+```
 
 ## Install
 
@@ -92,7 +114,7 @@ python -m pip install --upgrade build
 python -m build
 ```
 
-The source distribution and wheel are written to `dist/`. The full converted sample under `examples/quarterly_marketing_meeting/` stays in the repository; its media assets are excluded from package distributions. The smaller README comparison image is included in the source distribution.
+The source distribution and wheel are written to `dist/`. Converted projects under `examples/` stay in the repository; example media assets are excluded from package distributions. The README comparison PNGs are included in the source distribution.
 
 Development-only visual and geometry utilities live under `tools/`.
 

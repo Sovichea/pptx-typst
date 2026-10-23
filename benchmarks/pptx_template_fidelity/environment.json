@@ -1,0 +1,13 @@
+{
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "typst": "typst 0.15.1 (9dfd3a08)",
+  "pptx_typst": "0.1.0",
+  "python_pptx": "1.0.2",
+  "pymupdf": "1.28.2",
+  "numpy": "2.5.3",
+  "pillow": "12.3.0",
+  "benchmark_runner": "tools/run_text_fidelity_benchmark.py",
+  "input_files": "manifest.json SHA-256 identified; kept outside repository",
+  "powerpoint": "16.0"
+}

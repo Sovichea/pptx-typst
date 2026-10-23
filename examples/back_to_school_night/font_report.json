@@ -1,0 +1,750 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T08:36:19.988889+00:00",
+  "interpretation": "Availability is based on font inventories. When a render PDF is supplied, its extracted font names provide separate evidence and may show substitution despite an available inventory entry.",
+  "source": "examples\\back_to_school_night\\main.typ",
+  "platform": "win32",
+  "families": [
+    {
+      "family": "Arial",
+      "usages": [
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 6,
+          "construct": "set text default",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Arial",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Arial Narrow Bold",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Century Gothic",
+      "usages": [
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 57,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 95,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 139,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 139,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 192,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 230,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 277,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 324,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 371,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 409,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 465,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 512,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 532,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 566,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 567,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 580,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 593,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 593,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 593,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 615,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 616,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 638,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 657,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 659,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 680,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 706,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 716,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 718,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 718,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 739,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 765,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 775,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 777,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 777,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 777,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 777,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 798,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 824,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 843,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 845,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 845,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 845,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 845,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 845,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 845,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 866,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 892,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 902,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 925,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 927,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 927,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 948,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 974,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1011,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1013,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1013,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1034,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1036,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1036,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1057,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1083,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1093,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1095,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1095,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1095,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1116,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1118,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1139,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1165,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1219,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1245,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1299,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1301,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1301,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1301,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1301,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\back_to_school_night\\main.typ",
+          "line": 1322,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Century Gothic",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Century Gothic",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    }
+  ],
+  "typst_environment": {
+    "status": "checked",
+    "command": [
+      "typst",
+      "fonts"
+    ],
+    "family_count": 353,
+    "font_paths": []
+  },
+  "powerpoint_environment": {
+    "status": "checked",
+    "method": "windows_font_registry",
+    "powerpoint_detected": true,
+    "note": "Windows installed-font registry is used as an Office-visibility proxy; PowerPoint was not automated."
+  },
+  "dynamic_font_expressions": [],
+  "unresolved_font_owners": [
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 566,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 567,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 580,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 593,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 615,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 616,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 638,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 706,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 765,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 824,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 892,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 974,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 1083,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 1165,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\back_to_school_night\\main.typ",
+      "line": 1245,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    }
+  ],
+  "checks_not_performed": [
+    "Some text constructs omit a literal family and may inherit it from a master, layout, Typst default, or helper default; review unresolved_font_owners."
+  ]
+}

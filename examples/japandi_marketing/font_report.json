@@ -1,0 +1,834 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T08:36:20.491489+00:00",
+  "interpretation": "Availability is based on font inventories. When a render PDF is supplied, its extracted font names provide separate evidence and may show substitution despite an available inventory entry.",
+  "source": "examples\\japandi_marketing\\main.typ",
+  "platform": "win32",
+  "families": [
+    {
+      "family": "Arial",
+      "usages": [
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 6,
+          "construct": "set text default",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Arial",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Arial Narrow Bold",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Calibri",
+      "usages": [
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 30,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 59,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 88,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 99,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 119,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 119,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 119,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 139,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 159,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 188,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 208,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 228,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 248,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 268,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 305,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 324,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 326,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 350,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 369,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 392,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 394,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 415,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 417,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 417,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 417,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 417,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 417,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 441,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 451,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 474,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 476,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 497,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 499,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 523,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 542,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 544,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 565,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 588,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 590,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 614,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 627,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 628,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 628,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 628,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 628,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 629,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 629,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 629,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 629,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 639,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 641,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 662,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 688,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 698,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 700,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 721,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 744,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 746,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 770,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 783,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 802,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 804,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 825,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 848,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 850,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 850,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 850,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 850,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 850,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 850,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 874,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 907,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 930,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 932,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 956,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 956,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 956,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 969,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 979,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 981,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1002,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1004,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1025,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1051,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1051,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1051,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1061,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1084,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1086,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1107,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1109,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1133,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1133,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1133,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1143,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1145,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1166,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1168,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1189,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1215,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1234,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1236,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1257,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1280,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1282,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\japandi_marketing\\main.typ",
+          "line": 1282,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Calibri",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Calibri",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    }
+  ],
+  "typst_environment": {
+    "status": "checked",
+    "command": [
+      "typst",
+      "fonts"
+    ],
+    "family_count": 353,
+    "font_paths": []
+  },
+  "powerpoint_environment": {
+    "status": "checked",
+    "method": "windows_font_registry",
+    "powerpoint_detected": true,
+    "note": "Windows installed-font registry is used as an Office-visibility proxy; PowerPoint was not automated."
+  },
+  "dynamic_font_expressions": [],
+  "unresolved_font_owners": [
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 305,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 350,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 441,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 523,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 614,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 627,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 628,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 629,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 688,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 770,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 783,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 874,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 956,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 969,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 1051,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 1133,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\japandi_marketing\\main.typ",
+      "line": 1215,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    }
+  ],
+  "checks_not_performed": [
+    "Some text constructs omit a literal family and may inherit it from a master, layout, Typst default, or helper default; review unresolved_font_owners."
+  ]
+}

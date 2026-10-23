@@ -1,0 +1,58 @@
+{
+  "source_file": "Japandi linear marketing presentation.pptx",
+  "slides": 15,
+  "status": "completed_with_warnings",
+  "counts": {
+    "background_colors": 15,
+    "inherited_master_layers": 1,
+    "line_shapes": 29,
+    "media_placements": 5,
+    "geometry_rect": 5,
+    "text_placements": 32,
+    "autofit_shrink": 3,
+    "autofit_none": 29,
+    "table_placements": 1
+  },
+  "warnings": [
+    {
+      "issue": "placeholder_layering_risk",
+      "outcome": "approximated",
+      "source_type": "placeholder:footer",
+      "slide": 2,
+      "owner": "slide",
+      "owner_id": 2,
+      "shape_id": 5,
+      "shape": "Footer Placeholder 4",
+      "geometry_pt": {
+        "x": -162.78,
+        "y": 175.71,
+        "w": 359.4,
+        "h": 33.84
+      },
+      "fallback": "placeholder text is emitted in a separate layer above ordinary slide content",
+      "reason": "Later picture shape 8 overlaps this placeholder in source z-order; Typst stacking may differ.",
+      "expected_loss": "Text may appear over a picture that covers it in the PowerPoint rendering.",
+      "overlapping_shape_id": 8
+    },
+    {
+      "issue": "placeholder_layering_risk",
+      "outcome": "approximated",
+      "source_type": "placeholder:footer",
+      "slide": 4,
+      "owner": "slide",
+      "owner_id": 4,
+      "shape_id": 5,
+      "shape": "Footer Placeholder 4",
+      "geometry_pt": {
+        "x": -162.78,
+        "y": 175.71,
+        "w": 359.4,
+        "h": 33.84
+      },
+      "fallback": "placeholder text is emitted in a separate layer above ordinary slide content",
+      "reason": "Later picture shape 8 overlaps this placeholder in source z-order; Typst stacking may differ.",
+      "expected_loss": "Text may appear over a picture that covers it in the PowerPoint rendering.",
+      "overlapping_shape_id": 8
+    }
+  ]
+}

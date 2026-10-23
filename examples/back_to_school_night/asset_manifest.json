@@ -1,0 +1,4394 @@
+{
+  "source_file": "Back to school night presentation.pptx",
+  "source_slide_count": 13,
+  "slide_dimensions_pt": [
+    959.75,
+    540.0
+  ],
+  "unique_images": 18,
+  "unique_vectors": 13,
+  "alpha_variants": 0,
+  "group_mode": "safe",
+  "clip_mode": "legacy",
+  "mask_mode": "legacy",
+  "layout_mode": "structured",
+  "counts": {
+    "background_colors": 13,
+    "inherited_master_layers": 1,
+    "other_placements": 24,
+    "vector_shapes": 15,
+    "line_shapes": 24,
+    "media_placements": 24,
+    "geometry_rect": 21,
+    "unsupported_shape": 9,
+    "unsupported_placements": 9,
+    "group": 4,
+    "group_containers": 3,
+    "clipped_images": 3,
+    "masked_complex": 3,
+    "geometry_complex": 3,
+    "text_placements": 20,
+    "autofit_none": 20,
+    "table_placements": 2
+  },
+  "masters": [
+    {
+      "owner": "master",
+      "id": "Master01",
+      "part": "/ppt/slideMasters/slideMaster1.xml",
+      "placements": [],
+      "groups": []
+    }
+  ],
+  "layouts": [
+    {
+      "owner": "layout",
+      "id": "Layout01",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout1.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Rectangle: Rounded Corners 2",
+          "x": 40.18,
+          "y": 36.0,
+          "w": 199.7,
+          "h": 468.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_c94f500f8222.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Straight Connector 3",
+          "x": 286.12,
+          "y": 462.0,
+          "w": 607.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Straight Connector 4",
+          "x": 281.87,
+          "y": 42.0,
+          "w": 607.76,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Graphic 7",
+          "x": 0.0,
+          "y": 12.0,
+          "w": 206.45,
+          "h": 288.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image1_00a2ebe907.svg",
+          "render_source": "assets/media/image1_00a2ebe907.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.39459,
+            "t": -0.00608,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.39459,
+            "t": -0.00608,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Graphic 11",
+          "x": -1.82,
+          "y": 360.0,
+          "w": 208.27,
+          "h": 180.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image2_f94bf2412f.svg",
+          "render_source": "assets/media/image2_f94bf2412f.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 5,
+          "source_z_index": 5,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Cross 12",
+          "x": 128.29,
+          "y": 312.85,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout02",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout2.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Rectangle: Rounded Corners 7",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 868.1,
+          "h": 378.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_aece8f98b501.svg"
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Graphic 8",
+          "x": -0.91,
+          "y": 277.65,
+          "w": 306.79,
+          "h": 265.15,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image3_013027c85a.svg",
+          "render_source": "assets/media/image3_013027c85a.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Graphic 11",
+          "x": 699.37,
+          "y": 40.24,
+          "w": 301.53,
+          "h": 221.05,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image4_60ac25f068.svg",
+          "render_source": "assets/media/image4_60ac25f068.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Cross 12",
+          "x": 630.12,
+          "y": 12.33,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout03",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout3.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Rectangle: Rounded Corners 9",
+          "x": 555.8,
+          "y": 36.0,
+          "w": 336.24,
+          "h": 468.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_7fd3ca95db42.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 18,
+          "name": "Freeform: Shape 17",
+          "x": 526.82,
+          "y": 10.75,
+          "w": 161.66,
+          "h": 160.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_38976466b823.svg"
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g3_4"
+          ],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 368.64,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g3_4"
+          ],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 368.64,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 23,
+          "name": "Cross 22",
+          "x": 804.61,
+          "y": 418.11,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        }
+      ],
+      "groups": [
+        {
+          "id": "g3_4",
+          "parent": null,
+          "name": "Group 3",
+          "source_shape_id": 4,
+          "transform": {
+            "off_x": 45.8261,
+            "off_y": 48.0,
+            "ext_w": 368.6362,
+            "ext_h": 414.0,
+            "child_off_x": 45.8261,
+            "child_off_y": 48.0,
+            "child_ext_w": 848.0488,
+            "child_ext_h": 414.0,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              0.4346875,
+              0.0,
+              25.90609077
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            45.8261,
+            48.0,
+            414.4624,
+            462.0
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout04",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout4.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g4_32"
+          ],
+          "source_shape_id": 33,
+          "name": "Rectangle: Rounded Corners 32",
+          "x": 44.01,
+          "y": 292.48,
+          "w": 354.59,
+          "h": 211.52,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_b7e2a52f307b.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g4_32"
+          ],
+          "source_shape_id": 34,
+          "name": "Rectangle: Rounded Corners 33",
+          "x": 44.01,
+          "y": 48.0,
+          "w": 354.59,
+          "h": 211.52,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_b7e2a52f307b.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 30,
+          "name": "Straight Connector 29",
+          "x": 449.18,
+          "y": 462.0,
+          "w": 446.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 31,
+          "name": "Straight Connector 30",
+          "x": 449.18,
+          "y": 49.73,
+          "w": 446.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 36,
+          "name": "Graphic 35",
+          "x": -3.83,
+          "y": 3.79,
+          "w": 191.71,
+          "h": 186.53,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image5_061f1b2921.svg",
+          "render_source": "assets/media/image5_061f1b2921.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 47,
+          "name": "Cross 46",
+          "x": 313.11,
+          "y": 417.88,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        }
+      ],
+      "groups": [
+        {
+          "id": "g4_32",
+          "parent": null,
+          "name": "Group 31",
+          "source_shape_id": 32,
+          "transform": {
+            "off_x": 44.0083,
+            "off_y": 48.0001,
+            "ext_w": 354.5877,
+            "ext_h": 455.9994,
+            "child_off_x": 551.2874,
+            "child_off_y": 48.0821,
+            "child_ext_w": 354.5877,
+            "child_ext_h": 413.9177,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              1.0,
+              0.0,
+              -507.27913386
+            ],
+            [
+              0.0,
+              1.10166671,
+              -4.97039893
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            44.0083,
+            48.0001,
+            398.596,
+            503.9994
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout05",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout5.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Rectangle: Rounded Corners 13",
+          "x": 557.64,
+          "y": 90.0,
+          "w": 336.24,
+          "h": 324.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_6b51c91c93f8.svg"
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 16,
+          "name": "Graphic 15",
+          "x": 599.87,
+          "y": 122.11,
+          "w": 276.0,
+          "h": 262.5,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image6_be51971252.svg",
+          "render_source": "assets/media/image6_be51971252.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout06",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout6.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Rectangle: Rounded Corners 5",
+          "x": 45.83,
+          "y": 80.11,
+          "w": 847.78,
+          "h": 115.4,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_d3c655b528c5.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g6_9"
+          ],
+          "source_shape_id": 10,
+          "name": "Graphic 9",
+          "x": 758.42,
+          "y": -0.0,
+          "w": 201.33,
+          "h": 174.0,
+          "rot": -180.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image7_0a43c56ff1.svg",
+          "render_source": "assets/media/image7_0a43c56ff1.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g6_9"
+          ],
+          "source_shape_id": 11,
+          "name": "Cross 10",
+          "x": 649.25,
+          "y": 56.83,
+          "w": 51.53,
+          "h": 51.53,
+          "rot": 135.0,
+          "flip_y": true,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Graphic 11",
+          "x": 66.14,
+          "y": 96.0,
+          "w": 275.14,
+          "h": 99.52,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image6_be51971252.svg",
+          "render_source": "assets/media/image6_be51971252.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.00979,
+            "t": -0.01685,
+            "r": -0.05675,
+            "b": 0.63656
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.00979,
+            "t": -0.01685,
+            "r": -0.05675,
+            "b": 0.63656
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        }
+      ],
+      "groups": [
+        {
+          "id": "g6_9",
+          "parent": null,
+          "name": "Group 8",
+          "source_shape_id": 9,
+          "transform": {
+            "off_x": 649.2472,
+            "off_y": 0.0,
+            "ext_w": 310.5028,
+            "ext_h": 174.0,
+            "child_off_x": -0.8198,
+            "child_off_y": 0.0,
+            "child_ext_w": 310.5028,
+            "child_ext_h": 174.0,
+            "rotation_degrees": 0.0,
+            "flip_h": true,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              -1.0,
+              0.0,
+              958.93023622
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "layout",
+      "id": "Layout07",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout7.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 446.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 446.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#435F30",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Rectangle: Rounded Corners 9",
+          "x": 568.88,
+          "y": 36.0,
+          "w": 330.59,
+          "h": 468.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_4e17d357e914.svg"
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 11,
+          "name": "Graphic 10",
+          "x": 592.83,
+          "y": 57.76,
+          "w": 306.63,
+          "h": 318.27,
+          "rot": -0.0,
+          "flip_y": true,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image8_299b7b60f5.svg",
+          "render_source": "assets/media/image8_299b7b60f5.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": 0.03949,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": 0.03949,
+            "b": 0.23144
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Cross 11",
+          "x": 851.81,
+          "y": 451.5,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        },
+        {
+          "z_index": 5,
+          "source_z_index": 5,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Graphic 12",
+          "x": 677.62,
+          "y": 377.14,
+          "w": 173.4,
+          "h": 127.12,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image9_34ccaabcb0.svg",
+          "render_source": "assets/media/image9_34ccaabcb0.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout08",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout8.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Rectangle: Rounded Corners 3",
+          "x": 551.06,
+          "y": 49.23,
+          "w": 354.59,
+          "h": 211.52,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_520b2c3ddb87.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Graphic 5",
+          "x": 467.2,
+          "y": -5.57,
+          "w": 191.71,
+          "h": 186.53,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image5_061f1b2921.svg",
+          "render_source": "assets/media/image5_061f1b2921.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Rectangle: Rounded Corners 13",
+          "x": 551.06,
+          "y": 291.99,
+          "w": 354.59,
+          "h": 211.52,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_520b2c3ddb87.svg"
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 15,
+          "name": "Cross 14",
+          "x": 867.75,
+          "y": 455.1,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 23,
+          "name": "Straight Connector 22",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 446.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 5,
+          "source_z_index": 5,
+          "group_path": [],
+          "source_shape_id": 24,
+          "name": "Straight Connector 23",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 446.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#435F30",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout09",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout9.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 11,
+          "name": "Rectangle: Rounded Corners 10",
+          "x": 45.83,
+          "y": 53.38,
+          "w": 847.78,
+          "h": 231.7,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_ac81a9afff29.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Graphic 12",
+          "x": -0.82,
+          "y": -0.0,
+          "w": 201.33,
+          "h": 174.0,
+          "rot": -0.0,
+          "flip_y": true,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image10_79fc22641c.svg",
+          "render_source": "assets/media/image10_79fc22641c.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Graphic 13",
+          "x": 699.37,
+          "y": 40.24,
+          "w": 301.53,
+          "h": 221.05,
+          "rot": 90.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image4_60ac25f068.svg",
+          "render_source": "assets/media/image4_60ac25f068.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 15,
+          "name": "Cross 14",
+          "x": 258.16,
+          "y": 30.68,
+          "w": 51.53,
+          "h": 51.53,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout10",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout10.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Rectangle: Rounded Corners 8",
+          "x": 45.83,
+          "y": 314.53,
+          "w": 848.05,
+          "h": 90.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_ae6948501cbb.svg"
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Graphic 9",
+          "x": 686.25,
+          "y": 289.69,
+          "w": 157.36,
+          "h": 149.66,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image6_be51971252.svg",
+          "render_source": "assets/media/image6_be51971252.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 11,
+          "name": "Graphic 10",
+          "x": 404.32,
+          "y": 289.69,
+          "w": 157.36,
+          "h": 149.66,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image6_be51971252.svg",
+          "render_source": "assets/media/image6_be51971252.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 5,
+          "source_z_index": 5,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Graphic 11",
+          "x": 109.5,
+          "y": 289.69,
+          "w": 157.36,
+          "h": 149.66,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "image",
+          "source": "assets/media/image6_be51971252.svg",
+          "render_source": "assets/media/image6_be51971252.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout11",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout11.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Rectangle: Rounded Corners 7",
+          "x": 48.61,
+          "y": 165.25,
+          "w": 409.79,
+          "h": 261.89,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_f9dedfd9b0e1.svg"
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Rectangle: Rounded Corners 8",
+          "x": 480.44,
+          "y": 164.11,
+          "w": 417.48,
+          "h": 261.89,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "vector_shape",
+          "source": "assets/media/shape_47e990027af6.svg"
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 22,
+          "name": "Graphic 21",
+          "x": -0.13,
+          "y": 359.56,
+          "w": 97.48,
+          "h": 94.84,
+          "rot": -90.0,
+          "flip_y": false,
+          "group_skew": -0.0,
+          "type": "image",
+          "source": "assets/media/image11_723df3f7c8.svg",
+          "render_source": "assets/media/image11_723df3f7c8.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 5,
+          "source_z_index": 5,
+          "group_path": [],
+          "source_shape_id": 24,
+          "name": "Cross 23",
+          "x": 847.37,
+          "y": 129.57,
+          "w": 71.34,
+          "h": 71.34,
+          "rot": 45.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "unsupported",
+          "unsupported_kind": "shape",
+          "warning": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout12",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout12.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": 45.83,
+          "y": 47.11,
+          "w": 848.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout13",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout13.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [
+            "g13_4"
+          ],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 45.83,
+          "y": 462.0,
+          "w": 344.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#3E532A",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [
+            "g13_4"
+          ],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 45.83,
+          "y": 48.0,
+          "w": 344.05,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#435F30",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": [
+        {
+          "id": "g13_4",
+          "parent": null,
+          "name": "Group 3",
+          "source_shape_id": 4,
+          "transform": {
+            "off_x": 45.8261,
+            "off_y": 48.0,
+            "ext_w": 344.0488,
+            "ext_h": 414.0,
+            "child_off_x": 45.8261,
+            "child_off_y": 48.0,
+            "child_ext_w": 848.0488,
+            "child_ext_h": 414.0,
+            "rotation_degrees": 0.0,
+            "flip_h": false,
+            "flip_v": false
+          },
+          "matrix_pt": [
+            [
+              0.40569459,
+              0.0,
+              27.2347239
+            ],
+            [
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "render_bounds_pt": [
+            45.8261,
+            48.0,
+            389.875,
+            462.0
+          ]
+        }
+      ]
+    }
+  ],
+  "master_placeholders": [
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 46.80007874015748,
+      "y": 48.96,
+      "width": 847.44,
+      "height": 90.0,
+      "rotation": 0.0,
+      "margin-left": 9.598346456692914,
+      "margin-right": 9.598346456692914,
+      "margin-top": 4.799133858267717,
+      "margin-bottom": 4.799133858267717,
+      "anchor": "bottom",
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "id": "body-1",
+      "type": "body",
+      "idx": 1,
+      "x": 46.80007874015748,
+      "y": 166.32,
+      "width": 847.44,
+      "height": 283.68,
+      "rotation": 0.0,
+      "margin-left": 9.598346456692914,
+      "margin-right": 9.598346456692914,
+      "margin-top": 4.799133858267717,
+      "margin-bottom": 4.799133858267717,
+      "font": "Century Gothic"
+    }
+  ],
+  "layout_placeholders": [
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 282.24,
+      "y": 41.76,
+      "width": 612.0,
+      "height": 225.36,
+      "rotation": 0.0,
+      "font": "Century Gothic",
+      "size": 54.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "master": "Master01",
+      "id": "body-10",
+      "type": "body",
+      "idx": 10,
+      "x": 285.84,
+      "y": 280.08,
+      "width": 612.0000787401575,
+      "height": 84.0,
+      "rotation": 0.0,
+      "font": "Century Gothic",
+      "size": 24.0,
+      "weight": "bold",
+      "fill": "rgb(\"#3E532A\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 65.87496062992126,
+      "y": 131.04,
+      "width": 828.0,
+      "height": 224.64,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Century Gothic",
+      "size": 54.0,
+      "fill": "rgb(\"#E4EDDD\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 41.04,
+      "y": 48.24,
+      "width": 373.68,
+      "height": 414.0,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Century Gothic",
+      "size": 54.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 449.28,
+      "y": 49.72590551181102,
+      "width": 448.56015748031496,
+      "height": 322.27377952755904,
+      "rotation": 0.0,
+      "font": "Century Gothic",
+      "size": 54.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "master": "Master01",
+      "id": "body-13",
+      "type": "body",
+      "idx": 13,
+      "x": 449.6047244094488,
+      "y": 374.99984251968505,
+      "width": 448.65582677165355,
+      "height": 84.0,
+      "rotation": 0.0,
+      "font": "Century Gothic",
+      "size": 24.0,
+      "weight": "bold",
+      "fill": "rgb(\"#3E532A\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 54.0,
+      "y": 48.96,
+      "width": 450.0,
+      "height": 90.0,
+      "rotation": 0.0,
+      "align": "left",
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 36.0,
+      "y": 185.04,
+      "width": 857.52,
+      "height": 90.0,
+      "rotation": 0.0,
+      "align": "left",
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 41.04,
+      "y": 48.96,
+      "width": 462.8349606299213,
+      "height": 90.0,
+      "rotation": 0.0,
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 41.04,
+      "y": 48.96,
+      "width": 462.8349606299213,
+      "height": 90.0,
+      "rotation": 0.0,
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 128.88,
+      "y": 77.76,
+      "width": 642.24,
+      "height": 207.36,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Century Gothic",
+      "size": 48.0,
+      "fill": "rgb(\"#E4EDDD\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 36.0,
+      "y": 55.44,
+      "width": 847.44,
+      "height": 90.0,
+      "rotation": 0.0,
+      "align": "left",
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 36.0,
+      "y": 48.96,
+      "width": 847.44,
+      "height": 90.0,
+      "rotation": 0.0,
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 46.8,
+      "y": 47.1148031496063,
+      "width": 847.0748818897638,
+      "height": 76.7251968503937,
+      "rotation": 0.0,
+      "align": "left",
+      "font": "Century Gothic"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 41.04,
+      "y": 48.96,
+      "width": 348.8349606299213,
+      "height": 90.0,
+      "rotation": 0.0,
+      "font": "Century Gothic"
+    }
+  ],
+  "placeholder_warnings": [
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 17,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 3,
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 22,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 4,
+      "shape_id": 5,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 46,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 5,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 5,
+      "shape_id": 5,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 5,
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 19,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 21,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 6,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 6,
+      "shape_id": 11,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 13,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 7,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 7,
+      "shape_id": 9,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 9,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 8,
+      "shape_id": 4,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 8,
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 8,
+      "shape_id": 13,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 25,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 21,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 4,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 9,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 17,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 18,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 4,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 14,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 15,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 16,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 18,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 16,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 17,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 18,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 20,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 19,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 11,
+      "shape_id": 2,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 11,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 11,
+      "shape_id": 21,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 21,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 23,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 12,
+      "shape_id": 12,
+      "placeholder_type": "TABLE (12)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 12,
+      "shape_id": 14,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 7,
+      "placeholder_type": "TABLE (12)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 10,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 8,
+      "placeholder_type": "TABLE (12)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 9,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 15,
+      "placeholder_type": "TABLE (12)",
+      "action": "unsupported; omitted from structured output"
+    }
+  ],
+  "media_warnings": [
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 13,
+      "shape": "Cross 12",
+      "geometry_pt": {
+        "x": 128.29,
+        "y": 312.85,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 13,
+      "shape": "Cross 12",
+      "geometry_pt": {
+        "x": 630.12,
+        "y": 12.33,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 23,
+      "shape": "Cross 22",
+      "geometry_pt": {
+        "x": 804.61,
+        "y": 418.11,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 47,
+      "shape": "Cross 46",
+      "geometry_pt": {
+        "x": 313.11,
+        "y": 417.88,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 11,
+      "shape": "Cross 10",
+      "geometry_pt": {
+        "x": 649.25,
+        "y": 56.83,
+        "w": 51.53,
+        "h": 51.53,
+        "rot": 135.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 12,
+      "shape": "Cross 11",
+      "geometry_pt": {
+        "x": 851.81,
+        "y": 451.5,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 15,
+      "shape": "Cross 14",
+      "geometry_pt": {
+        "x": 867.75,
+        "y": 455.1,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 15,
+      "shape": "Cross 14",
+      "geometry_pt": {
+        "x": 258.16,
+        "y": 30.68,
+        "w": 51.53,
+        "h": 51.53,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 24,
+      "shape": "Cross 23",
+      "geometry_pt": {
+        "x": 847.37,
+        "y": 129.57,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    }
+  ],
+  "media": {
+    "00a2ebe9071acddb1be583547279d15da7801efa3ad5043b228adab837225aa2": {
+      "path": "assets/media/image1_00a2ebe907.svg",
+      "source": "/ppt/media/image1.svg",
+      "bytes": 690,
+      "sha256": "00a2ebe9071acddb1be583547279d15da7801efa3ad5043b228adab837225aa2",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout01",
+          "slide": null,
+          "shape": "Graphic 7",
+          "crop": {
+            "l": 0.39459,
+            "t": -0.00608,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "f94bf2412fc0fcbe556eac2c3bc6823615d85b7eaf43d67a35f3785851882c9e": {
+      "path": "assets/media/image2_f94bf2412f.svg",
+      "source": "/ppt/media/image2.svg",
+      "bytes": 1182,
+      "sha256": "f94bf2412fc0fcbe556eac2c3bc6823615d85b7eaf43d67a35f3785851882c9e",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout01",
+          "slide": null,
+          "shape": "Graphic 11",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "013027c85a4407a1f23ba5bf8c1d7cb8273c410f3d42200c8566425fb1874603": {
+      "path": "assets/media/image3_013027c85a.svg",
+      "source": "/ppt/media/image3.svg",
+      "bytes": 1162,
+      "sha256": "013027c85a4407a1f23ba5bf8c1d7cb8273c410f3d42200c8566425fb1874603",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout02",
+          "slide": null,
+          "shape": "Graphic 8",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "60ac25f06848b23725e70ccb27cf1591fb40a1a1becba07f1e0a07358961506e": {
+      "path": "assets/media/image4_60ac25f068.svg",
+      "source": "/ppt/media/image4.svg",
+      "bytes": 710,
+      "sha256": "60ac25f06848b23725e70ccb27cf1591fb40a1a1becba07f1e0a07358961506e",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout02",
+          "slide": null,
+          "shape": "Graphic 11",
+          "crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        },
+        {
+          "owner": "layout",
+          "owner_id": "Layout09",
+          "slide": null,
+          "shape": "Graphic 13",
+          "crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "03b471716c096b39a6414f3741d9c725655a8fd2cabd12b8aba1a5142437aaad": {
+      "path": "assets/media/image12_03b471716c.png",
+      "source": "/ppt/media/image12.png",
+      "bytes": 633094,
+      "sha256": "03b471716c096b39a6414f3741d9c725655a8fd2cabd12b8aba1a5142437aaad",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 3,
+          "slide": 3,
+          "shape": "Picture Placeholder 7",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00042,
+            "r": 0.0,
+            "b": 0.00042
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "complex"
+        }
+      ]
+    },
+    "061f1b2921dfd0fbaf6cdabac158ab3cd7310b75cdc11c2b2829ae26f126fdee": {
+      "path": "assets/media/image5_061f1b2921.svg",
+      "source": "/ppt/media/image5.svg",
+      "bytes": 1182,
+      "sha256": "061f1b2921dfd0fbaf6cdabac158ab3cd7310b75cdc11c2b2829ae26f126fdee",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout04",
+          "slide": null,
+          "shape": "Graphic 35",
+          "crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        },
+        {
+          "owner": "layout",
+          "owner_id": "Layout08",
+          "slide": null,
+          "shape": "Graphic 5",
+          "crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "a4ac60e8d3b471ae7ba51854e3e4193cfe812263e9cf899d3384b05731d02d9e": {
+      "path": "assets/media/image13_a4ac60e8d3.png",
+      "source": "/ppt/media/image13.png",
+      "bytes": 625302,
+      "sha256": "a4ac60e8d3b471ae7ba51854e3e4193cfe812263e9cf899d3384b05731d02d9e",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 4,
+          "slide": 4,
+          "shape": "Picture Placeholder 4",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00071,
+            "r": 0.0,
+            "b": 0.00071
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "complex"
+        }
+      ]
+    },
+    "be51971252ce3c86702def53553a97f39fdfbe90bcd3d15b07a2d91ed3e2b00e": {
+      "path": "assets/media/image6_be51971252.svg",
+      "source": "/ppt/media/image6.svg",
+      "bytes": 684,
+      "sha256": "be51971252ce3c86702def53553a97f39fdfbe90bcd3d15b07a2d91ed3e2b00e",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout05",
+          "slide": null,
+          "shape": "Graphic 15",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        },
+        {
+          "owner": "layout",
+          "owner_id": "Layout06",
+          "slide": null,
+          "shape": "Graphic 11",
+          "crop": {
+            "l": 0.00979,
+            "t": -0.01685,
+            "r": -0.05675,
+            "b": 0.63656
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        },
+        {
+          "owner": "layout",
+          "owner_id": "Layout10",
+          "slide": null,
+          "shape": "Graphic 9",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        },
+        {
+          "owner": "layout",
+          "owner_id": "Layout10",
+          "slide": null,
+          "shape": "Graphic 10",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        },
+        {
+          "owner": "layout",
+          "owner_id": "Layout10",
+          "slide": null,
+          "shape": "Graphic 11",
+          "crop": {
+            "l": 0.00864,
+            "t": 0.0,
+            "r": -0.0556,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "5686775123dfc2e54d367a37c7e9293084d3a904e8e55d41074f0c45c0a5f666": {
+      "path": "assets/media/image14_5686775123.svg",
+      "source": "/ppt/media/image14.svg",
+      "bytes": 527,
+      "sha256": "5686775123dfc2e54d367a37c7e9293084d3a904e8e55d41074f0c45c0a5f666",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 5,
+          "slide": 5,
+          "shape": "Picture Placeholder 4",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00053,
+            "r": 0.0,
+            "b": 0.00053
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "0a43c56ff1a79d2294f6d37c18c97701023c7e542751ef4d72d1292da187a98b": {
+      "path": "assets/media/image7_0a43c56ff1.svg",
+      "source": "/ppt/media/image7.svg",
+      "bytes": 1182,
+      "sha256": "0a43c56ff1a79d2294f6d37c18c97701023c7e542751ef4d72d1292da187a98b",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout06",
+          "slide": null,
+          "shape": "Graphic 9",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "299b7b60f55fe3537b9efc3f9af327536e2e4399db6a46e00119814f7d979683": {
+      "path": "assets/media/image8_299b7b60f5.svg",
+      "source": "/ppt/media/image8.svg",
+      "bytes": 1325,
+      "sha256": "299b7b60f55fe3537b9efc3f9af327536e2e4399db6a46e00119814f7d979683",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout07",
+          "slide": null,
+          "shape": "Graphic 10",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": 0.03949,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "34ccaabcb00e891d62cf1c27fc780b5adfee2f81a67445b7589767bc3ac70dcb": {
+      "path": "assets/media/image9_34ccaabcb0.svg",
+      "source": "/ppt/media/image9.svg",
+      "bytes": 710,
+      "sha256": "34ccaabcb00e891d62cf1c27fc780b5adfee2f81a67445b7589767bc3ac70dcb",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout07",
+          "slide": null,
+          "shape": "Graphic 12",
+          "crop": {
+            "l": 0.39459,
+            "t": 0.46841,
+            "r": -0.10838,
+            "b": 0.00608
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "e53bd85acd976ebe478afb6c9f3b0da6373ce2c6102a5f9df4314b1e6fe96c7a": {
+      "path": "assets/media/image15_e53bd85acd.png",
+      "source": "/ppt/media/image15.png",
+      "bytes": 961796,
+      "sha256": "e53bd85acd976ebe478afb6c9f3b0da6373ce2c6102a5f9df4314b1e6fe96c7a",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 8,
+          "slide": 8,
+          "shape": "Picture Placeholder 7",
+          "crop": {
+            "l": 0.00011,
+            "t": 0.0,
+            "r": 0.00011,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "complex"
+        }
+      ]
+    },
+    "79fc22641c356308fb3797058499b9bff31f6ca6c8b860ac846ef48d046058c5": {
+      "path": "assets/media/image10_79fc22641c.svg",
+      "source": "/ppt/media/image10.svg",
+      "bytes": 1182,
+      "sha256": "79fc22641c356308fb3797058499b9bff31f6ca6c8b860ac846ef48d046058c5",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout09",
+          "slide": null,
+          "shape": "Graphic 12",
+          "crop": {
+            "l": 0.22955,
+            "t": -0.01334,
+            "r": -0.10741,
+            "b": 0.23144
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "4d4880acdb4d5c5fa4d0c13dae16d4eedf41fdd658cb51c74595f888930f7f76": {
+      "path": "assets/media/image16_4d4880acdb.png",
+      "source": "/ppt/media/image16.png",
+      "bytes": 1178,
+      "sha256": "4d4880acdb4d5c5fa4d0c13dae16d4eedf41fdd658cb51c74595f888930f7f76",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 10,
+          "slide": 10,
+          "shape": "Picture Placeholder 13",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "2dd4ec6cb731624569c8c6776ea6ac455d75ffcae579c4cbb2c86284eeeed3f8": {
+      "path": "assets/media/image17_2dd4ec6cb7.png",
+      "source": "/ppt/media/image17.png",
+      "bytes": 1097,
+      "sha256": "2dd4ec6cb731624569c8c6776ea6ac455d75ffcae579c4cbb2c86284eeeed3f8",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 10,
+          "slide": 10,
+          "shape": "Picture Placeholder 14",
+          "crop": {
+            "l": 0.10565,
+            "t": 0.10565,
+            "r": 0.10565,
+            "b": 0.10565
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "d673c803643b766e54df89c963a9f55609330d8047a44c4d076692be566aaac6": {
+      "path": "assets/media/image18_d673c80364.png",
+      "source": "/ppt/media/image18.png",
+      "bytes": 671,
+      "sha256": "d673c803643b766e54df89c963a9f55609330d8047a44c4d076692be566aaac6",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 10,
+          "slide": 10,
+          "shape": "Picture Placeholder 15",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00439,
+            "r": 0.0,
+            "b": 0.00439
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "723df3f7c85dee3877d568b2da32a6da43574e5c15c25df18c4a0a537a3dd138": {
+      "path": "assets/media/image11_723df3f7c8.svg",
+      "source": "/ppt/media/image11.svg",
+      "bytes": 1303,
+      "sha256": "723df3f7c85dee3877d568b2da32a6da43574e5c15c25df18c4a0a537a3dd138",
+      "placements": [
+        {
+          "owner": "layout",
+          "owner_id": "Layout11",
+          "slide": null,
+          "shape": "Graphic 21",
+          "crop": {
+            "l": -0.06093,
+            "t": -0.16314,
+            "r": -0.13478,
+            "b": -0.03577
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "layout": "Layout01",
+      "master": "Master01",
+      "placements": [],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Open House",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 282.24,
+            "y": 41.76,
+            "w": 612.0,
+            "h": 225.36
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 282.24,
+            "y": 41.76,
+            "width": 612.0,
+            "height": 225.36,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        },
+        {
+          "id": "body-10",
+          "type": "body",
+          "idx": 10,
+          "text": "Jackson Plain Middle School\n",
+          "source_shape_id": 3,
+          "source_name": "Text Placeholder 2",
+          "source_z_index": 1,
+          "geometry_pt": {
+            "x": 285.84,
+            "y": 280.08,
+            "w": 612.0,
+            "h": 84.0
+          },
+          "layout_reference": "body-10",
+          "geometry_override": {
+            "x": 285.84,
+            "y": 280.08,
+            "width": 612.0000787401575,
+            "height": 84.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "layout": "Layout02",
+      "master": "Master01",
+      "placements": [],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Overview",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 65.87,
+            "y": 131.04,
+            "w": 828.0,
+            "h": 224.64
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 65.87496062992126,
+            "y": 131.04,
+            "width": 828.0,
+            "height": 224.64,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "layout": "Layout03",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Picture Placeholder 7",
+          "x": 591.92,
+          "y": 72.0,
+          "w": 265.58,
+          "h": 394.5,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image12_03b471716c.png",
+          "render_source": "assets/media/clip_baac1fa2a3eeac57.png",
+          "geometry": "complex",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00042,
+            "r": 0.0,
+            "b": 0.00042
+          },
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": true
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Meet \u000bthe Team",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 41.04,
+            "y": 48.24,
+            "w": 373.68,
+            "h": 414.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 41.04,
+            "y": 48.24,
+            "width": 373.68,
+            "height": 414.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "layout": "Layout04",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Picture Placeholder 4",
+          "x": 74.3,
+          "y": 75.0,
+          "w": 294.0,
+          "h": 402.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image13_a4ac60e8d3.png",
+          "render_source": "assets/media/clip_e2853ea4f503401d.png",
+          "geometry": "complex",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00071,
+            "r": 0.0,
+            "b": 0.00071
+          },
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": true
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Get Involved",
+          "source_shape_id": 7,
+          "source_name": "Title 6",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 449.28,
+            "y": 49.73,
+            "w": 448.56,
+            "h": 322.27
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 449.28,
+            "y": 49.72590551181102,
+            "width": 448.56015748031496,
+            "height": 322.27377952755904,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        },
+        {
+          "id": "body-13",
+          "type": "body",
+          "idx": 13,
+          "text": "Jackson Plain Middle School\n",
+          "source_shape_id": 8,
+          "source_name": "Text Placeholder 7",
+          "source_z_index": 2,
+          "geometry_pt": {
+            "x": 449.6,
+            "y": 375.0,
+            "w": 448.66,
+            "h": 84.0
+          },
+          "layout_reference": "body-13",
+          "geometry_override": {
+            "x": 449.6047244094488,
+            "y": 374.99984251968505,
+            "width": 448.65582677165355,
+            "height": 84.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "layout": "Layout05",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Picture Placeholder 4",
+          "x": 671.87,
+          "y": 194.32,
+          "w": 118.08,
+          "h": 118.08,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image14_5686775123.svg",
+          "render_source": "assets/media/image14_5686775123.svg",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00053,
+            "r": 0.0,
+            "b": 0.00053
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.0,
+            "t": 0.00053,
+            "r": 0.0,
+            "b": 0.00053
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 54.0,
+          "y": 164.16,
+          "w": 450.0,
+          "h": 291.6,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Explain the behavior you expect in your classroom\nYour class rules might include:\nBe respectful\nBe responsible\nFollow directions\nBe punctual\nBe organized\n",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Slide Number Placeholder 6",
+          "x": 821.87,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "5",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Class Rules",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 54.0,
+            "y": 48.96,
+            "w": 450.0,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 54.0,
+            "y": 48.96,
+            "width": 450.0,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "layout": "Layout06",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 36.0,
+          "y": 291.6,
+          "w": 848.16,
+          "h": 158.4,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Explain how students will be evaluated and graded\nTell parents when report cards and progress reports will be sent home\n",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 11,
+          "name": "Slide Number Placeholder 10",
+          "x": 821.87,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "6",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Curriculum Goals",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 36.0,
+            "y": 185.04,
+            "w": 857.52,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 36.0,
+            "y": 185.04,
+            "width": 857.52,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "layout": "Layout07",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 41.04,
+          "y": 164.16,
+          "w": 462.83,
+          "h": 291.6,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Take questions from parents\nAsk parents to fill out a questionnaire about their middle schooler\nHave them describe areas in which they would like to see the student improve\nHave them describe the stud",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Slide Number Placeholder 8",
+          "x": 431.51,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "7",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Questions",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 41.04,
+            "y": 48.96,
+            "w": 462.83,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 41.04,
+            "y": 48.96,
+            "width": 462.8349606299213,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 8,
+      "layout": "Layout08",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Picture Placeholder 7",
+          "x": 586.77,
+          "y": 91.54,
+          "w": 283.17,
+          "h": 369.66,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image15_e53bd85acd.png",
+          "render_source": "assets/media/clip_3c90b27af91dbaa6.png",
+          "geometry": "complex",
+          "crop": {
+            "l": 0.00011,
+            "t": 0.0,
+            "r": 0.00011,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": true
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Content Placeholder 3",
+          "x": 41.04,
+          "y": 164.16,
+          "w": 462.83,
+          "h": 291.6,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Explain how the school addresses academic and behavioral problems\nOutline the school's policies regarding tardiness, absence, and discipline\nProvide policy information about:\nSchool cancellations for ",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Slide Number Placeholder 12",
+          "x": 431.51,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "8",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "School Policies",
+          "source_shape_id": 3,
+          "source_name": "Title 2",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 41.04,
+            "y": 48.96,
+            "w": 462.83,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 41.04,
+            "y": 48.96,
+            "width": 462.8349606299213,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "layout": "Layout09",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 46.08,
+          "y": 314.64,
+          "w": 403.92,
+          "h": 147.33,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Explain how students will be evaluated\nTell parents when report cards and progress reports will be sent home\n",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Content Placeholder 3",
+          "x": 480.24,
+          "y": 314.64,
+          "w": 403.92,
+          "h": 147.33,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Describe the amount of homework students can expect\nProvide a calendar of upcoming events, such as class field trips and parent-teacher conferences\n",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Slide Number Placeholder 8",
+          "x": 821.87,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "9",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Class Information",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 128.88,
+            "y": 77.76,
+            "w": 642.24,
+            "h": 207.36
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 128.88,
+            "y": 77.76,
+            "width": 642.24,
+            "height": 207.36,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "layout": "Layout10",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Picture Placeholder 13",
+          "x": 151.07,
+          "y": 331.4,
+          "w": 66.24,
+          "h": 66.24,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image16_4d4880acdb.png",
+          "render_source": "assets/media/image16_4d4880acdb.png",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 15,
+          "name": "Picture Placeholder 14",
+          "x": 446.75,
+          "y": 331.38,
+          "w": 66.25,
+          "h": 66.25,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image17_2dd4ec6cb7.png",
+          "render_source": "assets/media/image17_2dd4ec6cb7.png",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.10565,
+            "t": 0.10565,
+            "r": 0.10565,
+            "b": 0.10565
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.10565,
+            "t": 0.10565,
+            "r": 0.10565,
+            "b": 0.10565
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 5,
+          "group_path": [],
+          "source_shape_id": 16,
+          "name": "Picture Placeholder 15",
+          "x": 724.61,
+          "y": 327.33,
+          "w": 66.24,
+          "h": 66.24,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image18_d673c80364.png",
+          "render_source": "assets/media/image18_d673c80364.png",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.0,
+            "t": 0.00439,
+            "r": 0.0,
+            "b": 0.00439
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.0,
+            "t": 0.00439,
+            "r": 0.0,
+            "b": 0.00439
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 46.08,
+          "y": 162.72,
+          "w": 403.92,
+          "h": 129.17,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Explain how students will be evaluated\nTell parents when report cards and progress reports will be sent home",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 4,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Content Placeholder 3",
+          "x": 480.24,
+          "y": 162.72,
+          "w": 403.92,
+          "h": 129.17,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Suggest ways that parents can help their middle schooler learn\nUse more than one slide to cover this information",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 5,
+          "source_z_index": 6,
+          "group_path": [],
+          "source_shape_id": 18,
+          "name": "Slide Number Placeholder 17",
+          "x": 821.87,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "10",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Class Information ",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 36.0,
+            "y": 55.44,
+            "w": 847.44,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 36.0,
+            "y": 55.44,
+            "width": 847.44,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 11,
+      "layout": "Layout11",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 2,
+          "name": "Content Placeholder 1",
+          "x": 67.5,
+          "y": 182.19,
+          "w": 372.0,
+          "h": 228.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "List opportunities for parents to become involved in volunteer programs, advisory councils, \u000band the PTA",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 503.58,
+          "y": 182.19,
+          "w": 372.0,
+          "h": 228.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Provide sign-up sheets for \u000bparents who are interested \u000bin helping with field trips \u000bor fundraising projects \u000bfor your class",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 21,
+          "name": "Slide Number Placeholder 20",
+          "x": 821.87,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "11",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Get Involved ",
+          "source_shape_id": 4,
+          "source_name": "Title 3",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 36.0,
+            "y": 48.96,
+            "w": 847.44,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 36.0,
+            "y": 48.96,
+            "width": 847.44,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 12,
+      "layout": "Layout12",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Table 9",
+          "x": 46.75,
+          "y": 142.5,
+          "w": 848.05,
+          "h": 294.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:table",
+          "type": "table",
+          "rows": 9,
+          "columns": 4
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Slide Number Placeholder 13",
+          "x": 821.87,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "12",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Table",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 46.8,
+            "y": 47.11,
+            "w": 847.07,
+            "h": 76.73
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 46.8,
+            "y": 47.1148031496063,
+            "width": 847.0748818897638,
+            "height": 76.7251968503937,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 13,
+      "layout": "Layout13",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Table 9",
+          "x": 432.75,
+          "y": 47.5,
+          "w": 495.12,
+          "h": 456.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:table",
+          "type": "table",
+          "rows": 9,
+          "columns": 4
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 41.04,
+          "y": 164.16,
+          "w": 349.2,
+          "h": 291.6,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Take questions from parents\nAsk parents to fill out a questionnaire about their middle schooler\nHave them describe areas in which they would like to see the student improve\nHave them describe the stud",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Slide Number Placeholder 9",
+          "x": 325.47,
+          "y": 487.44,
+          "w": 72.37,
+          "h": 16.56,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "13",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Questions ",
+          "source_shape_id": 6,
+          "source_name": "Title 5",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 41.04,
+            "y": 48.96,
+            "w": 348.83,
+            "h": 90.0
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 41.04,
+            "y": 48.96,
+            "width": 348.8349606299213,
+            "height": 90.0,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    }
+  ]
+}

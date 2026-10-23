@@ -1,0 +1,813 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T08:36:19.715868+00:00",
+  "interpretation": "Availability is based on font inventories. When a render PDF is supplied, its extracted font names provide separate evidence and may show substitution despite an available inventory entry.",
+  "source": "examples\\quarterly_marketing_meeting\\main.typ",
+  "platform": "win32",
+  "families": [
+    {
+      "family": "Arial",
+      "usages": [
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 6,
+          "construct": "set text default",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Arial",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Arial Narrow Bold",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Berlin Sans FB",
+      "usages": [
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 75,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 140,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 196,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 252,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 344,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 364,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 375,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 395,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 415,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 435,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 527,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 547,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 638,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 661,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 720,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 720,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 720,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 742,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 742,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 742,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 801,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 815,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 815,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 815,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 883,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 883,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 883,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 951,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 951,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 951,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1033,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1033,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1033,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1120,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1120,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1120,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1188,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1201,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1201,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1201,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1283,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Berlin Sans FB",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Berlin Sans FB Demi Bold",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    },
+    {
+      "family": "Calibri",
+      "usages": [
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 8,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 10,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 252,
+          "construct": "PptxPlaceholderSlot",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 639,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 671,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 673,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 673,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 673,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 673,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 673,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 694,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 752,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 754,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 754,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 754,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 775,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 802,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 834,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 836,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 836,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 836,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 857,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 902,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 904,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 925,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 961,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 963,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 963,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 984,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 986,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 986,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1007,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1071,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1073,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1073,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1073,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1073,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1094,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1162,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1211,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1213,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1213,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1213,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1213,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1213,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1234,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1236,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1236,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1236,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1236,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1257,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1293,
+          "construct": "PptxTextFrame",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1295,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1295,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        },
+        {
+          "file": "examples\\quarterly_marketing_meeting\\main.typ",
+          "line": 1295,
+          "construct": "PptxPlaceholderRun",
+          "field": "font"
+        }
+      ],
+      "availability": {
+        "typst": {
+          "status": "available",
+          "matched_family": "Calibri",
+          "basis": "Typst compiler font inventory"
+        },
+        "powerpoint": {
+          "status": "available",
+          "matched_family": "Calibri",
+          "basis": "windows_font_registry"
+        }
+      },
+      "substitution_risk": {
+        "typst": "none_detected",
+        "powerpoint": "none_detected"
+      }
+    }
+  ],
+  "typst_environment": {
+    "status": "checked",
+    "command": [
+      "typst",
+      "fonts"
+    ],
+    "family_count": 353,
+    "font_paths": []
+  },
+  "powerpoint_environment": {
+    "status": "checked",
+    "method": "windows_font_registry",
+    "powerpoint_detected": true,
+    "note": "Windows installed-font registry is used as an Office-visibility proxy; PowerPoint was not automated."
+  },
+  "dynamic_font_expressions": [],
+  "unresolved_font_owners": [
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 638,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 639,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 661,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 720,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 742,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 801,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 802,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 815,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 883,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 951,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 1033,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 1120,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 1188,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 1201,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    },
+    {
+      "file": "examples\\quarterly_marketing_meeting\\main.typ",
+      "line": 1283,
+      "construct": "PptxPlaceholder",
+      "reason": "font may come from a placeholder parent, Typst text default, or helper default"
+    }
+  ],
+  "checks_not_performed": [
+    "Some text constructs omit a literal family and may inherit it from a master, layout, Typst default, or helper default; review unresolved_font_owners."
+  ]
+}

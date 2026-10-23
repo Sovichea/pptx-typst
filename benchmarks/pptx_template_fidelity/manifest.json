@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "source_name": "User-provided PowerPoint desktop template collection (font-adjusted copies)",
+  "generated_on": "2026-10-23",
+  "input_note": "PPTX inputs remain outside the repository because the source templates were not independently cleared for redistribution. Manifest SHA-256 values identify both normalized copies and originals.",
+  "files": [
+    {
+      "title": "Back to school night presentation",
+      "file": "Back to school night presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "7f42b051b6ee619c9366852ab9d36119ba48a0e943bab9c1c0b7ca134d824aac",
+      "original_sha256": "e9be270cc1da00df1623240d9521de670f0c80fcb5c263a7848ec3ec39591a76"
+    },
+    {
+      "title": "Bevel",
+      "file": "Bevel.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "cffefeffe17ed3b98f2a2de238121e308289b8645f90b572080c183b2dd99c76",
+      "original_sha256": "d311a81e8893ee72a2a7ba821cc7af594fdfea9151e2727311ca17ec31f55e0e"
+    },
+    {
+      "title": "Blockwork elegance",
+      "file": "Blockwork elegance.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "13720b1608f0ec6f6f47ee0ee54e0b6dbf137ced62ba224a944e9983990880e8",
+      "original_sha256": "c18346f1b7048b684a131a791c7ec4d9599a99fb0791162f166e032797e23f2a"
+    },
+    {
+      "title": "Blue spheres presentation",
+      "file": "Blue spheres presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "0e1fdf9349c850a8578023293e86672cb42b179618f67a5d3ab37df2f9cda8e2",
+      "original_sha256": "e53e0ea39ffd5d4494adb1382cbb7697144176b3a81e2df17fb376012fcf61b0"
+    },
+    {
+      "title": "Bold underlines keynote presentation",
+      "file": "Bold underlines keynote presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "5363d38feb94049214ca00f017a4cb78ac4c6da724e3b0141c22b8be90da0a97",
+      "original_sha256": "8bd06e1374cc5a5f8f0bfe6e3dc230c373633ebcd8b56c03d50b80f2349eef68"
+    },
+    {
+      "title": "BW minimalist finance presentation",
+      "file": "BW minimalist finance presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "302fe26d8f5cdfff74e7d85bcff77e9bd3ff77fe8134e5dcc90c88e34e5ab5a0",
+      "original_sha256": "fb38fca8f79175f23c3dad91db44b556e4525d5c0a62b4528387d4907e15fc29"
+    },
+    {
+      "title": "Celestial design",
+      "file": "Celestial design.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "ae00de4349e8f105e8e5a769d2cfc6a02499bc0c5c7c1dcbfaef5d0fdf044bb3",
+      "original_sha256": "ec2b0198492daac5c2eaa4f9e7df0ee802f81e5aca965e4e85f87daaa285377e"
+    },
+    {
+      "title": "Cherry blossom petals presentation",
+      "file": "Cherry blossom petals presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "d0b2f20e4e48afc715a22ee908b8dea028e244eb764e148d9c0256ffcd82db3b",
+      "original_sha256": "ded6a8bd803bfa174237e9766515024d89e57fdef6074c068565ac3544a1ea14"
+    },
+    {
+      "title": "Cirnicate",
+      "file": "Cirnicate.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "96fe8de16fe0da295e85c80314c775643d8dea3e7595ccf35a41342f75494660",
+      "original_sha256": "e7077c217be764af599392507cb452c06d1405c5eecb2b304ee59ce78e67fe64"
+    },
+    {
+      "title": "Classical academia sales presentation",
+      "file": "Classical academia sales presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "bbe3bffda4093076fcdc20ff78ce754bfbb62705ef16109c8a2f215d1afa304e",
+      "original_sha256": "f31c4dcf50f496782507c14f820d0b4ae222bc041c9e8752ef00f754c06054a9"
+    },
+    {
+      "title": "Classical neutrals marketing presentation",
+      "file": "Classical neutrals marketing presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "7dcabcc78779969587554dec6ba18dc68c9464edb11f494471a277399abf3bb6",
+      "original_sha256": "f7fdfb43c998677eba027f318422e6adc1b6e689b18d64798acf4e94898e6582"
+    },
+    {
+      "title": "Dune",
+      "file": "Dune.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "026b9811b321ea71982b9bb0dd97274202d4c883342e0d7435810a007fce10b5",
+      "original_sha256": "f3724db4e27f7a167b8e693a3c11b6d2a830f78e9c3386e2afe308a4df21094d"
+    },
+    {
+      "title": "Feathered design",
+      "file": "Feathered design.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "e52187b93efc5b98629400cd8d72707dabedf4deea06e7e8b3d4e517b841b82e",
+      "original_sha256": "a9df62a4d1f43e03979e8d8175e09d22753f7ec890190bd239d8a995dbe5e216"
+    },
+    {
+      "title": "Floral pitch deck",
+      "file": "Floral pitch deck.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "db477546fb29616494d7decf1d89e5a2dafc64b4a553fa047b7e9e906acf5b26",
+      "original_sha256": "24d54bf2e876c424b90edaa3dbd6c4229dfce9fbb54a535062e106b7cfed0522"
+    },
+    {
+      "title": "Gradient aura keynote presentation",
+      "file": "Gradient aura keynote presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "8b6bf6c029a7e072bfcf029e05a62a6584c876479fd6c54b0f2c692a5bee10d5",
+      "original_sha256": "3fe1de215b85ded9a61219865d4173e6a2b69158929e877c7d905a0e851d9811"
+    },
+    {
+      "title": "Gradient history timeline",
+      "file": "Gradient history timeline.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "e35b4ee3368850b16ac1d061bd2162c6c9800e09c6877d7745e6523f1f88c2c6",
+      "original_sha256": "e8708745fb3e720be9d666a02ef848fd8aa5446f74518c621d6f69a813a2bb41"
+    },
+    {
+      "title": "Japandi linear marketing presentation",
+      "file": "Japandi linear marketing presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "774f1831e2c892b837077d224a0c291f239019c7139db7ddb93cb18b790065d6",
+      "original_sha256": "73d0bb69f9a7bd822a532e02670810f5c6f645aa63c4c4c65f999adf2f8541f8"
+    },
+    {
+      "title": "Light modernist presentation",
+      "file": "Light modernist presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "e713f2cf7b29c6e9ea52d0d4d380d792528f163dbb5913dc82932c567b6a4ce0",
+      "original_sha256": "ab4be2bc060d8bc134cf24fe86ad9f91f02dfe91c29c1525c1f5f4ec94c1fb20"
+    },
+    {
+      "title": "Liquid void presentation",
+      "file": "Liquid void presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "8586a7ee6a1eb27ceededc701facb400efd0f5ff1ee2fdf081cc6884b7c10dab",
+      "original_sha256": "149f4ae88a5b51cfad8ceca334d28d7f4b59907c791dcb07d4d8ddeeeb3d5080"
+    },
+    {
+      "title": "Modern helena presentation",
+      "file": "Modern helena presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "61a4bee3128d7fd97762d6d6f8fc6f671051e6cdb0a5d2d5e677a7512ba079a0",
+      "original_sha256": "296a27b368bc16f73057581ed1a64652628f4a44edf3d7fb8c554564d2cca3a7"
+    },
+    {
+      "title": "Modern minimalist keynote presentation",
+      "file": "Modern minimalist keynote presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "7d5182a1fac1a50c4a9c0c30ed47443f6eecce6a1e5d4d34aa60c161ca06f171",
+      "original_sha256": "91e6dabd23a430ae0e2ed79e11c7c3ddf257f0822737a9546a4414804496f257"
+    },
+    {
+      "title": "Monochrome black",
+      "file": "Monochrome black.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "e9bfed3a26a8c5277d17576cd2e03cfd1647d6710232b2ccc70a7e14195815b4",
+      "original_sha256": "dd1304e3ca0f0ffc953b6599c9064fd3af1b25460f84dd52fded4bab342f9b35"
+    },
+    {
+      "title": "Oasis",
+      "file": "Oasis.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "f8eec8a528c45545c3618ce16b56ab6219bdd38492ec0d7a6161ff32408a43bd",
+      "original_sha256": "408e11d95ec9f93ff5ceac0afde6c60c44cbc6bc6578431c681cac0044c45639"
+    },
+    {
+      "title": "Outdoor exploration presentation",
+      "file": "Outdoor exploration presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "c05f1bc11cbf5085c00bfe818c9c7ac0e78b3d14b65968761462347dfdfd3341",
+      "original_sha256": "3bc7e1d79e50f1c5fa9c8de7a97eecd4c1d5fa0468db37406211b3fe5b2d13a5"
+    },
+    {
+      "title": "Prismatic design",
+      "file": "Prismatic design.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "5ca0212ff1d7818d7960fab5041e1a1e92399d202f2a9481a77073af8f0cfb0b",
+      "original_sha256": "6544bf21932f6f168b02a1baffee0b10e4abf96206f12c9d19813981bad9b1d6"
+    },
+    {
+      "title": "Retro form fusion marketing presentation",
+      "file": "Retro form fusion marketing presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "a28868f4875e38e197c60f1d741b8965094e7ffd2700968071eab7c4fa4e840d",
+      "original_sha256": "0a46985d4162f868bef819b25471b68c4705fb604c76477835f35c8d43b19b53"
+    },
+    {
+      "title": "Retro research presentation",
+      "file": "Retro research presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "210d1c34e7ccafd6302771703c034302e39e16d47bbe8a469ea5f8873f889920",
+      "original_sha256": "02d5102e49d7f294a466d2053b006a641a2d7ee1b6357a30ec180470de6d4b67"
+    },
+    {
+      "title": "Roman fresco",
+      "file": "Roman fresco.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "8c44d8b1ad54cd3a2ae2a50843e5332a55075dba6a72dd951feaf0427572997e",
+      "original_sha256": "e09412604522225238964b078eac07c629731649262b05e0e79bbc0fc30ae83d"
+    },
+    {
+      "title": "Simple dune presentation",
+      "file": "Simple dune presentation.pptx",
+      "license": "not audited; user-provided template",
+      "source": "local PowerPoint template collection",
+      "sha256": "9d1ddc86b5bdb6b82906182fc0598098eb18ad028a25aa158527cef1037d0b79",
+      "original_sha256": "aee1ca0f574af112d261bb5afe6b867797cd233eb5cd57bcc7e8fbe3610da567"
+    }
+  ]
+}

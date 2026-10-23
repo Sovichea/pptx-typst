@@ -1,0 +1,3025 @@
+{
+  "source_file": "Japandi linear marketing presentation.pptx",
+  "source_slide_count": 15,
+  "slide_dimensions_pt": [
+    960.0,
+    540.0
+  ],
+  "unique_images": 5,
+  "unique_vectors": 0,
+  "alpha_variants": 0,
+  "group_mode": "safe",
+  "clip_mode": "legacy",
+  "mask_mode": "legacy",
+  "layout_mode": "structured",
+  "counts": {
+    "background_colors": 15,
+    "inherited_master_layers": 1,
+    "line_shapes": 29,
+    "media_placements": 5,
+    "geometry_rect": 5,
+    "text_placements": 32,
+    "autofit_shrink": 3,
+    "autofit_none": 29,
+    "table_placements": 1
+  },
+  "masters": [
+    {
+      "owner": "master",
+      "id": "Master01",
+      "part": "/ppt/slideMasters/slideMaster1.xml",
+      "placements": [],
+      "groups": []
+    }
+  ],
+  "layouts": [
+    {
+      "owner": "layout",
+      "id": "Layout01",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout33.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Straight Connector 3",
+          "x": 555.93,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 0.0,
+          "y": 12.93,
+          "w": 555.93,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout02",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout10.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Straight Connector 8",
+          "x": 480.0,
+          "y": 12.93,
+          "w": 480.0,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 13,
+          "name": "Straight Connector 12",
+          "x": 480.24,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 14,
+          "name": "Straight Connector 13",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout03",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout15.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 384.54,
+          "y": 12.93,
+          "w": 575.46,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": 384.54,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout04",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout27.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Straight Connector 3",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout05",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout8.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout06",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout43.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Straight Connector 3",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout07",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout39.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout08",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout19.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Straight Connector 4",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 588.94,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 622.74,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout09",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout2.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Straight Connector 6",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 9,
+          "name": "Straight Connector 8",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout10",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout41.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout11",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout35.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Straight Connector 5",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout12",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout50.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Straight Connector 7",
+          "x": 33.8,
+          "y": 12.93,
+          "w": 926.2,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "owner": "layout",
+      "id": "Layout13",
+      "master": "Master01",
+      "part": "/ppt/slideLayouts/slideLayout25.xml",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 0,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Straight Connector 2",
+          "x": 34.0,
+          "y": 12.93,
+          "w": 299.23,
+          "h": 0.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Straight Connector 11",
+          "x": 33.84,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 10,
+          "name": "Straight Connector 9",
+          "x": 333.23,
+          "y": 0.0,
+          "w": 0.0,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "type": "line",
+          "stroke": "#000000",
+          "stroke_width_pt": 1.0
+        }
+      ],
+      "groups": []
+    }
+  ],
+  "master_placeholders": [
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "id": "body-1",
+      "type": "body",
+      "idx": 1,
+      "x": 49.923622047244095,
+      "y": 167.6751181102362,
+      "width": 860.152283464567,
+      "height": 322.3248031496063,
+      "rotation": 0.0,
+      "margin-left": 7.2,
+      "margin-right": 7.2,
+      "margin-top": 3.6,
+      "margin-bottom": 3.6,
+      "font": "Calibri"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.923622047244095,
+      "y": 78.87511811023622,
+      "width": 860.152283464567,
+      "height": 59.50070866141732,
+      "rotation": 0.0,
+      "margin-left": 7.2,
+      "margin-right": 7.2,
+      "margin-top": 3.6,
+      "margin-bottom": 3.6,
+      "anchor": "top",
+      "font": "Calibri"
+    }
+  ],
+  "layout_placeholders": [
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.92370078740157,
+      "y": 78.8751968503937,
+      "width": 468.899842519685,
+      "height": 431.30007874015746,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 72.0,
+      "weight": "regular"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 532.3951968503937,
+      "y": 78.87527559055118,
+      "width": 377.6807086614173,
+      "height": 118.37590551181103,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 40.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.923622047244095,
+      "y": 70.90023622047244,
+      "width": 297.0,
+      "height": 411.1248031496063,
+      "rotation": 0.0,
+      "align": "center",
+      "anchor": "center",
+      "font": "Calibri",
+      "size": 40.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 47.11244094488189,
+      "y": 402.32472440944883,
+      "width": 343.6377952755906,
+      "height": 87.67527559055118,
+      "rotation": 0.0,
+      "anchor": "top",
+      "font": "Calibri",
+      "size": 40.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "master": "Master01",
+      "id": "centered-title-0",
+      "type": "centered-title",
+      "idx": 0,
+      "x": 49.88015748031496,
+      "y": 137.6751968503937,
+      "width": 860.1949606299213,
+      "height": 372.4999212598425,
+      "rotation": 0.0,
+      "align": "left",
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 72.0,
+      "fill": "rgb(\"#000000\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.923622047244095,
+      "y": 78.8751968503937,
+      "width": 860.152283464567,
+      "height": 88.79968503937008,
+      "rotation": 0.0,
+      "align": "left",
+      "font": "Calibri"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "body-13",
+      "type": "body",
+      "idx": 13,
+      "x": 49.923622047244095,
+      "y": 167.6751181102362,
+      "width": 414.6527559055118,
+      "height": 322.3248031496063,
+      "rotation": 0.0,
+      "font": "Calibri",
+      "size": 16.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "master": "Master01",
+      "id": "body-14",
+      "type": "body",
+      "idx": 14,
+      "x": 495.424094488189,
+      "y": 167.67503937007874,
+      "width": 414.65181102362203,
+      "height": 322.3248818897638,
+      "rotation": 0.0,
+      "font": "Calibri",
+      "size": 16.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 48.24,
+      "y": -89.28,
+      "width": 838.8,
+      "height": 89.28,
+      "rotation": 0.0,
+      "font": "Calibri"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.92370078740157,
+      "y": 80.95511811023621,
+      "width": 519.3266141732283,
+      "height": 87.6751968503937,
+      "rotation": 0.0,
+      "anchor": "top",
+      "font": "Calibri",
+      "size": 40.0
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "align": "left",
+      "font": "Calibri"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.923464566929134,
+      "y": 457.92,
+      "width": 860.1515748031496,
+      "height": 40.286929133858266,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 16.0,
+      "weight": "regular",
+      "fill": "rgb(\"#000000\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.87952755905512,
+      "y": 402.3248031496063,
+      "width": 816.3704724409449,
+      "height": 95.05448818897638,
+      "rotation": 0.0,
+      "align": "left",
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 24.0,
+      "weight": "regular",
+      "fill": "rgb(\"#000000\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.923622047244095,
+      "y": 138.27543307086614,
+      "width": 860.1515748031496,
+      "height": 204.36818897637795,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 40.0,
+      "weight": "regular",
+      "fill": "rgb(\"#000000\")"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "master": "Master01",
+      "id": "title-0",
+      "type": "title",
+      "idx": 0,
+      "x": 49.720393700787405,
+      "y": 78.8751968503937,
+      "width": 267.84,
+      "height": 88.8,
+      "rotation": 0.0,
+      "anchor": "bottom",
+      "font": "Calibri",
+      "size": 40.0
+    }
+  ],
+  "placeholder_warnings": [
+    {
+      "owner": "slide",
+      "slide": 1,
+      "shape_id": 16,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 1,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "master",
+      "owner_id": "Master01",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 10,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 9,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 12,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 2,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 2,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 2,
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 2,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 3,
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 3,
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 3,
+      "shape_id": 5,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 4,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 4,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 4,
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 4,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 5,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout05",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 6,
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 6,
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 5,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 7,
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 7,
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 7,
+      "shape_id": 6,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 5,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 9,
+      "shape_id": 12,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 9,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 10,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 10,
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 12,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 12,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 12,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout10",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 13,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 4,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 3,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 5,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 14,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 14,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 14,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 4,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout12",
+      "shape_id": 7,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "slide",
+      "slide": 15,
+      "shape_id": 5,
+      "placeholder_type": "FOOTER (15)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 15,
+      "shape_id": 6,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 15,
+      "shape_id": 3,
+      "placeholder_type": "OBJECT (7)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "slide",
+      "slide": 15,
+      "shape_id": 8,
+      "placeholder_type": "PICTURE (18)",
+      "action": "ordinary-object fallback"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 6,
+      "placeholder_type": "FOOTER (15)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 5,
+      "placeholder_type": "DATE (16)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 7,
+      "placeholder_type": "SLIDE_NUMBER (13)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 8,
+      "placeholder_type": "OBJECT (7)",
+      "action": "unsupported; omitted from structured output"
+    },
+    {
+      "owner": "layout",
+      "owner_id": "Layout13",
+      "shape_id": 11,
+      "placeholder_type": "PICTURE (18)",
+      "action": "unsupported; omitted from structured output"
+    }
+  ],
+  "media_warnings": [
+    {
+      "issue": "placeholder_layering_risk",
+      "outcome": "approximated",
+      "source_type": "placeholder:footer",
+      "slide": 2,
+      "owner": "slide",
+      "owner_id": 2,
+      "shape_id": 5,
+      "shape": "Footer Placeholder 4",
+      "geometry_pt": {
+        "x": -162.78,
+        "y": 175.71,
+        "w": 359.4,
+        "h": 33.84
+      },
+      "fallback": "placeholder text is emitted in a separate layer above ordinary slide content",
+      "reason": "Later picture shape 8 overlaps this placeholder in source z-order; Typst stacking may differ.",
+      "expected_loss": "Text may appear over a picture that covers it in the PowerPoint rendering.",
+      "overlapping_shape_id": 8
+    },
+    {
+      "issue": "placeholder_layering_risk",
+      "outcome": "approximated",
+      "source_type": "placeholder:footer",
+      "slide": 4,
+      "owner": "slide",
+      "owner_id": 4,
+      "shape_id": 5,
+      "shape": "Footer Placeholder 4",
+      "geometry_pt": {
+        "x": -162.78,
+        "y": 175.71,
+        "w": 359.4,
+        "h": 33.84
+      },
+      "fallback": "placeholder text is emitted in a separate layer above ordinary slide content",
+      "reason": "Later picture shape 8 overlaps this placeholder in source z-order; Typst stacking may differ.",
+      "expected_loss": "Text may appear over a picture that covers it in the PowerPoint rendering.",
+      "overlapping_shape_id": 8
+    }
+  ],
+  "media": {
+    "7b211e4a5291e61e2ff57541df52c5d770dc3ec86ca1f3a7dc140a95e76d7ed4": {
+      "path": "assets/media/image14_7b211e4a52.png",
+      "source": "/ppt/media/image14.png",
+      "bytes": 1623924,
+      "sha256": "7b211e4a5291e61e2ff57541df52c5d770dc3ec86ca1f3a7dc140a95e76d7ed4",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 1,
+          "slide": 1,
+          "shape": "Picture Placeholder 15",
+          "crop": {
+            "l": 0.00012,
+            "t": 0.0,
+            "r": 0.00012,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "5999961a05bace0f49a5e3c0c14696d0c3c49e65e33add3213dec7e4da258fa5": {
+      "path": "assets/media/image15_5999961a05.jpeg",
+      "source": "/ppt/media/image15.jpeg",
+      "bytes": 105438,
+      "sha256": "5999961a05bace0f49a5e3c0c14696d0c3c49e65e33add3213dec7e4da258fa5",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 2,
+          "slide": 2,
+          "shape": "Picture Placeholder 7",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "1771aff90571509ca0ee08bbc7aa87136358d6118a47a722f683fa301502fce8": {
+      "path": "assets/media/image16_1771aff905.jpeg",
+      "source": "/ppt/media/image16.jpeg",
+      "bytes": 36923,
+      "sha256": "1771aff90571509ca0ee08bbc7aa87136358d6118a47a722f683fa301502fce8",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 4,
+          "slide": 4,
+          "shape": "Picture Placeholder 7",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "33de6e528e9651a193f0de9e26071820c0393ea682bca72bbf5d65532763d8d0": {
+      "path": "assets/media/image17_33de6e528e.jpeg",
+      "source": "/ppt/media/image17.jpeg",
+      "bytes": 81512,
+      "sha256": "33de6e528e9651a193f0de9e26071820c0393ea682bca72bbf5d65532763d8d0",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 9,
+          "slide": 9,
+          "shape": "Picture Placeholder 11",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    },
+    "08cd74568f03e5c2a6d4bfde4075a275ae8412cbe75ce1e0177eff5a00be09bd": {
+      "path": "assets/media/image18_08cd74568f.jpeg",
+      "source": "/ppt/media/image18.jpeg",
+      "bytes": 182875,
+      "sha256": "08cd74568f03e5c2a6d4bfde4075a275ae8412cbe75ce1e0177eff5a00be09bd",
+      "placements": [
+        {
+          "owner": "slide",
+          "owner_id": 15,
+          "slide": 15,
+          "shape": "Picture Placeholder 7",
+          "crop": null,
+          "fillrect": null,
+          "alpha": 1.0,
+          "geometry": "rect"
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "layout": "Layout01",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 16,
+          "name": "Picture Placeholder 15",
+          "x": 556.33,
+          "y": -0.0,
+          "w": 404.07,
+          "h": 490.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image14_7b211e4a52.png",
+          "render_source": "assets/media/image14_7b211e4a52.png",
+          "geometry": "rect",
+          "crop": {
+            "l": 0.00012,
+            "t": 0.0,
+            "r": 0.00012,
+            "b": 0.0
+          },
+          "fillrect": null,
+          "render_crop": {
+            "l": 0.00012,
+            "t": 0.0,
+            "r": 0.00012,
+            "b": 0.0
+          },
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Subtitle 2",
+          "x": 565.15,
+          "y": 502.03,
+          "w": 381.7,
+          "h": 28.6,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Presented by Ellis Turner",
+          "anchor": "t",
+          "autofit_mode": "shrink",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.1
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "GROWTH MARKETING PLAN",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 78.88,
+            "w": 468.9,
+            "h": 431.3
+          },
+          "layout_reference": "title-0",
+          "geometry_override": {
+            "x": 49.92370078740157,
+            "y": 78.8751968503937,
+            "width": 468.899842519685,
+            "height": 431.30007874015746,
+            "rotation": 0.0
+          },
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "layout": "Layout02",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Picture Placeholder 7",
+          "x": 47.11,
+          "y": 0.0,
+          "w": 419.77,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image15_5999961a05.jpeg",
+          "render_source": "assets/media/image15_5999961a05.jpeg",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "2",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 533.59,
+          "y": 227.25,
+          "w": 376.49,
+          "h": 262.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Overview\nMarket analysis\nCampaign success\nMetrics & KPIs\nQ & A",
+          "anchor": "ctr",
+          "autofit_mode": "shrink",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "AGENDA",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 532.4,
+            "y": 78.88,
+            "w": 377.68,
+            "h": 118.38
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "layout": "Layout03",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Slide Number Placeholder 6",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "3",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Footer Placeholder 5",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Content Placeholder 4",
+          "x": 421.17,
+          "y": 70.9,
+          "w": 488.9,
+          "h": 411.12,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "This presentation is focused on our growth marketing strategy. We'll cover key areas such as market analysis, campaign success, metrics & KPIs, and more.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "OVERVIEW",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 70.9,
+            "w": 297.0,
+            "h": 411.12
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "layout": "Layout04",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Picture Placeholder 7",
+          "x": 47.11,
+          "y": 0.0,
+          "w": 912.89,
+          "h": 372.32,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image16_1771aff905.jpeg",
+          "render_source": "assets/media/image16_1771aff905.jpeg",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "4",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 421.2,
+          "y": 402.32,
+          "w": 488.88,
+          "h": 87.68,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "We aim to align our efforts and drive success through effective marketing strategies. Let's dive in and explore how we can achieve our growth objectives together.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "OUR GOAL",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 47.11,
+            "y": 402.32,
+            "w": 343.64,
+            "h": 87.68
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "layout": "Layout05",
+      "master": "Master01",
+      "placements": [],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "NAVIGATING THE LANDSCAPE",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.88,
+            "y": 137.68,
+            "w": 860.19,
+            "h": 372.5
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "layout": "Layout06",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Footer Placeholder 5",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Slide Number Placeholder 6",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "6",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "CONSUMER EXPECTATIONS",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 78.88,
+            "w": 860.15,
+            "h": 88.8
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        },
+        {
+          "id": "body-13",
+          "type": "body",
+          "idx": 13,
+          "text": "Seamless omnichannel experience: consumers expect a seamless experience across all touchpoints, whether they are interacting with a brand online, in-store, or through a mobile app. \nTransparency and trust: Consumers expect brands to be transparent about their practices, values, and product information. ",
+          "source_shape_id": 3,
+          "source_name": "Text Placeholder 2",
+          "source_z_index": 2,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 167.68,
+            "w": 414.65,
+            "h": 322.32
+          },
+          "layout_reference": "body-13",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        },
+        {
+          "id": "body-14",
+          "type": "body",
+          "idx": 14,
+          "text": "Personalization: consumers today expect brands to offer personalized experiences tailored to their individual preferences and behaviors.\nSustainability: Modern consumers are increasingly concerned about environmental impact and sustainability.  ",
+          "source_shape_id": 4,
+          "source_name": "Text Placeholder 3",
+          "source_z_index": 3,
+          "geometry_pt": {
+            "x": 495.42,
+            "y": 167.68,
+            "w": 414.65,
+            "h": 322.32
+          },
+          "layout_reference": "body-14",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "layout": "Layout07",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 4,
+          "name": "Footer Placeholder 3",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Slide Number Placeholder 4",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "7",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Content Placeholder 5",
+          "x": 49.88,
+          "y": 78.88,
+          "w": 860.19,
+          "h": 423.47,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "SUCCESSFUL BRANDS EVOLVE WITH THEIR AUDIENCE, NOT DESPITE THEM.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Quote",
+          "source_shape_id": 7,
+          "source_name": "Title 6",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 48.24,
+            "y": -89.28,
+            "w": 838.8,
+            "h": 89.28
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 8,
+      "layout": "Layout05",
+      "master": "Master01",
+      "placements": [],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "WHO IS OUR TARGET AUDIENCE?",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.88,
+            "y": 137.68,
+            "w": 860.19,
+            "h": 372.5
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "layout": "Layout08",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 12,
+          "name": "Picture Placeholder 11",
+          "x": 623.1,
+          "y": 0.0,
+          "w": 337.3,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image17_33de6e528e.jpeg",
+          "render_source": "assets/media/image17_33de6e528e.jpeg",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Footer Placeholder 5",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Slide Number Placeholder 6",
+          "x": 0.0,
+          "y": 511.2,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "9",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Content Placeholder 4",
+          "x": 49.92,
+          "y": 196.55,
+          "w": 519.33,
+          "h": 293.45,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Key demographics\nUnderstanding key demographics is crucial for tailoring successful marketing strategies. \u000b\u000bChallenges & needs\nOur target audience faces several challenges and needs that our marketing",
+          "anchor": "t",
+          "autofit_mode": "shrink",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "OUR CUSTOMERS",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 80.96,
+            "w": 519.33,
+            "h": 87.68
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "layout": "Layout09",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 7,
+          "name": "Content Placeholder 6",
+          "x": 49.88,
+          "y": 167.63,
+          "w": 860.25,
+          "h": 322.32,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "table",
+          "rows": 5,
+          "columns": 3
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "10",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.78,
+          "y": 176.53,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "MARKETING STRATEGY",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 78.88,
+            "w": 860.15,
+            "h": 59.5
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 11,
+      "layout": "Layout05",
+      "master": "Master01",
+      "placements": [],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "centered-title-0",
+          "type": "centered-title",
+          "idx": 0,
+          "text": "MARKETING MIX: \u000bTHE 4 PS",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.88,
+            "y": 137.68,
+            "w": 860.19,
+            "h": 372.5
+          },
+          "layout_reference": "centered-title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 12,
+      "layout": "Layout10",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 49.92,
+          "y": 82.08,
+          "w": 860.15,
+          "h": 317.9,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "“OUR LATEST CAMPAIGN DROVE A 35% INCREASE IN ENGAGEMENT, PROVING THAT STRATEGIC STORYTELLING RESONATES.”",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "12",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Ana Bowman, Director of Marketing",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 457.92,
+            "w": 860.15,
+            "h": 40.29
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 13,
+      "layout": "Layout11",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "13",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 49.92,
+          "y": 105.55,
+          "w": 816.33,
+          "h": 266.77,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "28%",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "increase in conversion rates \u000bthrough recent marketing efforts",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.88,
+            "y": 402.32,
+            "w": 816.37,
+            "h": 95.05
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 14,
+      "layout": "Layout12",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.78,
+          "y": 175.71,
+          "w": 359.4,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 49.88,
+          "y": 372.64,
+          "w": 519.37,
+          "h": 126.39,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "By staying data-driven and adaptable, our marketing strategy continues to support growth and long-term success.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.22,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "14",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "MARKETING THAT DRIVES \u000bRESULTS",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.92,
+            "y": 138.28,
+            "w": 860.15,
+            "h": 204.37
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    },
+    {
+      "slide": 15,
+      "layout": "Layout13",
+      "master": "Master01",
+      "placements": [
+        {
+          "z_index": 0,
+          "source_z_index": 4,
+          "group_path": [],
+          "source_shape_id": 8,
+          "name": "Picture Placeholder 7",
+          "x": 333.43,
+          "y": 0.0,
+          "w": 626.97,
+          "h": 540.0,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:picture",
+          "type": "image",
+          "source": "assets/media/image18_08cd74568f.jpeg",
+          "render_source": "assets/media/image18_08cd74568f.jpeg",
+          "geometry": "rect",
+          "crop": null,
+          "fillrect": null,
+          "render_crop": null,
+          "render_fillrect": null,
+          "alpha": 1.0,
+          "mask_applied": false
+        },
+        {
+          "z_index": 1,
+          "source_z_index": 1,
+          "group_path": [],
+          "source_shape_id": 5,
+          "name": "Footer Placeholder 4",
+          "x": -162.41,
+          "y": 176.12,
+          "w": 358.58,
+          "h": 33.84,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:footer",
+          "type": "text",
+          "text": "GROWTH MARKETING PLAN",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 2,
+          "source_z_index": 2,
+          "group_path": [],
+          "source_shape_id": 6,
+          "name": "Slide Number Placeholder 5",
+          "x": 0.0,
+          "y": 511.25,
+          "w": 33.8,
+          "h": 28.75,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:slide_number",
+          "type": "text",
+          "text": "15",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        },
+        {
+          "z_index": 3,
+          "source_z_index": 3,
+          "group_path": [],
+          "source_shape_id": 3,
+          "name": "Content Placeholder 2",
+          "x": 49.72,
+          "y": 196.18,
+          "w": 267.84,
+          "h": 293.82,
+          "rot": 0.0,
+          "flip_y": false,
+          "group_skew": 0.0,
+          "source_type": "placeholder:object",
+          "type": "text",
+          "text": "Let’s discuss questions \nas a team.",
+          "anchor": "t",
+          "autofit_mode": "none",
+          "font_scale": 1.0,
+          "line_spacing_reduction": 0.0
+        }
+      ],
+      "groups": [],
+      "placeholders": [
+        {
+          "id": "title-0",
+          "type": "title",
+          "idx": 0,
+          "text": "Q & A",
+          "source_shape_id": 2,
+          "source_name": "Title 1",
+          "source_z_index": 0,
+          "geometry_pt": {
+            "x": 49.72,
+            "y": 78.88,
+            "w": 267.84,
+            "h": 88.8
+          },
+          "layout_reference": "title-0",
+          "geometry_override": null,
+          "unresolved_layout_slot": false
+        }
+      ]
+    }
+  ]
+}

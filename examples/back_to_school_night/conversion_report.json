@@ -1,0 +1,215 @@
+{
+  "source_file": "Back to school night presentation.pptx",
+  "slides": 13,
+  "status": "completed_with_warnings",
+  "counts": {
+    "background_colors": 13,
+    "inherited_master_layers": 1,
+    "other_placements": 24,
+    "vector_shapes": 15,
+    "line_shapes": 24,
+    "media_placements": 24,
+    "geometry_rect": 21,
+    "unsupported_shape": 9,
+    "unsupported_placements": 9,
+    "group": 4,
+    "group_containers": 3,
+    "clipped_images": 3,
+    "masked_complex": 3,
+    "geometry_complex": 3,
+    "text_placements": 20,
+    "autofit_none": 20,
+    "table_placements": 2
+  },
+  "warnings": [
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout01",
+      "shape_id": 13,
+      "shape": "Cross 12",
+      "geometry_pt": {
+        "x": 128.29,
+        "y": 312.85,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout02",
+      "shape_id": 13,
+      "shape": "Cross 12",
+      "geometry_pt": {
+        "x": 630.12,
+        "y": 12.33,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout03",
+      "shape_id": 23,
+      "shape": "Cross 22",
+      "geometry_pt": {
+        "x": 804.61,
+        "y": 418.11,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout04",
+      "shape_id": 47,
+      "shape": "Cross 46",
+      "geometry_pt": {
+        "x": 313.11,
+        "y": 417.88,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout06",
+      "shape_id": 11,
+      "shape": "Cross 10",
+      "geometry_pt": {
+        "x": 649.25,
+        "y": 56.83,
+        "w": 51.53,
+        "h": 51.53,
+        "rot": 135.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout07",
+      "shape_id": 12,
+      "shape": "Cross 11",
+      "geometry_pt": {
+        "x": 851.81,
+        "y": 451.5,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout08",
+      "shape_id": 15,
+      "shape": "Cross 14",
+      "geometry_pt": {
+        "x": 867.75,
+        "y": 455.1,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout09",
+      "shape_id": 15,
+      "shape": "Cross 14",
+      "geometry_pt": {
+        "x": 258.16,
+        "y": 30.68,
+        "w": 51.53,
+        "h": 51.53,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    },
+    {
+      "issue": "unsupported_object",
+      "outcome": "unsupported",
+      "source_type": "shape",
+      "slide": null,
+      "owner": "layout",
+      "owner_id": "Layout11",
+      "shape_id": 24,
+      "shape": "Cross 23",
+      "geometry_pt": {
+        "x": 847.37,
+        "y": 129.57,
+        "w": 71.34,
+        "h": 71.34,
+        "rot": 45.0
+      },
+      "has_text": false,
+      "fallback": "none",
+      "reason": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted",
+      "expected_loss": "Unsupported shape: original preserved in source PPTX, not silently claimed as converted"
+    }
+  ]
+}

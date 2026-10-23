@@ -1,19 +1,5 @@
-# Quarterly marketing meeting sample
+# Quarterly Marketing Meeting sample
 
-This folder contains Typst source, a neutral helper template, media assets, and a conversion manifest generated from the sample PowerPoint deck. The original `.pptx` file is not included.
+This is an editable Typst conversion of the **Outdoor exploration presentation** template from the local 29-deck design sample. The source PowerPoint is not included.
 
-Compile the Typst project with:
-
-```console
-typst compile main.typ preview.pdf
-```
-
-The manifest records unsupported objects for review. Conversion support remains limited to the constructs documented in the project README.
-
-Decorative SVG pictures inherited from PowerPoint masters and layouts are included in the Typst output and kept as vector assets.
-
-Slide picture placeholders also inherit custom clipping geometry from their matching layout placeholders, preserving torn and shaped image edges.
-
-The product timeline SmartArt on slide 6 is included as a vector SVG generated from PowerPoint's stored drawing cache. Its text is part of the SVG artwork rather than separately editable Typst text.
-
-The tables on slides 9 and 10 are emitted as native Typst tables with editable cell text, sizing, alignment, and common fills and borders. The reverse converter reconstructs basic rectangular tables as native PowerPoint tables.
+Compile from this directory with `typst compile main.typ preview.pdf`. Review `conversion_report.json` for constructs that were approximated or are unsupported.

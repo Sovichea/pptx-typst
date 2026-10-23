@@ -590,7 +590,7 @@ def typst_failure_excerpt(output: str):
     return "\n".join(lines[:40])[-4000:]
 
 
-def benchmark_one(app, source: Path, entry, installed_fonts):
+def benchmark_one(app, source: Path, entry, installed_fonts, comparison_dir: Path):
     record = {key: entry.get(key) for key in ("title", "creator", "doi", "license", "file")}
     record.update({"file_bytes": source.stat().st_size, "status": "ok", "error": ""})
     deck = None
@@ -719,7 +719,7 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
                     record.update(fidelity)
                     selected = save_comparison_sheet(
                         source_pdf, typst_pdf, slide_text_scores,
-                        COMPARISON_DIR / f"{source.stem}.png", count=3,
+                        comparison_dir / f"{source.stem}.png", count=3,
                     )
                     if selected:
                         record["visual_comparison"] = f"visual_comparisons/{source.stem}.png"
@@ -748,7 +748,7 @@ def benchmark_one(app, source: Path, entry, installed_fonts):
     return record
 
 
-def run_powerpoint_batch(entries, start, manifest, installed_fonts):
+def run_powerpoint_batch(entries, start, manifest, installed_fonts, input_dir, comparison_dir):
     import pythoncom
     import win32com.client
 
@@ -762,9 +762,10 @@ def run_powerpoint_batch(entries, start, manifest, installed_fonts):
         manifest_indices = {entry["file"]: index + 1 for index, entry in enumerate(manifest["files"])}
         for entry in entries:
             index = manifest_indices.get(entry["file"], start + 1)
-            source = ROOT / entry["file"]
+            entry_path = Path(entry["file"])
+            source = entry_path if entry_path.is_absolute() else input_dir / entry_path
             print(f"[{index}/{len(manifest['files'])}] {entry['title']}", flush=True)
-            row = benchmark_one(app, source, entry, installed_fonts)
+            row = benchmark_one(app, source, entry, installed_fonts, comparison_dir)
             rows.append(row)
             print(f"  {row['status']} | layout={row.get('layout_fidelity_score')} | text={row.get('text_fidelity_score')} | full={row.get('full_slide_fidelity_score')}"
                   + (f" | {row['error'][:160]}" if row["error"] else ""), flush=True)
@@ -784,15 +785,27 @@ def main():
     parser.add_argument("--only", action="append", default=[],
                         help="process a manifest filename or basename (repeatable)")
     parser.add_argument("--report-only", action="store_true", help="recompute aggregate report from existing results.csv")
+    parser.add_argument("--manifest", type=Path, default=MANIFEST,
+                        help="benchmark manifest (defaults to the frozen 100-deck manifest)")
+    parser.add_argument("--input-dir", type=Path, default=ROOT,
+                        help="base directory for relative manifest PPTX paths")
+    parser.add_argument("--output-dir", type=Path, default=BENCH,
+                        help="directory for results, diagnostics, summary, and comparison sheets")
     args = parser.parse_args()
-    if not MANIFEST.is_file():
-        raise SystemExit(f"Missing {MANIFEST}; run tools/download_text_benchmark.py first")
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    manifest_path = args.manifest.resolve()
+    input_dir = args.input_dir.resolve()
+    output_dir = args.output_dir.resolve()
+    results_path = output_dir / "results.csv"
+    summary_path = output_dir / "summary.md"
+    comparison_dir = output_dir / "visual_comparisons"
+    if not manifest_path.is_file():
+        raise SystemExit(f"Missing {manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     installed_fonts = get_typst_font_names()
     if args.report_only:
-        if not RESULTS.is_file():
-            raise SystemExit(f"Missing {RESULTS}")
-        with RESULTS.open(encoding="utf-8-sig", newline="") as stream:
+        if not results_path.is_file():
+            raise SystemExit(f"Missing {results_path}")
+        with results_path.open(encoding="utf-8-sig", newline="") as stream:
             combined = list(csv.DictReader(stream))
     else:
         entries = [entry for entry in manifest["files"] if not entry.get("download_error")]
@@ -808,10 +821,10 @@ def main():
             entries = entries[args.start:args.end if args.end is not None else args.start + args.limit]
         if not entries:
             raise SystemExit("No benchmark entries selected")
-        rows = run_powerpoint_batch(entries, args.start, manifest, installed_fonts)
+        rows = run_powerpoint_batch(entries, args.start, manifest, installed_fonts, input_dir, comparison_dir)
         existing = []
-        if RESULTS.is_file() and (args.start or args.only):
-            with RESULTS.open(encoding="utf-8-sig", newline="") as stream:
+        if results_path.is_file() and (args.start or args.only):
+            with results_path.open(encoding="utf-8-sig", newline="") as stream:
                 existing = list(csv.DictReader(stream))
         if existing:
             by_file = {row.get("file"): row for row in existing}
@@ -822,7 +835,8 @@ def main():
             combined = rows
     for row in combined:
         if row.get("status") == "ok":
-            source = ROOT / row.get("file", "")
+            entry_path = Path(row.get("file", ""))
+            source = entry_path if entry_path.is_absolute() else input_dir / entry_path
             if source.is_file():
                 try:
                     deck, fresh_stats, _, _ = pptx_stats(source, installed_fonts)
@@ -851,7 +865,8 @@ def main():
                     row["page_alignment_error"] = f"could not verify slide identity: {exc}"
                     row["alignment_eligible"] = False
         if args.report_only:
-            source = ROOT / row.get("file", "")
+            entry_path = Path(row.get("file", ""))
+            source = entry_path if entry_path.is_absolute() else input_dir / entry_path
             if source.is_file():
                 try:
                     _, fresh_stats, _, _ = pptx_stats(source, installed_fonts)
@@ -913,7 +928,7 @@ def main():
         if structure:
             structure_detail_records.append({"record_type": "deck_structure", "deck": Path(row.get("file", "")).name,
                                              "title": row.get("title", ""), **structure})
-    slide_details_path = BENCH / "slide_diagnostics.jsonl"
+    slide_details_path = output_dir / "slide_diagnostics.jsonl"
     if not args.report_only:
         preserved_records = []
         if slide_details_path.is_file() and (args.start or args.only):
@@ -954,13 +969,13 @@ def main():
         * int(row.get("geometry_checked_ungrouped_placements") or 0)
         for row in succeeded
     )
-    RESULTS.parent.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     columns = list(dict.fromkeys(key for row in combined for key in row if not key.startswith("_")))
-    with RESULTS.open("w", encoding="utf-8-sig", newline="") as stream:
+    with results_path.open("w", encoding="utf-8-sig", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(combined)
-    COMPARISON_DIR.mkdir(parents=True, exist_ok=True)
+    comparison_dir.mkdir(parents=True, exist_ok=True)
     index_lines = [
         "# Low text-fidelity slide comparisons",
         "",
@@ -978,12 +993,12 @@ def main():
         index_lines.append("")
         index_lines.append(f"![PowerPoint and Typst slide comparison for {row.get('title', image_name)}]({image_name})")
         index_lines.append("")
-    (COMPARISON_DIR / "index.md").write_text("\n".join(index_lines).rstrip() + "\n", encoding="utf-8")
+    (comparison_dir / "index.md").write_text("\n".join(index_lines).rstrip() + "\n", encoding="utf-8")
     summary = [
         "# PPTX to Typst fidelity benchmark",
         "",
-        f"- Corpus: [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K), sampled deterministically; all selected records are CC BY 4.0.",
-        f"- Sample size: {len(manifest['files'])} downloaded decks; measurements recorded for {len(combined)}.",
+        f"- Corpus: {manifest.get('source_name', 'PowerPoint presentation set')}",
+        f"- Sample size: {len(manifest['files'])} presentations; measurements recorded for {len(combined)}.",
         f"- Successful conversions and renders: {len(succeeded)}; failures: {len(errors)}.",
         f"- Visible source slides rendered: {sum(int(row.get('slides_visible_source') or row.get('slides_source') or 0) for row in succeeded)}.",
         f"- Page correspondence: {sum(row.get('page_correspondence') == 'verified' for row in succeeded)} verified; {sum(row.get('page_correspondence') == 'invalid_comparison' for row in succeeded)} excluded as ambiguous.",
@@ -1012,14 +1027,14 @@ def main():
         "- Pixel scores use PDF output rendered locally by PowerPoint and Typst. Grouped text spans may be imperfectly extracted from PDFs.",
         "- Word recall compares text extracted from PowerPoint-exported and Typst PDFs. Differences in reading order are ignored; repeated or missing visible words lower the score.",
         "- Font-size difference compares character-weighted average font sizes extracted from the two PDFs. These aggregate metrics are affected by unsupported objects and font substitution.",
-        "- Source attribution, license, DOI and download checksums are in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv); per-slide diagnostics are in [slide_diagnostics.jsonl](slide_diagnostics.jsonl). PPTX files are in the ignored local `data/input/` directory.",
+        "- Source attribution, license, and input checksums are recorded in [manifest.json](manifest.json). Per-deck measurements are in [results.csv](results.csv); per-slide diagnostics are in [slide_diagnostics.jsonl](slide_diagnostics.jsonl). Input PPTX files are read from the supplied input directory.",
     ]
     if errors:
         summary.extend(["", "## Failure categories", ""])
         for category, count in Counter(row.get("failure_category", "Benchmark error") for row in errors).most_common():
             summary.append(f"- {category}: {count} deck(s). Details are in `results.csv`.")
-    SUMMARY.write_text("\n".join(summary) + "\n", encoding="utf-8")
-    print(f"Wrote {RESULTS} and {SUMMARY}")
+    summary_path.write_text("\n".join(summary) + "\n", encoding="utf-8")
+    print(f"Wrote {results_path} and {summary_path}")
 
 
 if __name__ == "__main__":
