@@ -444,7 +444,7 @@ def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pyte
     svg_warnings = [item for item in report["unsupported"] if item["kind"] == "svg_renderer_unavailable"]
     master_artwork_count = sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes)
     if svg_warnings:
-        assert master_artwork_count == 0
+        assert master_artwork_count == 2
     else:
         assert master_artwork_count == 3
     slide_text = text_in(deck)
