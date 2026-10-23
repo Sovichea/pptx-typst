@@ -60,7 +60,7 @@ typst-to-pptx my-deck/main.typ --output my-deck.pptx
 
 The starter project includes a supported `main.typ`, helper module, original SVG artwork, and three editable slides using one shared master and three layouts. Its copy and metrics are illustrative. To generate only the helper module, run `pptx-typst module --output pptx-typst.typ`.
 
-The helper module provides `PptxMaster`, `PptxLayout`, and `PptxSlide` for reusable hierarchy, plus static `PptxPlace`, `PptxGroup`, `PptxClip`, `PptxBox`, `PptxText`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable` constructs. Title, centered-title, and body placeholders are supported in the defined subset. See the [placeholder support report](https://github.com/Sovichea/pptx-typst/blob/main/docs/placeholder-support.md) and [master/layout report](https://github.com/Sovichea/pptx-typst/blob/main/docs/master-layout-poc.md).
+The helper module provides `PptxMaster`, `PptxLayout`, and `PptxSlide` for reusable hierarchy, plus static `PptxPlace`, `PptxGroup`, `PptxClip`, `PptxBox`, `PptxText`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable` constructs. Title, centered-title, and body placeholders are supported in the defined subset. See the [placeholder support report](https://github.com/Sovichea/pptx-typst/blob/main/docs/placeholder-support.md) and [master/layout report](https://github.com/Sovichea/pptx-typst/blob/main/docs/master-layout-support.md).
 
 ## Font preflight and validation
 
