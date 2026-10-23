@@ -7,7 +7,7 @@ Target: `pptx-typst` 0.1.0
 
 **Publication is blocked pending confirmation of redistribution rights for the template-derived example decks and comparison images.** Their rights were not verified in this audit, so no conclusion is made that the files are freely redistributable. The decks and images remain in the repository; this audit did not remove or replace them. Before publishing, obtain evidence that redistribution is allowed or make a separately authorized decision about the affected public materials.
 
-All package and starter-workflow checks listed below passed locally. The cross-platform run for the added font-command smoke check must pass on the final commit before publication.
+Package and starter-workflow checks passed locally. GitHub Actions run [39932560441](https://github.com/Sovichea/pptx-typst/actions/runs/39932560441) passed all 12 Windows, Linux, and macOS x Python 3.10-3.13 jobs on commit `c6e4b3b`, including the added font-command smoke check.
 
 ## Verified
 
@@ -23,6 +23,7 @@ All package and starter-workflow checks listed below passed locally. The cross-p
 | README | Rendered with the Markdown renderer; the five comparison images resolved successfully (HTTP 200), and repository links use absolute GitHub URLs. |
 | Package name/version | PyPI JSON endpoints for `pptx-typst` and `pptx-typst/0.1.0` returned 404 on the audit date. Recheck immediately before publication. |
 | Archive path scan | No developer-specific absolute Windows paths or private benchmark source locations were found in files in either archive. |
+| Cross-platform CI | GitHub Actions run 39932560441 passed all 12 OS/Python matrix jobs on commit `c6e4b3b`. |
 | Publication actions | No PyPI upload, release tag, or GitHub release was created. |
 
 The sdist includes documentation screenshots under `docs/images/`, including the example comparison images. It does not include the full converted example project directories. The wheel contains runtime package files only.
