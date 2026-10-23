@@ -88,6 +88,12 @@ The source distribution and wheel are written to `dist/`. The full converted sam
 
 Development-only visual and geometry utilities live under `tools/`.
 
+## Agent skills
+
+Repository-local Agent Skills for converting presentations and designing editable Typst-to-PowerPoint decks are included under [`.agents/skills`](.agents/README.md). The design skill includes static semantic component lowering and component-aware rendered-text QA. Host-agent discovery and supported static IR requirements are described in that guide.
+
+The semantic-layout work, synthetic fixture results, and remaining validation limits are documented in the [Milestone 9 report](docs/milestone-9-semantic-layout.md).
+
 ## Project status
 
 This is an alpha proof of concept. Review conversion reports and visually inspect presentations before relying on converted output. The project does not claim pixel-perfect rendering or support for arbitrary Typst source.

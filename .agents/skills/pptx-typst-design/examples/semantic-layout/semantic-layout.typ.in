@@ -1,0 +1,22 @@
+#import "pptx-typst.typ": *
+#set page(width: 960pt, height: 540pt, margin: 0pt)
+
+#let Identity = PptxMaster(fill: rgb("#F7F6F0"), children: [
+  #PptxPlace(x: 56pt, y: 518pt,
+    child: PptxRect(width: 848pt, height: 2pt, fill: rgb("#C9D4CE")))
+])
+
+#let Content = PptxLayout(master: Identity, children: [])
+
+#PptxSlide(width: 960pt, height: 540pt, layout: Content, children: [
+  #PptxPlace(x: 56pt, y: 42pt, child: PptxTextFrame(
+    width: 848pt, height: 60pt, font: "Arial", size: 34pt,
+    fill: rgb("#18372F"), weight: "bold", anchor: "center", default-align: "left",
+    paragraphs: (PptxParagraph(align: "left", runs: (
+      PptxPlaceholderRun(text: "Semantic components own alignment", font: "Arial",
+        size: 34pt, fill: rgb("#18372F"), weight: "bold"),
+    )),),
+  ))
+
+  // COMPONENTS INSERT HERE
+])

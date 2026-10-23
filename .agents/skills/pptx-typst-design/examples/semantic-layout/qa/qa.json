@@ -1,0 +1,614 @@
+{
+  "timestamp_utc": "2026-10-23T05:27:00.307150+00:00",
+  "purpose": "visual QA triage, not a fidelity guarantee",
+  "preview": {
+    "file": ".agents\\skills\\pptx-typst-design\\examples\\semantic-layout\\preview.pdf",
+    "pages": 1,
+    "page_sizes_pt": [
+      [
+        960.0,
+        540.0
+      ]
+    ],
+    "slides": [
+      {
+        "page": 1,
+        "width_pt": 960.0,
+        "height_pt": 540.0,
+        "text_block_count": 4,
+        "image_resource_count": 0,
+        "out_of_page_text_blocks": []
+      }
+    ]
+  },
+  "pptx": {
+    "file": ".agents\\skills\\pptx-typst-design\\examples\\semantic-layout\\semantic-components.pptx",
+    "slides": 1,
+    "size_pt": [
+      960.0,
+      540.0
+    ],
+    "shapes": [
+      {
+        "slide": 1,
+        "counts": {
+          "text_frames": 14,
+          "total": 14
+        },
+        "out_of_canvas_shapes": []
+      }
+    ]
+  },
+  "conversion_report": {
+    "file": ".agents\\skills\\pptx-typst-design\\examples\\semantic-layout\\conversion_report.json",
+    "status": null,
+    "warnings": 0,
+    "issue_counts": {},
+    "warnings_by_slide": {},
+    "potentially_material_warnings": []
+  },
+  "component_alignment": {
+    "authoring_pdf": {
+      "file": ".agents\\skills\\pptx-typst-design\\examples\\semantic-layout\\preview.pdf",
+      "components": [
+        {
+          "id": "discover-card",
+          "slide": 1,
+          "container_bounds_pt": [
+            56.0,
+            150.0,
+            266.667,
+            136.0
+          ],
+          "text_frame_bounds_pt": [
+            56.0,
+            150.0,
+            266.667,
+            136.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "Discover"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            136.53,
+            207.55,
+            242.13,
+            232.55
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 2.05,
+          "overflow": false
+        },
+        {
+          "id": "design-card",
+          "slide": 1,
+          "container_bounds_pt": [
+            346.667,
+            150.0,
+            266.667,
+            136.0
+          ],
+          "text_frame_bounds_pt": [
+            346.667,
+            150.0,
+            266.667,
+            136.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "Design"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            438.33,
+            207.55,
+            521.68,
+            232.55
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 2.05,
+          "overflow": false
+        },
+        {
+          "id": "deliver-card",
+          "slide": 1,
+          "container_bounds_pt": [
+            637.333,
+            150.0,
+            266.667,
+            136.0
+          ],
+          "text_frame_bounds_pt": [
+            637.333,
+            150.0,
+            266.667,
+            136.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "Deliver"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            728.97,
+            207.55,
+            812.35,
+            232.55
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 2.05,
+          "overflow": false
+        },
+        {
+          "id": "badge-01",
+          "slide": 1,
+          "container_bounds_pt": [
+            56.0,
+            344.0,
+            112.0,
+            112.0
+          ],
+          "text_frame_bounds_pt": [
+            56.0,
+            344.0,
+            112.0,
+            112.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "01"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            96.43,
+            388.3,
+            127.56,
+            416.3
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 2.3,
+          "overflow": false
+        },
+        {
+          "id": "node-observe",
+          "slide": 1,
+          "container_bounds_pt": [
+            208.0,
+            344.0,
+            336.0,
+            112.0
+          ],
+          "text_frame_bounds_pt": [
+            208.0,
+            344.0,
+            336.0,
+            112.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "Observe"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            329.97,
+            390.39,
+            422.02,
+            413.39
+          ],
+          "horizontal_alignment_error_pt": 0.01,
+          "vertical_alignment_error_pt": 1.89,
+          "overflow": false
+        },
+        {
+          "id": "node-adjust",
+          "slide": 1,
+          "container_bounds_pt": [
+            568.0,
+            344.0,
+            336.0,
+            112.0
+          ],
+          "text_frame_bounds_pt": [
+            568.0,
+            344.0,
+            336.0,
+            112.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "Adjust"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            700.23,
+            390.39,
+            771.78,
+            413.39
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 1.89,
+          "overflow": false
+        },
+        {
+          "id": "metric-example",
+          "slide": 1,
+          "container_bounds_pt": [
+            56.0,
+            460.0,
+            848.0,
+            54.0
+          ],
+          "text_frame_bounds_pt": [
+            56.0,
+            460.0,
+            848.0,
+            54.0
+          ],
+          "horizontal": "center",
+          "vertical": "center",
+          "expected_font": "Arial",
+          "expected_text_lines": [
+            "03",
+            "REUSABLE PATTERNS"
+          ],
+          "resolved_pdf_fonts": [
+            "Arial-BoldMT",
+            "ArialMT"
+          ],
+          "font_status": "match",
+          "status": "pass",
+          "glyph_bounds_pt": [
+            415.21,
+            472.35,
+            544.79,
+            503.15
+          ],
+          "horizontal_alignment_error_pt": 0.0,
+          "vertical_alignment_error_pt": 0.75,
+          "overflow": false
+        }
+      ],
+      "matched": 7,
+      "unavailable": 0,
+      "passed": 7,
+      "tolerances_pt": {
+        "horizontal": 2.0,
+        "vertical": 3.0
+      }
+    },
+    "roundtrip_pdf": null,
+    "comparison": {
+      "renderer": null,
+      "components": [
+        {
+          "id": "discover-card",
+          "classification": "source_only",
+          "authoring": {
+            "id": "discover-card",
+            "slide": 1,
+            "container_bounds_pt": [
+              56.0,
+              150.0,
+              266.667,
+              136.0
+            ],
+            "text_frame_bounds_pt": [
+              56.0,
+              150.0,
+              266.667,
+              136.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "Discover"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              136.53,
+              207.55,
+              242.13,
+              232.55
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 2.05,
+            "overflow": false
+          },
+          "conversion": null
+        },
+        {
+          "id": "design-card",
+          "classification": "source_only",
+          "authoring": {
+            "id": "design-card",
+            "slide": 1,
+            "container_bounds_pt": [
+              346.667,
+              150.0,
+              266.667,
+              136.0
+            ],
+            "text_frame_bounds_pt": [
+              346.667,
+              150.0,
+              266.667,
+              136.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "Design"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              438.33,
+              207.55,
+              521.68,
+              232.55
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 2.05,
+            "overflow": false
+          },
+          "conversion": null
+        },
+        {
+          "id": "deliver-card",
+          "classification": "source_only",
+          "authoring": {
+            "id": "deliver-card",
+            "slide": 1,
+            "container_bounds_pt": [
+              637.333,
+              150.0,
+              266.667,
+              136.0
+            ],
+            "text_frame_bounds_pt": [
+              637.333,
+              150.0,
+              266.667,
+              136.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "Deliver"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              728.97,
+              207.55,
+              812.35,
+              232.55
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 2.05,
+            "overflow": false
+          },
+          "conversion": null
+        },
+        {
+          "id": "badge-01",
+          "classification": "source_only",
+          "authoring": {
+            "id": "badge-01",
+            "slide": 1,
+            "container_bounds_pt": [
+              56.0,
+              344.0,
+              112.0,
+              112.0
+            ],
+            "text_frame_bounds_pt": [
+              56.0,
+              344.0,
+              112.0,
+              112.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "01"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              96.43,
+              388.3,
+              127.56,
+              416.3
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 2.3,
+            "overflow": false
+          },
+          "conversion": null
+        },
+        {
+          "id": "node-observe",
+          "classification": "source_only",
+          "authoring": {
+            "id": "node-observe",
+            "slide": 1,
+            "container_bounds_pt": [
+              208.0,
+              344.0,
+              336.0,
+              112.0
+            ],
+            "text_frame_bounds_pt": [
+              208.0,
+              344.0,
+              336.0,
+              112.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "Observe"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              329.97,
+              390.39,
+              422.02,
+              413.39
+            ],
+            "horizontal_alignment_error_pt": 0.01,
+            "vertical_alignment_error_pt": 1.89,
+            "overflow": false
+          },
+          "conversion": null
+        },
+        {
+          "id": "node-adjust",
+          "classification": "source_only",
+          "authoring": {
+            "id": "node-adjust",
+            "slide": 1,
+            "container_bounds_pt": [
+              568.0,
+              344.0,
+              336.0,
+              112.0
+            ],
+            "text_frame_bounds_pt": [
+              568.0,
+              344.0,
+              336.0,
+              112.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "Adjust"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              700.23,
+              390.39,
+              771.78,
+              413.39
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 1.89,
+            "overflow": false
+          },
+          "conversion": null
+        },
+        {
+          "id": "metric-example",
+          "classification": "source_only",
+          "authoring": {
+            "id": "metric-example",
+            "slide": 1,
+            "container_bounds_pt": [
+              56.0,
+              460.0,
+              848.0,
+              54.0
+            ],
+            "text_frame_bounds_pt": [
+              56.0,
+              460.0,
+              848.0,
+              54.0
+            ],
+            "horizontal": "center",
+            "vertical": "center",
+            "expected_font": "Arial",
+            "expected_text_lines": [
+              "03",
+              "REUSABLE PATTERNS"
+            ],
+            "resolved_pdf_fonts": [
+              "Arial-BoldMT",
+              "ArialMT"
+            ],
+            "font_status": "match",
+            "status": "pass",
+            "glyph_bounds_pt": [
+              415.21,
+              472.35,
+              544.79,
+              503.15
+            ],
+            "horizontal_alignment_error_pt": 0.0,
+            "vertical_alignment_error_pt": 0.75,
+            "overflow": false
+          },
+          "conversion": null
+        }
+      ]
+    }
+  },
+  "gate_issues": []
+}

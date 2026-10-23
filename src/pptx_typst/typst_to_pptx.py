@@ -377,6 +377,14 @@ def add_native(slide,child,x,y,rot,audit,slide_num):
         else:shp=None
         if shp:
             obj=slide.shapes.add_shape(shp,Pt(x),Pt(y),Pt(w),Pt(h))
+            if ty=='rect' and radius>0 and len(obj.adjustments):
+                # DrawingML's roundedRect adjustment is the corner radius as
+                # a fraction of the smaller shape dimension. python-pptx's
+                # default (about 1/6) otherwise discards the requested Typst
+                # radius and gives every rounded panel the same curvature.
+                short_side=min(w,h)
+                if short_side>0:
+                    obj.adjustments[0]=min(radius/short_side,0.5)
             fill=a.get('fill','none')
             if fill=='none':obj.fill.background()
             else:

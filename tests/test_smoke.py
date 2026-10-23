@@ -645,6 +645,7 @@ def test_reverse_conversion_preserves_image_fit_and_rounded_panel_style(tmp_path
         '''#PptxSlide(width:320pt,height:180pt,fill:rgb("#FFFFFF"),children:[
   #PptxPlace(x:20pt,y:20pt,child:PptxImage("wide.png",width:40pt,height:40pt,fit:"cover"))
   #PptxPlace(x:80pt,y:20pt,child:PptxRect(width:100pt,height:60pt,fill:rgb("#FF000080"),stroke:1pt + rgb("#223344"),radius:8pt))
+  #PptxPlace(x:200pt,y:20pt,child:PptxRect(width:50pt,height:30pt,fill:rgb("#EEEEEE"),radius:60pt))
 ])
 ''',
         encoding="utf-8",
@@ -658,6 +659,10 @@ def test_reverse_conversion_preserves_image_fit_and_rounded_panel_style(tmp_path
     assert picture.crop_left == pytest.approx(0.25, abs=0.01)
     assert picture.crop_right == pytest.approx(0.25, abs=0.01)
     assert panel.auto_shape_type == MSO_SHAPE.ROUNDED_RECTANGLE
+    assert panel.adjustments[0] == pytest.approx(8 / 60, abs=0.0001)
+    oversized_panel = next(shape for shape in deck.slides[0].shapes
+                           if shape.shape_type == MSO_SHAPE_TYPE.AUTO_SHAPE and shape.left == Pt(200))
+    assert oversized_panel.adjustments[0] == pytest.approx(0.5)
     assert panel.line.width == Pt(1)
     effect_ref = panel._element.find(qn("p:style")).find(qn("a:effectRef"))
     assert effect_ref.get("idx") == "0"

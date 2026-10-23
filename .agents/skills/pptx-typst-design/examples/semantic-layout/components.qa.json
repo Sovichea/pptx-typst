@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "id": "discover-card",
+      "slide": 1,
+      "text": "Discover",
+      "text_lines": [
+        "Discover"
+      ],
+      "container_bounds_pt": [
+        56.0,
+        150.0,
+        266.667,
+        136.0
+      ],
+      "text_frame_bounds_pt": [
+        56.0,
+        150.0,
+        266.667,
+        136.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 16.0,
+        "top": 16.0,
+        "bottom": 16.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    },
+    {
+      "id": "design-card",
+      "slide": 1,
+      "text": "Design",
+      "text_lines": [
+        "Design"
+      ],
+      "container_bounds_pt": [
+        346.667,
+        150.0,
+        266.667,
+        136.0
+      ],
+      "text_frame_bounds_pt": [
+        346.667,
+        150.0,
+        266.667,
+        136.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 16.0,
+        "top": 16.0,
+        "bottom": 16.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    },
+    {
+      "id": "deliver-card",
+      "slide": 1,
+      "text": "Deliver",
+      "text_lines": [
+        "Deliver"
+      ],
+      "container_bounds_pt": [
+        637.333,
+        150.0,
+        266.667,
+        136.0
+      ],
+      "text_frame_bounds_pt": [
+        637.333,
+        150.0,
+        266.667,
+        136.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 16.0,
+        "top": 16.0,
+        "bottom": 16.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    },
+    {
+      "id": "badge-01",
+      "slide": 1,
+      "text": "01",
+      "text_lines": [
+        "01"
+      ],
+      "container_bounds_pt": [
+        56.0,
+        344.0,
+        112.0,
+        112.0
+      ],
+      "text_frame_bounds_pt": [
+        56.0,
+        344.0,
+        112.0,
+        112.0
+      ],
+      "padding_pt": {
+        "left": 8.0,
+        "right": 8.0,
+        "top": 8.0,
+        "bottom": 8.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    },
+    {
+      "id": "node-observe",
+      "slide": 1,
+      "text": "Observe",
+      "text_lines": [
+        "Observe"
+      ],
+      "container_bounds_pt": [
+        208.0,
+        344.0,
+        336.0,
+        112.0
+      ],
+      "text_frame_bounds_pt": [
+        208.0,
+        344.0,
+        336.0,
+        112.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 16.0,
+        "top": 16.0,
+        "bottom": 16.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    },
+    {
+      "id": "node-adjust",
+      "slide": 1,
+      "text": "Adjust",
+      "text_lines": [
+        "Adjust"
+      ],
+      "container_bounds_pt": [
+        568.0,
+        344.0,
+        336.0,
+        112.0
+      ],
+      "text_frame_bounds_pt": [
+        568.0,
+        344.0,
+        336.0,
+        112.0
+      ],
+      "padding_pt": {
+        "left": 16.0,
+        "right": 16.0,
+        "top": 16.0,
+        "bottom": 16.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    },
+    {
+      "id": "metric-example",
+      "slide": 1,
+      "text": "",
+      "text_lines": [
+        "03",
+        "REUSABLE PATTERNS"
+      ],
+      "container_bounds_pt": [
+        56.0,
+        460.0,
+        848.0,
+        54.0
+      ],
+      "text_frame_bounds_pt": [
+        56.0,
+        460.0,
+        848.0,
+        54.0
+      ],
+      "padding_pt": {
+        "left": 0.0,
+        "right": 0.0,
+        "top": 0.0,
+        "bottom": 0.0
+      },
+      "horizontal": "center",
+      "vertical": "center",
+      "font": "Arial"
+    }
+  ]
+}

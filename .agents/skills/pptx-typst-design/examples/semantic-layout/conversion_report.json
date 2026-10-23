@@ -1,0 +1,200 @@
+{
+  "scope": "Place-based generated Typst subset, not general Typst",
+  "slides": 1,
+  "slide_size_pt": [
+    960.0,
+    540.0
+  ],
+  "pictures": 0,
+  "text_boxes": 8,
+  "native_shapes": 7,
+  "tables": 0,
+  "groups_flattened": 0,
+  "cropped_instance_fallbacks": 0,
+  "svg_assets_as_png": 0,
+  "text_content": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "unsupported": [],
+  "source_media": [],
+  "items": [
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 56.0,
+      "y": 42.0,
+      "w": 848.0,
+      "h": 60.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "rect",
+      "x": 56.0,
+      "y": 150.0,
+      "w": 266.667,
+      "h": 136.0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 56.0,
+      "y": 150.0,
+      "w": 266.67,
+      "h": 136.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "rect",
+      "x": 346.667,
+      "y": 150.0,
+      "w": 266.667,
+      "h": 136.0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 346.67,
+      "y": 150.0,
+      "w": 266.67,
+      "h": 136.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "rect",
+      "x": 637.333,
+      "y": 150.0,
+      "w": 266.667,
+      "h": 136.0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 637.33,
+      "y": 150.0,
+      "w": 266.67,
+      "h": 136.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "ellipse",
+      "x": 56.0,
+      "y": 344.0,
+      "w": 112.0,
+      "h": 112.0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 56.0,
+      "y": 344.0,
+      "w": 112.0,
+      "h": 112.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "rect",
+      "x": 208.0,
+      "y": 344.0,
+      "w": 336.0,
+      "h": 112.0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 208.0,
+      "y": 344.0,
+      "w": 336.0,
+      "h": 112.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "rect",
+      "x": 568.0,
+      "y": 344.0,
+      "w": 336.0,
+      "h": 112.0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 568.0,
+      "y": 344.0,
+      "w": 336.0,
+      "h": 112.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": 1,
+      "type": "text",
+      "x": 56.0,
+      "y": 460.0,
+      "w": 848.0,
+      "h": 54.0,
+      "rotation": 0.0,
+      "chars": 0
+    },
+    {
+      "slide": "master:Identity",
+      "type": "rect",
+      "x": 56.0,
+      "y": 518.0,
+      "w": 848.0,
+      "h": 2.0
+    }
+  ],
+  "masters": 1,
+  "layouts": 1,
+  "per_slide": [
+    {
+      "slide": 1,
+      "objects": 14,
+      "layout": "Content",
+      "master": "Identity"
+    }
+  ],
+  "unique_source_media": 0,
+  "hierarchy_written": true,
+  "hierarchy": {
+    "masters": [
+      {
+        "id": "Identity",
+        "shared_objects": 1
+      }
+    ],
+    "layouts": [
+      {
+        "id": "Content",
+        "master": "Identity",
+        "shared_objects": 0,
+        "show_master": true,
+        "fill": "none"
+      }
+    ],
+    "slides": [
+      {
+        "part": "/ppt/slides/slide1.xml",
+        "layout": "Content"
+      }
+    ]
+  }
+}
