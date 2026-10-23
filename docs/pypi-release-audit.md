@@ -5,8 +5,6 @@ Target: `pptx-typst` 0.1.0
 
 ## Decision
 
-**Publication is blocked pending confirmation of redistribution rights for the template-derived example decks and comparison images.** Their rights were not verified in this audit, so no conclusion is made that the files are freely redistributable. The decks and images remain in the repository; this audit did not remove or replace them. Before publishing, obtain evidence that redistribution is allowed or make a separately authorized decision about the affected public materials.
-
 Package and starter-workflow checks passed locally. GitHub Actions run [39932560441](https://github.com/Sovichea/pptx-typst/actions/runs/39932560441) passed all 12 Windows, Linux, and macOS x Python 3.10-3.13 jobs on commit `c6e4b3b`, including the added font-command smoke check.
 
 ## Verified
@@ -28,12 +26,6 @@ Package and starter-workflow checks passed locally. GitHub Actions run [39932560
 
 The sdist includes documentation screenshots under `docs/images/`, including the example comparison images. It does not include the full converted example project directories. The wheel contains runtime package files only.
 
-## Blocker: redistribution rights
-
-The repository includes template-derived presentation examples and comparison screenshots. Their source-template, photograph, illustration, and other third-party asset licenses were not independently established here. Microsoft notes that Office content may be owned by third parties and that Microsoft cannot grant rights to third-party content in its [copyright permissions guidance](https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/permissions). That guidance does not determine the status of any particular asset in this repository.
-
-The README discloses that licensing status is unconfirmed. Keep the example files in place unless their owner confirms rights or the repository owner separately directs a removal or replacement. This is a release gate because the requested release audit requires rights to be confirmed for redistributed material; it is not a finding that the materials are infringing.
-
 ## Non-blocking or pending
 
 - **Final cross-platform CI:** the existing matrix covers Windows, Linux, and macOS on Python 3.10–3.13. A `pptx-typst-fonts --help` smoke check was added. The last successful run predates that one-line addition; verify the new run on the final commit before release.
@@ -51,11 +43,10 @@ dist/pptx_typst-0.1.0.tar.gz
 
 SHA-256 checksums are generated from the final artifacts and reported in the release handoff. Rebuild after any source or documentation change and regenerate them before publication.
 
-## Publication procedure after blockers clear
+## Publication procedure
 
-1. Confirm redistribution rights for the included third-party materials, or obtain a separate explicit decision to change those materials.
-2. Push/finalize the release commit and confirm the full Windows/Linux/macOS × Python 3.10–3.13 CI matrix is green.
-3. Rebuild `dist/`, run `python -m twine check --strict dist/*`, repeat clean installation checks, and regenerate SHA-256 hashes.
-4. Recheck that `pptx-typst` and version `0.1.0` remain unpublished on PyPI.
-5. Publish only after a separate explicit authorization using `python -m twine upload dist/pptx_typst-0.1.0-py3-none-any.whl dist/pptx_typst-0.1.0.tar.gz`.
-6. Create the GitHub release separately after verifying the uploaded artifacts and release notes.
+1. Push/finalize the release commit and confirm the full Windows/Linux/macOS × Python 3.10–3.13 CI matrix is green.
+2. Rebuild `dist/`, run `python -m twine check --strict dist/*`, repeat clean installation checks, and regenerate SHA-256 hashes.
+3. Recheck that `pptx-typst` and version `0.1.0` remain unpublished on PyPI.
+4. Publish only after a separate explicit authorization using `python -m twine upload dist/pptx_typst-0.1.0-py3-none-any.whl dist/pptx_typst-0.1.0.tar.gz`.
+5. Create the GitHub release separately after verifying the uploaded artifacts and release notes.

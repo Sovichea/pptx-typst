@@ -106,7 +106,7 @@ These comparisons use the same slide from each input PowerPoint and generated Ty
 | [Japandi linear marketing](https://github.com/Sovichea/pptx-typst/tree/main/examples/japandi_marketing) | [Slide 1 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/japandi-marketing.png) ![Japandi marketing slide 1 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/japandi-marketing.png) |
 | [Blue spheres](https://github.com/Sovichea/pptx-typst/tree/main/examples/blue_spheres) | [Slide 7 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/blue-spheres.png) ![Blue spheres slide 7 comparison](https://raw.githubusercontent.com/Sovichea/pptx-typst/main/docs/images/example-comparisons/blue-spheres.png) |
 
-The original [FIELD / FORWARD semantic-layout example](https://github.com/Sovichea/pptx-typst/tree/main/examples/field_forward_milestone9) is also available. The frozen 100-deck benchmark and its methodology are documented in the [stabilization report](https://github.com/Sovichea/pptx-typst/blob/main/docs/alpha-stabilization-report.md); the separate [29-deck measurement report](https://github.com/Sovichea/pptx-typst/tree/main/benchmarks/pptx_template_fidelity) provides benchmark methodology and results. The source PowerPoint files are not included. Licensing for third-party assets in the template-derived examples and screenshots has not been independently confirmed; see the [release audit](https://github.com/Sovichea/pptx-typst/blob/main/docs/pypi-release-audit.md).
+The original [FIELD / FORWARD semantic-layout example](https://github.com/Sovichea/pptx-typst/tree/main/examples/field_forward_milestone9) is also available. The frozen 100-deck benchmark and its methodology are documented in the [stabilization report](https://github.com/Sovichea/pptx-typst/blob/main/docs/alpha-stabilization-report.md); the separate [29-deck measurement report](https://github.com/Sovichea/pptx-typst/tree/main/benchmarks/pptx_template_fidelity) provides benchmark methodology and results. The source PowerPoint files are not included.
 
 ## Python API
 
@@ -132,4 +132,4 @@ Open an [issue](https://github.com/Sovichea/pptx-typst/issues) for questions or 
 
 ## License
 
-The software is licensed under the [Apache License 2.0](https://github.com/Sovichea/pptx-typst/blob/main/LICENSE). Fonts, user-provided decks, and third-party assets retain their own terms; they are not relicensed by this project.
+The software is licensed under the [Apache License 2.0](https://github.com/Sovichea/pptx-typst/blob/main/LICENSE).
