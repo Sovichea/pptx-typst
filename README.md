@@ -22,7 +22,7 @@ python -m pip install .
 
 The forward converter can produce Typst source without the Typst compiler. To render the output as PDF, install the [Typst CLI](https://typst.app/) separately. It keeps the PowerPoint text point sizes and text-frame coordinates, resolves inherited text and bullet styles by default, and preserves bullet hanging indents. It tries the requested font followed by Typst's bundled Libertinus Serif. If the requested font is unavailable, fallback glyph metrics can still change wrapping and line appearance.
 
-Core conversion is exercised by CI on Windows, Linux, and macOS. Windows EMF/WMF rendering uses GDI+ through the packaged PowerShell script. Linux and macOS can use Inkscape for those formats; if it is missing, the source media is retained and the conversion report explains that the object will not render in Typst. The Inkscape-installed rendering path was not available for validation on the Windows release-preparation machine.
+Core conversion is exercised by CI on Windows, Linux, and macOS. Windows EMF/WMF rendering uses GDI+ through the packaged PowerShell script. Linux and macOS can use Inkscape for those formats; if it is missing, the source media is retained and the conversion report explains that the object will not render in Typst. SVG masking and SVG-to-PowerPoint rendering use CairoSVG and need a native Cairo library. If it is unavailable, forward conversion keeps the unmasked original and reports the loss; reverse conversion reports the SVG object as unsupported while continuing with other objects. The Inkscape-installed rendering path was not available for validation on the Windows release-preparation machine.
 
 ## Convert PowerPoint to Typst
 
@@ -101,7 +101,7 @@ The v0.1.0 stabilization run converted and rendered all 100 presentations in the
 | PowerPoint feature | Forward to Typst | Typst to PowerPoint |
 |---|---|---|
 | Text boxes and title/body placeholders | Editable text with supported paragraph and inheritance properties | Editable text and native title/body placeholders in the static supported subset |
-| Images and common vector media | Original assets retained; EMF/WMF may use a rendering derivative | PNG/JPEG and supported SVG assets; some media formats are reported as unsupported |
+| Images and common vector media | Original assets retained; EMF/WMF may use a rendering derivative | PNG/JPEG and SVG when CairoSVG can render it; missing native Cairo is reported per asset |
 | Shapes, lines, fills, and transparency | Common geometry and styling supported; complex masks and some shapes are approximated or omitted | Common rectangles, ellipses, lines, and supported static shapes |
 | Tables | Editable tables with common cell styles; merged cells are unsupported | Basic rectangular tables |
 | Masters and layouts | Shared master/layout hierarchy preserved | Native master/layout parts for statically resolvable declarations |

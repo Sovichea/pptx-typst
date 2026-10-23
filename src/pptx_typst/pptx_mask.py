@@ -4,7 +4,6 @@ Derivatives are only created for genuinely nonrectangular picture masks.
 from pathlib import Path
 import hashlib,io,json,math
 from PIL import Image
-import cairosvg
 
 def mask_image(data:bytes, width_pt:float,height_pt:float,paths:list[str],crop,fillrect,alpha:float,asset_dir:Path, source_hash:str):
     key=("v8-cover-full-viewbox",source_hash,round(width_pt,3),round(height_pt,3),tuple(paths),crop,fillrect,round(alpha,5))
@@ -40,7 +39,9 @@ def mask_image(data:bytes, width_pt:float,height_pt:float,paths:list[str],crop,f
     # ellipse/rounded-rectangle proportions before group rotation is applied.
     path_svg=''.join(f'<path d="{p}" fill="white"/>' for p in paths)
     svg=f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 1 1" preserveAspectRatio="none">{path_svg}</svg>'
-    try:bytes_png=cairosvg.svg2png(bytestring=svg.encode(),output_width=W,output_height=H)
+    try:
+        import cairosvg
+        bytes_png=cairosvg.svg2png(bytestring=svg.encode(),output_width=W,output_height=H)
     except Exception:return None
     coverage=Image.open(io.BytesIO(bytes_png)).convert('RGBA').getchannel('A')
     import PIL.ImageChops

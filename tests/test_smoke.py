@@ -441,7 +441,12 @@ def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pyte
     assert [slide.slide_layout.name for slide in deck.slides] == ["CoverLayout", "StoryLayout", "InsightLayout"]
     master_part = deck.slide_masters[0].part.partname
     assert all(slide.slide_layout.slide_master.part.partname == master_part for slide in deck.slides)
-    assert sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes) == 3
+    svg_warnings = [item for item in report["unsupported"] if item["kind"] == "svg_renderer_unavailable"]
+    master_artwork_count = sum(not shape.is_placeholder for shape in deck.slide_masters[0].shapes)
+    if svg_warnings:
+        assert master_artwork_count == 0
+    else:
+        assert master_artwork_count == 3
     slide_text = text_in(deck)
     assert any("Systems for a more resilient future" in text for text in slide_text)
     assert any("Care should flow around people" in text for text in slide_text)
@@ -1038,3 +1043,47 @@ def test_layout_validator_reports_source_objects_without_geometry(tmp_path: Path
         "shape": shape_id,
         "issue": "source geometry unavailable; position and size cannot be compared",
     }]
+
+
+def test_forward_cli_help_does_not_require_native_cairo(monkeypatch: pytest.MonkeyPatch) -> None:
+    import runpy
+
+    monkeypatch.setitem(sys.modules, "cairosvg", None)
+    monkeypatch.setattr(sys, "argv", ["pptx-to-typst", "--help"])
+    with pytest.raises(SystemExit) as result:
+        runpy.run_module("pptx_typst.pptx_to_typst", run_name="__main__")
+
+    assert result.value.code == 0
+
+
+def test_reverse_svg_without_native_cairo_is_reported(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import builtins
+
+    from pptx_typst.typst_to_pptx import convert
+
+    project = tmp_path / "project"
+    assets = project / "assets"
+    assets.mkdir(parents=True)
+    (assets / "art.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10"><rect width="20" height="10"/></svg>',
+        encoding="utf-8",
+    )
+    main = project / "main.typ"
+    main.write_text(
+        '''#PptxSlide(width:320pt,height:180pt,fill:rgb("#FFFFFF"),children:[
+  #PptxPlace(x:20pt,y:20pt,child:PptxImage("assets/art.svg",width:40pt,height:20pt))
+])
+''',
+        encoding="utf-8",
+    )
+    real_import = builtins.__import__
+
+    def without_cairo(name, *args, **kwargs):
+        if name == "cairosvg":
+            raise OSError("native Cairo library is unavailable")
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", without_cairo)
+    report = convert(main, tmp_path / "output.pptx")
+
+    assert any(item["kind"] == "svg_renderer_unavailable" for item in report["unsupported"])

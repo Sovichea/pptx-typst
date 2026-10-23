@@ -8,13 +8,13 @@ Assessment date: 2026-10-23. This preparation starts from the latest local `main
 
 From the installed wheel, `pptx-typst init` produced a starter project that compiled with Typst 0.15.1 and converted back to PPTX. The installed wheel also converted a benchmark source deck to Typst, compiled it, and ran the structural validator from a temporary directory. The source distribution's starter project also compiled. Six independently sourced presentations outside the benchmark converted and compiled; five had source PDF exports and deterministic page mapping for three visually reviewed slides each. These usability findings are detailed in [independent validation](independent-validation.md).
 
-The final local test suite passed 56 tests on Python 3.10 and 56 on Python 3.12. `compileall` passed on Python 3.10. A new regression test covers geometry-less source shapes in the installed validator; it now reports those shapes and excludes them from coordinate comparisons instead of raising an exception.
+The final local test suite passed 58 tests on Python 3.10 and 58 on Python 3.12. `compileall` passed on Python 3.10. Regression tests cover geometry-less source shapes in the validator and operation when native Cairo is unavailable; those cases now produce diagnostics instead of exceptions.
 
 ## Platform status
 
 Windows is the only platform exercised directly in this environment. An installed wheel converted a corpus deck containing EMF, ran the bundled PowerShell/GDI+ path, retained all five original EMF files, generated transparent PNG rendering derivatives, and compiled the resulting Typst project. The historical frozen benchmark was rendered on Windows with PowerPoint and Typst 0.15.1.
 
-CI is configured to run the test suite and all four entry points on Windows, Linux, and macOS with Python 3.10 through 3.13. The final GitHub Actions result is recorded after pushing this preparation commit. Linux and macOS are not locally tested. Inkscape was not installed here, so its actual EMF/WMF conversion path remains unverified; the missing-tool warning path is covered by automated tests. PowerPoint's desktop export was unavailable for one of the six independent decks, which still converted and compiled.
+The first CI matrix run exposed a native Cairo import failure on Windows and macOS when invoking the forward CLI. CairoSVG is now imported only for SVG masking or SVG-to-PowerPoint rasterization; without native Cairo, ordinary conversion continues and affected SVGs are reported. The next CI result is pending. Linux and macOS are not locally tested. Inkscape was not installed here, so its actual EMF/WMF conversion path remains unverified; the missing-tool warning path is covered by automated tests. PowerPoint's desktop export was unavailable for one of the six independent decks, which still converted and compiled.
 
 ## Unsupported objects and limitations
 

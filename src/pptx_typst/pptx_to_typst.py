@@ -1981,7 +1981,9 @@ for slide_no,slide in enumerate(prs.slides,1):
                         if masked:
                             rendered_rel=masked;crop=fillrect=None
                             counts['clipped_images']+=1;counts['masked_'+shape_kind]+=1
-                        else:counts['clip_mask_failures']+=1
+                        else:
+                            counts['clip_mask_failures']+=1
+                            obj['clip_warning']='The picture mask could not be rendered with the available SVG renderer; the original image is kept without its mask.'
                     else:
                         counts['unsupported_clip_masks']+=1
                         obj['clip_warning']='Mask uses adjustable presets, curves, or rotation not yet validated. Original picture kept without a generated mask.'

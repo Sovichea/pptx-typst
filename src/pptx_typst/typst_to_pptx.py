@@ -231,11 +231,17 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
     safe=all(v>=-0.0001 for v in (left,top,right,bottom)) and left+right<0.999 and top+bottom<0.999
     image_path=f
     if f.suffix.lower()=='.svg':
-        import cairosvg
+        try:
+            import cairosvg
+        except (ImportError, OSError) as exc:
+            show_unsupported(audit,'svg_renderer_unavailable',f'{f}: {exc}',slide_num);return True
         token=hashlib.sha256(f.read_bytes()+f'{W:.2f}x{H:.2f}'.encode()).hexdigest()[:14]
         image_path=alpha_cache/f'{token}.png'
         if not image_path.exists():
-            cairosvg.svg2png(url=str(f),write_to=str(image_path),output_width=max(8,round(W*2)),output_height=max(8,round(H*2)))
+            try:
+                cairosvg.svg2png(url=str(f),write_to=str(image_path),output_width=max(8,round(W*2)),output_height=max(8,round(H*2)))
+            except Exception as exc:
+                show_unsupported(audit,'svg_render_failed',f'{f}: {exc}',slide_num);return True
         audit['svg_assets_as_png']+=1
     elif f.suffix.lower() not in ('.png','.jpeg','.jpg','.bmp','.gif','.tif','.tiff'):
         show_unsupported(audit,'media_format',im['path'],slide_num);return True
