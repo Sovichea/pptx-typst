@@ -29,7 +29,7 @@ Python 3.10 through 3.13 is supported.
 python -m pip install pptx-typst==0.1.0
 ```
 
-The PyPI project name is available, but the 0.1.0 distribution has not been uploaded yet. Until publication, install from a trusted source checkout with `python -m pip install .`.
+Version `0.1.0` is published on [PyPI](https://pypi.org/project/pptx-typst/0.1.0/) and available as a [GitHub Release](https://github.com/Sovichea/pptx-typst/releases/tag/v0.1.0). The pinned install command above installs this release.
 
 The Python package performs conversion. Install the [Typst CLI](https://typst.app/) separately to compile generated Typst projects to PDF. EMF/WMF conversion uses the packaged Windows PowerShell/GDI+ helper on Windows, or Inkscape when available on Linux and macOS. Without a compatible renderer, the original media is retained and the conversion report warns that the object may not render. Some SVG masking and SVG-to-PowerPoint rasterization paths need Cairo native libraries; affected operations report a fallback or unsupported object when Cairo is unavailable.
 
