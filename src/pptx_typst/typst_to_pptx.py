@@ -201,6 +201,7 @@ def text_runs(child):
             body_start=end+block.end()-1
             content,_=balanced(child,body_start,'[',']')
             content=content.strip()
+            content=re.sub(r'#linebreak\(\)\s*', '\n', content)
             content=re.sub(r'\\([@#$\[\]\\])',r'\1',content)
         if not content:continue
         out.append(dict(text=content,font=txt_decode(a.get('font','"Aptos"')),size=length(a.get('size'),20),color=simple_color(a.get('fill')),bold='bold' in a.get('weight','').lower()))
@@ -351,12 +352,20 @@ def add_text(slide,child,x,y,rot,audit,slide_num):
     am=re.search(r'#align\(\s*(center|left|right)',child)
     if am:
         tf.paragraphs[0].alignment={'center':PP_ALIGN.CENTER,'left':PP_ALIGN.LEFT,'right':PP_ALIGN.RIGHT}[am.group(1)]
+    vm=re.search(r'#align\(\s*(?:center|left|right)\s*\+\s*(horizon|top|bottom)\)',child)
+    if vm:
+        tf.vertical_anchor={'horizon':MSO_ANCHOR.MIDDLE,'top':MSO_ANCHOR.TOP,'bottom':MSO_ANCHOR.BOTTOM}[vm.group(1)]
     txt=''.join(r['text'] for r in runs)
     # Keep rich runs editable. Typst paragraph-height differences are not benchmarked.
     p=tf.paragraphs[0]
     for rr in runs:
-        r=p.add_run();r.text=rr['text'];r.font.name=rr['font'];r.font.size=Pt(rr['size']);r.font.bold=rr['bold']
-        r.font.color.rgb=RGBColor(*rr['color'])
+        for index,part in enumerate(rr['text'].split('\n')):
+            if index:
+                p.add_line_break()
+            if not part:
+                continue
+            r=p.add_run();r.text=part;r.font.name=rr['font'];r.font.size=Pt(rr['size']);r.font.bold=rr['bold']
+            r.font.color.rgb=RGBColor(*rr['color'])
     if abs(rot)>0.001:shape.rotation=rot%360
     audit['text_boxes']+=1;audit['text_content'].append(txt)
     audit['items'].append({'slide':slide_num,'type':'text','x':round(x,2),'y':round(y,2),'w':round(w,2),'h':round(h,2),'rotation':round(rot,2),'chars':len(txt)})

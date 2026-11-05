@@ -50,6 +50,8 @@ Default canvas: 960 × 540 pt. Use point coordinates; do not confuse points with
 
 Avoid choosing tiny measured differences such as 0.21 em and independent arbitrary values for every slide. Use established tokens, check the render, and refine only when necessary. Use line spacing near 1.2–1.35; validate in Typst because measured font metrics differ from PowerPoint.
 
+Quantize every font size to a 0.5 pt increment. PowerPoint does not render arbitrary fractional sizes reliably, so a PDF set at 11.6 pt may export at a different effective size and reflow. Keep line spacing, coordinates, and stroke widths as finely measured as needed.
+
 Prefer two complementary font roles: display for titles and humanist sans for body. A single robust family with weight variation is also fine. For Khmer presentations, use available MiSans Khmer with tested glyph coverage; check line breaking and actual projection readability, not just PDF text extraction. Do not assume fonts are embedded in or installed on recipients' PowerPoint systems.
 
 ## Palette and contrast

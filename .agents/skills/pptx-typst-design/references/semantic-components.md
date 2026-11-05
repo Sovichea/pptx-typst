@@ -2,6 +2,8 @@
 
 Use a small component description to state intent and bounds, then lower it to the static Typst subset. The exporter does not evaluate custom Typst macros. The helper in `scripts/lower_components.py` emits ordinary `PptxPlace`, `PptxRect`/`PptxEllipse`, and `PptxTextFrame` declarations that remain individually editable in PowerPoint.
 
+For inverse-sync targets, rewrite generated labels to the content-block pattern: a `PptxBox` with `#align(...)[#PptxText(...)[Copy]]`. New copy must not remain in `PptxPlaceholderRun(text: "...")`; see [Typst IR API and feature routing](typst-ir-api.md#content-blocks-and-inverse-sync).
+
 ## Alignment rule
 
 Every component owns one authoritative rectangle. A card or diagram node may use a native shape for its fill and border, plus a text frame on the exact same `(x, y, width, height)`. Set text padding as the frame's margins, horizontal alignment on its paragraph, and vertical alignment on the frame anchor. Do not add offsets such as `x + 12pt` to imitate centering.

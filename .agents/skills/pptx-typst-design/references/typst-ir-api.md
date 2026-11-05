@@ -44,6 +44,26 @@ The module includes these native aliases:
 
 Native placeholder declarations use `PptxPlaceholderSlot` and `PptxPlaceholder`, but the reverse-converter support is bounded to common title/body uses. Start from the repository's starter deck and placeholder support documentation before authoring them.
 
+## Content blocks and inverse sync
+
+Put visible copy in a content block, not in a string argument. Typsastra/Tinymist inverse sync indexes markup text; copy supplied only through `PptxText(...)["..."]` or a new `PptxPlaceholderRun(text: "...")` record cannot be clicked back to its source.
+
+Use a layout box for bounds and a nested `PptxText` for the copy:
+
+```typst
+#PptxPlace(x: 80pt, y: 240pt,
+  child: PptxBox(width: 240pt, height: 140pt)[
+    #align(center + horizon)[
+      #PptxText(font: "Arial", size: 24pt, weight: "bold",
+        fill: rgb("#18372F"))[Detect]
+    ]
+  ])
+```
+
+The nested `PptxText` remains a native editable text box in PPTX, while the surrounding `PptxBox` supplies its frame bounds and alignment. For multi-line copy, set `#set par(leading: ...)` inside the box and use `#linebreak()` or allow the box width to wrap. This rule applies to visible copy only: font family names, asset paths, colors, and other parameters remain ordinary strings.
+
+Keep `PptxTextFrame` and `PptxPlaceholderRun` only for preserving an imported deck's existing paragraph records. Do not use them for new copy, and rewrite edited copy into content blocks.
+
 ## Proven base architecture
 
 This is the structural idiom used by the repo's bundled starter, shortened for clarity:
@@ -115,24 +135,18 @@ Prefer one authoritative component rectangle and place the text frame on the sam
   child: PptxRect(width: card-width, height: card-height,
     fill: rgb("#EEF3EF"), stroke: 1pt + rgb("#C9D4CE"), radius: 16pt))
 #PptxPlace(x: card-x, y: card-y,
-  child: PptxTextFrame(
-    width: card-width, height: card-height,
-    font: "Arial", size: 24pt, weight: "bold", fill: rgb("#18372F"),
-    anchor: "center", default-align: "center",
-    margin-left: 16pt, margin-right: 16pt,
-    margin-top: 12pt, margin-bottom: 12pt,
-    paragraphs: (
-      PptxParagraph(align: "center", runs: (
-        PptxPlaceholderRun(text: "Detect", font: "Arial", size: 24pt,
-          fill: rgb("#18372F"), weight: "bold"),
-      )),
-    ),
-  ))
+  child: PptxBox(width: card-width, height: card-height)[
+    #set par(leading: 4pt)
+    #align(center + horizon)[
+      #PptxText(font: "Arial", size: 24pt, weight: "bold",
+        fill: rgb("#18372F"))[Detect]
+    ]
+  ])
 ```
 
-The four component values are authored once and reused for both placements; adjust the component bounds or padding rather than the text origin. `PptxTextFrame` dimensions determine the editable frame, paragraph alignment determines horizontal alignment, and `anchor` determines vertical anchoring. Use this same-bounds pattern for a card, badge or diagram node; select `PptxEllipse` as the background for circular nodes. Keep complex icons as separate assets or supported shapes. Rounded-rectangle radius maps to PowerPoint's native adjustment within the shape's maximum possible radius; inspect the exported result for the design's corner scale.
+The four component values are authored once and reused for both placements; adjust the component bounds or padding rather than the text origin. The box dimensions determine the editable text frame, `#align` controls horizontal and vertical alignment, and `#set par(leading: ...)` controls multi-line rhythm. Use this same-bounds pattern for a card, badge or diagram node; select `PptxEllipse` as the background for circular nodes. Keep complex icons as separate assets or supported shapes. Rounded-rectangle radius maps to PowerPoint's native adjustment within the shape's maximum possible radius; inspect the exported result for the design's corner scale.
 
-The static exporter does not evaluate custom component macros. Any generator or agent-side component recipe must lower to explicit `PptxPlace`, `PptxRect`/`PptxEllipse`, `PptxTextFrame`, `PptxParagraph` and `PptxPlaceholderRun` calls in the final source.
+The static exporter does not evaluate custom component macros. Any generator or agent-side component recipe must lower to explicit `PptxPlace`, `PptxRect`/`PptxEllipse`, `PptxBox`, `PptxText` and content-block calls in the final source; keep `PptxTextFrame` only for preserving imported run records.
 
 ## Native shape-based charts
 
@@ -180,6 +194,8 @@ presentation/
   assets/
     photo.png
     illustration.svg
+  preview.png
+  preview.svg
   preview.pdf
   export/
     presentation.pptx
@@ -189,12 +205,16 @@ presentation/
     qa.json
 ```
 
-Commands:
+Use PNG or SVG for the design loop. On the final pass, render PNG, SVG, and PDF from the same source:
 
 ```sh
+typst compile presentation/main.typ "presentation/preview-{p}.png" --ppi 144
+typst compile presentation/main.typ "presentation/preview-{p}.svg"
 typst compile presentation/main.typ presentation/preview.pdf
 typst-to-pptx presentation/main.typ --output presentation/export/presentation.pptx
 ```
+
+A single-page poster can omit the `{p}` page template. Set every font size to a multiple of 0.5 pt; PowerPoint does not render arbitrary fractions reliably.
 
 `conversion_report.json` is written beside the PPTX output. If importing an original PPTX, keep its generated `asset_manifest.json` and source object comments and use `pptx-typst-validate` for geometry checks; that validation is *not* needed for a newly authored deck with no source PPTX.
 

@@ -14,7 +14,7 @@ A slide deck is not finished when Typst compiles. Verify the Typst PDF *and* the
 
 ### Pass 2: Contact sheet
 
-Render all PDF pages and inspect them as a gallery. Look for story pacing, layout repetition, palette drift, poor visual balance, random transitions between light/dark, inconsistent photo treatments and suspiciously empty or crowded pages. At minimum inspect **every slide thumbnail**, then open detailed renders where anything seems off.
+Use PNG or SVG as the design-loop feedback format. Render the PDF and its QA gallery only on the final pass, or when a final-fidelity check is specifically needed. Look for story pacing, layout repetition, palette drift, poor visual balance, random transitions between light/dark, inconsistent photo treatments and suspiciously empty or crowded pages. At minimum inspect **every slide thumbnail**, then open detailed renders where anything seems off.
 
 Use:
 

@@ -22,11 +22,14 @@ Use this skill for presentation design and authoring. For importing an existing 
 4. **Use a coherent design system.** Define palette, fonts, 4/8/12/16/24/32 pt spacing scale, margins, grid, component styles, image treatment, charts, and slide types. No arbitrary microscopic adjustments unless needed to correct a measured rendering issue.
 5. **Preflight fonts before final export.** Declare intended font families in the design system and run `pptx-typst-fonts deck/main.typ --report deck/font-report.json` (or `python tools/check_presentation_fonts.py ...` in a source checkout). Pass each same `--font-path` used by Typst compilation. Typst font availability and Office/system font availability are separate checks; `--font-path` does not install or embed a font for PowerPoint.
 6. **Build an editable scene.** Compose PowerPoint-friendly static `PptxMaster`, `PptxLayout`, `PptxSlide`, `PptxPlace`, native text/shape/table primitives, and separately authored image assets. Avoid unsupported dynamic Typst constructs if PPTX is required.
-7. **Author semantic components, then lower them to static IR.** Cards, badges and diagram nodes use one declared component bounding box. Align labels inside a `PptxTextFrame` with explicit paragraph alignment, vertical anchor and margins; do not estimate a second text coordinate. See [semantic components](references/semantic-components.md). Do not implement these as user-defined Typst macros that the exporter cannot evaluate.
-8. **Design in layers.** Put shared branding and chrome in masters; repeated layout structure in layouts; editable slide-specific content in slides. Avoid per-slide duplication and all-slide rasterization.
-9. **Review every rendered page.** Render contact sheets plus full-resolution critical slides; fix clipped text, low contrast, misalignment, invisible elements, accidental overlaps, and inconsistent rhythm.
-10. **Round-trip QA.** Export the PPTX with `typst-to-pptx`, read its `conversion_report.json`, then inspect/render the resulting PPTX if a viewer or PowerPoint renderer is available. When comparing PDFs, use consistent fonts where possible and inspect the font preflight/render report. Do not adjust positions to compensate for a substituted font; first make the intended font available or make an explicit design decision to use a substitute.
-11. **Deliver a reproducible package.** Include Typst source, helper module, original assets and provenance, preview PDF, PPTX, and a concise quality/limitations report as appropriate. Report missing/substituted family names, link the licensed font source, and tell recipients to install the font through their OS font manager (Windows Fonts settings, macOS Font Book, or their Linux distribution/user-font configuration) before opening or rendering the deck. Never claim PPTX parity that was not checked.
+7. **Author semantic components, then lower them to static IR.** Cards, badges and diagram nodes use one declared component bounding box. Align labels inside the box with explicit alignment and margins; do not estimate a second text coordinate. See [semantic components](references/semantic-components.md). Do not implement these as user-defined Typst macros that the exporter cannot evaluate.
+8. **Author copy as content blocks.** Put every visible string in a Typst content block, typically `PptxBox(width: ..., height: ...)[#align(...)[#PptxText(...)[Copy]]]`. Do not pass copy as a string literal (`PptxText(...)["Copy"]`) or add new `PptxPlaceholderRun(text: "...")` records. Typsastra/Tinymist inverse sync indexes markup text only, so string-only copy cannot be clicked back to its source. A nested `PptxText` keeps the text a native editable text box in PPTX. Existing imported `PptxTextFrame` run records are tolerated only while preserving converted paragraph geometry; rewrite new or edited copy into content blocks.
+9. **Render PNG or SVG during design.** After each meaningful Typst edit, compile directly to PNG or SVG and inspect that image as the agent's feedback loop. Do not use PDF as the iterative preview format. On the final pass, render PNG, SVG, and PDF from the same source. PNG and SVG emit one file per page, so use a page-number template for multi-slide decks.
+10. **Use 0.5 pt font-size increments.** Set every font size to a multiple of 0.5 pt. PowerPoint quantizes arbitrary fractions, so a PDF set at 11.6 pt may export and reflow at a different size. Line spacing, coordinates, and stroke widths may use finer values.
+11. **Design in layers.** Put shared branding and chrome in masters; repeated layout structure in layouts; editable slide-specific content in slides. Avoid per-slide duplication and all-slide rasterization.
+12. **Review every rendered page.** Inspect the PNG/SVG loop output plus full-resolution critical pages; fix clipped text, low contrast, misalignment, invisible elements, accidental overlaps, and inconsistent rhythm.
+13. **Round-trip QA.** Export the PPTX with `typst-to-pptx`, read its `conversion_report.json`, then inspect/render the resulting PPTX if a viewer or PowerPoint renderer is available. When comparing PDFs, use consistent fonts where possible and inspect the font preflight/render report. Do not adjust positions to compensate for a substituted font; first make the intended font available or make an explicit design decision to use a substitute.
+14. **Deliver a reproducible package.** Include Typst source, helper module, original assets and provenance, PNG + SVG + PDF previews, PPTX, and a concise quality/limitations report as appropriate. Report missing/substituted family names, link the licensed font source, and tell recipients to install their font through their OS font manager (Windows Fonts settings, macOS Font Book, or their Linux distribution/user-font configuration) before opening or rendering the deck. Never claim PPTX parity that was not checked.
 
 ## Choose the authoring route
 
@@ -64,7 +67,8 @@ Use this skill for presentation design and authoring. For importing an existing 
 pptx-typst init deck
 # inspect deck/main.typ and deck/pptx-typst.typ
 # replace starter copy and visuals using supported static declarations
-typst compile deck/main.typ deck/preview.pdf
+typst compile deck/main.typ "deck/preview-{p}.png" --ppi 144
+typst compile deck/main.typ "deck/preview-{p}.svg"
 mkdir -p deck/export
 typst-to-pptx deck/main.typ --output deck/export/deck.pptx
 # inspect deck/export/conversion_report.json
@@ -83,13 +87,26 @@ Author **2–3 representative slides first**: a cover, a dense information slide
 
 ### 5. Render, inspect, and repair
 
+During the design loop, render PNG or SVG and inspect it directly after each meaningful edit:
+
+```sh
+typst compile deck/main.typ "deck/preview-{p}.png" --ppi 144
+typst compile deck/main.typ "deck/preview-{p}.svg"
+```
+
+Use a page-number template for multi-slide decks; a single-page poster can use `preview.png` / `preview.svg` directly. Prefer PNG for quick visual checks and SVG when you need to inspect vectors or text geometry at any zoom.
+
+Only on the final pass, render all three formats and run the PDF QA inspector:
+
 ```sh
 typst compile deck/main.typ deck/preview.pdf
+typst compile deck/main.typ "deck/preview-{p}.png" --ppi 144
+typst compile deck/main.typ "deck/preview-{p}.svg"
 python <skill>/scripts/inspect_deck.py --pdf deck/preview.pdf --out deck/qa \
   --expect-pages 12
 ```
 
-Use the page count that matches the actual deck. Inspect the generated contact sheet, then full-resolution slides that are dense, image-heavy, or visually anomalous. Follow [visual QA and acceptance](references/visual-qa.md). Recompile after fixes. **Do not mark as done merely because no compile error occurred.**
+Use the page count that matches the actual deck. Inspect the PNG/SVG loop output plus full-resolution slides that are dense, image-heavy, or visually anomalous. Follow [visual QA and acceptance](references/visual-qa.md). Recompile after fixes. **Do not mark as done merely because no compile error occurred.**
 When a component manifest is available, run component-aware QA against the Typst PDF and exported-PPTX render. Confirm the reported renderer and review unavailable or ambiguous text matches visually.
 
 ### 6. Export and inspect PPTX
@@ -109,13 +126,13 @@ python <skill>/scripts/inspect_deck.py --pdf deck/preview.pdf \
 
 ### 7. Deliver
 
-Include a **brief QA statement**: intended slide count, Typst compile status, PPTX export status, number/type of conversion warnings, visual review coverage, major known limitations, source attribution, and editability tradeoffs. Make the source project runnable from its own directory.
+Include a **brief QA statement**: intended slide count, Typst compile status, PNG/SVG/PDF render status, PPTX export status, number/type of conversion warnings, visual review coverage, major known limitations, source attribution, and editability tradeoffs. Make the source project runnable from its own directory.
 
 ## Quality gates: what must be true
 
 - **Narrative:** coherent point of view, meaningful title on every slide, no unsupported factual claims.
 - **Visual:** aligned grid, cohesive color/typography, sufficient contrast, images intentionally cropped, sensible information density, no cut-off content; review every slide.
-- **Technical:** explicit page size, valid Typst source, all assets present, slide count matches, fonts and colors used intentionally.
+- **Technical:** explicit page size, valid Typst source, all assets present, slide count matches, fonts and colors used intentionally, every font size on a 0.5 pt increment.
 - **Export:** `.pptx` opens when inspected, common text and shapes remain editable, warnings reviewed, shared layouts preserved if used.
 - **Honesty:** identify all image-backed or unsupported visual elements, unverified viewers, unavailable fonts, and incomplete round-trip checks.
 
