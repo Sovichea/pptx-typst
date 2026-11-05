@@ -204,8 +204,30 @@ def text_runs(child):
             content=re.sub(r'#linebreak\(\)\s*', '\n', content)
             content=re.sub(r'\\([@#$\[\]\\])',r'\1',content)
         if not content:continue
-        out.append(dict(text=content,font=txt_decode(a.get('font','"Aptos"')),size=length(a.get('size'),20),color=simple_color(a.get('fill')),bold='bold' in a.get('weight','').lower()))
+        font_names=re.findall(r'"([^"]+)"',a.get('font','"Aptos"')) or ['Aptos']
+        cs_font=font_names[0]
+        latin_font=font_names[-1]
+        weight=txt_decode(a.get('weight','"regular"')).lower()
+        black=weight=='black'
+        if black and not latin_font.endswith(' Black'):
+            latin_font+=' Black'
+        out.append(dict(text=content,font=latin_font,cs_font=cs_font,latin_font=latin_font,
+                        size=length(a.get('size'),20),color=simple_color(a.get('fill')),
+                        bold='bold' in weight and not black,black=black,
+                        italic='italic' in a.get('style','').lower()))
     return out
+
+
+def set_run_typeface(run,typeface,cs_typeface=None,bold=None,italic=None):
+    run.font.name=typeface
+    if bold is not None:run.font.bold=bold
+    if italic is not None:run.font.italic=italic
+    rPr=run._r.get_or_add_rPr()
+    cs=rPr.find(qn('a:cs'))
+    if cs is None:
+        cs=OxmlElement('a:cs')
+        rPr.append(cs)
+    cs.set('typeface',cs_typeface or typeface)
 
 
 def show_unsupported(audit,kind,expr,slide):
@@ -364,8 +386,8 @@ def add_text(slide,child,x,y,rot,audit,slide_num):
                 p.add_line_break()
             if not part:
                 continue
-            r=p.add_run();r.text=part;r.font.name=rr['font'];r.font.size=Pt(rr['size']);r.font.bold=rr['bold']
-            r.font.color.rgb=RGBColor(*rr['color'])
+            r=p.add_run();r.text=part;set_run_typeface(r,rr['latin_font'],rr['cs_font'],rr['bold'],rr['italic'])
+            r.font.size=Pt(rr['size']);r.font.color.rgb=RGBColor(*rr['color'])
     if abs(rot)>0.001:shape.rotation=rot%360
     audit['text_boxes']+=1;audit['text_content'].append(txt)
     audit['items'].append({'slide':slide_num,'type':'text','x':round(x,2),'y':round(y,2),'w':round(w,2),'h':round(h,2),'rotation':round(rot,2),'chars':len(txt)})
