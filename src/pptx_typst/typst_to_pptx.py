@@ -254,17 +254,21 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
     safe=all(v>=-0.0001 for v in (left,top,right,bottom)) and left+right<0.999 and top+bottom<0.999
     image_path=f
     if f.suffix.lower()=='.svg':
-        try:
-            import cairosvg
-        except (ImportError, OSError) as exc:
-            show_unsupported(audit,'svg_renderer_unavailable',f'{f}: {exc}',slide_num);return True
-        token=hashlib.sha256(f.read_bytes()+f'{W:.2f}x{H:.2f}'.encode()).hexdigest()[:14]
-        image_path=alpha_cache/f'{token}.png'
-        if not image_path.exists():
+        generated=f.with_suffix('.png')
+        if f.parent == base/'assets/static' and generated.is_file():
+            image_path=generated
+        else:
             try:
-                cairosvg.svg2png(url=str(f),write_to=str(image_path),output_width=max(8,round(W*2)),output_height=max(8,round(H*2)))
-            except Exception as exc:
-                show_unsupported(audit,'svg_render_failed',f'{f}: {exc}',slide_num);return True
+                import cairosvg
+            except (ImportError, OSError) as exc:
+                show_unsupported(audit,'svg_renderer_unavailable',f'{f}: {exc}',slide_num);return True
+            token=hashlib.sha256(f.read_bytes()+f'{W:.2f}x{H:.2f}'.encode()).hexdigest()[:14]
+            image_path=alpha_cache/f'{token}.png'
+            if not image_path.exists():
+                try:
+                    cairosvg.svg2png(url=str(f),write_to=str(image_path),output_width=max(8,round(W*2)),output_height=max(8,round(H*2)))
+                except Exception as exc:
+                    show_unsupported(audit,'svg_render_failed',f'{f}: {exc}',slide_num);return True
         audit['svg_assets_as_png']+=1
     elif f.suffix.lower() not in ('.png','.jpeg','.jpg','.bmp','.gif','.tif','.tiff'):
         show_unsupported(audit,'media_format',im['path'],slide_num);return True
@@ -299,6 +303,10 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
         else:
             fit_w=h*source_ratio; x += (w-fit_w)/2; w=fit_w
     shape=slide.shapes.add_picture(str(image_path),Pt(x),Pt(y),width=Pt(w),height=Pt(h))
+    if f.suffix.lower()=='.svg' and safe:
+        from .native_source import embed_svg
+        embed_svg(slide,shape,f)
+        audit['svg_assets_embedded']+=1
     if safe and crop:
         shape.crop_left=max(0,left);shape.crop_top=max(0,top)
         shape.crop_right=max(0,right);shape.crop_bottom=max(0,bottom)
@@ -876,9 +884,12 @@ def remove_spans(source, spans):
     return source
 
 
-def convert(main,output):
+def convert(main,output,*,font_paths=()):
+    output=Path(output).resolve()
     main=Path(main).resolve();base=main.parent
     content=main.read_text(encoding='utf-8')
+    from .static_render import materialize
+    content,static_count=materialize(main,content,font_paths)
     content=re.sub(r'(?m)^\s*//[^\n]*$', '', content)
     master_defs=find_definitions(content,'PptxMaster')
     layout_defs=find_definitions(content,'PptxLayout')
@@ -914,7 +925,7 @@ def convert(main,output):
     if sw<=0 or sh<=0:raise RuntimeError('Invalid logical slide size')
     prs=Presentation();prs.slide_width=Pt(sw);prs.slide_height=Pt(sh)
     cache=output.parent/'raster_cache';cache.mkdir(parents=True,exist_ok=True)
-    audit={'scope':'Place-based generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'tables':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[],'masters':len(master_records),'layouts':len(layout_records)}
+    audit={'static_artwork':static_count,'svg_assets_embedded':0,'scope':'Place-based generated Typst subset, not general Typst','slides':len(slide_calls),'slide_size_pt':[sw,sh],'pictures':0,'text_boxes':0,'native_shapes':0,'tables':0,'groups_flattened':0,'cropped_instance_fallbacks':0,'svg_assets_as_png':0,'text_content':[],'unsupported':[],'source_media':set(),'items':[],'masters':len(master_records),'layouts':len(layout_records)}
     master_backgrounds={name:path for name,expr in master_background_exprs.items()
                        if (path:=background_asset(expr,base,audit,f'master:{name}')) is not None}
     layout_backgrounds={name:path for name,expr in layout_background_exprs.items()
@@ -1007,6 +1018,9 @@ def convert(main,output):
     if master_parts and layout_parts and slide_assignments:
         from .ooxml_hierarchy import install_hierarchy
         install_hierarchy(output,masters=master_parts,layouts=layout_parts,slide_layouts=slide_assignments,stage_parts=stage_parts,layout_show_master=layout_visibility,slide_show_master=slide_visibility,master_fills=master_fills,layout_fills=layout_fills,master_backgrounds=master_backgrounds,layout_backgrounds=layout_backgrounds)
+    from .native_source import attach
+    attach(main,output)
+    audit['native_source_embedded']=True
     audit['unique_source_media']=len(audit['source_media']);audit['source_media']=sorted(audit['source_media'])
     audit['hierarchy_written']=bool(master_parts and layout_parts and slide_assignments)
     audit['hierarchy']={'masters':[{'id':name,'shared_objects':master_object_counts.get(name,0)} for name in master_parts], 'layouts':[{'id':name,'master':layout_parts[name][0],'shared_objects':layout_object_counts.get(name,0),'show_master':layout_visibility.get(name,True),'fill':layout_fills.get(name,'none')} for name in layout_parts], 'slides':[{'part':part,'layout':layout_name} for part,layout_name in slide_assignments.items()]}
@@ -1015,7 +1029,7 @@ def convert(main,output):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('main_typ');p.add_argument('--output',default='converted.pptx');a=p.parse_args()
-    report=convert(a.main_typ,Path(a.output).resolve())
-    print(json.dumps({k:v for k,v in report.items() if k in ('slides','pictures','text_boxes','native_shapes','tables','groups_flattened','unique_source_media','cropped_instance_fallbacks','svg_assets_as_png')},indent=2))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('main_typ');p.add_argument('--output',default='converted.pptx');p.add_argument('--font-path',action='append',default=[]);a=p.parse_args()
+    report=convert(a.main_typ,Path(a.output).resolve(),font_paths=a.font_path)
+    print(json.dumps({k:v for k,v in report.items() if k in ('slides','pictures','text_boxes','native_shapes','tables','groups_flattened','unique_source_media','static_artwork','svg_assets_embedded','native_source_embedded','cropped_instance_fallbacks','svg_assets_as_png')},indent=2))
 if __name__=='__main__':main()

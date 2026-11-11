@@ -32,6 +32,7 @@ cli.add_argument("--clip-mode",choices=["component","legacy"],default="legacy",h
 cli.add_argument("--mask-mode",choices=["legacy","validated","experimental"],default="legacy",help="Conservative legacy default; opt in to preset or experimental curved masks after visual validation")
 cli.add_argument("--mask-allowlist",type=Path,help="Optional JSON list of placements allowed to use nonrectangular masking, keyed by slide and shape ID")
 cli.add_argument("--layout-mode",choices=["structured","flat"],default="structured",help="Keep reusable PowerPoint master/layout artwork as declarations, or repeat it in each slide for legacy output")
+cli.add_argument("--reconstruct",action="store_true",help="Reconstruct current PowerPoint content instead of restoring embedded Typst source")
 args=cli.parse_args()
 MASK_ALLOWLIST=None
 if args.mask_allowlist:
@@ -39,6 +40,11 @@ if args.mask_allowlist:
     MASK_ALLOWLIST={(int(v["slide"]),int(v["shape_id"])) for v in data["placements"]}
 SRC=args.input_pptx.resolve()
 OUT=args.output.resolve()
+from .native_source import restore
+source_report=restore(SRC,OUT,enabled=not args.reconstruct)
+if source_report['source_restoration']=='exact':
+    print('Saved',OUT,'native source restored exactly')
+    raise SystemExit(0)
 ASSETS=OUT/'assets/media';ASSETS.mkdir(parents=True,exist_ok=True)
 EMU=12700
 SLIDE_W=Presentation(SRC).slide_width/EMU
@@ -2311,6 +2317,8 @@ asset_manifest={'source_file':SRC.name,'source_slide_count':len(prs.slides),
     'media_warnings':media_warnings,'media':media_contents,'slides':manifest}
 (OUT/'asset_manifest.json').write_text(json.dumps(asset_manifest,ensure_ascii=False,indent=2),encoding='utf8')
 (OUT/'conversion_report.json').write_text(json.dumps({
+    'source_restoration':source_report['source_restoration'],
+    'source_warnings':source_report['warnings'],
     'source_file':SRC.name,'slides':len(prs.slides),
     'status':'completed_with_warnings' if media_warnings else 'completed',
     'counts':dict(counts),'warnings':media_warnings,

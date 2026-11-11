@@ -49,7 +49,7 @@ def run_forward(source: Path, output: Path) -> None:
     source_path = str(ROOT / "src")
     env["PYTHONPATH"] = source_path + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
     subprocess.run(
-        [sys.executable, "-m", "pptx_typst.pptx_to_typst", str(source), "--output", str(output), "--text-layout", "v3"],
+        [sys.executable, "-m", "pptx_typst.pptx_to_typst", str(source), "--output", str(output), "--reconstruct", "--text-layout", "v3"],
         cwd=ROOT,
         env=env,
         check=True,

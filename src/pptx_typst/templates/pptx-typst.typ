@@ -306,3 +306,6 @@
   })
 }
 #let PptxTable = table
+
+// Keep native artwork editable in Typst; export it as SVG only for PowerPoint.
+#let PptxStatic(width: auto, height: auto, body) = block(width: width, height: height, clip: true, body)
