@@ -109,10 +109,16 @@ def restore(source, output, *, enabled=True):
     prs = Presentation(source)
     rel = next((r for r in prs.part.rels.values() if r.reltype == REL and not r.is_external), None)
     if rel is None: return {'source_restoration': 'unavailable', 'warnings': []}
-    manifest = json.loads(rel.target_part.blob)
+    if not enabled:
+        return {'source_restoration': 'reconstructed', 'warnings': ['source restoration explicitly disabled']}
+    try:
+        manifest = json.loads(rel.target_part.blob)
+    except (ValueError, UnicodeDecodeError):
+        return {'source_restoration': 'reconstructed', 'warnings': ['invalid native source manifest']}
+    if not isinstance(manifest, dict):
+        return {'source_restoration': 'reconstructed', 'warnings': ['invalid native source manifest']}
     reason = None
-    if not enabled: reason = 'source restoration explicitly disabled'
-    elif manifest.get('version') != 1: reason = 'unsupported native source package version'
+    if manifest.get('version') != 1: reason = 'unsupported native source package version'
     elif manifest.get('baseline') != state(prs): reason = 'PowerPoint content or layout changed; stale source was not restored'
     if reason: return {'source_restoration': 'reconstructed', 'warnings': [reason]}
     files = {'main.typ': base64.b64decode(manifest['entry'], validate=True)}
