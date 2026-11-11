@@ -41,11 +41,22 @@ otherwise a private binary part retains one copy. References to visible media
 do not add source-to-image relationships that make Office clone media on save.
 Remote Typst packages and system fonts are not bundled automatically.
 
+Local dependency discovery accepts literal paths in imports, includes, image
+calls (including `PptxImage`), and file readers. Comments, prose, and unrelated
+quoted strings do not cause files to be bundled. Paths resolve relative to the
+module containing the call. Computed paths, reader aliases, and unresolved file
+operations disable exact recovery instead of guessing dependencies. The PPTX
+still exports; its report sets `native_source_complete: false` and explains the
+limitation in `source_warnings`. Use literal paths to enable exact recovery.
+
 On unchanged re-import, `main.typ` contains the original entrypoint bytes and
 local dependency paths are restored. This recovers code from embedded provenance,
 not from tracing images. `conversion_report.json` records `source_restoration:
 "exact"`. Source entry and dependency checksums are validated before restoration;
 paths escaping the output directory are rejected before files are written.
+Older snapshots without a dependency-completeness marker use reconstruction.
+Malformed source JSON also falls back to reconstruction; `--reconstruct`
+bypasses source JSON parsing entirely.
 
 Edits to content, formatting, geometry, SVG media, inheritance, links, notes, or
 required binary dependencies prevent stale exact restoration. Unknown or

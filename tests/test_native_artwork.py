@@ -146,3 +146,14 @@ def test_static_frame_requires_explicit_dimensions(exported, tmp_path: Path):
     source.write_text(source.read_text().replace('width: 200pt', 'width: auto'))
     with pytest.raises(ValueError, match='positive literal width'):
         convert(source, tmp_path / 'invalid.pptx')
+
+
+def test_computed_image_path_exports_but_requires_reconstruction(exported, tmp_path: Path):
+    source, _, _, _ = exported
+    helper = tmp_path / 'art.typ'
+    helper.write_text(helper.read_text().replace('image("mark.png"', 'image("mark" + ".png"'))
+    output = tmp_path / 'computed.pptx'
+    report = convert(source, output)
+    assert report['svg_assets_embedded'] == 2
+    assert not report['native_source_complete'] and report['source_warnings']
+    assert restore(output, tmp_path / 'restored')['source_restoration'] == 'reconstructed'

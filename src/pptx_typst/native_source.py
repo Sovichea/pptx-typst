@@ -3,12 +3,13 @@ import base64
 import hashlib
 import json
 from pathlib import Path
-import re
 
 from lxml import etree
 from pptx import Presentation
 from pptx.opc.package import Part
 from pptx.opc.packuri import PackURI
+
+from .source_dependencies import IncompleteDependencies, dependencies
 
 REL = 'https://pptx-typst.org/relationships/source'
 IMAGE_REL = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image'
@@ -59,38 +60,23 @@ def state(prs):
     return digest(json.dumps([prs.slide_width, prs.slide_height, slides], sort_keys=True).encode())
 
 
-def dependencies(source):
-    base = source.parent.resolve()
-    files, modules = {}, []
-    def collect(path):
-        path = path.resolve()
-        if not path.is_relative_to(base) or not path.is_file(): return
-        name = path.relative_to(base).as_posix()
-        if name in files or path == source: return
-        data = path.read_bytes()
-        files[name] = data
-        if path.suffix == '.typ': scan(path.parent, data.decode('utf-8-sig'))
-    def scan(parent, text):
-        modules.append((parent, text))
-        for match in re.finditer(r'"([^"\r\n]+)"', text): collect(parent / match[1])
-    scan(base, source.read_text(encoding='utf-8-sig'))
-    # image(path) resolves relative to the helper's module, not the caller.
-    references = {m[1] for _, text in modules for m in re.finditer(r'"([^"\r\n]+)"', text)}
-    for parent, _ in list(modules):
-        for name in references: collect(Path(parent) / name)
-    return files
-
-
 def attach(source, output):
     prs = Presentation(output)
     package = prs.part.package
-    manifest = {'version': 1, 'entry': base64.b64encode(source.read_bytes()).decode(),
+    warnings = []
+    try:
+        files = dependencies(source)
+    except IncompleteDependencies as exc:
+        files = {}
+        warnings.append(str(exc))
+    manifest = {'version': 1, 'dependencies_complete': not warnings,
+                'dependency_warnings': warnings, 'entry': base64.b64encode(source.read_bytes()).decode(),
                 'filename': source.name, 'entry_sha256': digest(source.read_bytes()), 'baseline': state(prs), 'files': {}}
     part = Part(PackURI('/pptxTypst/source.json'), 'application/json', package, b'')
     prs.part.relate_to(part, REL)
     media = {digest(p.blob) for p in package.iter_parts() if p.content_type.startswith('image/')}
     private = {}
-    for name, blob in dependencies(source).items():
+    for name, blob in files.items():
         if name.endswith('.typ'):
             record = {'text': base64.b64encode(blob).decode(), 'sha256': digest(blob)}
         else:
@@ -103,6 +89,7 @@ def attach(source, output):
         manifest['files'][name] = record
     part._blob = json.dumps(manifest, ensure_ascii=False).encode()
     prs.save(output)
+    return {'dependencies_complete': not warnings, 'warnings': warnings}
 
 
 def restore(source, output, *, enabled=True):
@@ -120,6 +107,8 @@ def restore(source, output, *, enabled=True):
     reason = None
     if manifest.get('version') != 1: reason = 'unsupported native source package version'
     elif manifest.get('baseline') != state(prs): reason = 'PowerPoint content or layout changed; stale source was not restored'
+    elif manifest.get('dependencies_complete') is not True:
+        reason = 'native source dependency completeness was not established'
     if reason: return {'source_restoration': 'reconstructed', 'warnings': [reason]}
     files = {'main.typ': base64.b64decode(manifest['entry'], validate=True)}
     if digest(files['main.typ']) != manifest.get('entry_sha256'):

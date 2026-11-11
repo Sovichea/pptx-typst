@@ -1019,8 +1019,10 @@ def convert(main,output,*,font_paths=()):
         from .ooxml_hierarchy import install_hierarchy
         install_hierarchy(output,masters=master_parts,layouts=layout_parts,slide_layouts=slide_assignments,stage_parts=stage_parts,layout_show_master=layout_visibility,slide_show_master=slide_visibility,master_fills=master_fills,layout_fills=layout_fills,master_backgrounds=master_backgrounds,layout_backgrounds=layout_backgrounds)
     from .native_source import attach
-    attach(main,output)
+    snapshot=attach(main,output)
     audit['native_source_embedded']=True
+    audit['native_source_complete']=snapshot['dependencies_complete']
+    audit['source_warnings']=snapshot['warnings']
     audit['unique_source_media']=len(audit['source_media']);audit['source_media']=sorted(audit['source_media'])
     audit['hierarchy_written']=bool(master_parts and layout_parts and slide_assignments)
     audit['hierarchy']={'masters':[{'id':name,'shared_objects':master_object_counts.get(name,0)} for name in master_parts], 'layouts':[{'id':name,'master':layout_parts[name][0],'shared_objects':layout_object_counts.get(name,0),'show_master':layout_visibility.get(name,True),'fill':layout_fills.get(name,'none')} for name in layout_parts], 'slides':[{'part':part,'layout':layout_name} for part,layout_name in slide_assignments.items()]}
