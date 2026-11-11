@@ -23,7 +23,7 @@ def exported(tmp_path: Path):
     shutil.copyfile(ROOT / "src/pptx_typst/templates/pptx-typst.typ", tmp_path / "pptx-typst.typ")
     Image.new("RGB", (12, 12), "green").save(tmp_path / "mark.png")
     (tmp_path / "art.typ").write_text('''#let diagram() = {
-  rect(width: 180pt, height: 60pt, fill: rgb("#167E85"), stroke: none)
+  rect(width: 180pt, height: 60pt, fill: rgb("#167E85"), stroke: none)[#text(size: 14pt, fill: white)[Native diagram]]
   image("mark.png", width: 20pt)
 }
 ''')
@@ -61,13 +61,14 @@ def test_native_artwork_exports_svg_and_exact_source(exported, tmp_path: Path):
         assert etree.fromstring(package.read(svgs[0])).get('viewBox').split()[-2:] == ['200', '100']
         private = [n for n in package.namelist() if n.startswith('pptxTypst/assets/')]
         assert len(private) == 1  # original embedded bitmap retained once
+    native_render = typst.compile(str(source), format='png')
     source.write_text('Source on disk is no longer used.')
     restored = tmp_path / 'restored'
     assert restore(output, restored)['source_restoration'] == 'exact'
     assert (restored / 'main.typ').read_bytes() == original
     for name in ['art.typ', 'mark.png', 'pptx-typst.typ']:
         assert (restored / name).read_bytes() == (tmp_path / name).read_bytes()
-    assert typst.compile(str(restored / 'main.typ'), format='png')
+    assert typst.compile(str(restored / 'main.typ'), format='png') == native_render
     saved = tmp_path / 'saved.pptx'
     deck.save(saved)
     assert restore(saved, tmp_path / 'saved-restored')['source_restoration'] == 'exact'
@@ -119,3 +120,29 @@ def test_snapshot_rejects_dependency_path_traversal(exported, tmp_path: Path):
     with pytest.raises(ValueError, match='escapes output directory'):
         restore(output, tmp_path / 'restored')
     assert not (tmp_path / 'escape.typ').exists()
+
+
+def test_master_artwork_keeps_svg_relationships(exported, tmp_path: Path):
+    source, _, _, _ = exported
+    source.write_text('''#import "pptx-typst.typ": *
+#import "art.typ": diagram
+#let Brand = PptxMaster(children: [
+ #PptxPlace(x: 20pt, y: 30pt, child: PptxStatic(width: 200pt, height: 100pt)[#diagram()])
+])
+#let Layout = PptxLayout(master: Brand, children: [])
+#PptxSlide(width: 960pt, height: 540pt, layout: Layout, children: [])
+''')
+    output = tmp_path / 'master.pptx'
+    report = convert(source, output)
+    assert report['hierarchy_written'] and report['svg_assets_embedded'] == 1
+    deck = Presentation(output)
+    master = deck.slides[0].slide_layout.slide_master
+    assert master._element.findall('.//{' + ASVG + '}svgBlip')
+    assert restore(output, tmp_path / 'master-restored')['source_restoration'] == 'exact'
+
+
+def test_static_frame_requires_explicit_dimensions(exported, tmp_path: Path):
+    source, _, _, _ = exported
+    source.write_text(source.read_text().replace('width: 200pt', 'width: auto'))
+    with pytest.raises(ValueError, match='positive literal width'):
+        convert(source, tmp_path / 'invalid.pptx')

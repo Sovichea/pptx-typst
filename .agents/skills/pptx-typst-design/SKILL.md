@@ -67,8 +67,8 @@ Use this skill for presentation design and authoring. For importing an existing 
 pptx-typst init deck
 # inspect deck/main.typ and deck/pptx-typst.typ
 # replace starter copy and visuals using supported static declarations
-typst compile deck/main.typ "deck/preview-{p}.png" --ppi 144
-typst compile deck/main.typ "deck/preview-{p}.svg"
+pptx-typst compile deck/main.typ --output "deck/preview-{p}.png" --ppi 144
+pptx-typst compile deck/main.typ --output "deck/preview-{p}.svg"
 mkdir -p deck/export
 typst-to-pptx deck/main.typ --output deck/export/deck.pptx
 # inspect deck/export/conversion_report.json
@@ -90,8 +90,8 @@ Author **2–3 representative slides first**: a cover, a dense information slide
 During the design loop, render PNG or SVG and inspect it directly after each meaningful edit:
 
 ```sh
-typst compile deck/main.typ "deck/preview-{p}.png" --ppi 144
-typst compile deck/main.typ "deck/preview-{p}.svg"
+pptx-typst compile deck/main.typ --output "deck/preview-{p}.png" --ppi 144
+pptx-typst compile deck/main.typ --output "deck/preview-{p}.svg"
 ```
 
 Use a page-number template for multi-slide decks; a single-page poster can use `preview.png` / `preview.svg` directly. Prefer PNG for quick visual checks and SVG when you need to inspect vectors or text geometry at any zoom.
@@ -99,9 +99,9 @@ Use a page-number template for multi-slide decks; a single-page poster can use `
 Only on the final pass, render all three formats and run the PDF QA inspector:
 
 ```sh
-typst compile deck/main.typ deck/preview.pdf
-typst compile deck/main.typ "deck/preview-{p}.png" --ppi 144
-typst compile deck/main.typ "deck/preview-{p}.svg"
+pptx-typst compile deck/main.typ --output deck/preview.pdf
+pptx-typst compile deck/main.typ --output "deck/preview-{p}.png" --ppi 144
+pptx-typst compile deck/main.typ --output "deck/preview-{p}.svg"
 python <skill>/scripts/inspect_deck.py --pdf deck/preview.pdf --out deck/qa \
   --expect-pages 12
 ```
@@ -148,3 +148,17 @@ Include a **brief QA statement**: intended slide count, Typst compile status, PN
 - [Five-slide example deck](examples/main.typ): illustrative static Typst IR structure; copy the helper module with `pptx-typst module` or create with `pptx-typst init`. The example is authored for the v0.1.0 helper interface, not a guarantee for arbitrary future versions.
 
 This is a **design-and-production skill**. It complements rather than replaces the original `pptx-typst` conversion skill. Its ambition can match that of a PowerPoint design agent, while its **export claims remain limited to what the installed `pptx-typst` converter can actually represent and round-trip**.
+
+## Native drawings and roundtrip
+
+Use `PptxStatic(width: ..., height: ...)[...]` within `PptxPlace` for native diagram
+code exported as SVG with an Office fallback. Keep editable slide text outside
+static artwork and retain the original drawing code/imports in source. Supply
+positive literal point dimensions and keep required definitions at top level.
+Use `pptx-typst compile ... --output ...` for typst-py previews.
+
+Exports embed source and local dependencies. Verify unchanged roundtrip by byte
+comparison and native rendered pages, including a PowerPoint save when available.
+Use `--reconstruct` to test the current-deck reader; edited content/layout must
+not be replaced with stale source. Inspect SVG/fallback bounds and transparency
+in PowerPoint, not only the native preview.

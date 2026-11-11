@@ -91,3 +91,6 @@ def main() -> None:
         destination = project / "assets" / name
         destination.write_bytes(content)
         print(f"Created {destination}")
+
+if __name__ == '__main__':
+    main()

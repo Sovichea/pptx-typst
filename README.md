@@ -15,7 +15,7 @@ For an existing deck, convert it once, make edits to the generated project, comp
 ```console
 pptx-to-typst source.pptx --output working-deck
 # An agent or script edits working-deck/main.typ and supported assets.
-typst compile working-deck/main.typ working-deck/preview.pdf
+pptx-typst compile working-deck/main.typ --output working-deck/preview.pdf
 typst-to-pptx working-deck/main.typ --output revised-deck.pptx
 ```
 
@@ -31,13 +31,21 @@ python -m pip install pptx-typst==0.1.0
 
 Version `0.1.0` is published on [PyPI](https://pypi.org/project/pptx-typst/0.1.0/) and available as a [GitHub Release](https://github.com/Sovichea/pptx-typst/releases/tag/v0.1.0). The pinned install command above installs this release.
 
-The Python package performs conversion. Install the [Typst CLI](https://typst.app/) separately to compile generated Typst projects to PDF. EMF/WMF conversion uses the packaged Windows PowerShell/GDI+ helper on Windows, or Inkscape when available on Linux and macOS. Without a compatible renderer, the original media is retained and the conversion report warns that the object may not render. Some SVG masking and SVG-to-PowerPoint rasterization paths need Cairo native libraries; affected operations report a fallback or unsupported object when Cairo is unavailable.
+The current Python package uses typst-py for conversion previews, native artwork export, and font discovery. Use `pptx-typst compile main.typ --output preview.pdf`; no separate Typst executable is required. EMF/WMF conversion uses the packaged Windows PowerShell/GDI+ helper on Windows, or Inkscape when available on Linux and macOS. Without a compatible renderer, the original media is retained and the conversion report warns that the object may not render. Some SVG masking and SVG-to-PowerPoint rasterization paths need Cairo native libraries; affected operations report a fallback or unsupported object when Cairo is unavailable.
+
+The native SVG/source-roundtrip features described below are in the current
+checkout. Install this checkout with `python -m pip install -e .` until a release
+containing them is published.
+
+The native SVG/source-roundtrip features described below are in the current
+checkout. Install this checkout with `python -m pip install -e .` until a release
+containing them is published.
 
 ## PowerPoint to Typst
 
 ```console
 pptx-to-typst presentation.pptx --output presentation-typst
-typst compile presentation-typst/main.typ presentation.pdf
+pptx-typst compile presentation-typst/main.typ --output presentation.pdf
 ```
 
 The generated project contains `main.typ`, `template.typ`, `asset_manifest.json`, `conversion_report.json`, and shared media under `assets/media/`. The forward converter retains original assets and emits supported text, shapes, images, tables, masters, and layouts as editable Typst objects. EMF/WMF may also have a derived rendering asset. Use `pptx-to-typst --help` for layout, masking, and text options.
@@ -54,7 +62,7 @@ The reverse converter handles the documented static Typst subset; it does not ev
 
 ```console
 pptx-typst init my-deck
-typst compile my-deck/main.typ my-deck/preview.pdf
+pptx-typst compile my-deck/main.typ --output my-deck/preview.pdf
 typst-to-pptx my-deck/main.typ --output my-deck.pptx
 ```
 
@@ -80,12 +88,62 @@ pptx-typst-validate presentation.pptx presentation-typst --out presentation-typs
 
 Reports identify unsupported and approximated objects with slide numbers, source shape IDs when available, fallback behavior, and expected fidelity or editability loss. A successful command does not mean every source object was reproduced.
 
+## Native drawings and source roundtrip
+
+Keep drawing code inside an explicit static-artwork frame:
+
+```typst
+#PptxPlace(x: 40pt, y: 80pt,
+  child: PptxStatic(width: 300pt, height: 160pt)[
+    #rect(width: 280pt, height: 140pt, fill: rgb("#167E85"), stroke: none)
+  ],
+)
+```
+
+`PptxStatic` stays native in Typst and becomes an SVG picture with an Office PNG
+fallback during PPTX export. Text outside that frame remains editable. The PPTX
+also stores the original entrypoint and local dependencies, deduplicating binary
+assets. Re-importing an unchanged export restores source bytes and drawing code,
+including after supported PowerPoint save normalization. Check
+`source_restoration: "exact"` in the import report.
+
+Changes to presentation content or supported layout trigger reconstruction of the
+current deck rather than restoring stale source. Use `pptx-to-typst deck.pptx
+--output project --reconstruct` to request that path explicitly. Reconstructed
+artwork retains SVG where available; it cannot infer arbitrary original code.
+See [native artwork and source recovery](docs/native-artwork.md) for scope and limits.
+
+## Native drawings and source roundtrip
+
+Keep drawing code inside an explicit static-artwork frame:
+
+```typst
+#PptxPlace(x: 40pt, y: 80pt,
+  child: PptxStatic(width: 300pt, height: 160pt)[
+    #rect(width: 280pt, height: 140pt, fill: rgb("#167E85"), stroke: none)
+  ],
+)
+```
+
+`PptxStatic` stays native in Typst and becomes an SVG picture with an Office PNG
+fallback during PPTX export. Text outside that frame remains editable. The PPTX
+also stores the original entrypoint and local dependencies, deduplicating binary
+assets. Re-importing an unchanged export restores source bytes and drawing code,
+including after supported PowerPoint save normalization. Check
+`source_restoration: "exact"` in the import report.
+
+Changes to presentation content or supported layout trigger reconstruction of the
+current deck rather than restoring stale source. Use `--reconstruct` to request
+that path explicitly. Reconstructed artwork retains SVG where available; it
+cannot infer arbitrary original code. See
+[native artwork and source recovery](docs/native-artwork.md) for scope and limits.
+
 ## Supported feature subset
 
 | PowerPoint feature | PowerPoint to Typst | Typst to PowerPoint |
 |---|---|---|
 | Text and title/body placeholders | Editable text with supported paragraph and inheritance properties | Editable text and native supported placeholders |
-| Images and common vector media | Original assets retained; EMF/WMF may use a render derivative | PNG/JPEG and SVG when the required Cairo path is available |
+| Images and common vector media | Original assets retained; EMF/WMF may use a render derivative | PNG/JPEG; SVG with an Office fallback (external SVGs may need Cairo) |
 | Shapes, lines, fills, transparency | Common geometry and styling; complex masks and some shapes may be approximated | Common rectangles, ellipses, lines, and supported static shapes |
 | Tables | Editable text, dimensions, alignment, fills, and common borders; merged cells unsupported | Basic rectangular tables |
 | Masters and layouts | Reusable hierarchy preserved | Native parts for statically resolvable declarations |

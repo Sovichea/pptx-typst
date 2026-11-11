@@ -208,9 +208,9 @@ presentation/
 Use PNG or SVG for the design loop. On the final pass, render PNG, SVG, and PDF from the same source:
 
 ```sh
-typst compile presentation/main.typ "presentation/preview-{p}.png" --ppi 144
-typst compile presentation/main.typ "presentation/preview-{p}.svg"
-typst compile presentation/main.typ presentation/preview.pdf
+pptx-typst compile presentation/main.typ --output "presentation/preview-{p}.png" --ppi 144
+pptx-typst compile presentation/main.typ --output "presentation/preview-{p}.svg"
+pptx-typst compile presentation/main.typ --output presentation/preview.pdf
 typst-to-pptx presentation/main.typ --output presentation/export/presentation.pptx
 ```
 

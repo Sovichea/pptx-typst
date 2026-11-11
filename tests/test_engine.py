@@ -19,3 +19,16 @@ def test_typst_py_renders_without_cli(monkeypatch, tmp_path: Path):
     assert result.returncode == 0 and (tmp_path / "other.pdf").is_file()
     source.write_text("#unknown-function()")
     assert run_typst(["typst", "compile", "main.typ"], cwd=tmp_path).returncode != 0
+
+
+def test_compile_cli_writes_numbered_svg_pages(tmp_path: Path):
+    import os
+    import sys
+    source = tmp_path / "main.typ"
+    source.write_text("First#pagebreak()Second")
+    env = os.environ.copy()
+    env['PYTHONPATH'] = str(Path(__file__).resolve().parents[1] / 'src')
+    subprocess.run([sys.executable, '-m', 'pptx_typst.cli', 'compile', str(source),
+                    '--output', str(tmp_path / 'page-{p}.svg')], env=env, check=True,
+                   capture_output=True, text=True)
+    assert (tmp_path / 'page-1.svg').is_file() and (tmp_path / 'page-2.svg').is_file()

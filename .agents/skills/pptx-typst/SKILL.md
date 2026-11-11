@@ -2,7 +2,8 @@
 name: pptx-typst
 description: Convert PowerPoint PPTX presentations into editable Typst slide projects, edit imported slides while preserving their layout and artwork, create supported Typst slides, inspect conversion warnings, compile previews, validate slide geometry, and export the supported Typst subset back to PowerPoint. Use for PPTX-to-Typst, PPTX round trips, and presentation migration tasks; not for arbitrary Typst documents or pixel-perfect PowerPoint replication.
 license: Apache-2.0
-compatibility: Requires the pptx-typst Python CLI (Python 3.10-3.13); Typst CLI for PDF previews. EMF/WMF rendering can require Inkscape or Windows GDI+. Some SVG operations require native Cairo.
+metadata:
+  compatibility: Requires the pptx-typst Python CLI (Python 3.10-3.13); typst-py for PDF/SVG/PNG previews. EMF/WMF rendering can require Inkscape or Windows GDI+. Some SVG operations require native Cairo.
 ---
 
 # Use pptx-typst effectively
@@ -26,7 +27,7 @@ If the task is unrelated to PowerPoint conversion or requires arbitrary Typst pr
 
 - Check whether `pptx-to-typst`, `typst-to-pptx`, `pptx-typst`, and `typst` are available. Use `--help` to confirm options in the installed version.
 - Python 3.10-3.13 is supported. Install the published `pptx-typst` package when available; while the 0.1.0 publication is pending, install from a trusted checkout or verified distribution artifact in a virtual environment.
-- Install the Typst CLI separately when PDF previews or compile verification are needed. The release was tested with Typst 0.15.1; confirm compatibility before relying on a different version.
+- Use `pptx-typst compile main.typ --output preview.pdf` for previews through the installed typst-py binding; a separate Typst executable is not required.
 - Before a final Typst-to-PowerPoint export, run `pptx-typst-fonts main.typ --report font_report.json`. In a source checkout, use `python tools/check_presentation_fonts.py main.typ --report font_report.json`. Repeat every `--font-path` passed to the Typst compiler; those directories affect Typst only and do not install fonts for Office.
 - Inkscape can convert EMF/WMF into SVG. On Windows, the packaged PowerShell/GDI+ fallback can instead generate transparent PNGs. If neither is available, the original media remains but its rendered object may be omitted. Native Cairo is needed for some SVG masking/raster operations.
 - Avoid changing system-wide dependencies or overwriting user files without authorization.
@@ -35,7 +36,7 @@ If the task is unrelated to PowerPoint conversion or requires arbitrary Typst pr
 
 ```sh
 pptx-to-typst "input.pptx" --output "input-typst"
-typst compile "input-typst/main.typ" "input-typst/preview.pdf"
+pptx-typst compile "input-typst/main.typ" --output "input-typst/preview.pdf"
 pptx-typst-validate "input.pptx" "input-typst" --out "input-typst/geometry-audit.json"
 ```
 
@@ -75,7 +76,7 @@ See the [agentic presentation workflow guide](https://github.com/Sovichea/pptx-t
 
 ```sh
 pptx-typst init "new-deck"
-typst compile "new-deck/main.typ" "new-deck/preview.pdf"
+pptx-typst compile "new-deck/main.typ" --output "new-deck/preview.pdf"
 ```
 
 The initialized project supplies a local `pptx-typst.typ`, example assets, and a three-layout starter deck. Begin with its working examples instead of inventing another PowerPoint/Typst interface. Supported authoring helpers include `PptxMaster`, `PptxLayout`, `PptxSlide`, `PptxPlace`, `PptxText`, `PptxBox`, `PptxImage`, `PptxRect`, `PptxEllipse`, `PptxLine`, and `PptxTable`.
@@ -84,6 +85,21 @@ The initialized project supplies a local `pptx-typst.typ`, example assets, and a
 - Use explicit static declarations and placements for material intended for reverse conversion. Do not expect arbitrary loops, custom macros, computations, or dynamic Typst constructs to be understood by `typst-to-pptx`.
 - Keep slides projector-readable. If content is crowded, reduce content or split the slide rather than shrinking every text box.
 - To generate only the reusable helper module: `pptx-typst module --output "pptx-typst.typ"`. Do not use `--force` unless replacing existing files was requested.
+
+## Native artwork and source recovery
+
+Use `PptxStatic(width: ..., height: ...)[native drawing code]` inside an explicit
+placement for diagrams that should export as SVG. Keep the original drawing calls
+and local dependencies; do not replace the authored body with exported images.
+Use positive literal point dimensions. The renderer uses typst-py and top-level
+imports/definitions; unresolved local programming scopes require adaptation.
+
+Re-import unchanged exports to restore embedded source exactly. Compare source
+and dependency bytes and compile restored native pages. Test a real PowerPoint
+save when PowerPoint is available. For edits or reader diagnostics, use
+`--reconstruct`; source restoration must not overwrite current deck edits.
+Check SVG plus fallback geometry, transparency, shared master/layout artwork,
+and separate editable text. Source recovery uses stored provenance, not image inference.
 
 ## Reverse: supported Typst to PowerPoint
 
