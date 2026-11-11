@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pptx_typst.engine import run_typst
+
 import hashlib
 import json
 import os
@@ -101,9 +103,9 @@ def test_theme_background_references_are_resolved_for_master_and_layout(tmp_path
     assert f'PptxLayout(master:Master01,fill:rgb("#{expected_layout}")' in generated
     assert "fill:none," in generated
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "backgrounds.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -217,9 +219,9 @@ def test_theme_image_background_is_shared_and_roundtrips(tmp_path: Path) -> None
                for media in manifest["media"].values()
                for media_placement in media["placements"])
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "background.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -257,9 +259,9 @@ def test_slide_text_placeholders_render_over_later_artwork(tmp_path: Path) -> No
     assert "PptxPlaceholder(" in generated
     assert "Visible placeholder title" in generated
     assert "// Editable text: Title 1" not in generated
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "placeholder.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -283,9 +285,9 @@ def test_placeholder_layout_inherits_master_placeholder_font(tmp_path: Path) -> 
     slide_instance = next(line for line in generated.splitlines() if "PptxPlaceholder(id:\"title-0\"" in line)
     assert 'font:"Arial"' not in slide_instance
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "placeholder-font.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -338,9 +340,9 @@ def test_native_title_body_placeholder_relationships_roundtrip(tmp_path: Path) -
         encoding="utf-8",
     )
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run([typst, "compile", "main.typ", "before.pdf"], cwd=project,
+        run_typst([typst, "compile", "main.typ", "before.pdf"], cwd=project,
                        check=True, capture_output=True, text=True, timeout=120)
     output = tmp_path / "native-placeholders.pptx"
     report = convert(project / "main.typ", output)
@@ -402,7 +404,7 @@ def test_native_title_body_placeholder_relationships_roundtrip(tmp_path: Path) -
     assert 'text:"Slide One"' in generated
     assert 'bullet:"•"' in generated
     if typst:
-        subprocess.run([typst, "compile", "main.typ", "after.pdf"], cwd=imported,
+        run_typst([typst, "compile", "main.typ", "after.pdf"], cwd=imported,
                        check=True, capture_output=True, text=True, timeout=120)
 
 
@@ -425,9 +427,9 @@ def test_init_uses_current_master_layout_macro(tmp_path: Path, monkeypatch: pyte
     assert "#let StoryLayout = PptxLayout(" in starter
     assert "#let InsightLayout = PptxLayout(" in starter
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "starter.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -462,7 +464,7 @@ def picture_count(deck: Presentation) -> int:
 
 
 def test_pptx_converts_to_compilable_typst(tmp_path: Path) -> None:
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if not typst:
         pytest.skip("Typst CLI is required for the compile smoke test")
     image_path = tmp_path / "pixel.png"
@@ -473,7 +475,7 @@ def test_pptx_converts_to_compilable_typst(tmp_path: Path) -> None:
 
     run_forward(source, project)
     assert (project / "main.typ").is_file()
-    subprocess.run(
+    run_typst(
         [typst, "compile", "main.typ", "smoke.pdf"],
         cwd=project,
         check=True,
@@ -485,7 +487,7 @@ def test_pptx_converts_to_compilable_typst(tmp_path: Path) -> None:
 
 
 def test_tiff_media_gets_a_typst_compatible_derivative(tmp_path: Path) -> None:
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if not typst:
         pytest.skip("Typst CLI is required for the TIFF media regression test")
     image_path = tmp_path / "source.tiff"
@@ -508,7 +510,7 @@ def test_tiff_media_gets_a_typst_compatible_derivative(tmp_path: Path) -> None:
         assert converted.mode == "RGBA"
         assert converted.getpixel((0, 0))[3] == 128
 
-    subprocess.run(
+    run_typst(
         [typst, "compile", "main.typ", "tiff.pdf"], cwd=project,
         check=True, capture_output=True, text=True, timeout=120,
     )
@@ -544,9 +546,9 @@ def test_default_text_layout_does_not_insert_a_full_line_between_paragraphs(tmp_
     assert "#v(5.20pt)" not in typst_source
     assert "PptxTextFrame(" in typst_source
     assert "PptxParagraph(" in typst_source
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "paragraphs.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -597,9 +599,9 @@ def test_default_text_layout_compiles_multiline_bullets_and_vertical_anchor(tmp_
     assert 'bullet:"•"' in generated
     assert "PptxTextFrame(" in generated
     assert 'anchor:"center"' in generated
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "bullets.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -735,9 +737,9 @@ def test_master_layout_hierarchy_is_shared_and_roundtrips(tmp_path: Path) -> Non
     # The starter module supports both composition and the bounded static parser.
     (tmp_path / "template.typ").write_text((ROOT / "src/pptx_typst/template.typ").read_text(encoding="utf-8"), encoding="utf-8")
     (tmp_path / "pptx-typst.typ").write_text((ROOT / "src/pptx_typst/templates/pptx-typst.typ").read_text(encoding="utf-8"), encoding="utf-8")
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run([typst, "compile", "main.typ", "authored.pdf"], cwd=tmp_path, check=True, capture_output=True, text=True, timeout=120)
+        run_typst([typst, "compile", "main.typ", "authored.pdf"], cwd=tmp_path, check=True, capture_output=True, text=True, timeout=120)
         pdftotext = shutil.which("pdftotext")
         if pdftotext:
             extracted = subprocess.run([pdftotext, "authored.pdf", "-"], cwd=tmp_path, check=True, capture_output=True, text=True, timeout=30).stdout
@@ -824,7 +826,7 @@ def test_master_layout_hierarchy_is_shared_and_roundtrips(tmp_path: Path) -> Non
     assert 'PptxLayout(master:Master01,fill:rgb("#223344")' in generated
 
     if typst:
-        subprocess.run([typst, "compile", "main.typ", "hierarchy.pdf"], cwd=project, check=True, capture_output=True, text=True, timeout=120)
+        run_typst([typst, "compile", "main.typ", "hierarchy.pdf"], cwd=project, check=True, capture_output=True, text=True, timeout=120)
         pdftotext = shutil.which("pdftotext")
         if pdftotext:
             extracted = subprocess.run([pdftotext, "hierarchy.pdf", "-"], cwd=project, check=True, capture_output=True, text=True, timeout=30).stdout

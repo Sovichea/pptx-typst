@@ -2,6 +2,8 @@
 """Install missing, open-licensed Google Fonts used by the frozen PPTX corpus."""
 from __future__ import annotations
 
+from pptx_typst.engine import run_typst
+
 import ctypes
 import json
 import os
@@ -83,7 +85,7 @@ def main():
     FONT_CACHE.mkdir(parents=True, exist_ok=True)
     user_font_dir = Path(os.environ["LOCALAPPDATA"]) / "Microsoft" / "Windows" / "Fonts"
     try:
-        current_families = {line.strip().casefold() for line in subprocess.run(
+        current_families = {line.strip().casefold() for line in run_typst(
             ["typst", "fonts"], capture_output=True, text=True, check=True
         ).stdout.splitlines() if line.strip()}
     except (OSError, subprocess.CalledProcessError):

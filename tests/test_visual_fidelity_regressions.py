@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pptx_typst.engine import run_typst
+
 import os
 from pathlib import Path
 import shutil
@@ -108,9 +110,9 @@ def test_placeholder_run_formatting_roundtrips(tmp_path: Path) -> None:
     assert "italic:true" in typst_source
     assert 'PptxPlaceholderRun(text:"\\n", font:"Calibri", size:44.000pt' in typst_source
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "output.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -147,9 +149,9 @@ def test_connector_uses_editable_typst_line_and_roundtrips(tmp_path: Path) -> No
     assert "PptxLine(start:" in typst_source
     assert "#D21923" in typst_source
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "output.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -191,9 +193,9 @@ def test_triangle_connector_marker_renders_and_roundtrips(tmp_path: Path) -> Non
     assert 'head-end:"triangle"' in typst_source
     assert "tail-points:" in typst_source
     assert "head-points:" in typst_source
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "output.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )
@@ -241,9 +243,9 @@ def test_group_transform_does_not_inflate_vector_stroke(tmp_path: Path) -> None:
     assert 'stroke="#DC0000"' in svg
     assert 'stroke-width="0.225"' in svg
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
-        subprocess.run(
+        run_typst(
             [typst, "compile", "main.typ", "output.pdf"], cwd=project,
             check=True, capture_output=True, text=True, timeout=120,
         )

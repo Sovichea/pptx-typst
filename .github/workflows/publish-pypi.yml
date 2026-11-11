@@ -23,9 +23,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - uses: typst-community/setup-typst@v5
-        with:
-          typst-version: 0.15.1
 
       - name: Check tag matches package version
         shell: bash

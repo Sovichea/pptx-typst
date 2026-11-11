@@ -45,24 +45,25 @@ def test_dynamic_font_alias_is_reported_as_unchecked() -> None:
 
 
 def test_typst_inventory_passes_the_same_font_paths(monkeypatch, tmp_path: Path) -> None:
+    from pptx_typst import engine
     seen = []
+    def inventory(paths):
+        seen.extend(paths)
+        return {"Inter"}
+    monkeypatch.setattr(engine, "font_inventory", inventory)
+    paths = [tmp_path / "fonts A", tmp_path / "fonts-B"]
+    names, metadata = fonts.typst_font_inventory(font_paths=paths)
+    assert seen == paths and names == {"Inter"}
+    assert metadata["backend"] == "typst-py"
 
-    def inventory(command, timeout=20):
-        seen.extend(command)
-        return {"Inter"}, {"status": "checked"}
 
-    monkeypatch.setattr(fonts, "_run_inventory", inventory)
-    fonts.typst_font_inventory("typst-test", [tmp_path / "fonts A", tmp_path / "fonts-B"])
-    assert seen == ["typst-test", "fonts", "--font-path",
-                    f"{tmp_path / 'fonts A'}{fonts.os.pathsep}{tmp_path / 'fonts-B'}"]
-
-
-def test_unavailable_typst_command_is_unknown_not_missing(monkeypatch) -> None:
-    monkeypatch.setattr(fonts, "_run_inventory", lambda *_args, **_kwargs: (None, {
-        "status": "unknown", "reason": "typst not found"}))
-    inventory, metadata = fonts.typst_font_inventory("missing-typst")
-    assert inventory is None
-    assert metadata["status"] == "unknown"
+def test_unavailable_typst_binding_is_unknown_not_missing(monkeypatch) -> None:
+    from pptx_typst import engine
+    def unavailable(_paths):
+        raise OSError("font inventory unavailable")
+    monkeypatch.setattr(engine, "font_inventory", unavailable)
+    inventory, metadata = fonts.typst_font_inventory()
+    assert inventory is None and metadata["status"] == "unknown"
     assert fonts._family_status("Inter", inventory, metadata)["status"] == "unknown"
 
 

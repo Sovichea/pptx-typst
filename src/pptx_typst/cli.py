@@ -55,7 +55,22 @@ def main() -> None:
     init.add_argument("directory", nargs="?", type=Path, default=Path("pptx-typst-project"))
     init.add_argument("--force", action="store_true", help="replace generated files that already exist")
 
+    compile_parser = commands.add_parser("compile", help="render Typst using typst-py")
+    compile_parser.add_argument("source", type=Path)
+    compile_parser.add_argument("--output", type=Path, required=True)
+    compile_parser.add_argument("--font-path", action="append", type=Path, default=[])
+    compile_parser.add_argument("--root", type=Path)
+    compile_parser.add_argument("--format", choices=["pdf", "svg", "png"])
+    compile_parser.add_argument("--ppi", type=float)
+
     args = parser.parse_args()
+    if args.command == "compile":
+        from .engine import compile_document
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        compile_document(args.source, args.output, font_paths=args.font_path,
+                         root=args.root, format=args.format, ppi=args.ppi)
+        return
+
     if args.command == "module":
         _write_template("pptx-typst.typ", args.output, args.force)
         return

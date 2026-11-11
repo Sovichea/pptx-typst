@@ -2,6 +2,8 @@
 """Produce focused structural/rendered text-placement diagnostics for PPTX samples."""
 from __future__ import annotations
 
+from pptx_typst.engine import run_typst
+
 import argparse
 import json
 import math
@@ -546,7 +548,7 @@ def analyze_one(app, source: Path, output_dir: Path, installed_fonts, text_layou
         if converted.returncode:
             raise RuntimeError(converted.stderr[-2000:] or converted.stdout[-2000:])
         manifest = json.loads((project / "asset_manifest.json").read_text(encoding="utf-8"))
-        typst_result = subprocess.run(
+        typst_result = run_typst(
             ["typst", "compile", "main.typ", str(temp / "typst.pdf")], cwd=project,
             capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900,
         )

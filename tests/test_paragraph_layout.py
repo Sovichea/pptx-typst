@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pptx_typst.engine import run_typst
+
 import os
 from pathlib import Path
 import shutil
@@ -219,10 +221,10 @@ def test_ordinary_text_and_placeholder_share_spacing_and_roundtrip(tmp_path: Pat
     assert 'font-scale:0.90000' in generated and 'line-spacing-reduction:0.10000' in generated
     assert generated.count('PptxPlaceholderRun(text:"\\n", font:"Arial"') >= 3
 
-    typst = shutil.which("typst")
+    typst = "typst-py"
     if typst:
         pdf_path = project / "output.pdf"
-        subprocess.run([typst, "compile", "main.typ", str(pdf_path)], cwd=project,
+        run_typst([typst, "compile", "main.typ", str(pdf_path)], cwd=project,
                        check=True, capture_output=True, text=True, timeout=120)
         try:
             import pymupdf

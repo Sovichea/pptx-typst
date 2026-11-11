@@ -2,6 +2,8 @@
 """Convert and compare the downloaded PPTX corpus using local PowerPoint/Typst."""
 from __future__ import annotations
 
+from pptx_typst.engine import run_typst
+
 import argparse
 from collections import Counter
 import csv
@@ -50,7 +52,7 @@ def lower_decile(values):
 
 
 def get_typst_font_names():
-    result = subprocess.run(["typst", "fonts"], check=True, capture_output=True, text=True)
+    result = run_typst(["typst", "fonts"], check=True, capture_output=True, text=True)
     return {line.strip().casefold() for line in result.stdout.splitlines() if line.strip()}
 
 
@@ -647,7 +649,7 @@ def benchmark_one(app, source: Path, entry, installed_fonts, comparison_dir: Pat
             record["table_placements_output"] = converted_manifest.get("counts", {}).get("table_placements", 0)
             record["unsupported_objects_output"] = converted_manifest.get("counts", {}).get("unsupported_placements", 0)
             stage = "typst_compile"
-            typst = subprocess.run(
+            typst = run_typst(
                 ["typst", "compile", "main.typ", str(converted_pdf_path)],
                 cwd=project, capture_output=True, text=True, encoding="utf-8",
                 errors="replace", timeout=900,

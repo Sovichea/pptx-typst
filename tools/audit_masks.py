@@ -7,6 +7,8 @@ regression. This does NOT substitute a new raster illustration for the original:
 media assets are shared and the alpha-mask derivative is cached separately.
 """
 from __future__ import annotations
+
+from pptx_typst.engine import run_typst
 import argparse,json,os,subprocess,tempfile,sys
 from pathlib import Path
 import numpy as np,fitz
@@ -39,7 +41,7 @@ def build(tag,pairs):
     env=os.environ.copy();env['PYTHONPATH']=str(BASE/'src')+os.pathsep+env.get('PYTHONPATH','')
     cr=subprocess.run(cmd,capture_output=True,text=True,cwd=BASE,env=env)
     if cr.returncode:raise RuntimeError(f'converter failure {tag}: '+cr.stderr[-2000:])
-    co=subprocess.run([str(a.typst),'compile',str(project/'main.typ'),str(project/'converted.pdf')],capture_output=True,text=True)
+    co=run_typst([str(a.typst),'compile',str(project/'main.typ'),str(project/'converted.pdf')],capture_output=True,text=True)
     if co.returncode:raise RuntimeError(f'Typst compile failure {tag}: '+co.stderr[-2000:])
     m=json.loads((project/'asset_manifest.json').read_text());frames=render(fitz.open(project/'converted.pdf'))
     if len(frames)!=len(ref):raise RuntimeError('mismatched page counts')

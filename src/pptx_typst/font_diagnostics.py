@@ -163,11 +163,13 @@ def _run_inventory(command: list[str], timeout: int = 20) -> tuple[set[str] | No
 
 def typst_font_inventory(executable: str = "typst", font_paths: list[Path] | None = None) -> tuple[set[str] | None, dict]:
     """Query the Typst compiler using the same additional font paths supplied by the user."""
-    command = [executable, "fonts"]
-    if font_paths:
-        # Typst accepts the platform path-list separator in one --font-path value.
-        command.extend(["--font-path", os.pathsep.join(str(path) for path in font_paths)])
-    return _run_inventory(command)
+    from .engine import font_inventory
+    try:
+        names = font_inventory(font_paths or [])
+        return names, {"status": "checked", "backend": "typst-py", "family_count": len(names),
+                       "font_paths": [str(path) for path in font_paths or []]}
+    except Exception as exc:
+        return None, {"status": "unknown", "backend": "typst-py", "reason": str(exc)}
 
 
 def _windows_font_families() -> set[str]:
@@ -437,7 +439,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check required font availability for supported static Typst presentations.")
     parser.add_argument("source", type=Path, help="Typst source file (bounded static pptx-typst subset)")
     parser.add_argument("--report", type=Path, default=Path("font_report.json"), help="JSON output path")
-    parser.add_argument("--typst", default="typst", help="Typst executable name or path")
+    parser.add_argument("--typst", default="typst", help="Deprecated compatibility option; Typst uses the Python binding")
     parser.add_argument("--font-path", action="append", type=Path, default=[],
                         help="Additional font directory; repeat or pass the same paths used for Typst compile")
     parser.add_argument("--pptx", type=Path, help="Optional exported PPTX for declaration comparison")
