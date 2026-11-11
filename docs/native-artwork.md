@@ -11,6 +11,9 @@ and supplies a transparent PNG fallback for Office versions that need it. These
 pictures remain static in PowerPoint. Ordinary supported text and shapes outside
 the frame remain editable. Existing SVG image assets also retain their vectors
 when the supported crop can be represented without raster compositing.
+External SVGs are normalized to Cairo's vector syntax for Office compatibility;
+their unmodified source bytes remain available through source recovery. Native
+`PptxStatic` SVGs keep their typst-py output and do not require Cairo.
 
 ## Rendering context
 

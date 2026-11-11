@@ -253,6 +253,7 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
     left=-dx/W; top=-dy/H; right=1-(w-dx)/W; bottom=1-(h-dy)/H
     safe=all(v>=-0.0001 for v in (left,top,right,bottom)) and left+right<0.999 and top+bottom<0.999
     image_path=f
+    svg_path=f
     if f.suffix.lower()=='.svg':
         generated=f.with_suffix('.png')
         if f.parent == base/'assets/static' and generated.is_file():
@@ -269,6 +270,18 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
                     cairosvg.svg2png(url=str(f),write_to=str(image_path),output_width=max(8,round(W*2)),output_height=max(8,round(H*2)))
                 except Exception as exc:
                     show_unsupported(audit,'svg_render_failed',f'{f}: {exc}',slide_num);return True
+            if safe:
+                # Office rejects some otherwise valid external SVGs. Normalize
+                # their vector syntax with the same renderer as the fallback;
+                # the source snapshot retains the unmodified authored asset.
+                svg_path=alpha_cache/f'{token}.svg'
+                try:
+                    if not svg_path.exists():
+                        cairosvg.svg2svg(url=str(f),write_to=str(svg_path),output_width=max(8,round(W*2)),output_height=max(8,round(H*2)))
+                    audit['svg_assets_normalized']=audit.get('svg_assets_normalized',0)+1
+                except Exception as exc:
+                    svg_path=None
+                    show_unsupported(audit,'svg_vector_normalization_failed',f'{f}: {exc}',slide_num)
         audit['svg_assets_as_png']+=1
     elif f.suffix.lower() not in ('.png','.jpeg','.jpg','.bmp','.gif','.tif','.tiff'):
         show_unsupported(audit,'media_format',im['path'],slide_num);return True
@@ -303,9 +316,9 @@ def add_image(slide, obj, base, x,y,rot,alpha_cache,audit,slide_num):
         else:
             fit_w=h*source_ratio; x += (w-fit_w)/2; w=fit_w
     shape=slide.shapes.add_picture(str(image_path),Pt(x),Pt(y),width=Pt(w),height=Pt(h))
-    if f.suffix.lower()=='.svg' and safe:
+    if f.suffix.lower()=='.svg' and safe and svg_path is not None:
         from .native_source import embed_svg
-        embed_svg(slide,shape,f)
+        embed_svg(slide,shape,svg_path)
         audit['svg_assets_embedded']+=1
     if safe and crop:
         shape.crop_left=max(0,left);shape.crop_top=max(0,top)
@@ -940,8 +953,12 @@ def convert(main,output,*,font_paths=()):
         slide=prs.slides.add_slide(prs.slide_layouts[6])
         fill=head.get('fill','none').strip()
         if fill!='none':
-            bg=slide.background.fill;bg.solid();bg.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
-            if 'gradient.' in fill:show_unsupported(audit,'slide_background_gradient',fill,n)
+            if 'gradient.' in fill:
+                from .ooxml_hierarchy import _set_solid_background
+                if not _set_solid_background(slide._element,fill):
+                    show_unsupported(audit,'slide_background_gradient',fill,n)
+            else:
+                bg=slide.background.fill;bg.solid();bg.fore_color.rgb=RGBColor(*simple_color(fill,(255,255,255)))
         export_one(body,slide,base,cache,audit,n)
         slide_placeholder_records=find_macro_records(head.get('placeholders','[]'),'PptxPlaceholder')
         layout_name=head.get('layout','').strip()
@@ -1010,10 +1027,11 @@ def convert(main,output,*,font_paths=()):
                 for record in records:apply_inherited_placeholder_paragraph_style(stage,idx,record,'layout')
         layout_object_counts[name]=len(stage.shapes)
         clear_theme_shadows(stage)
+    from .drawingml_fills import linear_gradient
     for name,fill in master_fills.items():
-        if 'gradient.' in fill:show_unsupported(audit,'master_background_gradient',fill,f'master:{name}')
+        if 'gradient.' in fill and linear_gradient(fill) is None:show_unsupported(audit,'master_background_gradient',fill,f'master:{name}')
     for name,(_,_,_,fill) in layout_records.items():
-        if 'gradient.' in fill:show_unsupported(audit,'layout_background_gradient',fill,f'layout:{name}')
+        if 'gradient.' in fill and linear_gradient(fill) is None:show_unsupported(audit,'layout_background_gradient',fill,f'layout:{name}')
     output.parent.mkdir(parents=True,exist_ok=True);prs.save(output)
     if master_parts and layout_parts and slide_assignments:
         from .ooxml_hierarchy import install_hierarchy

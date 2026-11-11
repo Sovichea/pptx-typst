@@ -157,3 +157,28 @@ def test_computed_image_path_exports_but_requires_reconstruction(exported, tmp_p
     assert report['svg_assets_embedded'] == 2
     assert not report['native_source_complete'] and report['source_warnings']
     assert restore(output, tmp_path / 'restored')['source_restoration'] == 'reconstructed'
+
+
+def test_external_svg_is_normalized_without_changing_original_source(tmp_path):
+    try:
+        __import__('cairosvg')
+    except (ImportError, OSError):
+        pytest.skip('External SVG export requires the optional native Cairo runtime')
+    svg = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20"><path d="M0 0H40V20H0Z" fill="red"/></svg>'
+    (tmp_path / 'art.svg').write_bytes(svg)
+    source = tmp_path / 'main.typ'
+    source.write_text('#import "pptx-typst.typ": *\n'
+                      '#PptxSlide(width:960pt,height:540pt,children:['
+                      '#PptxPlace(x:20pt,y:20pt,child:PptxImage("art.svg",width:80pt,height:40pt))])')
+    shutil.copyfile(ROOT / 'src/pptx_typst/templates/pptx-typst.typ', tmp_path / 'pptx-typst.typ')
+    output = tmp_path / 'export.pptx'
+    report = convert(source, output)
+    assert not report['unsupported'] and report['svg_assets_normalized'] == 1
+    embedded = next(p.blob for p in Presentation(output).part.package.iter_parts()
+                    if p.content_type == 'image/svg+xml')
+    assert embedded != svg
+    assert etree.fromstring(embedded).get('width') is not None
+    assert (tmp_path / 'art.svg').read_bytes() == svg
+    restored = tmp_path / 'restored'
+    assert restore(output, restored)['source_restoration'] == 'exact'
+    assert (restored / 'art.svg').read_bytes() == svg

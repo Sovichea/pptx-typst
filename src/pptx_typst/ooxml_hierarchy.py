@@ -342,32 +342,38 @@ def install_hierarchy(
     temp_path.replace(pptx_path)
 
 
-def _set_solid_background(owner_xml, expression: str) -> None:
-    """Write the converter's supported explicit RGB background value."""
+def _set_solid_background(owner_xml, expression: str) -> bool:
+    """Write a supported explicit RGB or imported linear-gradient background."""
     if not expression or expression.strip() == "none":
-        return
+        return False
     import re
-    if "gradient." in expression:
-        return  # caller reports gradients as a bounded unsupported case
+    from .drawingml_fills import linear_gradient
+    gradient = linear_gradient(expression)
+    if "gradient." in expression and gradient is None:
+        return False
     match = re.search(r"#([0-9a-fA-F]{6})([0-9a-fA-F]{2})?", expression)
-    if not match:
-        return
+    if gradient is None and not match:
+        return False
     cSld = owner_xml.find("{%s}cSld" % P)
     if cSld is None:
-        return
+        return False
     old = cSld.find("{%s}bg" % P)
     if old is not None:
         cSld.remove(old)
     bg = etree.Element("{%s}bg" % P)
     props = etree.SubElement(bg, "{%s}bgPr" % P)
-    solid = etree.SubElement(props, "{%s}solidFill" % ("http://schemas.openxmlformats.org/drawingml/2006/main"))
-    color = etree.SubElement(solid, "{%s}srgbClr" % ("http://schemas.openxmlformats.org/drawingml/2006/main"))
-    color.set("val", match.group(1).upper())
-    if match.group(2):
-        alpha = etree.SubElement(color, "{%s}alpha" % ("http://schemas.openxmlformats.org/drawingml/2006/main"))
-        alpha.set("val", str(round(int(match.group(2), 16) / 255 * 100000)))
+    if gradient is not None:
+        props.append(gradient)
+    else:
+        solid = etree.SubElement(props, "{%s}solidFill" % A)
+        color = etree.SubElement(solid, "{%s}srgbClr" % A)
+        color.set("val", match.group(1).upper())
+        if match.group(2):
+            alpha = etree.SubElement(color, "{%s}alpha" % A)
+            alpha.set("val", str(round(int(match.group(2), 16) / 255 * 100000)))
     etree.SubElement(props, "{%s}effectLst" % ("http://schemas.openxmlformats.org/drawingml/2006/main"))
     cSld.insert(0, bg)
+    return True
 
 
 def _set_image_background(owner_xml, owner_part: str, owner_rels, image_path: Path,
