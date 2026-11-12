@@ -446,3 +446,418 @@
   ],
 )
 
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 05 / BUDGET
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[04 / BUDGET]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 760pt, height: 70pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 48pt,
+        fill: ink,
+        weight: "bold",
+      )[Where the budget goes.]]
+    ])
+    #PptxPlace(x: 36pt, y: 186pt, child: PptxRect(
+      width: 600pt,
+      height: 290pt,
+      fill: card,
+      stroke: 1pt + rule,
+      radius: 8pt,
+    ))
+    #PptxPlace(x: 56pt, y: 200pt, child: PptxBox(width: 340pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[ANNUAL COST SHARE / PERCENT]]
+    ])
+    #PptxPlace(x: 48pt, y: 224pt, child: PptxStatic(width: 576pt, height: 240pt)[
+      #block(width: 100%, height: 100%, fill: card)[#align(center + horizon)[#cost-area]]
+    ])
+    #PptxPlace(x: 680pt, y: 210pt, child: PptxBox(width: 240pt, height: 90pt)[
+      #align(left + top)[#PptxText(font: "Georgia", size: 64pt, fill: forest, weight: "bold")[91%]]
+    ])
+    #PptxPlace(x: 680pt, y: 290pt, child: PptxBox(width: 240pt, height: 40pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[OPERATIONS SHARE#linebreak()BY YEAR 10]]
+    ])
+    #PptxPlace(x: 680pt, y: 340pt, child: PptxRect(width: 240pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 680pt, y: 356pt, child: PptxBox(width: 240pt, height: 90pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 22pt,
+        fill: ink,
+        weight: "regular",
+      )[The first budget#linebreak()is the smallest.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[05 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 06 / CASE NOTE
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[05 / CASE NOTE]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 820pt, height: 70pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 48pt,
+        fill: ink,
+        weight: "bold",
+      )[One team, three constraints.]]
+    ])
+    #PptxPlace(x: 48pt, y: 210pt, child: PptxBox(width: 520pt, height: 140pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 32pt,
+        fill: forest,
+        weight: "regular",
+      )[“We stopped optimizing the launch and started optimizing the second year.”]]
+    ])
+    #PptxPlace(x: 48pt, y: 360pt, child: PptxBox(width: 520pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 14pt,
+        fill: muted,
+        weight: "regular",
+      )[— Operations lead, regional grid]]
+    ])
+    #PptxPlace(x: 48pt, y: 400pt, child: PptxRect(width: 520pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 640pt, y: 200pt, child: PptxBox(width: 240pt, height: 54pt)[
+      #align(left + top)[#PptxText(font: "Georgia", size: 48pt, fill: rust, weight: "bold")[14 yrs]]
+    ])
+    #PptxPlace(x: 640pt, y: 258pt, child: PptxBox(width: 240pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[ASSET LIFE]]
+    ])
+    #PptxPlace(x: 640pt, y: 280pt, child: PptxBox(width: 240pt, height: 54pt)[
+      #align(left + top)[#PptxText(font: "Georgia", size: 48pt, fill: ochre, weight: "bold")[3.2×]]
+    ])
+    #PptxPlace(x: 640pt, y: 338pt, child: PptxBox(width: 240pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[REPAIR VS. BUILD]]
+    ])
+    #PptxPlace(x: 640pt, y: 360pt, child: PptxBox(width: 240pt, height: 54pt)[
+      #align(left + top)[#PptxText(font: "Georgia", size: 48pt, fill: forest, weight: "bold")[0]]
+    ])
+    #PptxPlace(x: 640pt, y: 418pt, child: PptxBox(width: 240pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[UNPLANNED RETIREMENTS]]
+    ])
+    #PptxPlace(x: 48pt, y: 430pt, child: PptxBox(width: 800pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[The constraint is not the technology. It is the calendar.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[06 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 07 / DECISION
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[06 / DECISION]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 860pt, height: 70pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 44pt,
+        fill: ink,
+        weight: "bold",
+      )[Decide by reversibility and cost.]]
+    ])
+    #PptxPlace(x: 48pt, y: 170pt, child: PptxBox(width: 200pt, height: 24pt)[
+      #align(center + top)[#PptxText(font: "Arial", size: 18pt, fill: rust, weight: "bold")[LOW COST]]
+    ])
+    #PptxPlace(x: 248pt, y: 170pt, child: PptxBox(width: 200pt, height: 24pt)[
+      #align(center + top)[#PptxText(font: "Arial", size: 18pt, fill: rust, weight: "bold")[HIGH COST]]
+    ])
+    #PptxPlace(x: 48pt, y: 198pt, child: PptxBox(width: 400pt, height: 18pt)[
+      #align(center + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[REVERSIBLE]]
+    ])
+    #PptxPlace(x: 48pt, y: 220pt, child: PptxRect(width: 200pt, height: 112pt, fill: forest, stroke: none))
+    #PptxPlace(x: 248pt, y: 220pt, child: PptxRect(width: 200pt, height: 112pt, fill: ochre, stroke: none))
+    #PptxPlace(x: 48pt, y: 332pt, child: PptxRect(width: 200pt, height: 112pt, fill: rust, stroke: none))
+    #PptxPlace(x: 248pt, y: 332pt, child: PptxRect(width: 200pt, height: 112pt, fill: ink, stroke: none))
+    #PptxPlace(x: 48pt, y: 260pt, child: PptxBox(width: 200pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Georgia", size: 24pt, fill: paper, weight: "bold")[TRY]]
+    ])
+    #PptxPlace(x: 248pt, y: 260pt, child: PptxBox(width: 200pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Georgia", size: 24pt, fill: ink, weight: "bold")[STAGE]]
+    ])
+    #PptxPlace(x: 48pt, y: 372pt, child: PptxBox(width: 200pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Georgia", size: 22pt, fill: paper, weight: "bold")[STANDARDIZE]]
+    ])
+    #PptxPlace(x: 248pt, y: 372pt, child: PptxBox(width: 200pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Georgia", size: 24pt, fill: paper, weight: "bold")[RETIRE]]
+    ])
+    #PptxPlace(x: 48pt, y: 452pt, child: PptxBox(width: 400pt, height: 18pt)[
+      #align(center + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[IRREVERSIBLE]]
+    ])
+    #PptxPlace(x: 504pt, y: 200pt, child: PptxBox(width: 408pt, height: 100pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 24pt,
+        fill: ink,
+        weight: "regular",
+      )[If it is cheap to undo,#linebreak()test it. If it is expensive#linebreak()to undo, slow down.]]
+    ])
+    #PptxPlace(x: 504pt, y: 320pt, child: PptxRect(width: 408pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 504pt, y: 340pt, child: PptxBox(width: 408pt, height: 80pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Reversibility is a budget.#linebreak()Spend it on learning, not#linebreak()on avoiding decisions.]]
+    ])
+    #PptxPlace(x: 504pt, y: 430pt, child: PptxBox(width: 408pt, height: 34pt)[
+      #align(left + top)[#PptxText(font: "Georgia", size: 30pt, fill: rust, weight: "bold")[2 × 2]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[07 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 08 / RULES
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[07 / RULES]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 820pt, height: 70pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 48pt,
+        fill: ink,
+        weight: "bold",
+      )[Five rules for quiet systems.]]
+    ])
+    #PptxPlace(x: 48pt, y: 206pt, child: PptxBox(width: 40pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 14pt, fill: rust, weight: "bold")[01]]
+    ])
+    #PptxPlace(x: 100pt, y: 200pt, child: PptxBox(width: 352pt, height: 30pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 24pt,
+        fill: ink,
+        weight: "bold",
+      )[Measure the second year.]]
+    ])
+    #PptxPlace(x: 472pt, y: 204pt, child: PptxBox(width: 440pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[The launch is not the evidence.]]
+    ])
+    #PptxPlace(x: 48pt, y: 244pt, child: PptxRect(width: 864pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 48pt, y: 260pt, child: PptxBox(width: 40pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 14pt, fill: rust, weight: "bold")[02]]
+    ])
+    #PptxPlace(x: 100pt, y: 254pt, child: PptxBox(width: 352pt, height: 30pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 24pt,
+        fill: ink,
+        weight: "bold",
+      )[Prefer reversible moves.]]
+    ])
+    #PptxPlace(x: 472pt, y: 258pt, child: PptxBox(width: 440pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Keep the exit cheaper than the entry.]]
+    ])
+    #PptxPlace(x: 48pt, y: 298pt, child: PptxRect(width: 864pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 48pt, y: 314pt, child: PptxBox(width: 40pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 14pt, fill: rust, weight: "bold")[03]]
+    ])
+    #PptxPlace(x: 100pt, y: 308pt, child: PptxBox(width: 352pt, height: 30pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 24pt,
+        fill: ink,
+        weight: "bold",
+      )[Retire on purpose.]]
+    ])
+    #PptxPlace(x: 472pt, y: 312pt, child: PptxBox(width: 440pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Every asset needs an ending.]]
+    ])
+    #PptxPlace(x: 48pt, y: 352pt, child: PptxRect(width: 864pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 48pt, y: 368pt, child: PptxBox(width: 40pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 14pt, fill: rust, weight: "bold")[04]]
+    ])
+    #PptxPlace(x: 100pt, y: 362pt, child: PptxBox(width: 352pt, height: 30pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 24pt,
+        fill: ink,
+        weight: "bold",
+      )[Keep one source of truth.]]
+    ])
+    #PptxPlace(x: 472pt, y: 366pt, child: PptxBox(width: 440pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Decisions, not documents.]]
+    ])
+    #PptxPlace(x: 48pt, y: 406pt, child: PptxRect(width: 864pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 48pt, y: 422pt, child: PptxBox(width: 40pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 14pt, fill: rust, weight: "bold")[05]]
+    ])
+    #PptxPlace(x: 100pt, y: 416pt, child: PptxBox(width: 352pt, height: 30pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 24pt,
+        fill: ink,
+        weight: "bold",
+      )[Make maintenance visible.]]
+    ])
+    #PptxPlace(x: 472pt, y: 420pt, child: PptxBox(width: 440pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Put it on the same page as growth.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[08 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 09 / ARCHIVE
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[08 / ARCHIVE]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 860pt, height: 70pt)[
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 44pt,
+        fill: ink,
+        weight: "bold",
+      )[The archive is not the argument.]]
+    ])
+    #PptxPlace(x: 48pt, y: 210pt, child: PptxBox(width: 460pt, height: 120pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 32pt,
+        fill: forest,
+        weight: "regular",
+      )[A system that cannot explain#linebreak()its own history cannot be#linebreak()maintained.]]
+    ])
+    #PptxPlace(x: 48pt, y: 350pt, child: PptxBox(width: 460pt, height: 80pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 22pt,
+        fill: muted,
+        weight: "regular",
+      )[Keep the decisions, the exceptions,#linebreak()and the reasons. The documents#linebreak()will follow.]]
+    ])
+    #PptxPlace(x: 560pt, y: 210pt, child: PptxRect(width: 352pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 560pt, y: 220pt, child: PptxBox(width: 352pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[2019 / DECISION]]
+    ])
+    #PptxPlace(x: 560pt, y: 242pt, child: PptxBox(width: 352pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: ink,
+        weight: "regular",
+      )[Standardize the sensor bus.]]
+    ])
+    #PptxPlace(x: 560pt, y: 290pt, child: PptxRect(width: 352pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 560pt, y: 300pt, child: PptxBox(width: 352pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[2021 / EXCEPTION]]
+    ])
+    #PptxPlace(x: 560pt, y: 322pt, child: PptxBox(width: 352pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: ink,
+        weight: "regular",
+      )[One site kept the old controller.]]
+    ])
+    #PptxPlace(x: 560pt, y: 370pt, child: PptxRect(width: 352pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 560pt, y: 380pt, child: PptxBox(width: 352pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[2024 / RETIREMENT]]
+    ])
+    #PptxPlace(x: 560pt, y: 402pt, child: PptxBox(width: 352pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: ink,
+        weight: "regular",
+      )[The exception became the lesson.]]
+    ])
+    #PptxPlace(x: 48pt, y: 450pt, child: PptxBox(width: 800pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Keep the decisions, not just the documents.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[09 / 10]]
+    ])
+  ],
+)
+
