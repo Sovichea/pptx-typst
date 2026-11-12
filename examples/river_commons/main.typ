@@ -83,7 +83,7 @@
 
 #PptxSlide(width: 960pt, height: 540pt, layout: Light, children: [
   #PptxPlace(x: 480pt, y: 64pt, child: PptxImage(
-    "assets/bishan-river.jpg",
+    "assets/bishan-river-optimized.jpg",
     width: 432pt,
     height: 410pt,
     fit: "cover",
@@ -578,7 +578,7 @@
     #align(left + top)[#PptxText(
       font: "Arial",
       size: 24pt,
-      fill: rgb("#153E40"),
+      fill: rgb("#F5F1E7"),
       weight: "bold",
     )[Connected access]]
   ])
@@ -627,7 +627,7 @@
 
 #PptxSlide(width: 960pt, height: 540pt, layout: Light, children: [
   #PptxPlace(x: 0pt, y: 0pt, child: PptxImage(
-    "assets/rain-garden-office.jpg",
+    "assets/rain-garden-office-optimized.jpg",
     width: 960pt,
     height: 540pt,
     fit: "cover",
