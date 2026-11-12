@@ -113,30 +113,31 @@ current deck rather than restoring stale source. Use `pptx-to-typst deck.pptx
 artwork retains SVG where available; it cannot infer arbitrary original code.
 See [native artwork and source recovery](docs/native-artwork.md) for scope and limits.
 
-## Native drawings and source roundtrip
+### Drawing packages
 
-Keep drawing code inside an explicit static-artwork frame:
+`PptxStatic` also works with Typst drawing packages. Import CeTZ, Fletcher, or
+Gribouille before the first explicit slide, then draw inside a frame with literal
+point dimensions:
 
 ```typst
+#import "@preview/cetz:0.5.2": canvas, draw
+#import "@preview/fletcher:0.5.8": diagram, node, edge
+#import "@preview/gribouille:0.7.0": *
+
 #PptxPlace(x: 40pt, y: 80pt,
-  child: PptxStatic(width: 300pt, height: 160pt)[
-    #rect(width: 280pt, height: 140pt, fill: rgb("#167E85"), stroke: none)
+  child: PptxStatic(width: 360pt, height: 200pt)[
+    #canvas({
+      import draw: *
+      // chart or diagram
+    })
   ],
 )
 ```
 
-`PptxStatic` stays native in Typst and becomes an SVG picture with an Office PNG
-fallback during PPTX export. Text outside that frame remains editable. The PPTX
-also stores the original entrypoint and local dependencies, deduplicating binary
-assets. Re-importing an unchanged export restores source bytes and drawing code,
-including after supported PowerPoint save normalization. Check
-`source_restoration: "exact"` in the import report.
-
-Changes to presentation content or supported layout trigger reconstruction of the
-current deck rather than restoring stale source. Use `--reconstruct` to request
-that path explicitly. Reconstructed artwork retains SVG where available; it
-cannot infer arbitrary original code. See
-[native artwork and source recovery](docs/native-artwork.md) for scope and limits.
+The exporter keeps the frame as SVG vector media with a PNG fallback for Office.
+Text and conclusions that must stay editable belong outside the frame. Remote
+package sources and system fonts are not bundled automatically, so pin package
+versions and run the font preflight before delivery.
 
 ## Supported feature subset
 

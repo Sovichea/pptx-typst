@@ -35,6 +35,33 @@ binding. `--font-path` is available on compile, export, and font-preflight comma
 It does not install fonts in Office. Native SVG creation through `PptxStatic`
 does not require Cairo; some external SVG and mask conversions still do.
 
+## Drawing packages
+
+Static frames can contain artwork from Typst drawing packages such as CeTZ,
+Fletcher, and Gribouille. Import the packages in the preamble, before the first
+explicit slide, and keep the drawing inside a bounded `PptxStatic` frame:
+
+```typst
+#import "@preview/cetz:0.5.2": canvas, draw
+#import "@preview/fletcher:0.5.8": diagram, node, edge
+#import "@preview/gribouille:0.7.0": *
+
+#PptxPlace(x: 40pt, y: 80pt,
+  child: PptxStatic(width: 360pt, height: 200pt)[
+    #canvas({
+      import draw: *
+      // chart, plot, or diagram
+    })
+  ],
+)
+```
+
+The frame exports as SVG vector media with a PNG fallback. Everything inside the
+frame is static artwork; keep titles, labels that must change, and conclusions
+outside it. Gribouille plots and Fletcher diagrams use the same path. Remote
+package sources and system fonts are not bundled automatically, so pin package
+versions and run the font preflight before delivery.
+
 ## What the PPTX stores
 
 A related JSON part stores the original entrypoint, local Typst dependencies,

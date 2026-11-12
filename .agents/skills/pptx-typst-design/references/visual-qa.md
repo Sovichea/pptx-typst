@@ -35,6 +35,7 @@ At 100% view, scrutinize:
 - Intentional image focus and crop, including photos with people and important annotations.
 - Chart accuracy, axis scale, legend, units, baseline and data labels.
 - White or negative space; does the slide breathe?
+- Typography at 100% slide size: body copy is at least 24 pt (20 pt absolute minimum), sources/labels are 12–14 pt, body line spacing is 1.3–1.5, and display spacing is 0.95–1.1. If meaningful text is 8–11 pt, cut copy or split the slide.
 - Accessibility: hue-only coding, tiny captions, color contrast, and reading order.
 - Correct attribution and readable source labels where required.
 

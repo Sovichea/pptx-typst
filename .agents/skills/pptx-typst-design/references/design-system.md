@@ -43,12 +43,16 @@ Default canvas: 960 × 540 pt. Use point coordinates; do not confuse points with
 | Spacing scale | 4 / 8 / 12 / 16 / 24 / 32 / 48 pt | Consistency across the deck |
 | Display | 40–52 pt | Covers and big statements (use less text) |
 | Slide headline | 32–44 pt | Strong visible hierarchy |
-| Body | 22–28 pt | Projected-screen text |
+| Body | 24–28 pt | Projected-screen text; 20 pt absolute minimum |
 | Subhead | 24–32 pt | Supporting content |
-| Data labels | 16–22 pt | Keep charts readable |
-| Sources/footer | 11–14 pt | Only when unavoidable; do not use as primary content |
+| Data labels | 18–22 pt | Keep charts readable |
+| Sources/footer | 12–14 pt | Only when unavoidable; do not use as primary content |
 
-Avoid choosing tiny measured differences such as 0.21 em and independent arbitrary values for every slide. Use established tokens, check the render, and refine only when necessary. Use line spacing near 1.2–1.35; validate in Typst because measured font metrics differ from PowerPoint.
+Avoid choosing tiny measured differences such as 0.21 em and independent arbitrary values for every slide. Use established tokens, check the render, and refine only when necessary.
+
+Use body line spacing of 1.3–1.5 and display spacing of 0.95–1.1. In Typst, `#set par(leading: 0.6em)` produces roughly 1.3× at 20–28 pt body sizes; `0.3em` produces roughly 1.0× at 40–64 pt display sizes. Do not use fixed 2–4 pt leading for body copy: at larger sizes it collapses the lines and makes the slide look cramped. Validate in Typst because measured font metrics differ from PowerPoint.
+
+Public presentation guidance converges on similar limits: at least 24 pt body text, 28–36 pt headlines, 1.2–1.5 line spacing, 6×6 or 7×7 content limits, and cutting copy rather than shrinking type. See [Harvard T.H. Chan](https://hsph.harvard.edu/research/health-communication/resources/slide-checklist/) and [UCSF](https://meded.ucsf.edu/node/8625).
 
 Quantize every font size to a 0.5 pt increment. PowerPoint does not render arbitrary fractional sizes reliably, so a PDF set at 11.6 pt may export at a different effective size and reflow. Keep line spacing, coordinates, and stroke widths as finely measured as needed.
 
