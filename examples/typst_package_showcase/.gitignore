@@ -1,0 +1,9 @@
+.typsastra/
+assets/static/
+raster_cache/
+exports/
+conversion_report.json
+showcase-powerpoint.pdf
+previews/slide-*.png
+previews/slide-*.svg
+qa/
