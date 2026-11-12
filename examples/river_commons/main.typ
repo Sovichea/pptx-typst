@@ -410,3 +410,412 @@
   ])
 ])
 
+#PptxSlide(width: 960pt, height: 540pt, layout: Light, children: [
+  #PptxPlace(x: 48pt, y: 76pt, child: PptxBox(width: 865pt, height: 120pt)[
+    #set par(leading: 0.3em)
+    #align(left + top)[#PptxText(
+      font: "Georgia",
+      size: 44pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[A smaller peak#linebreak()is a design goal.]]
+  ])
+  #PptxPlace(x: 48pt, y: 220pt, child: PptxBox(width: 350pt, height: 105pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Compare the shape of a response#linebreak()before assigning a target.]]
+  ])
+  #PptxPlace(x: 464pt, y: 420pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (400pt, 0pt),
+    stroke: 1pt + rgb("#53706B"),
+  ))
+  #PptxPlace(x: 464pt, y: 246pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (0pt, 174pt),
+    stroke: 1pt + rgb("#53706B"),
+  ))
+  #PptxPlace(x: 480pt, y: 414pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (110pt, -160pt),
+    stroke: 3pt + rgb("#CC613D"),
+  ))
+  #PptxPlace(x: 590pt, y: 254pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (90pt, 160pt),
+    stroke: 3pt + rgb("#CC613D"),
+  ))
+  #PptxPlace(x: 480pt, y: 414pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (100pt, -24pt),
+    stroke: 3pt + rgb("#153E40"),
+  ))
+  #PptxPlace(x: 580pt, y: 390pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (100pt, -70pt),
+    stroke: 3pt + rgb("#153E40"),
+  ))
+  #PptxPlace(x: 680pt, y: 320pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (80pt, 10pt),
+    stroke: 3pt + rgb("#153E40"),
+  ))
+  #PptxPlace(x: 760pt, y: 330pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (90pt, 84pt),
+    stroke: 3pt + rgb("#153E40"),
+  ))
+  #PptxPlace(x: 614pt, y: 241pt, child: PptxBox(width: 240pt, height: 30pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 20pt,
+      fill: rgb("#CC613D"),
+      weight: "regular",
+    )[Sharp response]]
+  ])
+  #PptxPlace(x: 690pt, y: 275pt, child: PptxBox(width: 205pt, height: 30pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 20pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Delayed response]]
+  ])
+  #PptxPlace(x: 464pt, y: 445pt, child: PptxBox(width: 400pt, height: 30pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 14pt,
+      fill: rgb("#53706B"),
+      weight: "regular",
+    )[TIME AFTER RAIN →]]
+  ])
+  #PptxPlace(x: 48pt, y: 442pt, child: PptxBox(width: 345pt, height: 38pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#53706B"),
+      weight: "regular",
+    )[QUALITATIVE SKETCH / NO MEASURED VALUES]]
+  ])
+  #PptxPlace(x: 48pt, y: 26pt, child: PptxBox(width: 700pt, height: 20pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[RIVER COMMONS / FIELD NOTES]]
+  ])
+  #PptxPlace(x: 48pt, y: 506pt, child: PptxBox(width: 760pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[FICTIONAL DISTRICT / CONCEPT STUDY / NOT A PERFORMANCE CLAIM]]
+  ])
+  #PptxPlace(x: 866pt, y: 506pt, child: PptxBox(width: 60pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rgb("#153E40"), weight: "regular")[06 / 10]]
+  ])
+])
+
+#PptxSlide(width: 960pt, height: 540pt, layout: Dark, children: [
+  #PptxPlace(x: 0pt, y: 0pt, child: PptxImage("assets/route-field.svg", width: 960pt, height: 540pt))
+  #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 805pt, height: 115pt)[
+    #set par(leading: 0.3em)
+    #align(left + top)[#PptxText(
+      font: "Georgia",
+      size: 44pt,
+      fill: rgb("#F5F1E7"),
+      weight: "bold",
+    )[Protect the route#linebreak()before the object.]]
+  ])
+  #PptxPlace(x: 48pt, y: 202pt, child: PptxBox(width: 395pt, height: 76pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#F5F1E7"),
+      weight: "regular",
+    )[Keep access continuous.#linebreak()Place amenities around it.]]
+  ])
+  #PptxPlace(x: 150pt, y: 328pt, child: PptxEllipse(
+    width: 22pt,
+    height: 22pt,
+    fill: rgb("#CC613D"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 482pt, y: 211pt, child: PptxEllipse(
+    width: 22pt,
+    height: 22pt,
+    fill: rgb("#CC613D"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 812pt, y: 94pt, child: PptxEllipse(
+    width: 22pt,
+    height: 22pt,
+    fill: rgb("#CC613D"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 68pt, y: 429pt, child: PptxBox(width: 260pt, height: 45pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[Connected access]]
+  ])
+  #PptxPlace(x: 378pt, y: 429pt, child: PptxBox(width: 240pt, height: 45pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#F5F1E7"),
+      weight: "bold",
+    )[Visible crossings]]
+  ])
+  #PptxPlace(x: 678pt, y: 429pt, child: PptxBox(width: 245pt, height: 45pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#F5F1E7"),
+      weight: "bold",
+    )[Clear destination]]
+  ])
+  #PptxPlace(x: 48pt, y: 26pt, child: PptxBox(width: 700pt, height: 20pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#F5F1E7"),
+      weight: "bold",
+    )[RIVER COMMONS / FIELD NOTES]]
+  ])
+  #PptxPlace(x: 48pt, y: 506pt, child: PptxBox(width: 760pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#F5F1E7"),
+      weight: "regular",
+    )[FICTIONAL DISTRICT / CONCEPT STUDY / NOT A PERFORMANCE CLAIM]]
+  ])
+  #PptxPlace(x: 866pt, y: 506pt, child: PptxBox(width: 60pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rgb("#F5F1E7"), weight: "regular")[07 / 10]]
+  ])
+])
+
+#PptxSlide(width: 960pt, height: 540pt, layout: Light, children: [
+  #PptxPlace(x: 0pt, y: 0pt, child: PptxImage(
+    "assets/rain-garden-office.jpg",
+    width: 960pt,
+    height: 540pt,
+    fit: "cover",
+  ))
+  #PptxPlace(x: 0pt, y: 0pt, child: PptxImage("assets/pilot-window-mask.svg", width: 960pt, height: 540pt))
+  #PptxPlace(x: 48pt, y: 76pt, child: PptxBox(width: 860pt, height: 114pt)[
+    #set par(leading: 0.3em)
+    #align(left + top)[#PptxText(
+      font: "Georgia",
+      size: 44pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[Test one block#linebreak()before scaling.]]
+  ])
+  #PptxPlace(x: 48pt, y: 414pt, child: PptxBox(width: 250pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[01 / Observe]]
+  ])
+  #PptxPlace(x: 48pt, y: 452pt, child: PptxBox(width: 250pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#53706B"),
+      weight: "regular",
+    )[Watch a wet day.]]
+  ])
+  #PptxPlace(x: 360pt, y: 414pt, child: PptxBox(width: 250pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[02 / Rehearse]]
+  ])
+  #PptxPlace(x: 360pt, y: 452pt, child: PptxBox(width: 250pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#53706B"),
+      weight: "regular",
+    )[Walk the detour.]]
+  ])
+  #PptxPlace(x: 672pt, y: 414pt, child: PptxBox(width: 250pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[03 / Revise]]
+  ])
+  #PptxPlace(x: 672pt, y: 452pt, child: PptxBox(width: 250pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#53706B"),
+      weight: "regular",
+    )[Change the detail.]]
+  ])
+  #PptxPlace(x: 48pt, y: 391pt, child: PptxBox(width: 864pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Queens rain gardens / Tdorante10 / CC BY-SA 4.0 / cropped; sources in ATTRIBUTION.md]]
+  ])
+  #PptxPlace(x: 48pt, y: 26pt, child: PptxBox(width: 700pt, height: 20pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[RIVER COMMONS / FIELD NOTES]]
+  ])
+  #PptxPlace(x: 48pt, y: 506pt, child: PptxBox(width: 760pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[FICTIONAL DISTRICT / CONCEPT STUDY / NOT A PERFORMANCE CLAIM]]
+  ])
+  #PptxPlace(x: 866pt, y: 506pt, child: PptxBox(width: 60pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rgb("#153E40"), weight: "regular")[08 / 10]]
+  ])
+])
+
+#PptxSlide(width: 960pt, height: 540pt, layout: Light, children: [
+  #PptxPlace(x: 48pt, y: 82pt, child: PptxBox(width: 864pt, height: 112pt)[
+    #set par(leading: 0.3em)
+    #align(left + top)[#PptxText(
+      font: "Georgia",
+      size: 44pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[A boundary needs#linebreak()an owner.]]
+  ])
+  #PptxPlace(x: 48pt, y: 219pt, child: PptxBox(width: 860pt, height: 40pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#53706B"),
+      weight: "regular",
+    )[Pair every design intention with an operating question.]]
+  ])
+  #PptxPlace(x: 48pt, y: 283pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (864pt, 0pt),
+    stroke: 1pt + rgb("#C3CEC1"),
+  ))
+  #PptxPlace(x: 48pt, y: 295pt, child: PptxBox(width: 245pt, height: 35pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: rgb("#CC613D"), weight: "bold")[ACCESS]]
+  ])
+  #PptxPlace(x: 320pt, y: 295pt, child: PptxBox(width: 592pt, height: 35pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Who keeps the route open?]]
+  ])
+  #PptxPlace(x: 48pt, y: 345pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (864pt, 0pt),
+    stroke: 1pt + rgb("#C3CEC1"),
+  ))
+  #PptxPlace(x: 48pt, y: 357pt, child: PptxBox(width: 245pt, height: 35pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: rgb("#CC613D"), weight: "bold")[CARE]]
+  ])
+  #PptxPlace(x: 320pt, y: 357pt, child: PptxBox(width: 592pt, height: 35pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Who inspects the planted edge?]]
+  ])
+  #PptxPlace(x: 48pt, y: 407pt, child: PptxLine(
+    start: (0pt, 0pt),
+    end: (864pt, 0pt),
+    stroke: 1pt + rgb("#C3CEC1"),
+  ))
+  #PptxPlace(x: 48pt, y: 419pt, child: PptxBox(width: 245pt, height: 35pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: rgb("#CC613D"), weight: "bold")[RESPONSE]]
+  ])
+  #PptxPlace(x: 320pt, y: 419pt, child: PptxBox(width: 592pt, height: 35pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 24pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Who decides when the space changes?]]
+  ])
+  #PptxPlace(x: 48pt, y: 26pt, child: PptxBox(width: 700pt, height: 20pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[RIVER COMMONS / FIELD NOTES]]
+  ])
+  #PptxPlace(x: 48pt, y: 506pt, child: PptxBox(width: 760pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[FICTIONAL DISTRICT / CONCEPT STUDY / NOT A PERFORMANCE CLAIM]]
+  ])
+  #PptxPlace(x: 866pt, y: 506pt, child: PptxBox(width: 60pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rgb("#153E40"), weight: "regular")[09 / 10]]
+  ])
+])
+
