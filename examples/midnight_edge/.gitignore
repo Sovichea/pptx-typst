@@ -1,0 +1,7 @@
+raster_cache/
+conversion_report.json
+font-report.json
+previews/slide-*.png
+previews/slide-*.svg
+previews/powerpoint.pdf
+previews/powerpoint-contact-sheet.png
