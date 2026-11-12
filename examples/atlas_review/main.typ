@@ -861,3 +861,47 @@
   ],
 )
 
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 10 / CLOSE
+    #PptxPlace(x: 700pt, y: 70pt, child: PptxEllipse(width: 240pt, height: 240pt, fill: rust, stroke: none))
+    #PptxPlace(x: 780pt, y: 220pt, child: PptxRect(width: 130pt, height: 220pt, fill: forest, stroke: none))
+    #PptxPlace(x: 640pt, y: 250pt, child: PptxRect(width: 40pt, height: 40pt, fill: ochre, stroke: none))
+    #PptxPlace(x: 48pt, y: 110pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rust, weight: "bold")[10 / CLOSE]]
+    ])
+    #PptxPlace(x: 48pt, y: 146pt, child: PptxBox(width: 560pt, height: 200pt)[
+      #set par(leading: 0.3em)
+      #align(left + top)[#PptxText(
+        font: "Georgia",
+        size: 60pt,
+        fill: ink,
+        weight: "bold",
+      )[Keep what works.#linebreak()Retire the rest.]]
+    ])
+    #PptxPlace(x: 48pt, y: 370pt, child: PptxBox(width: 480pt, height: 70pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 24pt,
+        fill: muted,
+        weight: "regular",
+      )[A durable system is a series#linebreak()of deliberate endings.]]
+    ])
+    #PptxPlace(x: 48pt, y: 440pt, child: PptxRect(width: 120pt, height: 3pt, fill: rust, stroke: none))
+    #PptxPlace(x: 48pt, y: 456pt, child: PptxBox(width: 600pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 12pt,
+        fill: muted,
+        weight: "regular",
+      )[ATLAS REVIEW / ISSUE 04 / 2026]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Arial", size: 12pt, fill: muted, weight: "bold")[10 / 10]]
+    ])
+  ],
+)
