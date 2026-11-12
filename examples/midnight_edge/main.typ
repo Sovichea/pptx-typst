@@ -350,3 +350,441 @@
   ],
 )
 
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 04 / PROFILE
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[03 / PROFILE]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 760pt, height: 60pt)[
+      #align(left + top)[#PptxText(
+        font: "Barlow",
+        size: 42pt,
+        fill: ice,
+        weight: "bold",
+      )[Where latency hides.]]
+    ])
+    #PptxPlace(x: 36pt, y: 190pt, child: PptxRect(
+      width: 584pt,
+      height: 292pt,
+      fill: panel,
+      stroke: none,
+      radius: 10pt,
+    ))
+    #PptxPlace(x: 56pt, y: 204pt, child: PptxBox(width: 320pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[LOOP BUDGET / MILLISECONDS]]
+    ])
+    #PptxPlace(x: 210pt, y: 232pt, child: PptxRect(width: 1pt, height: 218pt, fill: rule, stroke: none))
+    #PptxPlace(x: 56pt, y: 244pt, child: PptxBox(width: 130pt, height: 24pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: ice, weight: "bold")[CAPTURE]]
+    ])
+    #PptxPlace(x: 210pt, y: 256pt, child: PptxLine(
+      start: (0pt, 0pt),
+      end: (149.5pt, 0pt),
+      stroke: 2.5pt + cyan,
+    ))
+    #PptxPlace(x: 354.5pt, y: 251pt, child: PptxEllipse(width: 10pt, height: 10pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 560pt, y: 244pt, child: PptxBox(width: 40pt, height: 24pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 20pt, fill: ice, weight: "bold")[7]]
+    ])
+    #PptxPlace(x: 56pt, y: 288pt, child: PptxBox(width: 130pt, height: 24pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: ice, weight: "bold")[FUSE]]
+    ])
+    #PptxPlace(x: 210pt, y: 300pt, child: PptxLine(
+      start: (0pt, 0pt),
+      end: (128pt, 0pt),
+      stroke: 2.5pt + lilac,
+    ))
+    #PptxPlace(x: 333pt, y: 295pt, child: PptxEllipse(width: 10pt, height: 10pt, fill: lilac, stroke: none))
+    #PptxPlace(x: 560pt, y: 288pt, child: PptxBox(width: 40pt, height: 24pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 20pt, fill: ice, weight: "bold")[6]]
+    ])
+    #PptxPlace(x: 56pt, y: 332pt, child: PptxBox(width: 130pt, height: 24pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: ice, weight: "bold")[DECIDE]]
+    ])
+    #PptxPlace(x: 210pt, y: 344pt, child: PptxLine(
+      start: (0pt, 0pt),
+      end: (320pt, 0pt),
+      stroke: 2.5pt + amber,
+    ))
+    #PptxPlace(x: 525pt, y: 339pt, child: PptxEllipse(width: 10pt, height: 10pt, fill: amber, stroke: none))
+    #PptxPlace(x: 560pt, y: 332pt, child: PptxBox(width: 40pt, height: 24pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 20pt, fill: ice, weight: "bold")[15]]
+    ])
+    #PptxPlace(x: 56pt, y: 376pt, child: PptxBox(width: 130pt, height: 24pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: ice, weight: "bold")[ACT]]
+    ])
+    #PptxPlace(x: 210pt, y: 388pt, child: PptxLine(start: (0pt, 0pt), end: (192pt, 0pt), stroke: 2.5pt + ice))
+    #PptxPlace(x: 397pt, y: 383pt, child: PptxEllipse(width: 10pt, height: 10pt, fill: ice, stroke: none))
+    #PptxPlace(x: 560pt, y: 376pt, child: PptxBox(width: 40pt, height: 24pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 20pt, fill: ice, weight: "bold")[9]]
+    ])
+    #PptxPlace(x: 56pt, y: 420pt, child: PptxBox(width: 130pt, height: 24pt)[
+      #align(left + top)[#PptxText(font: "Arial", size: 20pt, fill: ice, weight: "bold")[VERIFY]]
+    ])
+    #PptxPlace(x: 210pt, y: 432pt, child: PptxLine(
+      start: (0pt, 0pt),
+      end: (85.5pt, 0pt),
+      stroke: 2.5pt + cyan,
+    ))
+    #PptxPlace(x: 290.5pt, y: 427pt, child: PptxEllipse(width: 10pt, height: 10pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 560pt, y: 420pt, child: PptxBox(width: 40pt, height: 24pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 20pt, fill: ice, weight: "bold")[4]]
+    ])
+    #PptxPlace(x: 650pt, y: 210pt, child: PptxBox(width: 260pt, height: 90pt)[
+      #align(left + top)[#PptxText(font: "Barlow", size: 72pt, fill: amber, weight: "bold")[37%]]
+    ])
+    #PptxPlace(x: 650pt, y: 300pt, child: PptxBox(width: 260pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[OF THE LOOP IS DECIDE]]
+    ])
+    #PptxPlace(x: 650pt, y: 340pt, child: PptxRect(width: 260pt, height: 0.5pt, fill: rule, stroke: none))
+    #PptxPlace(x: 650pt, y: 356pt, child: PptxBox(width: 260pt, height: 100pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 22pt,
+        fill: ice,
+        weight: "regular",
+      )[Trim the decision#linebreak()and the whole loop#linebreak()gets shorter.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 12pt, fill: muted, weight: "bold")[04 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 05 / EDGE VS CLOUD
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: amber,
+        weight: "bold",
+      )[04 / EDGE VS CLOUD]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 760pt, height: 60pt)[
+      #align(left + top)[#PptxText(
+        font: "Barlow",
+        size: 42pt,
+        fill: ice,
+        weight: "bold",
+      )[Keep the decision close.]]
+    ])
+    #PptxPlace(x: 48pt, y: 196pt, child: PptxRect(
+      width: 410pt,
+      height: 244pt,
+      fill: panel,
+      stroke: 1pt + cyan,
+      radius: 10pt,
+    ))
+    #PptxPlace(x: 502pt, y: 196pt, child: PptxRect(
+      width: 410pt,
+      height: 244pt,
+      fill: deep,
+      stroke: 1pt + rule,
+      radius: 10pt,
+    ))
+    #PptxPlace(x: 72pt, y: 216pt, child: PptxBox(width: 300pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: cyan,
+        weight: "bold",
+      )[EDGE / ON-DEVICE]]
+    ])
+    #PptxPlace(x: 72pt, y: 240pt, child: PptxBox(width: 300pt, height: 56pt)[
+      #align(left + top)[#PptxText(font: "Barlow", size: 56pt, fill: ice, weight: "bold")[41 ms]]
+    ])
+    #PptxPlace(x: 72pt, y: 302pt, child: PptxBox(width: 300pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[CONTROL LATENCY]]
+    ])
+    #PptxPlace(x: 72pt, y: 346pt, child: PptxBox(width: 340pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[11 W / local power]]
+    ])
+    #PptxPlace(x: 72pt, y: 378pt, child: PptxBox(width: 340pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[99.97% / uptime]]
+    ])
+    #PptxPlace(x: 526pt, y: 216pt, child: PptxBox(width: 300pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[CLOUD / CENTRAL]]
+    ])
+    #PptxPlace(x: 526pt, y: 240pt, child: PptxBox(width: 300pt, height: 56pt)[
+      #align(left + top)[#PptxText(font: "Barlow", size: 56pt, fill: ice, weight: "bold")[212 ms]]
+    ])
+    #PptxPlace(x: 526pt, y: 302pt, child: PptxBox(width: 300pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: muted,
+        weight: "bold",
+      )[CONTROL LATENCY]]
+    ])
+    #PptxPlace(x: 526pt, y: 346pt, child: PptxBox(width: 340pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[68 W / facility power]]
+    ])
+    #PptxPlace(x: 526pt, y: 378pt, child: PptxBox(width: 340pt, height: 20pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[99.91% / uptime]]
+    ])
+    #PptxPlace(x: 480pt, y: 216pt, child: PptxRect(width: 1pt, height: 204pt, fill: rule, stroke: none))
+    #PptxPlace(x: 48pt, y: 458pt, child: PptxBox(width: 864pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 22pt,
+        fill: ice,
+        weight: "regular",
+      )[The cloud trains the model. The edge runs the loop.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 12pt, fill: muted, weight: "bold")[05 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 06 / PATH
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[05 / PATH]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 860pt, height: 60pt)[
+      #align(left + top)[#PptxText(
+        font: "Barlow",
+        size: 42pt,
+        fill: ice,
+        weight: "bold",
+      )[From bench to pilot in 12 weeks.]]
+    ])
+    #PptxPlace(x: 80pt, y: 310pt, child: PptxRect(width: 800pt, height: 2pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 30pt, y: 264pt, child: PptxBox(width: 160pt, height: 18pt)[
+      #align(center + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[W0 / BENCH]]
+    ])
+    #PptxPlace(x: 100pt, y: 302pt, child: PptxEllipse(width: 20pt, height: 20pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 20pt, y: 340pt, child: PptxBox(width: 180pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[BENCH]]
+    ])
+    #PptxPlace(x: 20pt, y: 378pt, child: PptxBox(width: 180pt, height: 70pt)[
+      #set par(leading: 0.55em)
+      #align(center + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Single sensor,#linebreak()12 ms loop.]]
+    ])
+    #PptxPlace(x: 270pt, y: 264pt, child: PptxBox(width: 160pt, height: 18pt)[
+      #align(center + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[W4 / LOOP]]
+    ])
+    #PptxPlace(x: 340pt, y: 302pt, child: PptxEllipse(width: 20pt, height: 20pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 260pt, y: 340pt, child: PptxBox(width: 180pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[LOOP]]
+    ])
+    #PptxPlace(x: 260pt, y: 378pt, child: PptxBox(width: 180pt, height: 70pt)[
+      #set par(leading: 0.55em)
+      #align(center + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Fusion and#linebreak()fallback tested.]]
+    ])
+    #PptxPlace(x: 510pt, y: 264pt, child: PptxBox(width: 160pt, height: 18pt)[
+      #align(center + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[W8 / FIELD]]
+    ])
+    #PptxPlace(x: 580pt, y: 302pt, child: PptxEllipse(width: 20pt, height: 20pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 500pt, y: 340pt, child: PptxBox(width: 180pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[FIELD]]
+    ])
+    #PptxPlace(x: 500pt, y: 378pt, child: PptxBox(width: 180pt, height: 70pt)[
+      #set par(leading: 0.55em)
+      #align(center + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Three sites,#linebreak()one operator.]]
+    ])
+    #PptxPlace(x: 750pt, y: 264pt, child: PptxBox(width: 160pt, height: 18pt)[
+      #align(center + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[W12 / PILOT]]
+    ])
+    #PptxPlace(x: 820pt, y: 302pt, child: PptxEllipse(width: 20pt, height: 20pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 740pt, y: 340pt, child: PptxBox(width: 180pt, height: 34pt)[
+      #align(center + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[PILOT]]
+    ])
+    #PptxPlace(x: 740pt, y: 378pt, child: PptxBox(width: 180pt, height: 70pt)[
+      #set par(leading: 0.55em)
+      #align(center + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Closed loop#linebreak()under 50 ms.]]
+    ])
+    #PptxPlace(x: 48pt, y: 450pt, child: PptxBox(width: 800pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 22pt,
+        fill: ice,
+        weight: "regular",
+      )[One metric: closed-loop latency under 50 ms.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 12pt, fill: muted, weight: "bold")[06 / 10]]
+    ])
+  ],
+)
+
+#PptxSlide(
+  width: 960pt,
+  height: 540pt,
+  layout: Standard,
+  children: [
+    // 07 / FAILURE MODES
+    #PptxPlace(x: 48pt, y: 78pt, child: PptxBox(width: 520pt, height: 18pt)[
+      #align(left + top)[#PptxText(
+        font: "Consolas",
+        size: 12pt,
+        fill: amber,
+        weight: "bold",
+      )[06 / FAILURE MODES]]
+    ])
+    #PptxPlace(x: 48pt, y: 102pt, child: PptxBox(width: 760pt, height: 60pt)[
+      #align(left + top)[#PptxText(
+        font: "Barlow",
+        size: 42pt,
+        fill: ice,
+        weight: "bold",
+      )[Three ways the loop breaks.]]
+    ])
+    #PptxPlace(x: 48pt, y: 200pt, child: PptxRect(
+      width: 270pt,
+      height: 220pt,
+      fill: panel,
+      stroke: 1pt + rule,
+      radius: 10pt,
+    ))
+    #PptxPlace(x: 64pt, y: 216pt, child: PptxRect(width: 48pt, height: 4pt, fill: amber, stroke: none))
+    #PptxPlace(x: 64pt, y: 230pt, child: PptxBox(width: 60pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Consolas", size: 12pt, fill: amber, weight: "bold")[01]]
+    ])
+    #PptxPlace(x: 64pt, y: 254pt, child: PptxBox(width: 238pt, height: 34pt)[
+      #align(left + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[Stale signal]]
+    ])
+    #PptxPlace(x: 64pt, y: 298pt, child: PptxBox(width: 238pt, height: 100pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[The sensor ages out#linebreak()before the model notices.]]
+    ])
+    #PptxPlace(x: 342pt, y: 200pt, child: PptxRect(
+      width: 270pt,
+      height: 220pt,
+      fill: panel,
+      stroke: 1pt + rule,
+      radius: 10pt,
+    ))
+    #PptxPlace(x: 358pt, y: 216pt, child: PptxRect(width: 48pt, height: 4pt, fill: cyan, stroke: none))
+    #PptxPlace(x: 358pt, y: 230pt, child: PptxBox(width: 60pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Consolas", size: 12pt, fill: cyan, weight: "bold")[02]]
+    ])
+    #PptxPlace(x: 358pt, y: 254pt, child: PptxBox(width: 238pt, height: 34pt)[
+      #align(left + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[Split decision]]
+    ])
+    #PptxPlace(x: 358pt, y: 298pt, child: PptxBox(width: 238pt, height: 100pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[Two controllers disagree#linebreak()about the same input.]]
+    ])
+    #PptxPlace(x: 636pt, y: 200pt, child: PptxRect(
+      width: 270pt,
+      height: 220pt,
+      fill: panel,
+      stroke: 1pt + rule,
+      radius: 10pt,
+    ))
+    #PptxPlace(x: 652pt, y: 216pt, child: PptxRect(width: 48pt, height: 4pt, fill: lilac, stroke: none))
+    #PptxPlace(x: 652pt, y: 230pt, child: PptxBox(width: 60pt, height: 18pt)[
+      #align(left + top)[#PptxText(font: "Consolas", size: 12pt, fill: lilac, weight: "bold")[03]]
+    ])
+    #PptxPlace(x: 652pt, y: 254pt, child: PptxBox(width: 238pt, height: 34pt)[
+      #align(left + top)[#PptxText(font: "Barlow", size: 24pt, fill: ice, weight: "bold")[Late actuation]]
+    ])
+    #PptxPlace(x: 652pt, y: 298pt, child: PptxBox(width: 238pt, height: 100pt)[
+      #set par(leading: 0.55em)
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 20pt,
+        fill: muted,
+        weight: "regular",
+      )[The command arrives#linebreak()after the window closes.]]
+    ])
+    #PptxPlace(x: 48pt, y: 450pt, child: PptxBox(width: 800pt, height: 24pt)[
+      #align(left + top)[#PptxText(
+        font: "Arial",
+        size: 22pt,
+        fill: ice,
+        weight: "regular",
+      )[Each failure is a latency budget problem.]]
+    ])
+    #PptxPlace(x: 862pt, y: 500pt, child: PptxBox(width: 50pt, height: 16pt)[
+      #align(right + top)[#PptxText(font: "Consolas", size: 12pt, fill: muted, weight: "bold")[07 / 10]]
+    ])
+  ],
+)
+
