@@ -819,3 +819,61 @@
   ])
 ])
 
+#PptxSlide(width: 960pt, height: 540pt, layout: Light, children: [
+  #PptxPlace(x: 0pt, y: 0pt, child: PptxImage("assets/close-bank.svg", width: 960pt, height: 540pt))
+  #PptxPlace(x: 48pt, y: 90pt, child: PptxBox(width: 864pt, height: 165pt)[
+    #set par(leading: 0.3em)
+    #align(left + top)[#PptxText(
+      font: "Georgia",
+      size: 56pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[Let the edge#linebreak()become an asset.]]
+  ])
+  #PptxPlace(x: 48pt, y: 294pt, child: PptxBox(width: 780pt, height: 74pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 26pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[Start with one block, one route,#linebreak()and one team that can learn from it.]]
+  ])
+  #PptxPlace(x: 48pt, y: 450pt, child: PptxBox(width: 650pt, height: 32pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 14pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[RIVER COMMONS / A DESIGN CONVERSATION]]
+  ])
+  #PptxPlace(x: 48pt, y: 26pt, child: PptxBox(width: 700pt, height: 20pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "bold",
+    )[RIVER COMMONS / FIELD NOTES]]
+  ])
+  #PptxPlace(x: 0pt, y: 494pt, child: PptxRect(
+    width: 960pt,
+    height: 46pt,
+    fill: rgb("#F5F1E7"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 48pt, y: 506pt, child: PptxBox(width: 760pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(
+      font: "Arial",
+      size: 12pt,
+      fill: rgb("#153E40"),
+      weight: "regular",
+    )[FICTIONAL DISTRICT / CONCEPT STUDY / NOT A PERFORMANCE CLAIM]]
+  ])
+  #PptxPlace(x: 866pt, y: 506pt, child: PptxBox(width: 60pt, height: 18pt)[
+    #set par(leading: 0.6em)
+    #align(left + top)[#PptxText(font: "Arial", size: 12pt, fill: rgb("#153E40"), weight: "regular")[10 / 10]]
+  ])
+])
