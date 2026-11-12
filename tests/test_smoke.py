@@ -637,6 +637,39 @@ def test_supported_typst_converts_to_pptx(tmp_path: Path) -> None:
     assert picture_count(deck) == 1
 
 
+def test_typst_color_aliases_resolve_to_pptx_fills_and_text(tmp_path: Path) -> None:
+    from pptx_typst.typst_to_pptx import convert
+
+    main = tmp_path / "main.typ"
+    main.write_text(
+        '''#let brand = rgb("#2447FF")
+#let accent = rgb("#FF4D2E")
+#PptxSlide(width:320pt,height:180pt,children:[
+  #PptxPlace(x:20pt,y:20pt,child:PptxRect(width:80pt,height:40pt,fill:brand,stroke:2pt + accent))
+  #PptxPlace(x:20pt,y:80pt,child:PptxBox(width:200pt,height:30pt)[
+    #align(left + top)[#PptxText(font:"Arial",size:18pt,fill:accent)[Alias color]]
+  ])
+])
+''',
+        encoding="utf-8",
+    )
+    output = tmp_path / "aliases.pptx"
+    convert(main, output)
+    deck = Presentation(output)
+    rect = next(
+        shape for shape in deck.slides[0].shapes
+        if shape.shape_type == MSO_SHAPE.RECTANGLE and shape.width == Pt(80)
+    )
+    assert rect.fill.fore_color.rgb == RGBColor(0x24, 0x47, 0xFF)
+    assert rect.line.color.rgb == RGBColor(0xFF, 0x4D, 0x2E)
+    run = next(
+        run for shape in deck.slides[0].shapes if shape.has_text_frame
+        for paragraph in shape.text_frame.paragraphs for run in paragraph.runs
+        if run.text == "Alias color"
+    )
+    assert run.font.color.rgb == RGBColor(0xFF, 0x4D, 0x2E)
+
+
 def test_reverse_conversion_preserves_image_fit_and_rounded_panel_style(tmp_path: Path) -> None:
     from pptx_typst.typst_to_pptx import convert
 

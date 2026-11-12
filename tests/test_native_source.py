@@ -91,6 +91,17 @@ def test_local_imports_and_reader_paths_use_owning_module(tmp_path):
     assert set(dependencies(source)) == {'nested/helper.txt', 'nested/mark.svg'}
 
 
+def test_module_import_inside_code_is_not_a_file_dependency(tmp_path):
+    source = tmp_path / 'main.typ'
+    source.write_text(
+        '#let chart = {\n'
+        '  import draw: *\n'
+        '  line((0pt, 0pt), (10pt, 0pt))\n'
+        '}\n'
+    )
+    assert dependencies(source) == {}
+
+
 def test_qualified_builtin_and_unicode_paths_are_collected(tmp_path):
     source = tmp_path / 'main.typ'
     source.write_text('#std.image("\\u{6d}ark.svg")')

@@ -18,6 +18,14 @@ from pptx.oxml.ns import qn
 
 PX_PER_PT = 1.0
 NUM = r'[-+]?\d+(?:\.\d+)?'
+COLOR_ALIASES = {}
+COLOR_DEFINITION = re.compile(
+    r'(?m)^\s*#let\s+([A-Za-z_][\w-]*)\s*=\s*rgb\(\s*"(#[0-9A-Fa-f]{6})"\s*\)'
+)
+
+
+def collect_color_aliases(content):
+    return {name: value for name, value in COLOR_DEFINITION.findall(content)}
 
 # Calls provided by the starter module are intentionally thin aliases for the
 # supported Root/Place and native Typst primitives. Normalize them before
@@ -112,9 +120,18 @@ def find_calls(s,which):
 
 def simple_color(s,default=(0,0,0)):
     if not s:return default
+    s=s.strip()
     m=re.search(r'#([\da-fA-F]{6})',s)
     if m:
         h=m.group(1);return tuple(int(h[i:i+2],16) for i in (0,2,4))
+    if s in COLOR_ALIASES:
+        s=COLOR_ALIASES[s]
+        h=re.search(r'#([\da-fA-F]{6})',s).group(1)
+        return tuple(int(h[i:i+2],16) for i in (0,2,4))
+    for name,value in sorted(COLOR_ALIASES.items(),key=lambda item:len(item[0]),reverse=True):
+        if re.search(r'(?<![\w-])'+re.escape(name)+r'(?![\w-])',s):
+            h=value[1:]
+            return tuple(int(h[i:i+2],16) for i in (0,2,4))
     if 'white' in s:return (255,255,255)
     if 'black' in s:return (0,0,0)
     return default
@@ -903,6 +920,8 @@ def convert(main,output,*,font_paths=()):
     content=main.read_text(encoding='utf-8')
     from .static_render import materialize
     content,static_count=materialize(main,content,font_paths)
+    COLOR_ALIASES.clear()
+    COLOR_ALIASES.update(collect_color_aliases(content))
     content=re.sub(r'(?m)^\s*//[^\n]*$', '', content)
     master_defs=find_definitions(content,'PptxMaster')
     layout_defs=find_definitions(content,'PptxLayout')

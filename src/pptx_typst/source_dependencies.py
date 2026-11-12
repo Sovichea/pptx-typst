@@ -142,7 +142,10 @@ def dependencies(source):
                 end = i + 2
                 if end < len(tokens) and tokens[end] not in {':', '|', ';', '}'}:
                     raise IncompleteDependencies('computed import or include')
-                collect(path.parent, literal_path(tokens[i + 1:end]), module=True)
+                argument = tokens[i + 1:end]
+                if name == 'import' and len(argument) == 1 and IDENTIFIER.fullmatch(argument[0]):
+                    continue  # Module import such as `import draw: *`, not a file.
+                collect(path.parent, literal_path(argument), module=True)
             elif name in READERS:
                 if tokens[i - 1:i] in (['set'], ['show']):
                     continue  # Styling a reader does not read a file.
