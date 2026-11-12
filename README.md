@@ -155,6 +155,8 @@ Font substitution can change text metrics, wrapping, and alignment. SmartArt cac
 
 ## Examples and validation
 
+[River Commons](examples/river_commons) is a ten-slide overlay-composition example with curved photo reveals, independent SVG masks, native editable text and charts, and locally stored Creative Commons photography. See its [contact sheet](examples/river_commons/previews/contact-sheet.png) and [photo attribution](examples/river_commons/ATTRIBUTION.md).
+
 These comparisons use the same slide from each input PowerPoint and generated Typst project. They show representative results from the local Windows/PowerPoint benchmark, not pixel-equivalent output.
 
 | Example | PowerPoint and Typst comparison |
