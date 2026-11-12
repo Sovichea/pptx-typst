@@ -68,3 +68,12 @@ Eight static frames contain the six package demonstrations and two signal traces
 They remain native drawing code in Typst and export as vector SVG with PNG
 fallbacks in PowerPoint. Chart internals and diagram labels are static in PPTX;
 titles, conclusions, captions, and simple geometry remain editable.
+
+## Verification
+
+All ten native pages and PowerPoint renders were visually reviewed. Export
+reported zero unsupported objects, 71 native text boxes, and eight SVG artwork
+instances sharing seven vector parts. The entrypoint and local helper restore
+byte-for-byte; all ten restored SVG pages match the authored renders exactly.
+Arial and Consolas are available to both Typst and Office on the validation
+machine. The example's parametrized round-trip regression also passed.

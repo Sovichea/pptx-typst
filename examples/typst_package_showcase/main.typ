@@ -359,3 +359,387 @@
     weight: "regular",
   )[03 / 10]]])
 ])
+
+// 04 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: PaperLayout, children: [
+  #PptxPlace(x: 48pt, y: 74pt, child: PptxBox(width: 864pt, height: 68pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 42pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[Planning leads the workload.]]])
+  #PptxPlace(x: 48pt, y: 184pt, child: PptxBox(width: 280pt, height: 22pt)[#align(left + top)[#PptxText(
+    font: "Consolas",
+    size: 14pt,
+    fill: rgb("#62645F"),
+    weight: "regular",
+  )[100 HOURS / SAMPLE ALLOCATION]]])
+  #PptxPlace(x: 48pt, y: 232pt, child: PptxBox(width: 270pt, height: 112pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 96pt,
+    fill: rgb("#FF4D2E"),
+    weight: "bold",
+  )[31]]])
+  #PptxPlace(x: 52pt, y: 350pt, child: PptxBox(width: 260pt, height: 22pt)[#align(left + top)[#PptxText(
+    font: "Consolas",
+    size: 14pt,
+    fill: rgb("#62645F"),
+    weight: "regular",
+  )[HOURS IN PLANNING]]])
+  #PptxPlace(x: 52pt, y: 402pt, child: PptxBox(width: 260pt, height: 80pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[The work before#linebreak()the work.]]])
+  #PptxPlace(x: 344pt, y: 166pt, child: PptxStatic(width: 568pt, height: 300pt)[#block(
+    width: 100%,
+    height: 100%,
+  )[#align(center + horizon)[#hours-chart]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[04 / 10]]])
+])
+
+// 05 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: CobaltLayout, children: [
+  #PptxPlace(x: 48pt, y: 72pt, child: PptxBox(width: 864pt, height: 70pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 60pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[Four moves. One argument.]]])
+  #PptxPlace(x: 48pt, y: 248pt, child: PptxBox(width: 180pt, height: 66pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#D8FF3E"),
+    weight: "bold",
+  )[01]]])
+  #PptxPlace(x: 48pt, y: 320pt, child: PptxRect(
+    width: 184pt,
+    height: 2pt,
+    fill: rgb("#F2F1EA"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 48pt, y: 350pt, child: PptxBox(width: 184pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[GEOMETRY]]])
+  #PptxPlace(x: 48pt, y: 402pt, child: PptxBox(width: 184pt, height: 78pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 20pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[Structure the page.]]])
+  #PptxPlace(x: 264pt, y: 248pt, child: PptxBox(width: 180pt, height: 66pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#D8FF3E"),
+    weight: "bold",
+  )[02]]])
+  #PptxPlace(x: 264pt, y: 320pt, child: PptxRect(
+    width: 184pt,
+    height: 2pt,
+    fill: rgb("#F2F1EA"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 264pt, y: 350pt, child: PptxBox(width: 184pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[EVIDENCE]]])
+  #PptxPlace(x: 264pt, y: 402pt, child: PptxBox(width: 184pt, height: 78pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 20pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[Show the signal.]]])
+  #PptxPlace(x: 480pt, y: 248pt, child: PptxBox(width: 180pt, height: 66pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#D8FF3E"),
+    weight: "bold",
+  )[03]]])
+  #PptxPlace(x: 480pt, y: 320pt, child: PptxRect(
+    width: 184pt,
+    height: 2pt,
+    fill: rgb("#F2F1EA"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 480pt, y: 350pt, child: PptxBox(width: 184pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[SYSTEM]]])
+  #PptxPlace(x: 480pt, y: 402pt, child: PptxBox(width: 184pt, height: 78pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 20pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[Draw the loop.]]])
+  #PptxPlace(x: 696pt, y: 248pt, child: PptxBox(width: 180pt, height: 66pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#D8FF3E"),
+    weight: "bold",
+  )[04]]])
+  #PptxPlace(x: 696pt, y: 320pt, child: PptxRect(
+    width: 184pt,
+    height: 2pt,
+    fill: rgb("#F2F1EA"),
+    stroke: none,
+  ))
+  #PptxPlace(x: 696pt, y: 350pt, child: PptxBox(width: 184pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[PROFILE]]])
+  #PptxPlace(x: 696pt, y: 402pt, child: PptxBox(width: 184pt, height: 78pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 20pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[Weigh the trade-offs.]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[05 / 10]]])
+])
+
+// 06 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: PaperLayout, children: [
+  #PptxPlace(x: 48pt, y: 72pt, child: PptxBox(width: 864pt, height: 24pt)[#align(left + top)[#PptxText(
+    font: "Consolas",
+    size: 14pt,
+    fill: rgb("#62645F"),
+    weight: "regular",
+  )[PRECISION / ERROR IN MICROMETRES]]])
+  #PptxPlace(x: 48pt, y: 116pt, child: PptxStatic(width: 864pt, height: 270pt)[#block(
+    width: 100%,
+    height: 100%,
+  )[#align(center + horizon)[#cetz-line]]])
+  #PptxPlace(x: 48pt, y: 418pt, child: PptxBox(width: 864pt, height: 54pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 40pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[The error budget closes.]]])
+  #PptxPlace(x: 48pt, y: 470pt, child: PptxBox(width: 864pt, height: 30pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 20pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[62 to 22 µm across six weekly measurements.]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[06 / 10]]])
+])
+
+// 07 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: PaperLayout, children: [
+  #PptxPlace(x: 48pt, y: 74pt, child: PptxBox(width: 330pt, height: 56pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 42pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[One gate.]]])
+  #PptxPlace(x: 48pt, y: 130pt, child: PptxBox(width: 330pt, height: 56pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 42pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[Two paths.]]])
+  #PptxPlace(x: 48pt, y: 252pt, child: PptxBox(width: 250pt, height: 130pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 112pt,
+    fill: rgb("#FF4D2E"),
+    weight: "bold",
+  )[2]]])
+  #PptxPlace(x: 52pt, y: 384pt, child: PptxBox(width: 300pt, height: 24pt)[#align(left + top)[#PptxText(
+    font: "Consolas",
+    size: 14pt,
+    fill: rgb("#62645F"),
+    weight: "regular",
+  )[SHIP OR REWORK]]])
+  #PptxPlace(x: 400pt, y: 106pt, child: PptxStatic(width: 512pt, height: 300pt)[#block(
+    width: 100%,
+    height: 100%,
+  )[#align(center + horizon)[#branch-diagram]]])
+  #PptxPlace(x: 48pt, y: 454pt, child: PptxBox(width: 864pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[Classify once. Make the next action explicit.]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[07 / 10]]])
+])
+
+// 08 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: NightLayout, children: [
+  #PptxPlace(x: 48pt, y: 72pt, child: PptxBox(width: 640pt, height: 56pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[Confidence]]])
+  #PptxPlace(x: 48pt, y: 126pt, child: PptxBox(width: 640pt, height: 56pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[compounds.]]])
+  #PptxPlace(x: 48pt, y: 210pt, child: PptxStatic(width: 610pt, height: 270pt)[#block(
+    width: 100%,
+    height: 100%,
+  )[#align(center + horizon)[#confidence-chart]]])
+  #PptxPlace(x: 704pt, y: 182pt, child: PptxBox(width: 208pt, height: 132pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 112pt,
+    fill: rgb("#D8FF3E"),
+    weight: "bold",
+  )[84]]])
+  #PptxPlace(x: 710pt, y: 318pt, child: PptxBox(width: 202pt, height: 22pt)[#align(left + top)[#PptxText(
+    font: "Consolas",
+    size: 14pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[WEEK 8 / CONFIDENCE]]])
+  #PptxPlace(x: 710pt, y: 366pt, child: PptxBox(width: 202pt, height: 112pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[The conclusion#linebreak()stays editable.]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[08 / 10]]])
+])
+
+// 09 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: PaperLayout, children: [
+  #PptxPlace(x: 48pt, y: 70pt, child: PptxBox(width: 864pt, height: 56pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[Three rules]]])
+  #PptxPlace(x: 48pt, y: 124pt, child: PptxBox(width: 864pt, height: 56pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 44pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[for technical decks.]]])
+  #PptxPlace(x: 48pt, y: 222pt, child: PptxBox(width: 58pt, height: 46pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 28pt,
+    fill: rgb("#2447FF"),
+    weight: "bold",
+  )[01]]])
+  #PptxPlace(x: 128pt, y: 222pt, child: PptxBox(width: 784pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 26pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[One claim per slide.]]])
+  #PptxPlace(x: 128pt, y: 262pt, child: PptxBox(width: 784pt, height: 34pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 22pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[The headline is the argument, not the topic.]]])
+  #PptxPlace(x: 48pt, y: 306pt, child: PptxBox(width: 58pt, height: 46pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 28pt,
+    fill: rgb("#2447FF"),
+    weight: "bold",
+  )[02]]])
+  #PptxPlace(x: 128pt, y: 306pt, child: PptxBox(width: 784pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 26pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[Make the evidence visible.]]])
+  #PptxPlace(x: 128pt, y: 346pt, child: PptxBox(width: 784pt, height: 34pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 22pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[Give the chart the space it needs.]]])
+  #PptxPlace(x: 48pt, y: 390pt, child: PptxBox(width: 58pt, height: 46pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 28pt,
+    fill: rgb("#2447FF"),
+    weight: "bold",
+  )[03]]])
+  #PptxPlace(x: 128pt, y: 390pt, child: PptxBox(width: 784pt, height: 40pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 26pt,
+    fill: rgb("#111A20"),
+    weight: "bold",
+  )[Keep the words editable.]]])
+  #PptxPlace(x: 128pt, y: 430pt, child: PptxBox(width: 784pt, height: 34pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 22pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[Draw the artwork. Keep the meaning in text.]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#111A20"),
+    weight: "regular",
+  )[09 / 10]]])
+])
+
+// 10 / Narrative composition
+#PptxSlide(width: 960pt, height: 540pt, layout: CobaltLayout, children: [
+  #PptxPlace(x: 390pt, y: 68pt, child: PptxStatic(width: 520pt, height: 140pt)[#block(
+    width: 100%,
+    height: 100%,
+  )[#align(center + horizon)[#signal-wave]]])
+  #PptxPlace(x: 48pt, y: 216pt, child: PptxBox(width: 720pt, height: 78pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 60pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[Keep the]]])
+  #PptxPlace(x: 48pt, y: 288pt, child: PptxBox(width: 630pt, height: 138pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 112pt,
+    fill: rgb("#F2F1EA"),
+    weight: "bold",
+  )[signal.]]])
+  #PptxPlace(x: 654pt, y: 350pt, child: PptxBox(width: 258pt, height: 126pt)[#align(left + top)[#PptxText(
+    font: "Arial",
+    size: 24pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[Draw the artwork.#linebreak()Keep the meaning#linebreak()editable.]]])
+  #PptxPlace(x: 838pt, y: 508pt, child: PptxBox(width: 74pt, height: 18pt)[#align(right + top)[#PptxText(
+    font: "Consolas",
+    size: 12pt,
+    fill: rgb("#F2F1EA"),
+    weight: "regular",
+  )[10 / 10]]])
+])
